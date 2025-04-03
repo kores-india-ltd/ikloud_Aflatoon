@@ -1,0 +1,62 @@
+﻿@model ikloud_Aflatoon.Infrastructure.Download
+
+<div id="IWResultView" class="w3-white w3-border w3-margin w3-card-4">
+    @Html.HiddenFor(m => m.TotalRecord)
+    @Html.HiddenFor(m => m.AlreadyDwnld)
+    @Html.HiddenFor(m => m.readyTodwnld)
+    @Html.HiddenFor(m => m.PendingVF)
+    @if (Model != null)
+    {
+        <div class="w3-row">
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:600">Total Records :</label>
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:700">@Model.TotalRecord</label>
+        </div>
+        <div class="w3-row">
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:600">Already Downloaded Records :</label>
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:700">@Model.AlreadyDwnld</label>
+        </div>
+        <div class="w3-row">
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:600">Ready To Download :</label>
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:700">@Model.readyTodwnld</label>
+        </div>
+        <div class="w3-row">
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:600">Pending Verification :</label>
+            <label class="w3-label w3-text-black w3-col m3" style="font-weight:700">@Model.PendingVF</label>
+        </div>
+        <div class="w3-row w3-center">
+            <label class="w3-label" id="rsltrec" style="font-weight:600">Save File :</label>
+            <a class="w3-hover-border-dark-gray w3-text-blue" href='@Url.Action("IWCreateFile", "IWFileDownload", new { id = Model.filename })'>
+                @Model.filename
+            </a>
+        </div>
+        <script type="text/javascript">
+            //document.getElementById('btnDown').attributes("disable", false)
+
+            if (@Model.readyTodwnld!=0 && @Model.status==0 ) {
+                $("#btnDown").removeAttr("disabled");
+                $("#rsltrec").hide();
+            }
+            else if (@Model.status==1) {
+                $("#btnDown").attr("disabled", "disabled");
+                $("#rsltrec").show();
+            }
+
+            @*if (@Model.status==1) {
+                $("#btnDown").attr("disabled", "disabled");
+
+            }
+            else {
+
+                $("#btnDown").attr("disabled", "disabled");
+                $("#rsltrec").show();
+
+            }*@
+
+
+
+
+
+        </script>
+
+    }
+</div>

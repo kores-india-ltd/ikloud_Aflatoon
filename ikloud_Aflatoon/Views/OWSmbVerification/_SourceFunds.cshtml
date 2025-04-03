@@ -1,0 +1,14 @@
+﻿
+<div id="cbsdetails1" style="left:auto">
+    <label class="w3-label w3-theme-dark w3-white" style="font-weight:bold;color:white">  Source of Funds:</label> <br />
+    @*@Html.DropDownList("ddSrcFnds", new SelectList(ViewBag.vbSrcFnds), new { onchange = "getselect();", Id = "Id", Name = "Description", style = "width: 50%;" })*@
+    @Html.DropDownList("ddSrcFnds", new SelectList(ViewBag.vbSrcFnds, "Id", "Description"),"", new { onchange = "getSrcFnds();", style = "width: 250px;" })
+
+
+    <div>
+        <b>Source of Funds:</b> <br />
+        @Html.TextBox("txtSrcFnds","", new { id = "txtSrcFnds", name = "txtSrcFnds",style = "width:250px", autocomplete = "on" })
+
+    </div>
+
+</div>

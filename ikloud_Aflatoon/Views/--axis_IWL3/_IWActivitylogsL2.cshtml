@@ -1,0 +1,313 @@
+@model IEnumerable<ikloud_Aflatoon.IWActivityLog>
+<h2>
+    Activity Log
+</h2>
+<style type="text/css">
+    .mainDiv {
+        font-family: Verdana;
+        font-size: 14px;
+        padding-left: 20px;
+        padding-right: 5px;
+    }
+
+    .expandableCollapsibleDiv img {
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 5px;
+        padding-left: 10px;
+        float: left;
+    }
+
+    .expandableCollapsibleDiv table {
+        border-bottom: 1px solid #000;
+        clear: both;
+        list-style: outside none none;
+        margin: 0;
+        padding-bottom: 10px;
+        display: none;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".expandableCollapsibleDiv > img").click(function (e) {
+            var showElementDescription =
+              $(this).parents(".expandableCollapsibleDiv").find("table");
+
+            if ($(showElementDescription).is(":visible")) {
+                showElementDescription.hide("fast", "swing");
+                $(this).attr("src", "~/Content/images/up-arrow.jpg");
+            } else {
+                showElementDescription.show("fast", "swing");
+                $(this).attr("src", "~/Content/images/down-arrow.jpg");
+            }
+        });
+    });
+</script>
+
+<!--Added  By Abid-->
+@{
+    int cnt = 0;
+    int index = 0;
+    int Deindex = 0;
+    int L3cnt = 0;
+    int Vfhdr = 0;
+    //int L1cnt = 0;
+}
+<div id="activitylogs">
+
+    @foreach (var itm in Model)
+    {
+        if (index == 0)
+        {
+            <div class="expandableCollapsibleDiv">
+                <img src="~/Content/images/up-arrow.jpg" />
+                <h3><a>AI Prediction</a></h3>
+                <table border="1">
+                    <tr>
+                        <th>
+                            Field
+                        </th>
+                        <th>
+                            Value
+                        </th>
+                        <th>
+                            Confidence
+                        </th>
+                        <th>
+                            Result
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            MICR_AIDecision
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.MICR_AIValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.MICR_AIConfidence)
+                        </td>
+                        <td>@Html.DisplayFor(a => itm.AIMICRDecision)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            AccountNo_AIDecision
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.AccountNo_AIValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.AccountNo_AIConfidence)
+                        </td>
+                        <td>@Html.DisplayFor(a => itm.AIAccountDecision)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            AmountFigure_AIDecision
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.AmountFigure_AIValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.AmountFigure_AIConfidence)
+                        </td>
+                        <td>@Html.DisplayFor(a => itm.AIFigureAmtDecision)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            AmountWord_AIDecision
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.AmountWord_AIValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.AmountWord_AIConfidence)
+                        </td>
+                        <td>@Html.DisplayFor(a => itm.AIWordAmtDecision)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Date_AIDecision
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Date_AIValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Date_AIConfidence)
+                        </td>
+                        <td>@Html.DisplayFor(a => itm.AIDateDecision)</td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Signature_AIDecision
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Signature_AIRejectReason)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Signature_AIConfidence)
+                        </td>
+                        <td>@Html.DisplayFor(a => itm.Signature_AIDecision)</td>
+                    </tr>
+
+                </table>
+            </div>
+        }
+        index = index + 1;
+
+    }
+    <div class="expandableCollapsibleDiv">
+        <img src="~/Content/images/up-arrow.jpg" />
+        <h3><a>Verification</a></h3>
+
+        <table border="1">
+            @foreach (var itm in Model)
+            {
+                if (itm.LogLevel == "L1 Verification" || itm.LogLevel == "L2 Verification" || itm.LogLevel == "L3 Verification")
+                {
+                    if (Vfhdr == 0)
+                    {
+                        Vfhdr = 1;
+
+                        <tr>
+                            <th>
+                                Log Level
+                            </th>
+                            <th>
+                                Actio Taken
+                            </th>
+                            <th>
+                                Login ID
+                            </th>
+                            <th>
+                                Reject Desc
+                            </th>
+                            <th>
+                                Comments
+                            </th>
+                            <th>
+                                Time Stamp
+                            </th>
+                        </tr>
+                    }
+                    if (cnt == 0 && itm.LogLevel == "L2 Verification")
+                    {
+                        cnt = 1;
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(a => itm.LogLevel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Activity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.LoginID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.RejectDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Comments)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Timestamp)
+                            </td>
+                        </tr>
+                    }
+                    else if (itm.LogLevel == "L1 Verification" || itm.LogLevel == "L3 Verification")
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(a => itm.LogLevel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Activity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.LoginID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.RejectDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Comments)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Timestamp)
+                            </td>
+                        </tr>
+                    }
+
+                }
+            }
+
+        </table>
+    </div>
+
+
+    <div class="expandableCollapsibleDiv">
+        <img src="~/Content/images/up-arrow.jpg" />
+        <h3><a>Data Entry</a></h3>
+        <table border="1">
+
+            @foreach (var itm in Model)
+            {
+                if (itm.LogLevel != "L1 Verification" && itm.LogLevel != "L2 Verification" && itm.LogLevel != "L3 Verification")
+                {
+
+                    if (Deindex == 0)
+                    {
+                        Deindex = 1;
+                        <tr>
+                            <th>
+                                Log Level
+                            </th>
+                            <th>
+                                Actio Taken
+                            </th>
+                            <th>
+                                Login ID
+                            </th>
+                            <th>
+                                Comments
+                            </th>
+                            <th>
+                                Time Stamp
+                            </th>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(a => itm.LogLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Activity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.LoginID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.RejectDesc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Comments)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => itm.Timestamp)
+                        </td>
+                    </tr>
+
+                }
+            }
+
+
+        </table>
+    </div>
+
+</div>

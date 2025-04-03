@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "L3 Selection";
+    ViewBag.header = "L3 Selection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.notfound != null)
+{
+    <script type="text/javascript">
+        // alert('Aila!!!');
+        //document.getElementById('nodatafound').style.display = 'block';
+        alert('@ViewBag.notfound');
+    </script>
+}
+
+@using (Html.BeginForm("Selection", "TFL3Verification", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="w3-container w3-row w3-center">
+        <div class="w3-colw3-center w3-large w3-light-grey">
+            <div class="m4">
+                <div class="w3-label">Select Clearing Type</div>
+                @Html.DropDownList("ClearingType", null, "Select", new { style = "width: 150px;" })
+            </div>
+            <div class="m4">
+                <div class="w3-label">Select Verification Type</div>
+                <select id="rpttype" name="rpttype" style="width: 170px;">
+                    <option selected="selected">Select</option>
+                    <option>Rejected Cheques</option>
+                    <option>Accepted Cheques</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="w3-row w3-center">
+        <input class="w3-btn" style="float: initial" type="submit" value="Go" id="btSelection" name="btSelection" onclick="return(selectValid());">
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("ClearingType").focus();
+        function selectValid() {
+            var clertype = document.getElementById('ClearingType')
+            var clerval = clertype.options[clertype.selectedIndex].text;
+            if (clerval == "Select") {
+                alert('Please select clearing type!!');
+                document.getElementById('ClearingType').focus();
+                return false;
+            }
+            var repttype = document.getElementById('rpttype')
+            var reptval = repttype.options[repttype.selectedIndex].text;
+            if (reptval == "Select") {
+                alert('Please select verification type!!');
+                document.getElementById('rpttype').focus();
+                return false;
+            }
+        }
+
+
+    </script>
+}

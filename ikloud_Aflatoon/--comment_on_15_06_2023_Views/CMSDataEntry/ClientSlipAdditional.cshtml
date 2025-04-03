@@ -1,0 +1,253 @@
+﻿@model ikloud_Aflatoon.Models.CMSCustAdditionalInput
+
+<div id="clntSlip">
+    @*@using (Ajax.BeginForm("UpdateSlipAdditional", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "getcheqs" }))
+        {*@
+    <input type="hidden" id="impath" value="@Model.FrontGreyImagePath" />
+    <input type="hidden" id="backimpath" value="@Model.BackGreyImagePath" />
+    @Html.HiddenFor(m => m.ProdEffectiveDate)
+    @Html.HiddenFor(m => m.InstrumentType)
+    @Html.HiddenFor(m => m.ClientCode)
+    @Html.HiddenFor(m => m.BranchCode)
+    @*  @Html.HiddenFor(m => m.ProdCode)
+        @Html.HiddenFor(m => m.InstrumentDtlsRequired)
+        @Html.HiddenFor(m => m.BranchCode)
+        @Html.HiddenFor(m => m.BatchNo)
+        @Html.HiddenFor(m => m.ScanningNodeId)
+        @Html.HiddenFor(m => m.SlipNo)
+        @Html.HiddenFor(m => m.ID)*@
+
+
+    <div class="w3-row">
+        <fieldset>
+            <legend class="w3-large">@Model.Legend:</legend>
+            <div class="w3-col m8 w3-center w3-dark-grey w3-padding">
+                @*<img class="w3-card-8" id="myimg" src="http://10.144.3.31/Ikloud_Pro_test\IkloudPro_Test_Images\20160307\11\4_002\1_Front.jpg" style="width: 95%" />*@
+                <img class="w3-card-8 w3-image" id="myimg" src="~/Icons/noimagefound.jpg" style="cursor:zoom-in" onclick="fullImage();" />
+            </div>
+            <div class="w3-row w3-padding">
+                <div class="w3-col m8">
+                    <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                    @*<label class="w3-btn" onclick="ChangeImage('FTiff');">Front Tiff</label>*@
+                    <label class="w3-btn" onclick="ChangeImage('FGray');">Front Gray</label>
+                    <label class="w3-btn" onclick="ChangeImage('BTiff');">Back Gray</label>
+                    <label class="w3-label">Cheque Count: @Model.SlipChequeCount </label>
+                    <label class="w3-label">Branch Code: @Model.BranchCode </label>
+                </div>
+            </div>
+            <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="w3-container w3-padding-4 w3-border ">
+        <fieldset>
+            <legend class="w3-large">@Model.Legend:</legend>
+            <div class="w3-row  w3-large">
+
+
+                @if (Model.ProdHierRequired == "Y")
+                {
+                    <div class="w3-col m2"><label class="w3-label">Hierarchy Code</label></div>
+                }
+                @if (Model.ProdDivisionRequired == "Y")
+                {
+                    <div class="w3-col m2"><label class="w3-label">Division Code</label></div>
+                }
+                @if (Model.ProdDrawerRequired == "Y")
+                {
+                    <div class="w3-col m2"><label class="w3-label">Customer Drawer Name</label></div>
+                }
+                @if (Model.ProdSubcustomerRequired == "Y")
+                {
+                    if (Model.ProdSubCustomerEntrylevel == "D")
+                    {
+                        <div class="w3-col m2"><label class="w3-label">SubCustomer Code</label></div>
+                    }
+                }
+                @if (Model.ProdlccPickupRequired == "Y")
+                {
+                    <div class="w3-col m2"><label class="w3-label">Product LCC Pickup</label></div>
+                }
+            </div>
+            <div class="w3-row">
+
+                @if (Model.ProdHierRequired == "Y")
+                {
+                    <div class="w3-col m2 l2">
+                        @Html.TextBoxFor(m => m.HiratchyCode, new { @onchange = "return(AllFieldsValiation('HiratchyCode'))" })
+                    </div>
+                }
+                @if (Model.ProdDivisionRequired == "Y")
+                {
+                    <div class="w3-col m2 l2">
+                        @Html.TextBoxFor(m => m.DivisionCode, new { @onchange = "return(AllFieldsValiation('DivisionCode'))" })
+                    </div>
+                }
+                @if (Model.ProdDrawerRequired == "Y")
+                {
+                    <div class="w3-col m2 l2">
+                        @Html.TextBoxFor(m => m.CustDrawerCode, new { @maxlength = 50, @onchange = "return(AllFieldsValiation('CustDrawerCode'))" })
+                    </div>
+                }
+                @if (Model.ProdSubcustomerRequired == "Y")
+                {
+                    if (Model.ProdSubCustomerEntrylevel == "D")
+                    {
+                        <div class="w3-col m2 l2">
+                            @Html.TextBoxFor(m => m.SubcustomerCode, new { @onchange = "return(AllFieldsValiation('SubcustomerCode'))" })
+                        </div>
+                    }
+
+                }
+                @if (Model.ProdlccPickupRequired == "Y")
+                {
+                    <div class="w3-col m2 l2">
+                        @Html.TextBoxFor(m => m.ProdLCCPickup, new { @onchange = "return(AllFieldsValiation('ProdLCCPickup'))" })
+                    </div>
+                }
+            </div>
+            <div class="w3-row">
+                @if (Model.InstrumentType == "S")
+                {
+                    <div class="w3-col m2">
+                        <label class="w3-label">SlipRefNo</label>
+                    </div>
+                }
+
+
+                @if (Model.Additional1Legend != null)
+                {
+                    <div class="w3-col m2"><label class="w3-label">@Model.Additional1Legend</label> </div>
+                    @Html.HiddenFor(m => m.Additional1ID)
+                }
+                @if (Model.Additional2Legend != null)
+                {
+                    <div class="w3-col m2"><label class="w3-label">@Model.Additional2Legend</label></div>
+                    @Html.HiddenFor(m => m.Additional2ID)
+                }
+                @if (Model.Additional3Legend != null)
+                {
+                    <div class="w3-col m2"><label class="w3-label">@Model.Additional3Legend</label></div>
+                    @Html.HiddenFor(m => m.Additional3ID)
+                }
+                @if (Model.Additional4Legend != null)
+                {
+                    <div class="w3-col m2"><label class="w3-label">@Model.Additional4Legend</label></div>
+                    @Html.HiddenFor(m => m.Additional4ID)
+                }
+                @if (Model.Additional5Legend != null)
+                {
+                    <div class="w3-col m4"><label class="w3-label">@Model.Additional5Legend</label></div>
+                    @Html.HiddenFor(m => m.Additional5ID)
+                }
+
+            </div>
+            <div class="w3-row">
+                @if (Model.InstrumentType == "S")
+                {
+                    <div class="w3-col m2 l2">
+                        @Html.TextBoxFor(m => m.SlipRefNo)
+                    </div>
+                }
+
+                @if (Model.Additional1Legend != null)
+                {
+                    <div class="w3-col m2 l2">
+                        @if (Model.Additional1_master_serial != "0")
+                        {
+                            @Html.TextBoxFor(m => m.Additional1, new { @onchange = "return(AllFieldsValiation('Additional1'))" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Additional1, new { @maxlength = @Model.Additional1_CUSPAI_DATA_SIZE, @onchange = "return(AllFieldsValiation('Additional1'))" })
+                        }
+
+                    </div>
+                }
+                @if (Model.Additional2Legend != null)
+                {
+                    <div class="w3-col m2 l2">
+                        @if (Model.Additional2_master_serial != "0")
+                        {
+                            @Html.TextBoxFor(m => m.Additional2, new { @onchange = "return(AllFieldsValiation('Additional2'))" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Additional2, new { @maxlength = @Model.Additional2_CUSPAI_DATA_SIZE, @onchange = "return(AllFieldsValiation('Additional2'))" })
+                        }
+
+
+                    </div>
+                }
+                @if (Model.Additional3Legend != null)
+                {
+                    <div class="w3-col m2 l2">
+                        @if (Model.Additional3_master_serial != "0")
+                        {
+                            @Html.TextBoxFor(m => m.Additional3, new { @onchange = "return(AllFieldsValiation('Additional3'))" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Additional3, new { @maxlength = @Model.Additional3_CUSPAI_DATA_SIZE, @onchange = "return(AllFieldsValiation('Additional3'))" })
+                        }
+
+
+                    </div>
+                }
+                @if (Model.Additional4Legend != null)
+                {
+                    <div class="w3-col m2 l2">
+                        @if (Model.Additional4_master_serial != "0")
+                        {
+                            @Html.TextBoxFor(m => m.Additional4, new { @onchange = "return(AllFieldsValiation('Additional4'))" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Additional4, new { @maxlength = @Model.Additional4_CUSPAI_DATA_SIZE, @onchange = "return(AllFieldsValiation('Additional4'))" })
+                        }
+
+
+                    </div>
+                }
+                @if (Model.Additional5Legend != null)
+                {
+                    <div class="w3-col m2 l2">
+                        @if (Model.Additional5_master_serial != "0")
+                        {
+                            @Html.TextBoxFor(m => m.Additional5, new { @onchange = "return(AllFieldsValiation('Additional5'))" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Additional5, new { @maxlength = @Model.Additional5_CUSPAI_DATA_SIZE, @onchange = "return(AllFieldsValiation('Additional5'))" })
+                        }
+
+
+                    </div>
+                }
+
+            </div>
+        </fieldset>
+    </div>
+    @*}  *@
+</div>
+@*<div id="getcheqs">
+
+    </div>*@
+
+<script language="javascript" type="text/javascript">
+    var imgval = document.getElementById('impath').value;
+
+    document.getElementById('myimg').src = imgval;
+    document.getElementById('btnslp').style.display = "";
+
+
+    // function bindmodel() {
+    //alert('aila');
+    var modelDataJSON = '@Html.Raw(Json.Encode(Model))';
+    updateSlip(modelDataJSON);
+
+
+    //  }
+</script>

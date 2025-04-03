@@ -1,0 +1,87 @@
+﻿@model ikloud_Aflatoon.BranchMaster
+
+@{
+    ViewBag.Title = "Delete Branch";
+    ViewBag.header = "Delete Branch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>BranchMaster</legend>
+    
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BranchCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BranchCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BranchName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BranchName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IFSCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IFSCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MICRCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MICRCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OwDomainId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OwDomainId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IwDomainId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IwDomainId)
+    </div>
+
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.CreationDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreationDateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy)
+    </div>*@
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,375 @@
+﻿@model ikloud_Aflatoon.SMBVerificationView
+@{
+    ViewBag.Title = "Verify";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script type="text/javascript">
+    var acmaxlength = '@ViewBag.MaxAclen';
+    var acminlength = '@ViewBag.MinAclen';
+    var payeemaxlength = '@ViewBag.MaxPayeelen';
+
+    //acmaxlength = acmaxlength - 1;
+    acminlength = acminlength - 1;
+    payeemaxlength = payeemaxlength - 1;
+
+</script>
+<script src="~/Scripts/Json2.js"></script>
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+<script src="~/Scripts/OWCDKCheckerVerification.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+
+
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" id="cnt" value="1" />
+<input type="hidden" id="tempcnt" value="1" />
+<input type="hidden" name="blockkey" id="blockkey" value="0" />
+<input type="hidden" id="postdt" value="@Session["PostDate"]" />
+<input type="hidden" id="staledt" value="@Session["StaleDate"]" />
+
+<input type="hidden" id="oldact" />
+<input type="hidden" id="oldClient" />
+<input type="hidden" id="NarrationID" value="@Session["Narration"]" />
+<input type="hidden" id="ofc" value="0" />
+<input type="hidden" name="allowAlpha" id="allowAlpha" value="@Session["ACAlphaAllow"]" />
+<input type="hidden" id="hVfType" name="hVfType" value="@Session["VFType"]" />
+<input type="hidden" id="MinAclen" value="@ViewBag.MinAclen" />
+<input type="hidden" id="MaxAclen" value="@ViewBag.MaxAclen" />
+<input type="hidden" id="scanningType" value="@ViewBag.ScanningType" />
+<input type="hidden" id="disableVerAccNo" value="@ViewBag.OWVerDisbAccNo" />
+<input type="hidden" id="disableCdkAccNo" value="@ViewBag.OWCdkDisbAccNo" />
+<input type="hidden" id="disableCdkPayeeName" value="@ViewBag.OWCdkDisbPayeeName" />
+<input type="hidden" id="L1Modified" value="@ViewBag.L1Modified" />
+<input type="hidden" id="L2Modified" value="@ViewBag.L2Modified" />
+<input type="hidden" id="L1Status" value="@ViewBag.L1Status" />
+<input type="hidden" id="L2Status" value="@ViewBag.L2Status" />
+<input type="hidden" id="L1RejectDesc" value="@ViewBag.L1RejectDesc" />
+<input type="hidden" id="L2RejectDesc" value="@ViewBag.L2RejectDesc" />
+<input type="hidden" id="accValidation" value="@Session["AccValidation"]" />
+<input type="hidden" id="ScanningTypeId" value="@Session["ScanningTypeId"]" />
+<input type="hidden" id="disableCdkDate" value="@ViewBag.OWCdkDisbDate" />
+<input type="hidden" id="OWIsDataEntryAllowedForAccountNo" value="@ViewBag.OWIsDataEntryAllowedForAccountNo" />
+<input type="hidden" id="OWIsDataEntryAllowedForPayeeName" value="@ViewBag.OWIsDataEntryAllowedForPayeeName" />
+<input type="hidden" id="OWIsDataEntryAllowedForDate" value="@ViewBag.OWIsDataEntryAllowedForDate" />
+<input type="hidden" id="OWIsDataEntryAllowedForAmount" value="@ViewBag.OWIsDataEntryAllowedForAmount" />
+<input type="hidden" id="BankCode" value="@ViewBag.BankCode" />
+<input type="hidden" id="ChequeAmount" value="@ViewBag.ChequeAmount" />
+<input type="hidden" id="FrontGrey" value="@ViewBag.FrontGrey" />
+<input type="hidden" id="FrontTiff" value="@ViewBag.FrontTiff" />
+<input type="hidden" id="BackGrey" value="@ViewBag.BackGrey" />
+<input type="hidden" id="BackTiff" value="@ViewBag.BackTiff" />
+<input type="hidden" id="FrontUV" value="@ViewBag.FrontUV" />
+
+<div class="w3-hide">
+    @Html.DropDownList("rtnlist", new SelectList(ViewBag.rtnlist), "Select")
+    @Html.DropDownList("rtnlistDescrp", new SelectList(ViewBag.rtnlistDescrp), "Select")
+    @Html.DropDownList("narration", new SelectList(ViewBag.narration))
+    @Html.DropDownList("SchemCode", new SelectList(ViewBag.SchemCode))
+</div>
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    using (Html.BeginForm("OWCDKL2", "OWCDKCheckerVerification", FormMethod.Post))
+    {
+
+        <div class="w3-row">
+            <!--Column 1-->
+            <div class="w3-col m3 w3-grey w3-padding w3-large" id="slpacnt" style="display:none">
+                <label class="w3-label w3-padding w3-text-white" style="float: initial;font-weight:700">Account Number </label>
+                <div class="w3-container" style="float: initial">
+                    <input class="w3-input w3-border w3-border-blue w3-padding" style="width: auto; float: left;font-weight:700" type="text" id="accnt" name="accnt" maxlength="@Session["acto"]" />
+                    <input class="w3-btn w3-margin-left" type="button" value="GetDetails" id="getdtls" name="getdtls" onclick="getcbsdtls();" />
+                </div>
+            </div>
+            <!--Column 1-->
+            <div class="w3-col m3 w3-grey w3-padding w3-large" id="Chqacnt" style="display:none">
+
+                <div class="w3-container" style="float: initial">
+                    <label class="w3-label w3-padding w3-text-white" style="float: initial;font-weight:700">Account Number </label>
+                    <label class="w3-label w3-padding w3-text-white" id="chequeAcct" style="float: initial;font-weight:800; text-decoration-color:blue"></label>
+                </div>
+            </div>
+            <div class="w3-col m9 w3-grey w3-padding w3-large" id="ClntsDtlsdiv" style="display:none">
+
+                <div class="w3-container" style="float: initial">
+                    <label class="w3-label w3-padding w3-text-dark-grey w3-left-align" style="float: initial">Client Code </label>
+                    <input class=" w3-input   w3-border-blue w3-padding" style="width:150px; float: left;font-weight:500" type="text" id="ClientCd" name="ClientCd" maxlength="8" />
+                    <input class="w3-btn w3-margin-left" type="button" value="Get" id="ClntsDtls" name="ClntsDtls" onclick="clientdtls();" />
+
+                    <div id="clientdetails" class="w3-container" style="float:right;font-weight:500;color:darkblue">
+
+                    </div>
+                </div>
+            </div>
+            <!--Column 2-->
+            <div class="w3-col m9  w3-xlarge ">
+                <div class="w3-row">
+                    <div class="w3-container w3-col m4">
+                        @*<label class="w3-label w3-text-dark-grey">Chq Count</label>*@
+                        @*<label class="w3-label w3-text-black" id="ChqCnt"></label>*@
+                        @*<input class="w3-input w3-border w3-border-blue " type="text" style="width: 50px;font-weight:700; background-color:green" id="iwAmt" value="24" />*@
+                    </div>
+
+                    <div class="w3-container w3-col m4">
+                        @*<label class="w3-label w3-text-dark-grey">Cheq Total Amt </label>
+                            <label class="w3-label w3-text-black" id="totamt"></label>*@
+                    </div>
+                    <div class="w3-container w3-col m4">
+                        <label class="w3-label w3-text-dark-grey" style="display:none" id="sliplabl">Slip Amt </label>
+                        <label class="w3-label w3-text-black" id="Slipamt"></label>
+                        <div class="w3-container w3-right" style="display:none" id="slpamt">
+                            <label class="w3-label w3-text-dark-grey">Slip Amount:</label><!--onfocusout="CalSLPAmt();"-->
+                            <input class="w3-input w3-border w3-border-blue " type="text" maxlength="15" style="width: 150px;font-weight:700" id="slpamount" name="slpamount" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w3-col m4  w3-xlarge">
+                    <span class="w3-text-red" style="display:none" id="bankname"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="w3-row w3-grey">
+            <div class="w3-col m4 w3-large  w3-grey">
+                <div id="cbsdetails">
+                </div>
+                <div class="w3-container w3-dark-grey w3-card-2 w3-margin">
+                    <div class="w3-container" id="chqamt">
+                        <br />
+                        <br />
+
+                        @Html.HiddenFor(m => m.L2Id)
+                        @Html.HiddenFor(m => m.captureRawId)
+                        @Html.HiddenFor(m => m.BatchNo)
+                        @Html.HiddenFor(m => m.BatchSeqNo)
+                        @Html.HiddenFor(m => m.InstrumentType)
+                        @Html.HiddenFor(m => m.CustomerId)
+                        @Html.HiddenFor(m => m.DomainId)
+                        @Html.HiddenFor(m => m.ScanningNodeId)
+                        @Html.HiddenFor(m => m.BranchCode)
+                        @Html.HiddenFor(m => m.FrontGreyImage)
+                        @Html.HiddenFor(m => m.FrontTiffImage)
+                        @Html.HiddenFor(m => m.BackTiffImage)
+                        @Html.HiddenFor(m => m.BackGreyImage)
+                        @Html.HiddenFor(m => m.CBSAccountInformation)
+                        @Html.HiddenFor(m => m.CBSJointAccountInformation)
+                        @Html.HiddenFor(m => m.FrontUVImage)
+
+                        <table>
+                            <tr id="divDate">
+                                <td><b>Date:</b> </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.ChqDate, new { style = "width:70px", autocomplete = "off" })
+                                    &nbsp;&nbsp;<b>[ ddmmyy] </b>
+                                </td>
+                            </tr>
+                            <tr id="divAmount">
+                                <td><b>Amount:</b></td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.ChqAmt, new { style = "width:200px", autocomplete = "off" })
+                                </td>
+                            </tr>
+                            <tr id="divAccount">
+                                <td><b>Account No:</b> </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.ChqAcno, new
+                               {
+                                   style = "width:200px",
+                                   //@onfocus = "ChangeImage('" + Model.BackTiffImage + "')",
+                                   //@onblur = "ChangeImage('" + Model.FrontGreyImage + "')",
+                                   autocomplete = "off"
+                               })
+                                    @*<div class="w3-btn"  id="getcbs" onclick="getPayee()"> Get</div>*@
+                                    @*<input class="w3-btn" type="button" value="Get" id="getcbs" onclick="getPayee()" name="getcbs" />*@
+                                </td>
+                            </tr>
+                            <tr id="divPayeeName">
+                                <td><b>Payee Name:</b> </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.ChqPayeeName, new { style = "width:350px", autocomplete = "off" })
+                                </td>
+                            </tr>
+                            <tr>
+                        </table>
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="w3-container" style="float:left" id="divDecision">
+                        <label class="w3-label w3-text-light-grey" style="float: left">Decision: </label>
+                        <input class="w3-margin-left w3-text-dark-grey" id="Decision" name="Decision" type="text" style="width: 35px; float: left;font-weight:700;text-align:center" maxlength="1" onkeyup="IWVef();" />
+                    </div>
+                    <div class="w3-container" id="rtncd" style="display:none">
+                        <span class="w3-opennav w3-margin-left test" onclick="document.getElementById('RejectReason').style.display = 'block';">&#9776;</span>
+                        <label class="w3-label w3-margin-left w3-text-light-grey test" style="float: left">Reason Code: </label>
+                        <input class="w3-margin-left w3-text-dark-grey test" type="text" style="width: 35px; float: left;font-weight:700;text-align:center" maxlength="2" id="IWRemark" name="IWRemark" />
+                        <input class="w3-input w3-margin-top w3-text-dark-grey" type="text" id="rejectreasondescrpsn" name="rejectreasondescrpsn" maxlength="50" style="float: initial;font-weight:700" />
+                    </div>
+                    <div class="w3-container" style="float:left">
+                        <label class="w3-label w3-text-light-grey" style="float: left">A - Accept </label><br />
+                        <label class="w3-label w3-text-light-grey" style="float: left">R - Reject </label>
+                    </div>
+                    <br />
+                    <div class="w3-container" id="narsndiv" style="display:none">
+                        <label class="w3-label w3-margin-left w3-text-light-grey" style="float: left">Enter Narration </label>
+                        <input class="w3-input w3-margin-top w3-text-dark-grey" type="text" id="nartext" name="nartext" maxlength="30" style="float: initial;font-weight:700" />
+                    </div>
+                    <br />
+                    <br />
+                    <div class="w3-container w3-padding" style="float:left;width:400px;">
+                        <input class="w3-btn w3-margin-left" type="submit" value="Ok" id="btnSubmit" onclick="IWLICQC()" name="btnSubmit" style="float:left;width:150px;padding-right:5px;margin-right:5px;" />
+                        @*<input class="w3-btn w3-margin-left" type="submit" value="CDK Ok" id="btnSubmitCDK" onclick="IWLICQC()" name="btnSubmit" style="float:left;width:150px;padding-right:5px;margin-right:5px;" />&nbsp;&nbsp;&nbsp;*@
+                        @*<input class="w3-btn" type="button" id="btnSubmit" value="Back" />*@
+                        <input class="w3-btn" type="submit" id="btnSubmitClose" value="Close" name="btnSubmit" style="float:left;width:100px;padding-right:5px;margin-right:5px;" />&nbsp;&nbsp;&nbsp;
+                        <span class="w3-opennav w3-text-black w3-large w3-hover-amber" onclick="getowlogs();" style="float:left;width:50px;">&#9776; AL</span>
+                    </div>
+                    <div style="display:none;">
+                        <input type="text" id="realModified" name="realModified" value="false" />
+                        <input type="text" id="modified" name="modified" value="00000000" />
+                        <input type="text" id="mtrn" value="" />
+                        @Html.TextBoxFor(m => m.captureRawId, new { style = "width:350px", autocomplete = "off" })
+                        <img id="backGreyImage" class="w3-card-8 w3-image" style="display:none;" src="@Url.Content(Model.BackGreyImage)" />
+                        <img id="frontGreyImage" class="w3-card-8 w3-image" style="display:none;" src="@Url.Content(Model.FrontGreyImage)" />
+                    </div>
+                    <br />
+                </div>
+                <div class="w3-row">
+                    <div class="w3-col">
+                        <div class="w3-container" id="l1dec">
+                            <label class="w3-label w3-text-white" style="font-weight: 700">Maker Decision:</label>
+                            <label class="w3-label w3-text-white" style="font-weight: 700" id="l1decision"></label>
+                            <label class="w3-label w3-text-yellow" style="font-weight:700" id="L1rejectDecrp"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-row">
+                    <div class="w3-col">
+                        <div class="w3-container" id="l2dec">
+                            <label class="w3-label w3-text-white" style="font-weight: 700">Checker Decision:</label>
+                            <label class="w3-label w3-text-white" style="font-weight: 700" id="l2decision"></label>
+                            <label class="w3-label w3-text-red" style="font-weight:700" id="L2rejectDecrp"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-col m7 w3-center w3-dark-grey w3-padding">
+                <div class="w3-row w3-padding">
+                    @Html.Label("[Branch Code:")
+                    @Html.DisplayFor(model => model.BranchCode)
+
+                    @Html.Label("]   [Scan NodeID:")
+                    @Html.DisplayFor(model => model.ScanningNodeId)
+
+                    @Html.Label("]   [Batch No:")
+                    @Html.DisplayFor(model => model.BatchNo)
+
+                    @Html.Label("]   [Batch SeqNo:")
+                    @Html.DisplayFor(model => model.BatchSeqNo)
+                    ]
+                </div>
+                <img id="myimg" class="w3-card-8 w3-image" style="cursor:zoom-in" onclick="fullImage();" src="@Url.Content(Model.FrontGreyImage)" />
+                <div id="divtiff">
+                </div>
+                <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                    <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+                </div>
+                @*<object class="w3-card-8" id="myimg" data="http://10.144.3.31/Ikloud_Pro_test\IkloudPro_Test_Images\20160307\11\76_002\1_Front.jpg" type="image/jpg" style="width: 600px; height: 300px"></object>*@
+                <br />
+                <br />
+                <div class="w3-row w3-large w3-padding" id="MICR">
+                    <div class="w3-col w3-center m2 ">
+                    </div>
+                    <div class="w3-row w3-padding ">
+                        @*<input class="w3-margin-left w3-text-dark-grey" type="text" maxlength="6" id="ChqnoQC" style="width:70px; float: initial;font-weight:700">*@
+                        ChqNo:
+                        @Html.TextBoxFor(m => m.FinalChqNo, new { style = "width:70px", autocomplete = "off" })
+                        SortCode:
+                        @*<input class="w3-margin-left w3-text-dark-grey" type="text" maxlength="9" id="SortQC" onfocusout="bankNameONFocus();" style="width:100px;float: initial;font-weight:700">*@
+                        @Html.TextBoxFor(m => m.FinalSortcode, new { style = "width:100px", autocomplete = "off" })
+                        SAN:
+                        @*<input class="w3-margin-left w3-text-dark-grey" type="text" id="SANQC" maxlength="6" style="width:80px;float: initial;font-weight:700">*@
+                        @Html.TextBoxFor(m => m.FinalSAN, new { style = "width:80px", autocomplete = "off" })
+                        Tr Code:
+                        @*<input class="w3-margin-left w3-text-dark-grey" type="text" id="TransQC" maxlength="2" style="width:50px;float: initial;font-weight:700">*@
+                        @Html.TextBoxFor(m => m.FinalTransCode, new { style = "width:40px", autocomplete = "off" })
+                    </div>
+                    <div class="w3-col w3-center m2" id="divctsnoncts" style="display:none">
+                        <select id="ctsnocts" name="ctsnocts">
+                            <option value="01">CTS</option>
+                            <option value="11">Non-CTS</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="w3-row w3-padding">
+                    <div class="w3-row w3-padding">
+                        <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontTiffImage');">Front Tiff</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontGreyImage');">Front Gray</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.BackTiffImage');">Back Tiff</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontUVImage');">Front UV</label>
+                        <label class="w3-label w3-text-white" style="font-weight:800">Mark P2F </label>
+                        @Html.CheckBox("MarkP2f", new { style = "transform: scale(1.5);-webkit-transform: scale(1.5);" })
+                        @*<label class="w3-btn" id="lblslpimg" style="display:none" onclick="callslipimage()">Slip Image</label>*@
+                    </div>
+                    <div class="w3-col m1" id="hldslip" style="display:none">
+                        <label class="w3-label w3-highway-red w3-large" id="lblhldslp">H</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    }
+
+    <div id="RejectReason" class="w3-modal w3-animate-zoom ">
+
+        <div class="w3-modal-content">
+            <div class="w3-container w3-theme-dark">
+                <span onclick="document.getElementById('RejectReason').style.display = 'none';"
+                      class="w3-closebtn">&times;</span>
+                <h2>Select Reject Reason</h2>
+            </div>
+            <div class="w3-container">
+
+                @Html.Action("RejectReason", "OWL2")
+            </div>
+            <div class="w3-container">&nbsp;</div>
+        </div>
+    </div>
+    <div id="activitylogs" title="Activity Logs"></div>
+    <script language="javascript" type="text/javascript">
+
+
+        if (document.getElementById('nodata').value != false) {
+            //alert('ok');
+            //getPayee();
+            //passval(array);
+        }
+    </script>
+
+}

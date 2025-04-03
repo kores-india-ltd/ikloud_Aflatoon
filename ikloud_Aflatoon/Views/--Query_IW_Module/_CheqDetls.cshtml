@@ -1,0 +1,121 @@
+﻿@model ikloud_Aflatoon.Infrastructure.IWSearch
+
+@Html.HiddenFor(model => model.BackTiffImagePath)
+@Html.HiddenFor(model => model.FrontTiffImagePath)
+@Html.HiddenFor(model => model.FrontGreyImagePath)
+
+<div id="chqdtlss" class="w3-modal w3-animate-zoom ">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('chqdtlss').style.display = 'none'" class="w3-closebtn"> &times;</span>
+            <h2>Cheque Image</h2>
+        </header>
+        <div class="w3-container">
+            <img id="myimg" class="w3-card-8 w3-image" src="@Model.FrontGreyImagePath" />
+            <table class="w3-table w3-striped w3-bordered">
+
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">Cheque No</td>
+                    <td class="w3-input" style="font-weight:800">@Model.XMLSerialNo</td>
+                    <td class="w3-label" style="font-weight:800">Amount</td>
+                    <td class="w3-input" style="font-weight:800">@Model.XMLAmount</td>
+                    <td class="w3-label" style="font-weight:800">PayorBankRoutNo</td>
+                    <td class="w3-input" style="font-weight:800">@Model.XMLPayorBankRoutNo</td>
+                </tr>
+                <tr class="w3-text-light-grey"><td colspan="6"></td></tr>
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">SAN</td>
+                    <td class="w3-input" style="font-weight:800">@Model.XMLSAN</td>
+                    <td class="w3-label" style="font-weight:800">Trns</td>
+                    <td class="w3-input" style="font-weight:800">@Model.XMLTrns</td>
+                    <td class="w3-label" style="font-weight:800">DocType</td>
+                    <td class="w3-input" style="font-weight:800">@Model.DocType</td>
+                </tr>
+                <tr class="w3-text-light-grey"><td colspan="6"></td></tr>
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">PresentmentDate</td>
+                    <td class="w3-input" style="font-weight:800">@Model.PresentmentDate</td>
+                    <td class="w3-label" style="font-weight:800">BOFDRoutNo</td>
+                    <td class="w3-input" style="font-weight:800">@Model.BOFDRoutNo</td>
+                    <td class="w3-label" style="font-weight:800">Cheq Date</td>
+                    <td class="w3-input" style="font-weight:800">@Model.chequedate</td>
+                </tr>
+                <tr class="w3-text-light-grey"><td colspan="6"></td></tr>
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">L1VerificationBy</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L1VerificationName</td>
+                    <td class="w3-label" style="font-weight:800">L1Decision</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L1VerificationAction</td>
+                    <td class="w3-label" style="font-weight:800">L1RejectReason</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L1RejectReason</td>
+                </tr>
+                <tr class="w3-text-light-grey"><td colspan="6"></td></tr>
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">L2VerificationBy</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L2VerificationName</td>
+                    <td class="w3-label" style="font-weight:800">L2Decision</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L2VerificationAction</td>
+                    <td class="w3-label" style="font-weight:800">L2RejectReason</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L2RejectReason</td>
+                </tr>
+                <tr class="w3-text-light-grey"><td colspan="6"></td></tr>
+
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">L3VerificationBy</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L3VerificationName</td>
+                    <td class="w3-label" style="font-weight:800">L3Decision</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L3VerificationAction</td>
+                    <td class="w3-label" style="font-weight:800">L3RejectReason</td>
+                    <td class="w3-input" style="font-weight:800">@Model.L3RejectReason</td>
+                </tr>
+                <tr class="w3-text-light-grey"><td colspan="6"></td></tr>
+                <tr class="w3-light-grey">
+                    <td class="w3-label" style="font-weight:800">MICRRepairFlags</td>
+                    <td class="w3-input" style="font-weight:800">@Model.MICRRepairFlags</td>
+                    <td class="w3-label" style="font-weight:800">AccountNumber</td>
+                    <td colspan="3" class="w3-input" style="font-weight:800">@Model.AccountNo</td>
+                </tr>
+                <tr class="w3-light-grey">
+                    <td colspan="6" class="w3-center">
+                        <input class="w3-radio" type="radio" checked="checked" name="slctimg" id="frntGryimg" onclick="ChangeImage('FGray')" value="@Model.FrontGreyImagePath" /><span class="w3-label" style="font-weight:800"> Front Gray</span>&nbsp;&nbsp;|
+                        <input class="w3-radio" type="radio" name="slctimg" id="frntTiffimg" value="@Model.FrontTiffImagePath" onclick="ChangeImage('FTiff')" /><span class="w3-label" style="font-weight:800">
+                            Front Tiff
+                        </span>&nbsp;&nbsp;|
+                        <input class="w3-radio" type="radio" name="slctimg" id="backTiffimg" value="@Model.BackTiffImagePath" onclick="ChangeImage('BTiff')" /><span class="w3-label" style="font-weight:800">Back Tiff</span>
+                    </td>
+                </tr>
+                <tr class="w3-text-light-grey">
+                    @if (Model.chiStatus != null && Model.chiStatus != "")
+                    {
+                        <td colspan="6" class="w3-center">
+                            <input type="button" id="markreturn" value="UnMark Return" onclick="UnMark('@Model.ID','chqdtls');" />
+                        </td>
+                    }
+                    else
+                    {
+                        if (Model.MiscStatus == 0 || Model.MiscStatus == null)
+                        {
+                            <td colspan="6" class="w3-center">
+                                <input type="button" id="markreturn" value="Mark Return" onclick="alert('L1/L2/L3 is pending for this cheque. You can not mark return')" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td colspan="6" class="w3-center">
+                                <input type="button" id="markreturn" value="Mark Return" onclick="selectrsn('@Model.ID','chqdtls');" />
+                            </td>
+                        }
+                    }
+                </tr>
+
+            </table>
+        </div>
+        <footer class="w3-container w3-theme-dark"></footer>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('chqdtlss').style.display = 'block';
+
+</script>
+

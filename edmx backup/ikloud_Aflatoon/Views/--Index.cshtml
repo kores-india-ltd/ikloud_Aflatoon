@@ -1,0 +1,133 @@
+﻿@using ikloud_Aflatoon;
+@using System;
+@model IEnumerable<IkloudProReports.Models.OutwardDomainDashBoard_V2>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    label{padding-left:20px;font-weight:700;color:blue;font-family:Cambria}
+    h2{font-family:Cambria;font-size:25px;color:whitesmoke}
+
+</style>
+
+
+@using (Html.BeginForm("Index", "OutwardDomainDashBoardV1", FormMethod.Post, new { id = "refresh" }))
+{
+    
+@*<button type="submit" id="btnRefresh" name="refresh" value="btnrefresh">Refresh</button>*@
+    <div style="text-align:center" class="w3-panel  w3-card-4">
+        <label class="w3-label">S- Slip</label>
+        <label class="w3-label">C- Cheque</label>
+        <label class="w3-label">VF- Verification</label>
+        <label class="w3-label">VFSC- Verification with Slip Cheque</label>
+        <label class="w3-label">VFC- Verification with only Cheque</label>
+    </div>
+
+
+    if (Model != null)
+    {
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                if (i == 0)
+                {
+    <div  class="w3-panel w3-center w3-dark-grey">
+        <h2><b> @item.CustomerName</b></h2>
+    </div>
+                i++;
+            }
+        }
+    }
+
+
+    <div class="w3-row">
+        <div class="w3-responsive w3-col">
+            <table class="w3-table w3-card-4 w3-bordered">
+                <tr id="grp" class="w3-light-grey">
+                    @*<th colspan="4">Domain Pending Items list
+                </th>*@
+                    <td class=" w3-theme-d5 w3-border-right"></td>
+                    <td class="w3-theme-d5 w3-border-right" style="text-align:center;font-family:Arial;font-weight:bold" colspan="8">Data Entry</td>
+                    <td class="w3-theme-d5" style="text-align:center;font-family:Arial;font-weight:bold" colspan="8">Verification</td>
+                    <td class="w3-theme-d5 w3-border-left" style="text-align:center;font-family:Arial;font-weight:bold" colspan="4">Presentation</td>
+                    <td class="w3-theme-d5 w3-border-left" style="text-align:center;font-family:Arial;font-weight:bold" colspan="4">Transfer</td>
+                </tr>
+                <tr>
+                    <th class=" w3-theme-d5">Location </th>
+                    <th class=" w3-grey">S-Tot </th>
+                    <th class=" w3-grey">C-Tot </th>
+                    <th class=" w3-grey">S-Amt </th>
+                    <th class=" w3-grey">C-Amt </th>
+                    <th class=" w3-grey">C-Micr </th>
+                    <th class=" w3-grey">C-Dt </th>
+                    <th class=" w3-grey">S-Ac </th>
+                    <th class=" w3-grey">C-Ac </th>
+                    <th class=" w3-light-grey">C-L1VFSC </th>
+                    <th class=" w3-light-grey">C-L1VFC </th>
+                    <th class=" w3-light-grey">C-L2VFSC </th>
+                    <th class=" w3-light-grey">C-L2VFC </th>
+                    <th class=" w3-light-grey">C-L3VFSC </th>
+                    <th class=" w3-light-grey">C-L3VFC </th>
+                    <th class=" w3-light-grey">C-Disc </th>
+                    <th class=" w3-light-grey">C-CHI Rjct </th>
+                    <th class=" w3-dark-grey">C-P2f </th>
+                    <th class=" w3-dark-grey">C-Bndlng </th>
+                    <th class=" w3-dark-grey">C-Resc Rcvd </th>
+                    <th class=" w3-dark-grey">C-Oack Rcvd </th>
+                    <th class=" w3-text-khaki">C-Tot </th>
+                    <th class=" w3-text-khaki">C-L1VFC </th>
+                    <th class=" w3-text-khaki">C-L2VFC </th>
+                    <th class=" w3-text-khaki">C-L3VFC </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class=" w3-theme-d5"> @item.scanNodeDesc </td>
+                        <td class=" w3-grey">
+                            @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                            @item.cntSlips
+                        </td>
+                        if(@item.cntchqs>0)
+                        {
+                            <td class=" w3-grey"> @item.cntchqs </td>
+                            <td class=" w3-grey"> @item.cntslipamtde </td>
+                            <td class=" w3-grey"> @item.cntchqamtde  </td>
+                            <td class=" w3-grey"> @item.cntchqmicr  </td>
+                            <td class=" w3-grey"> @item.cntchqdatede </td>
+                            <td class=" w3-grey"> @item.cntslipaccountde </td>
+                            <td class=" w3-grey"> @item.cntchqaccountde  </td>
+                            <td class=" w3-light-grey"> @item.cntL1VerSC  </td>
+                            <td class=" w3-light-grey"> @item.cntL1VerC </td>
+                            <td class=" w3-light-grey"> @item.cntL2VerSC </td>
+                            <td class=" w3-light-grey"> @item.cntL2VerC  </td>
+                            <td class=" w3-light-grey"> @item.cntL3VerSC </td>
+                            <td class=" w3-light-grey"> @item.cntL3VerC  </td>
+                            <td class=" w3-light-grey"> @item.cntDiscrepant </td>
+                            <td class=" w3-light-grey"> @item.cntChireject </td>
+                            <td class=" w3-dark-grey"> @item.cntP2f  </td>
+                            <td class=" w3-dark-grey"> @item.cntReadyforBundling </td>
+                            <td class=" w3-dark-grey"> @item.cntResrecvd  </td>
+                            <td class=" w3-dark-grey"> @item.cntOackrecvd </td>
+                            <td class=" w3-blue-grey"> @item.cntTrfChqs  </td>
+                            <td class=" w3-blue-grey"> @item.cntTrfChqsL1 </td>
+                            <td class=" w3-blue-grey"> @item.cntTrfChqsL2  </td>
+                            <td class=" w3-blue-grey"> @item.cntTrfChqsL3 </td>
+                        }
+                        
+                    </tr>
+                    @*<tr>
+                        <td>Total</td>
+                        <td>@Model.Select(odym => odym.cntSlips).Count()</td>
+                    </tr>*@
+
+                }
+            </table>
+        </div>
+    </div>
+}
+}
+

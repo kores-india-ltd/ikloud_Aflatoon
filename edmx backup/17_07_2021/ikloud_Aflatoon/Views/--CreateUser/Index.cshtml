@@ -1,0 +1,107 @@
+﻿@model IEnumerable<ikloud_Aflatoon.UserMaster>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.header = "User Management";
+    ViewBag.Title = "User Management";
+    if (ViewBag.disable == true)
+    {
+        <script type="text/javascript">
+            alert('@ViewBag.mesg');
+        </script>
+    }
+}
+
+<style type="text/css">
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+
+
+</style>
+<h2>User Management</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="ctable">
+    @{
+        if (ViewBag.modf == true)
+        {
+            ViewBag.modf = false;
+            ViewBag.message = "User modified successfully!";
+            @*      <tr><td> @Html.Partial("_CreateUser")</td></tr>*@
+        }
+
+    }
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginID)
+        </th>
+        @* <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href='@Url.Action("selecteduser", "CreateUser", new { id = item.ID })'>
+                    @Html.DisplayFor(modelItem => item.LoginID)
+                </a>
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailID)
+            </td>
+            <!-- <td>
+                  @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                  @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                  @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+              </td>-->
+
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+</div>

@@ -1,0 +1,425 @@
+﻿@model ikloud_Aflatoon.Infrastructure.cbstetails
+<div id="cbsdetails">
+
+    @Html.HiddenFor(m => m.cbsdls)
+    @Html.HiddenFor(m => m.JoinHldrs)
+    @*<div class="w3-container w3-light-green w3-margin w3-card-8">
+            @if (Model.cbsdls != null)
+            {
+                if (Model.PayeeName != null)
+                {
+                    @Html.DropDownList("Payee", new SelectList(Model.PayeeName), new { onchange = "getselect();" })
+                }
+                else
+                {
+
+                    @Html.DropDownList("Payee", new List<SelectListItem>
+                            {
+                                new SelectListItem{ Text="Not Found", Value = "Not Found" },
+                             }, new { onchange = "getselect();" })
+                }
+
+            }
+        </div>*@
+
+
+    <div class="w3-container w3-light-grey w3-margin w3-card-4">
+        <!--cbsdiv-->
+        @if (Model.cbsdls != null)
+        {
+            <script>
+                @*document.getElementById('accnt').value=@Model.Account;*@
+            </script>
+
+            if (Model.cbsdls.Substring(1, 1) != "F")
+            {
+                if (Model.cbsdls.Split('|').ElementAt(3) == "SBFCR" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "SBFCS" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "CAFCR" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "CAFCS")
+                {
+                    <script type="text/javascript">
+                        alert('Alert! FCRA A/C Check Branch confirmation for source of Funds!!');
+                    </script>
+                }
+            }
+            if (Model.cbsdls.Split('|').ElementAt(1) == "S" && Model.cbsdls.Split('|').ElementAt(2) != "")
+            {
+                if (Model.cbsdls.Split('|').ElementAt(3) == "SBNRE" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "SBFRL" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "UBFRL" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "SBFCR" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "SBFCS" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "CAFCR" ||
+                    Model.cbsdls.Split('|').ElementAt(3) == "CAFCS" ||
+                   Model.cbsdls.Split('|').ElementAt(6) == "D" || //account status in adbc Closed-C,Dormant-D,Inactive-I,Unclaimed-U
+                    Model.cbsdls.Split('|').ElementAt(6) == "C" ||
+                    Model.cbsdls.Split('|').ElementAt(6) == "I" ||
+                    Model.cbsdls.Split('|').ElementAt(6) == "U" ||
+                    Model.cbsdls.Split('|').ElementAt(4) == "STOP") //freeze code STOP in adcb
+                {
+                    <script type="text/javascript">
+                        document.getElementById("blockkey").value = "0";
+                    </script>
+                    <div class="w3-container w3-highway-red">
+                        <div class="w3-container">
+                            <label>
+                                Name:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(2)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            @if (Model.JoinHldrs != null)
+                            {
+                                <h4>
+                                    <label>
+                                        Joint Holders:
+                                    </label>
+                                    @for (int i = 3; i < Model.JoinHldrs.Split('|').Count() - 1; i++)
+                                    {
+                                        <label>
+                                            @Model.JoinHldrs.Split('|').ElementAt(i)
+                                        </label>
+                                    }
+                                </h4>
+                            }
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Scheme Code:
+                            </label>
+                            <label>
+                                @*@Model.cbsdls.Split('|').ElementAt(3)*@
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Freeze Code:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(4)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                MOP:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(5) - @Model.MOP
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Account Status:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                NRE Flag:
+                            </label>
+                            <label>
+                                @if (@Model.cbsdls.Split('|').ElementAt(3) == "3021" || @Model.cbsdls.Split('|').ElementAt(3) == "1021")
+                                {<label>
+                                        Y
+                                    </label>}
+                                else
+                                {<label>
+                                        N
+                                    </label>}
+                                @*@Model.cbsdls.Split('|').ElementAt(10)*@
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Scheme Type:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(11)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                Account Ownership:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(3)
+                            </label>
+                        </div>
+                    </div>
+                }
+                else if (@Model.cbsdls.Split('|').ElementAt(3) == "3021" || @Model.cbsdls.Split('|').ElementAt(3) == "1021") //for NRE
+                {
+                    <script type="text/javascript">
+                        document.getElementById("blockkey").value = "0";
+                        alert('Alert! Check this is a NRE Account !!');
+                    </script>
+                    <div class="w3-container w3-highway-orange">
+                        <div class="w3-container">
+                            <label>
+                                Name:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(2)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            @if (Model.JoinHldrs != null)
+                            {
+                                <h4>
+                                    <label>
+                                        Joint Holders:
+                                    </label>
+                                    @for (int i = 3; i < Model.JoinHldrs.Split('|').Count() - 1; i++)
+                                    {
+                                        <label>
+                                            @Model.JoinHldrs.Split('|').ElementAt(i)
+                                        </label>
+                                    }
+                                </h4>
+                            }
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Scheme Code:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(3)
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Freeze Code:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(4)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                MOP:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(5) - @Model.MOP
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Account Status:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                NRE Flag:
+                            </label>
+                            <label>
+                                @if (@Model.cbsdls.Split('|').ElementAt(3) == "3021" || @Model.cbsdls.Split('|').ElementAt(3) == "1021")
+                                {<label>
+                                        Y
+                                    </label>}
+                                else
+                                {<label>
+                                        N
+                                    </label>}
+                                @*@Model.cbsdls.Split('|').ElementAt(10)*@
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Scheme Type:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(11)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                Account Ownership:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(3)
+                            </label>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!--<script type="text/javascript">
+                    document.getElementById("blockkey").value = "0";
+                </script>
+
+                <div class="w3-container">
+                    <label>
+                        Name:
+                    </label>
+                    <label>
+                        @Model.cbsdls.Split('|').ElementAt(3)
+                    </label>
+                </div>
+
+
+                <div class="w3-container">
+                    <label>
+                        Scheme Code:
+                    </label>
+                    <label>-->
+                    @*@Model.cbsdls.Split('|').ElementAt(3)*@
+                    <!--</label>
+                </div>
+
+                <div class="w3-container">
+                    <label>
+                        Freeze Code:
+                    </label>
+                    <label>
+                        @Model.cbsdls.Split('|').ElementAt(4)
+                    </label>
+                </div>
+
+
+                <div class="w3-container">
+                    <label>
+                        Account Status:
+                    </label>
+                    <label>
+                        @Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                    </label>
+                </div>
+                <div class="w3-container">
+                    <label>
+                        New Account:
+                    </label>
+                    <label>
+                        Y
+                    </label>
+                </div>
+                <div class="w3-container">
+                    <label>
+                        Staff Account:
+                    </label>
+                    <label>
+                        Y
+                    </label>
+                </div>
+
+
+                <div class="w3-container">
+                    <label>
+                        cpps flag:
+                    </label>
+                    <label>
+                        @if (@Model.cbsdls.Split('|').ElementAt(3) == "3021" || @Model.cbsdls.Split('|').ElementAt(3) == "1021")
+                        {<label>
+                                Y
+                            </label>}
+                        else
+                        {<label>
+                                N
+                            </label>}-->
+                    @*@Model.cbsdls.Split('|').ElementAt(10)*@
+                    <!--</label>
+                </div>
+                <div class="w3-container">
+                    <label>
+                        P2F:
+                    </label>
+                    <label>
+                        Y
+                    </label>
+                </div>
+                <div class="w3-container">
+                    <label>
+                        MOP:
+                    </label>
+                    <label>
+                        Y
+                    </label>
+                </div>
+                <div class="w3-container">
+                    <label>
+                        Signature Requirement:
+                    </label>
+                    <label>
+                        Y
+                    </label>
+                </div>-->
+
+                    <table class="w3-table w3-bordered">
+                        <tr>
+                            @*<td><label>Name:</label></td>
+                             <td>SCARLET TEXTILE MILLS INDIA PVT LTD</td>*@
+                            <td><label>Freeze Status:</label></td>
+                            <td>T/D/C</td>
+                            <td><label>Account Status:</label></td>
+                            <td>I/D/C</td>
+                        </tr>
+                        <tr>
+                            <td><label>P2F:</label></td>
+                            <td>Y/N</td>
+                            <td><label>CPPS:</label></td>
+                            <td>Y/N</td>
+
+                        </tr>
+                        <tr>
+                            <td><label>Payee New A/C Flag:</label></td>
+                            <td>Y/N</td>
+                            <td><label>Staff Flag:</label></td>
+                            <td>Y/N</td>
+                        </tr>
+                        <tr>
+                            <td><label>Issuer New A/c :</label></td>
+                            <td>Y/N</td>
+                            <td><label>MOP:</label></td>
+                            <td>Y</td>
+                        </tr>
+                        @*<tr>
+                            <td><label>MOP:</label></td>
+                            <td>Y</td>
+                            <td><label>Signature Requirement:</label></td>
+                            <td>Y</td>
+                        </tr>*@
+                    </table>
+
+
+
+                }
+            }
+            else
+            {
+                <div class="w3-container w3-highway-red">
+                    <h4 class="w3-container">@Model.cbsdls.Split('|').ElementAt(2)</h4>
+                    <script type="text/javascript">
+                        document.getElementById("blockkey").value = "1";
+                    </script>
+                </div>
+            }
+        }
+        else if (Model.cbsdls == null)
+        {
+            <div class="w3-container w3-highway-red">
+                <h3 class="w3-container">
+                    <strong>Account Details Not Found!!</strong>
+                </h3>
+            </div>
+            <script type="text/javascript">
+                document.getElementById("blockkey").value = "1";
+            </script>
+
+        }
+    </div>
+</div>

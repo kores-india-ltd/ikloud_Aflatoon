@@ -1,0 +1,124 @@
+﻿@model ikloud_Aflatoon.customerView
+
+@{
+    ViewBag.Title = "Create Customer";
+    ViewBag.header = "Create Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script>
+    $(document).ready(function () {
+        //alert('aila!!')
+        $('#CustomerCode,#PresentingBankRouteNo').keypress(function (event) {
+
+            if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                event.preventDefault(); //stop character from entering input
+            }
+
+        });
+
+
+        $("#CustomerName").keypress(function (event) {
+            if (event.shiftKey) {
+                event.preventDefault();
+            }
+            var vrpay = document.getElementById("CustomerName").value;
+
+            if (vrpay.length == 0) {
+                if (event.charCode == 32) {
+                    alert('Blank space are not allowed!');
+                    event.preventDefault();
+                    return false;
+                }
+            }
+
+            if (event.keyCode == 190 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 ||
+                        event.keyCode == 40 || event.keyCode == 46 || event.charCode == 32 || (event.charCode > 47 && event.charCode < 58) || (event.charCode > 64 &&
+                        event.charCode < 91) || (event.charCode > 95 && event.charCode < 123) || event.charCode == 46 || (event.charCode >= 37 && event.charCode <= 40)) {
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+
+    });
+</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+
+    <fieldset>
+        <legend>CustomerMaster</legend>
+
+        <div class="editor-label">
+            @Html.Label("Organization Name")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x=>x.OrganizationId,Model.Organization)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Grid Name")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x=>x.GridId,Model.Grid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CustomerName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CustomerName, new { autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.CustomerName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CustomerCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CustomerCode, new { autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.CustomerCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PresentingBankRouteNo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PresentingBankRouteNo, new { autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.PresentingBankRouteNo)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.CreationDateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreationDateTime)
+            @Html.ValidationMessageFor(model => model.CreationDateTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy)
+            @Html.ValidationMessageFor(model => model.CreatedBy)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    
+}

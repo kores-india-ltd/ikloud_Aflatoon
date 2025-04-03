@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "CHI Reject handler";
+    //ViewBag.header = "CHI Reject handler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="~/Scripts/Json2.js"></script>
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/ChiRejectHandler.js"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+@*@using (Ajax.BeginForm("ChiReject", new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "chidetls",
+        LoadingElementId = "loader"
+    }))
+    {*@
+<form class="w3-form">
+    <div class="w3-container w3-row">
+        <div class="w3-col">
+            <label class="w3-label w3-text-black" style="font-weight:900">Select Customer</label>
+            @Html.DropDownList("Customer", null, "All", new { style = "width: 150px;" })
+            <input class="w3-btn" type="button" id="btnok" name="btnok" value="Ok" />
+            <label id="loader" style="display:none"> <span style="color:red">  Loading...</span><img src="~/Content/images/progressss.gif" /></label>
+        </div>
+        @*<div></div>*@
+    </div>
+
+
+    @* }
+    *@
+    <div id="chidetls">
+
+    </div>
+</form>

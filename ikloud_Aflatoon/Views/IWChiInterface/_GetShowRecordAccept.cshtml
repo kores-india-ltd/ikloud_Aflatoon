@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.GetShowRecordAccept>
+
+<div class="row" id="tableData">
+    <div class="col-md-12">
+        <h3>@ViewBag.Heading</h3>
+        <table class="table table-responsive table-bordered table-condensed" style="cursor:pointer; overflow:auto; font-size:x-small; overflow-y:scroll;">
+            <thead>
+                <tr style="background-color:lightblue;">
+                    <th>ID</th>
+
+                    <th>Cheque Number</th>
+                    <th>Payee Name</th>
+                    <th>Sort Code</th>
+                    <th>Transaction Code</th>
+                    <th>SAN Code</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.id</td>
+
+                            <td>@item.ChqNo</td>
+                            <td>@item.Payeename</td>
+                            <td>@item.SortCode</td>
+                            <td>@item.Transcode</td>
+                            <td>@item.SANCode</td>
+                            <td>@item.Amount</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" style="text-align:center; color:red;">No record found</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

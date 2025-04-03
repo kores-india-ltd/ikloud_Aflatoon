@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ikloud_Aflatoon.UserMaster>
+@{
+    ViewBag.Title = "User Management Checker";
+    ViewBag.header = "User Management Checker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<h2>User Management Checker</h2>
+
+@if (Session["RoleName"].ToString() == "IDM CHECKER")
+{
+    if (ViewBag.mesg != null)
+    {
+        ViewBag.message = ViewBag.mesg;
+    }
+    <p>
+        @ViewBag.message
+    </p>
+    <p>
+        @Html.ActionLink("View Report", "Report")
+    </p>
+}
+
+<table class="ctable">
+    @{
+        if (ViewBag.mesg != null)
+        {
+            ViewBag.message = ViewBag.mesg;
+        }
+        if (ViewBag.modf == true)
+        {
+            ViewBag.modf = false;
+            ViewBag.message = "User modified successfully!";
+        }
+
+    }
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginID)
+        </th>
+        @* <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href='@Url.Action("selecteduser", "CreateUserNew", new { id = item.ID })'>
+                    @Html.DisplayFor(modelItem => item.LoginID)
+                </a>
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailID)
+            </td>
+            <td>
+                @using (Html.BeginForm("ActiveInactiveUser", "CreateUserNew", new { id = item.ID }))
+                {
+                    <input type="submit" class="NavButton" name="btn" value="Approve" onclick='return (confirm("Are you sure to approve user?"))' />
+                    <span style="width:5px;">|</span>
+                    <input type="submit" class="NavButton" name="btn" value="Reject" onclick='return (confirm("Are you sure to reject user?"))' />
+                    @*if (item.Active == true)
+                    {
+                        <input type="submit" class="NavButton" name="btn" value="Disable" onclick='return (confirm("Are you sure to disable?"))' />
+                    }
+                    else
+                    {
+                        <input type="submit" class="NavButton" name="btn" value="Enable" onclick='return (confirm("Are you sure to enable?"))' />
+                    }*@
+                }
+
+                @*@Html.ActionLink("Active", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Deactive", "Details", new { id = item.ID })*@
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ikloud_Aflatoon.domainView>
+
+@{
+    ViewBag.Title = "Domain";
+    ViewBag.header = "Domain";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="w3-container" style="margin-left:30px;">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table>
+        <tr>
+            <th align="left">
+                @Html.DisplayName("Domain Name")
+            </th>
+            <th align="left">
+                @Html.DisplayName("Domain Code")
+            </th>
+            <th align="left">
+                @Html.DisplayName("City Code")
+            </th>
+            <th align="left">
+                @Html.DisplayName("Branch Code")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td align="left">
+                    @Html.DisplayFor(modelItem => item.DomainName)
+                </td>
+                <td align="left">
+                    @Html.DisplayFor(modelItem => item.DomainCode)
+                </td>
+
+                <td align="left">
+                    @Html.DisplayFor(modelItem => item.CityCode)
+                </td>
+
+                <td align="left">
+                    @Html.DisplayFor(modelItem => item.BranchCode)
+                </td>
+                @* <td>
+                        @Html.DisplayFor(modelItem => item.CreationDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

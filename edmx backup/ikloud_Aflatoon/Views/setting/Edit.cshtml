@@ -1,0 +1,82 @@
+﻿@model ikloud_Aflatoon.applicationSettingsView
+
+@{
+    ViewBag.Title = "Edit Settings";
+    ViewBag.header = "Edit Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ApplicationSetting</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CustomerId)
+        @Html.HiddenFor(model => model.CustomerName)
+        @Html.HiddenFor(model => model.SettingName)
+        @Html.HiddenFor(model => model.SettingLevel)
+
+        <div class="editor-label">
+            @Html.Label("Customer")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.CustomerName, new { disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.CustomerId)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Setting Name")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model=>model.SettingName, new { disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.SettingNameId)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Setting Level")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model=>model.SettingLevel, new { disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.SettingLevelId)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Setting Value")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SettingValue)
+            @Html.ValidationMessageFor(model => model.SettingValue)
+        </div>
+
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy)
+            @Html.ValidationMessageFor(model => model.CreatedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedOn)
+            @Html.ValidationMessageFor(model => model.CreatedOn)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    
+}

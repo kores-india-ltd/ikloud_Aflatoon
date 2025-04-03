@@ -1,0 +1,260 @@
+﻿@using ikloud_Aflatoon;
+@using System;
+
+@*@model IEnumerable<IkloudProReports.Models.OutwardDomainDashBoard_V2>*@
+@model IEnumerable<ikloud_Aflatoon.Infrastructure.OutwardDomainDashBoard_V2_Model>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Index", "OutwardDomainDashBoardV1", FormMethod.Post, new { id = "refresh" }))
+{
+
+   
+
+    @*<button type="submit" id="btnRefresh" name="refresh" value="btnrefresh">Refresh</button>*@
+    <div style="text-align:center" class="w3-panel  w3-card-4">
+        <label class="w3-label">S- Slip</label>
+        <label class="w3-label">C- Cheque</label>
+        <label class="w3-label">VF- Verification</label>
+        <label class="w3-label">VFSC- Verification with Slip Cheque</label>
+        <label class="w3-label">VFC- Verification with only Cheque</label>
+        @*<label class="w3-label">VFSH- Verification Slip Hold</label>*@
+    </div>
+
+
+    if (Model != null)
+    {
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                if (i == 0)
+                {
+                    <div class="w3-panel w3-center w3-dark-grey">
+                        <h2><b> @item.CustomerName</b></h2>
+                    </div>
+                    i++;
+                }
+            }
+        }
+    }
+
+
+    <div class="w3-row" >
+        <div class="w3-responsive w3-col" id="dbHeader">
+            <table class="w3-table w3-card-4 w3-bordered" id="dbtable">
+                <tr id="grp" class="w3-light-grey">
+                    <td class="w3-theme-d5 w3-border-right"></td>
+                    <td class="w3-text-white" style="text-align:center;font-family:Arial;font-weight:bold" colspan="1"></td>
+                    <td class="w3-theme-d5 w3-border-right" style="text-align:center;font-family:Arial;font-weight:bold" colspan="1">Scan</td>
+                    <td class="w3-theme-d5 w3-border-right" style="text-align:center;font-family:Arial;font-weight:bold" colspan="1">L1 DataEntry</td>
+                    <td class="w3-theme-d5 w3-border-right" style="text-align:center;font-family:Arial;font-weight:bold" colspan="1">L2 Verification</td>
+                    <td class="w3-theme-d5 w3-border-right" style="text-align:center;font-family:Arial;font-weight:bold" colspan="1">L3 Verification</td>
+                    <td class="w3-theme-d5 w3-border-right" style="text-align:center;font-family:Arial;font-weight:bold" colspan="2">Disc & CHI</td>
+                    <td class="w3-theme-d5 w3-border-left" style="text-align:center;font-family:Arial;font-weight:bold" colspan="7">Presentation</td>
+
+                </tr>
+                <tr>
+                    <th class="w3-theme-d5">Location </th>
+                    <th class="w3-text-white"></th>
+                    @*<th class="w3-grey">S-Tot </th>*@
+                    <th class="w3-grey">C-Tot </th>
+
+                    @*<th class="w3-light-grey">C-SlipDE </th>*@
+                    <th class="w3-light-grey">C-ChqDE </th>
+
+                    @*<th class="w3-light-grey">C-SlipVrf </th>*@
+                    <th class="w3-light-grey">C-ChqVrf </th>
+
+                    @*<th class="w3-light-grey">C-SlipVrf </th>*@
+                    <th class="w3-light-grey">C-ChqVrf </th>
+
+                    <th class="w3-light-grey">C-Disc </th>
+                    <th class="w3-light-grey">C-CHI Rjct </th>
+
+                    <th class="w3-dark-grey">C-P2f </th>
+                    <th class="w3-dark-grey">C-Bndlng </th>
+                    <th class="w3-dark-grey">C-Created </th>
+                    <th class="w3-dark-grey">C-Uploaded </th>
+                    <th class="w3-dark-grey">C-Resc Rcvd </th>
+                    <th class="w3-dark-grey">C-Oack Rcvd </th>
+                    <th class="w3-dark-grey">C-Return </th>
+
+                </tr>
+               
+                @{
+                    int totSlips = 0;
+                    int totchqs = 0;
+                    int totslipamtde = 0;
+                    int totchqamtde = 0;
+                    int totchqmicr = 0;
+                    int totchqdatede = 0;
+                    int totslipaccountde = 0;
+                    int totchqaccountde = 0;
+                    int totL1VerSC = 0;
+                    int totL1VerC = 0;
+                    int totL2VerSC = 0;
+                    int totL2VerC = 0;
+                    int? totHoldSlipsL2 = 0;
+                    int totL3VerSC = 0;
+                    int totL3VerC = 0;
+                    int? totHoldSlipsL3 = 0;
+                    int totDiscrepant = 0;
+                    int totChireject = 0;
+                    int totP2f = 0;
+                    int totReadyforBundling = 0;
+                    int totFileCreated = 0;
+                    int totFileUploaded = 0;
+                    int totResrecvd = 0;
+                    int totOackrecvd = 0;
+                    int totChireturn = 0;
+                    int totTrfChqs = 0;
+                    int totTrfChqsL1 = 0;
+                    int totTrfChqsL2 = 0;
+                    int totTrfChqsL3 = 0;
+                    int totTrfChqsDisc = 0;
+
+                    int chqtot = 0;
+                    int chichqtot = 0;
+
+                    foreach (var item in Model)
+                    {
+                        if (item.cntchqs > 0)
+                        {
+
+                            //totSlips = totSlips + item.cntSlips;
+                            totchqs = totchqs + item.cntchqs;
+                            //totslipamtde = totslipamtde + item.cntslipamtde;
+                            //totchqamtde = totchqamtde + item.cntchqamtde;
+                            //totchqmicr = totchqmicr + item.cntchqmicr;
+                            //totchqdatede = totchqdatede + @item.cntchqdatede;
+                            //totslipaccountde = totslipaccountde + item.cntslipaccountde;
+                            //totchqaccountde = totchqaccountde + item.cntchqaccountde;
+
+                            //totL1VerSC = totL1VerSC + item.cntL1VerSC;
+                            totL1VerC = totL1VerC + item.cntL1VerC;
+
+                            //totL2VerSC = totL2VerSC + item.cntL2VerSC;
+                            totL2VerC = totL2VerC + item.cntL2VerC;
+
+                            //totHoldSlipsL2 = totHoldSlipsL2 + item.HoldSlipsL2;
+
+                            //totL3VerSC = totL3VerSC + item.cntL3VerSC;
+                            totL3VerC = totL3VerC + item.cntL3VerC;
+
+                            //totHoldSlipsL3 = totHoldSlipsL3 + item.HoldSlipsL3;
+                            totDiscrepant = totDiscrepant + item.cntDiscrepant;
+                            totChireject = totChireject + item.cntChireject;
+                            totP2f = totP2f + item.cntP2f;
+                            totReadyforBundling = totReadyforBundling + item.cntReadyforBundling;
+                            totFileCreated = totFileCreated + item.cntFileCreated;
+                            totFileUploaded = totFileUploaded + item.cntFileUploaded;
+                            totResrecvd = totResrecvd + item.cntResrecvd;
+                            totOackrecvd = totOackrecvd + item.cntOackrecvd;
+                            totChireturn = Convert.ToInt32(totChireturn + item.cntChiReturn);
+                            //totTrfChqs = totTrfChqs + Convert.ToInt32(item.cntTrfChqs);
+                            //totTrfChqsL1 = totTrfChqsL1 + Convert.ToInt32(item.cntTrfChqsL1);
+                            //totTrfChqsL2 = totTrfChqsL2 + Convert.ToInt32(item.cntTrfChqsL2);
+                            //totTrfChqsL3 = totTrfChqsL3 + Convert.ToInt32(item.cntTrfChqsL3);
+                            //totTrfChqsDisc = totTrfChqsDisc + Convert.ToInt32(item.cntTrfDiscrepant);
+
+                        }
+                    }
+                }
+                <tr class="w3-highway-schoolbus">
+                    <td>Total </td>
+                    <th class="w3-light-grey"></th>
+                    @*<td>@totSlips </td>*@
+                    <td>@totchqs </td>
+                    
+                    @*<td>@totL1VerSC </td>*@
+                    <td>@totL1VerC </td>
+
+                    @*<td>@totL2VerSC </td>*@
+                    <td>@totL2VerC </td>
+
+                    @*<td>@totL3VerSC </td>*@
+                    <td>@totL3VerC </td>
+                    
+                    <td>@totDiscrepant </td>
+                    <td>@totChireject </td>
+
+                    <td>@totP2f </td>
+                    <td>@totReadyforBundling </td>
+                    <td>@totFileCreated </td>
+                    <td>@totFileUploaded </td>
+                    <td>@totResrecvd </td>
+                    <td>@totOackrecvd </td>
+                    <td>@totChireturn </td>
+                    
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (item.cntchqs > 0)
+                        {
+                            chqtot = item.cntchqs;
+                            chichqtot = Convert.ToInt32(item.cntDiscrepant) +
+                            Convert.ToInt32(item.cntReadyforBundling) +
+                            Convert.ToInt32(item.cntFileCreated) +
+                            Convert.ToInt32(item.cntFileUploaded) +
+                            Convert.ToInt32(item.cntResrecvd) +
+                            Convert.ToInt32(item.cntOackrecvd) +
+                            Convert.ToInt32(item.cntChiReturn);
+
+                            <td class="w3-theme-d5"> @item.scanNodeDesc </td>
+
+                            if (chqtot == chichqtot)
+                            {
+                                <td class="" style="color:green;font-weight:bold">&#9745;</td>
+                            }
+                            else
+                            {
+                                <td class="" style="color:red;font-weight:bold">&#9746;</td>
+                            }
+
+                            @*<td class="w3-grey">
+                                @item.cntSlips
+                            </td>*@
+                            <td class="w3-grey"> @item.cntchqs </td>
+                            
+                            @*<td class="w3-light-grey"> @item.cntL1VerSC  </td>*@
+                            <td class="w3-light-grey"> @item.cntL1VerC </td>
+
+                            @*<td class="w3-light-grey"> @item.cntL2VerSC </td>*@
+                            <td class="w3-light-grey"> @item.cntL2VerC  </td>
+
+                            @*<td class="w3-light-grey"> @item.cntL3VerSC </td>*@
+                            <td class="w3-light-grey"> @item.cntL3VerC  </td>
+                            
+                            <td class="w3-light-grey"> @item.cntDiscrepant </td>
+                            <td class="w3-light-grey"> @item.cntChireject </td>
+
+                            <td class="w3-dark-grey"> @item.cntP2f  </td>
+                            <td class="w3-dark-grey"> @item.cntReadyforBundling </td>
+                            <td class="w3-dark-grey"> @item.cntFileCreated </td>
+                            <td class="w3-dark-grey"> @item.cntFileUploaded </td>
+                            <td class="w3-dark-grey"> @item.cntResrecvd  </td>
+                            <td class="w3-dark-grey"> @item.cntOackrecvd </td>
+                            <td class="w3-dark-grey"> @item.cntChiReturn </td>
+                            
+                        }
+
+                       
+                    </tr>
+
+                }
+
+            </table>
+        </div>
+    </div>
+}
+
+

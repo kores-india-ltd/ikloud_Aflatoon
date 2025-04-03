@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.RejectReason>
+<div class="w3-container">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr><td>Reason Code</td><td>Description</td></tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            @*if (item.ReasonCodeS == "88")
+                {
+                    <tr>
+                        <td>@item.ReasonCodeS</td>
+                        <td>
+                            @item.Description: &nbsp;<input style="width:200px;" maxlength="25" type="text" id="rtndescrp" name="rtndescrp" />&nbsp;&nbsp;
+                            &nbsp;&nbsp;<span style="color:blue" class="w3-hover-blue w3-opennav" onclick="reasonselected(@item.ReasonCodeS)">Select</span>
+                        </td>
+
+                    </tr>
+                }
+                else
+                {*@
+            <tr class="w3-hover-blue w3-opennav" onclick="reasonselected('@item.ReasonCodeS')">
+                <td>@item.ReasonCodeS</td>
+                <td>@item.Description</td>
+            </tr>
+            //   }
+
+
+        }
+    </table>
+</div>
+@*<div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+        &nbsp;
+        @if (Model.HasPreviousPage)
+        {
+            @Html.ActionLink("<<", "RejectReason", new { page = 1, mid = ViewBag.mid, rtnmodule = ViewBag.rtnmodule, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw("&nbsp;");
+            @Html.ActionLink("< Prev", "RejectReason", new { page = Model.PageNumber - 1, mid = ViewBag.mid, rtnmodule = ViewBag.rtnmodule, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:<<
+            @Html.Raw("&nbsp;");
+            @:< Prev
+        }
+        &nbsp;
+        @if (Model.HasNextPage)
+        {
+            @Html.ActionLink("Next >", "RejectReason", new { page = Model.PageNumber + 1, mid = ViewBag.mid, rtnmodule = ViewBag.rtnmodule, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw("&nbsp;");
+            @Html.ActionLink(">>", "RejectReason", new { page = Model.PageCount, mid = ViewBag.mid, rtnmodule = ViewBag.rtnmodule, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:Next >
+            @Html.Raw("&nbsp;")
+            @:>>
+        }
+    </div>*@
+

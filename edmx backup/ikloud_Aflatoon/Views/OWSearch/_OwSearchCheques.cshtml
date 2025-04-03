@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.IWSearch>
+
+<div class="w3-container" id="chqsrch">
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr>
+                <td>SerialNo</td>
+                <td>Amount</td>
+                <td>PayeeName</td>
+                <td>PayorBankRoutNo</td>
+                <td>SAN</td>
+                <td>TransCode</td>
+                <td>Account Number</td>
+                <td>Return</td>
+                <td>ChqDate</td>
+                <td>P2F</td>
+                <td>ChqInfo</td>
+
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.XMLSerialNo</td>
+                <td>@item.XMLAmount</td>
+                <td>@item.XMLPayeeName</td>
+                <td>@item.XMLPayorBankRoutNo</td>
+                <td>@item.XMLSAN</td>
+                <td>@item.XMLTrns</td>
+                <td>@item.CreditAccountNo</td>
+
+                @if (item.chiStatus != null && item.chiStatus == "206")
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" checked="checked" disabled="disabled" /> </td>
+                }
+                else
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" disabled="disabled" /> </td>
+                }
+                <td>
+                    @item.chequedate
+                </td>
+                @if (item.P2F == "C")
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" checked="checked" disabled="disabled" /> </td>
+                }
+                else
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" disabled="disabled" /> </td>
+                }
+                <td>
+
+                    <span class="w3-hover-blue w3-opennav w3-text-blue" onclick="selectedcheque('@item.ID')">Details</span>&nbsp;|&nbsp;
+                    @*@if (item.chiStatus != null && item.chiStatus != "")
+                        {
+                            <span class="w3-hover-blue w3-opennav w3-text-blue" onclick="UnMark('@item.ID','search');">UnMark Return</span>
+                        }
+                        else
+                        {
+
+                            <span class="w3-hover-blue w3-opennav w3-text-blue" onclick="selectrsn('@item.ID','search');">Mark Return</span>
+                        }*@
+
+                </td>
+            </tr>
+
+        }
+    </table>
+    <input type="hidden" id="rtnID" name="rtnID">
+    <div id="rjctrsn" class="w3-modal w3-animate-zoom ">
+        @*@Html.Action("RejectReason", "IWDataEntry");*@
+        <div class="w3-modal-content">
+            <div class="w3-container w3-theme-dark">
+                <span onclick="document.getElementById('rjctrsn').style.display = 'none';"
+                      class="w3-closebtn">&times;</span>
+                <h2>Select Reject Reason</h2>
+            </div>
+            <div class="w3-container">
+
+                @Html.Action("RejectReason", "OWSearch")
+            </div>
+            <div class="w3-container">&nbsp;</div>
+        </div>
+    </div>
+</div>

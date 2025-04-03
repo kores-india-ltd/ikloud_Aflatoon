@@ -1,0 +1,97 @@
+﻿@model ikloud_Aflatoon.Infrastructure.ChiReject
+
+<div id="chidetls">
+    @using (Html.BeginForm("ChiReject", "ChiRejectHandler"))
+    {
+
+        <div class="w3-row w3-center w3-container">
+            <div class="w3-col w3-large w3-center w3-border w3-margin-bottom  w3-theme-d2">
+                <label class="w3-label w3-text-white" id="chidesc" style="font-weight:900">@Model.ChiRejectdescription</label>
+            </div>
+        </div>
+
+        <div class="w3-row w3-center w3-margin-bottom">
+            <img id="myimg" class="w3-card-8 w3-image " style="cursor:zoom-in" onclick="fullImage();" src="@Model.FrontGreyImagePath" />
+        </div>
+        <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+            <img id="myfulimg" class="w3-modal-content w3-card-8 w3-center w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+        </div>
+        <div class="w3-row w3-padding w3-center">
+            <div class="w3-col ">
+                <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                <label class="w3-btn" onclick="ChangeImage('FTiff');">Front Tiff</label>
+                <label class="w3-btn" onclick="ChangeImage('FGray');">Front Gray</label>
+                <label class="w3-btn" onclick="ChangeImage('BTiff');">Back Tiff</label>
+            </div>
+        </div>
+        <div class="w3-row w3-gray">
+            <div class="w3-col m3">
+                <label class="w3-label">Cheque No</label>
+            </div>
+            <div class="w3-col m3">
+                <label class="w3-label">Sort Code</label>
+            </div>
+            <div class="w3-col m3">
+                <label class="w3-label">SAN</label>
+            </div>
+            <div class="w3-col m3">
+                <label class="w3-label">Trans Code</label>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col m3">
+                @Html.TextBoxFor(m => m.ChequeNoFinal)
+            </div>
+            <div class="w3-col m3">
+                @Html.TextBoxFor(m => m.SortCodeFinal)
+            </div>
+            <div class="w3-col m2">
+                @Html.TextBoxFor(m => m.SANFinal)
+            </div>
+            <div class="w3-col m2">
+                @Html.TextBoxFor(m => m.TransCodeFinal)
+            </div>
+            <div>
+                <label class="w3-label w3-blue">Ignore IQA</label>
+                <input type="text" id="ignriqa" class="w3-text" style="width: 35px; float: left; font-weight: 700; text-align: center" maxlength="1">
+            </div>
+            <div>
+                <label class="w3-label w3-blue">Doc Type</label>
+                <label class="w3-label w3-blue">@Model.DocType</label>
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col ">
+                <label class="w3-label w3-text-light-grey" style="float: left">Decision: </label>
+                <input class="w3-margin-left w3-text-dark-grey" id="Decision" name="Decision" type="text" style="width: 35px; float: left; font-weight: 700; text-align: center" maxlength="1" />
+            </div>
+            <div>
+                <input class="w3-btn w3-margin-left" name="btn" type="submit" id="ok" value="OK" onclick="return (validMICR());" />
+                <input class="w3-btn" type="button" name="btn" id="btnClose" value="Close" />
+            </div>
+        </div>
+        <div class="w3-row">
+            <div class="w3-col m2">
+                <label class="w3-label w3-border-gray" style="font-weight:800">P</label>
+                <label class="w3-label w3-border-blue">Mark To P2F</label>
+            </div>
+            <div class="w3-col m2">
+                <label class="w3-label w3-border-gray" style="font-weight:800">S</label>
+                <label class="w3-label w3-border-blue">Send To CHI</label>
+            </div>
+            <div class="w3-col m2">
+                <label class="w3-label w3-border-gray" style="font-weight:800">N</label>
+                <label class="w3-label w3-border-blue">Do Not Present</label>
+            </div>
+            <div class="w3-col m2">
+                <label class="w3-label w3-border-gray" style="font-weight:800">B</label>
+                <label class="w3-label w3-border-blue">Bank On Blockage</label>
+            </div>
+            <div class="w3-col m2">
+                <label class="w3-label w3-border-gray" style="font-weight:800">G</label>
+                <label class="w3-label w3-border-blue">Government Cheque</label>
+            </div>
+        </div>
+
+    }
+</div>

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Models.SelectDomain>
+@{
+    ViewBag.Title = "_SelectDomains";
+    //int i = 0;
+}
+
+<table id="chkdomain" class="w3-table w3-striped w3-bordered" style="width:30%">
+    <thead class="w3-theme-d5">
+        <tr>
+            <td style="font-size: 14px">
+                Please select Domain
+            </td>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>@item.domainName</td><td><input type=checkbox id="@item.domainName" value="@item.domainName" onchange="appenddata('@item.domainName');" /></td>*@
+                <td>
+                    @item.domainName
+                </td>
+                <td>
+                    <input class="w3-check" type=checkbox id="@item.domainName" value="@item.domainName"  />
+                </td>
+            </tr>
+        }
+</table>

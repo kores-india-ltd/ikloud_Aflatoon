@@ -1,0 +1,23 @@
+﻿@model  ikloud_Aflatoon.Models.ErrorDisplay
+@{
+    ViewBag.header = "Error";
+    Layout = null;
+    if (ViewBag.extra == true)
+    {
+        <script type="text/javascript">
+            alert('@ViewBag.popmsg');
+        </script>
+    }
+}
+
+<div class="w3-container w3-center">
+    <h3>
+        @Model.ErrorMessage
+    </h3>
+    <h3>
+        Please Login Again.
+    </h3>
+
+    <small>@Html.ActionLink("Click here for login", "Logout", "Login", new { user = User.Identity.Name, rememberme = false }, null)</small>
+</div>
+

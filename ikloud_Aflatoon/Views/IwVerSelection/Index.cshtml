@@ -1,0 +1,132 @@
+﻿@{
+
+    ViewBag.Title = "Selection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<script src="@Url.Content("~/Scripts/IwSelectionVer.js")"></script>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<style>
+    .label {
+        padding: 10px 20px;
+        display: inline-block;
+        border-radius: 5px;
+        cursor: pointer;
+        color: black;
+    }
+    /* Default background color for labels */
+    #normal:checked + label {
+        background-color: blue;
+        color: white;
+    }
+
+    #careful:checked + label {
+        background-color: red;
+    }
+</style>
+
+@if (ViewBag.msg != null)
+{
+    <script type="text/javascript">
+       // alert('Aila!!!');
+        //document.getElementById('nodatafound').style.display = 'block';
+        alert('@ViewBag.msg');
+    </script>
+}
+
+<div class="w3-form" style="padding-top:40%">
+    @*@Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)*@
+    @using (Html.BeginForm("SendData", "IwVerSelection", FormMethod.Post))
+    {
+
+
+        <input type="hidden" id="flghdId" name="flghdId" value="@Session["FlagForVerification"].ToString()" />
+
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom w3-round-xlarge w3-padding-16 w3-light-grey" style="max-width: 600px">
+            <div class="w3-container">
+                <div class="w3-center" style="font-size: 1.5em; font-weight: bold;">
+                    @if (Session["FlagForVerification"] != null)
+                    {
+                        string flagValue = Session["FlagForVerification"].ToString();
+                        if (flagValue == "L1")
+                        {
+                            <span>L1 Verification</span>
+                        }
+                        else if (flagValue == "L2")
+                        {
+                            <span>L2 Verification</span>
+                        }
+
+                        else if (flagValue == "L3")
+                        {
+                            <span> L3 Verification</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>Verification</span>
+                    }
+                </div>
+
+                <div id="divBranch" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Queue</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        <input type="radio" id="normal" name="queue" value="Normal">
+                        <label for="normal" class="label">Normal</label>&nbsp;&nbsp;
+                        <input type="radio" id="careful" name="queue" value="Careful">
+                        <label for="careful" class="label">Careful</label>
+                    </div>
+                </div>
+                <div id="divFilterSelectiondrop" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Filter</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+
+                        @Html.DropDownList("AmtSelection", null, null, new { id = "AmtSelection", @class = "w3-select", style = "width:100%;" })
+
+                    </div>
+                </div>
+
+                <div id="divExpirySelectiondrop" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Expiry</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @Html.DropDownList("SessionExpiryTime", null, "All", new { id = "SessionExpiryTime", @class = "w3-select", style = "width:100%;" })
+
+
+                    </div>
+                </div>
+
+                <div class="w3-center w3-padding-16">
+                    <input class="w3-btn" type="submit" name="select" id="select" value="Select" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w3-btn" type="button" name="cancel" id="cancel" value="Cancel" onclick="GoToHomePage();" />
+                    @*<input class="w3-btn" type="button" name="refresh" id="refresh" value="Refresh" onclick="GoToRefreshPage();" />*@
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+
+
+
+
+
+
+
+</div>
+
+
+
+

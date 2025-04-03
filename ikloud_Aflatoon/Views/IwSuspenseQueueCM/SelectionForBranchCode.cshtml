@@ -1,0 +1,75 @@
+﻿@model ikloud_Aflatoon.Infrastructure.SelectionForBranchCode
+@{
+    ViewBag.Title = "SelectionForBranchCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+
+<script src="@Url.Content("~/Scripts/IwSuspenseQueueSelectionForBranchCodeCM.js")"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<div class="w3-form" style="padding-top:40%">
+    @using (Html.BeginForm("SelectionForBranchCode", "IwSuspenseQueueCM", FormMethod.Post, Model))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.BranchCodeList)
+
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom w3-round-xlarge w3-padding-16 w3-light-grey" style="max-width: 600px">
+            <div class="w3-container">
+
+                <div id="divBranch" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Branch Code</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @Html.DropDownList("BranchSelect", new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "Select Branch",
+                                                        new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div id="divBranch" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Exception</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @Html.DropDownList("ExceptionFilter", null, "ALL", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <!-- Radio Buttons for Checker and Maker -->
+                <div class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Role</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @if (Session["CheckerOrMaker"] != null && Session["CheckerOrMaker"].ToString() == "Checker")
+                        {
+                            <label style="margin-right: 20px;"><input type="radio" name="role" value="Maker" id="radioMaker" /> Maker</label>
+                            <label><input type="radio" name="role" value="Checker" id="radioChecker" /> Checker</label><br />
+                            <span id="radioError" style="color: red; display: none;">Please select a role.</span>
+                        }
+                        else
+                        {
+
+                            <label><input type="radio" name="role" value="Maker" checked /> Maker</label>
+                        }
+
+                    </div>
+                </div>
+
+                <div class="w3-center w3-padding-16">
+                    <input class="w3-btn" type="submit" name="select" id="select" value="Select" onclick="return validateForm();" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w3-btn" type="button" name="cancel" id="cancel" value="Cancel" onclick="GoToHomePage();" />
+                    <input class="w3-btn" type="button" name="refresh" id="refresh" value="Refresh" onclick="GoToRefreshPage();" />
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

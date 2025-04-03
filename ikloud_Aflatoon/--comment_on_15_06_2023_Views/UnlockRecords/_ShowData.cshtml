@@ -1,0 +1,48 @@
+﻿@model System.Data.DataSet
+<div class=" w3-container w3-padding-top" id="ShowDetails">
+    @if (Model.Tables[0].Rows.Count > 0)
+    {
+        <script type="text/javascript">
+            //$("#btnView").attr("disabled", "disabled");
+            $("#Unlockrcd").removeAttr("disabled");
+           
+        </script>
+
+    }
+    else
+    {
+        <script type="text/javascript">
+            $("#Unlockrcd").attr("disabled", "disabled");
+            //$("#Unlockrcd").removeAttr("disabled");
+            alert('No Data Was Found !!');
+        </script>
+    }
+    <input type="hidden" id="clickedradio" value="@ViewBag.unlockfield"/>
+
+    <table class="w3-table" style="width:100%" border="1" id="myTable">
+        <tr class="w3-gray">
+            <th class="w3-hover-text-white">ID</th>
+            <th class="w3-hover-text-white">RowDataID</th>
+            <th class="w3-hover-text-white">Status</th>
+            @*<th class="w3-hover-text-white">InstrumentType</th>*@
+            <th class="w3-hover-text-white">Userid</th>
+            <th class="w3-hover-text-white">User Name</th>
+        </tr>
+        @*@foreach (var item in Model)*@
+        @foreach (System.Data.DataRow row in Model.Tables[0].Rows)
+        {
+            <tr>
+                <td>@row[0]</td>
+                <td>@row[1]</td>
+                <td>@row[2]</td>
+                <td>@row[3]</td>
+                @*<td>@row[4]</td>*@
+                <td>@Html.Action("Username", new { id = row[3] }) </td>
+
+            </tr>
+        }
+
+    </table>
+    @*<label>Abid</label>*@
+
+</div>

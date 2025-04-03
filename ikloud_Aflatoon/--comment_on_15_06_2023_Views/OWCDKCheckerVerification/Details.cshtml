@@ -1,0 +1,230 @@
+﻿@model IEnumerable<ikloud_Aflatoon.L2Verification>
+@{
+    ViewBag.header = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cheques Details";
+}
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    $(document).ready(function () {
+        var table = document.getElementById('tblDetails');
+        var isStatus = 0;
+        var rowLength = table.rows.length;
+
+        for (var i = 0; i < rowLength; i += 1) {
+
+            if (i !== 0) {
+                var row = table.rows[i];
+
+                //your code goes here, looping over every row.
+                //cells are accessed as easy
+                console.log(row);
+                var cellLength = row.cells.length;
+                for (var y = 0; y < cellLength; y += 1) {
+                    if (y == 11) {
+                        var cell = row.cells[y].innerText;
+                        console.log(cell);
+                        if (cell !== "0") {
+                            isStatus = isStatus + 1;
+                            console.log("In Status Cell");
+                        }
+                    }
+                    
+                    //do something with every cell here
+                }
+            }
+            
+        }
+        console.log("isStatus " +isStatus);
+
+        if (isStatus > 0) {
+            document.getElementById('btnAccept').disabled = false;
+            document.getElementById('btnReject').disabled = false;
+        }
+        else {
+            document.getElementById('btnAccept').disabled = true;
+            document.getElementById('btnReject').disabled = true;
+        }
+
+
+        $("#btnClose").click(function () {
+
+            console.log("In Close Home button");
+            var url = RootUrl + "OWCDKCheckerVerification/SelectionForBatch";
+            window.location.href = url;
+        });
+
+        $("#btnAccept").click(function () {
+
+            console.log("In Accept button");
+            
+
+            var decision = "A";
+            $.ajax({
+
+                url: RootUrl + 'OWCDKCheckerVerification/CloseBatch',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'html',
+                data: { Decision: decision },
+                
+                success: function (data) {
+                    console.log(data);
+                    var url = RootUrl + "OWCDKCheckerVerification/SelectionForBatch";
+                    window.location.href = url;
+                }
+
+            });
+        });
+
+        $("#btnReject").click(function () {
+
+            console.log("In Reject button");
+            
+
+            var decision = "R";
+            $.ajax({
+
+                url: RootUrl + 'OWCDKCheckerVerification/CloseBatch',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'html',
+                data: { Decision: decision },
+                //data: { branchCode: $("#BranchSelect").val(), batchNo: $("#BatchSelect").val() },
+                success: function (data) {
+                    console.log(data);
+                    var url = RootUrl + "OWCDKCheckerVerification/SelectionForBatch";
+                    window.location.href = url;
+                }
+
+            });
+        });
+    });
+
+
+</script>
+
+<h2>Cheques Details</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <input class="btn btn-success col-md-12" type="button" name="btnAccept" id="btnAccept" value="Accept" />
+        </div>
+        <div class="col-md-2">
+            <input class="btn btn-danger col-md-12" type="button" name="btnReject" id="btnReject" value="Reject" />
+        </div>
+        <div class="col-md-2">
+            <input class="btn btn-info col-md-12" type="button" name="btnClose" id="btnClose" value="Close" />
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <table class="table table-responsive table-bordered" id="tblDetails">
+
+        @if (Model != null)
+        {
+        <tr style="background-color:lightblue;">
+            <th>
+                Sr.No.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RawDataId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BatchNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScanningNodeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChequeNoMICR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SortCodeMICR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SANMICR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransCodeMICR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+            int index = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @index
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RawDataId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScanningNodeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BranchCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChequeNoMICR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SortCodeMICR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SANMICR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransCodeMICR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PayeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Verify", "Verify", new { id = item.Id }) |
+
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+
+    </table>
+</div>
+

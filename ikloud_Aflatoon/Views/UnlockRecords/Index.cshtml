@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Unlock Records";
+    ViewBag.header = "Unlock Records";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+
+
+
+<script src="~/Scripts/UnlockRecords.js"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<input type="hidden" id="clrtype" value="@Session["ProType"]" />
+
+<div class="w3-container w3-row w3-padding-top w3-light-gray">
+    <div class="w3-col m8">
+        <label class="w3-label w3-text-black" style="font-weight:700">Choose Module For Unlock Records</label>&nbsp;&nbsp;&nbsp;
+        <input class="w3-radio" type="radio" onclick="getRadioval();" name="choosrdio" style="font-weight:700" value="DataEntry" />DataEntry
+        <input class="w3-radio" type="radio" onclick="getRadioval();" name="choosrdio" style="font-weight:700" value="L1 Verification" />L1 Verification
+        <input class="w3-radio" type="radio" onclick="getRadioval();" name="choosrdio" style="font-weight:700" value="L2 Verification" />L2 Verification
+        <input class="w3-radio" type="radio" onclick="getRadioval();" name="choosrdio" style="font-weight:700" value="L3 Verification" />L3 Verification
+        <input class="w3-radio" type="radio" onclick="getRadioval();" name="choosrdio" style="font-weight:700" value="CHI Reject Handler" />CHI Reject Handler
+        <input class="w3-radio" type="radio" onclick="getRadioval();" name="choosrdio" style="font-weight:700" value="IW DataEntry" />IW DataEntry
+    </div>
+    <div class="w3-col m4">
+        <input class="w3-btn" type="button" id="showlockRcd" value="Show Locked Records" disabled="disabled" />&nbsp;&nbsp;&nbsp;
+        <input class="w3-btn" type="submit" id="Unlockrcd" value="Unlock Records" disabled="disabled" /> &nbsp;&nbsp;&nbsp;
+        <input class="w3-btn" type="submit" value="Close" id="btncls" />
+        <label id="loader" style="display:none"> <span style="color:red">  Loading...</span><img src="~/Content/images/progressss.gif" /></label>
+    </div>
+</div>
+<!------------------Outward--------------->
+<div class=" w3-container w3-row w3-padding-top" id="deselect" style="display:none">
+    <div class="w3-col ">
+        <label class="w3-label w3-text-black" style="font-weight:700"> Select Data Entry Field</label>&nbsp;&nbsp;&nbsp;
+        <select id="defiled" name="defiled">
+            <option>
+                Slip Amount
+            </option>
+            <option>
+                Cheque Amount
+            </option>
+            <option>
+                Cheque Date
+            </option>
+            <option>
+                Cheque MICR
+            </option>
+            <option>
+                Slip Account NO
+            </option>
+        </select>
+    </div>
+</div>
+<!------------------Inward--------------->
+<div class=" w3-container w3-row w3-padding-top" id="iwdeselect" style="display:none">
+    <div class="w3-col ">
+        <label class="w3-label w3-text-black" style="font-weight:700"> Select Data Entry Field</label>
+        <select id="IWdefiled" name="IWdefiled">
+            <option>
+                Cheque MICR
+            </option>
+            <option>
+                Account NO
+            </option>
+            <option>
+                Cheque Amount
+            </option>
+            <option>
+                Cheque Date
+            </option>
+            <option>
+                Cheque QC
+            </option>
+            <option>
+                Payee Name
+            </option>
+
+
+        </select>
+    </div>
+</div>
+<div  id="ShowDetails">
+
+</div>
+
+
+
+
+

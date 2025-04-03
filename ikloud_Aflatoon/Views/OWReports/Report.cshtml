@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "Outward Reports";
+    ViewBag.header = "Outward Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/OWReports.js"></script>
+
+
+<link href="~/Content/themes/base/jquery-uiii.css" rel="stylesheet" />
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+<script type="text/javascript">
+    @*var bnkCd = '@ViewBag.BankCode';
+    
+    console.log('bank code :- ' + bnkCd);*@
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<input type="hidden" id="BankCode" value="@ViewBag.BankCode" />
+<input type="hidden" id="Accesslevel" value="@ViewBag.Accesslevel" />
+<input type="hidden" id="ProcessingDate" value="@ViewBag.ProcessingDate" />
+
+
+<div class="w3-container w3-padding-left w3-padding-top">
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+            <div class="m4">
+                <label class="w3-label w3-padding-16 w3-text-black"> Select From Date:</label>
+                <input class="w3-text" type="text" readonly="readonly" id="fromdate" name="fromdate" />
+            </div>
+            <div class="m4 w3-white"><br /></div>
+            <div class="m4">
+                <label class="w3-label w3-padding-16 w3-text-black"> Select To Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="w3-text" type="text" readonly="readonly" id="todate" name="todate" />
+            </div>
+        </div>
+
+    </div>
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Clearing Type</div>
+                @*<select class="w3-select" id="clrtype">
+                <option selected="selected">Select</option>
+                <option>CTS</option>
+                <option>Non CTS</option>
+            </select>*@
+                @*@Html.DropDownList("clrtype", null, null, new { style = "width: 450px;" })*@
+                @Html.DropDownList("clrtype", null, null, new { @class = "w3-select" })
+            </div>
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Session Type</div>
+
+                @Html.DropDownList("SessionExpiryTime", null, "ALL", new { @class = "w3-select", style = "height: 37px;" })
+            </div>
+
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Domains</div>
+                @if (ViewBag.Accesslevel == "DOM")
+                {
+                    @Html.DropDownList("gridDomains", null, null, new { @class = "w3-select", onchange = "FillBranchDropdown(this)" })
+                }
+                else
+                {
+                    @Html.DropDownList("gridDomains", null, "ALL", new { @class = "w3-select", onchange = "FillBranchDropdown(this)" })
+                }
+
+            </div>
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Branch</div>
+                <select id="Branch" class="w3-select">
+                    <option value="">Select a Branch</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Report Type</div>
+                <select class="w3-select" id="rpttype">
+                    <option selected="selected">Select</option>
+                    @*<option>Productivity Report</option>
+        <option>Verification Report</option>
+        <option>P2FDetails Report</option>*@
+                    <option>Return PullOut Report</option>
+                    <option>P2F PullOut Report</option>
+                    <option>Bank wise P2F Report</option>
+                    <option>Verification / CHI Reject Report</option>
+                    <option>Batch Wise Summary Report</option>
+                    <option>Day's Summary Report</option>
+                    @*<option>MICR Repair Report</option>*@
+                    @*<option>L2 Modification Report</option>*@
+                    @*<option>L3 Modification Report</option>*@
+                    <option>Extension Report</option>
+                    <option>OW Productivity Report</option>
+                    @*<option>P2F Bankwise Summary</option>*@
+                    @*<option>IQA Failure Report</option>
+        <option>Unbundled Cheques Report</option>*@
+                    <option>Duplicate Cheques Report</option>
+                    <option>Return Memo Report</option>
+                    <option>Discrepant Report</option>
+                    <option>Item Wise Presentation Details</option>
+                    @*<option>Audit Report</option>*@
+                    <option>Bundled File Summary Report</option>
+                    @*<option>Return Report Unmatch Memo</option>*@
+                    <option>Presentment Details BranchWise Report</option>
+                    <option>Presentment BranchWise Summary Report</option>
+                    <option>Settlement Details BranchWise Report</option>
+                    <option>Settlement BranchWise Summary Report</option>
+                    <option>Outward DataEntry Action Report</option>
+                    <option>Outward Verification Action Report</option>
+                    <option>P2F Details BranchWise Report</option>
+                    <option>P2F BranchWise Summary Report</option>
+                    <option>Return Memo With BranchName Report</option>
+                    <option>Return Memo With Image Report</option>
+                    <option>Return Details Report With BranchWise</option>
+                    <option>Return Details Report With BranchWise Summary</option>
+                    <option>Consolidated Outward Return Report</option>
+                    @if (ViewBag.BankCode == "641" || ViewBag.BankCode == "056")
+                    {
+                        <option>Login Report</option>
+                        <option>User Management Report</option>
+                        <option>Role Management Report</option>
+                        <option>PPS Report</option>
+                        @*<option>DBS And LVB Settlement BranchWise Summary</option>
+            <option>DBS And LVB Presentment Gridwise Summary</option>
+            <option>DBS And LVB Uploaded Gridwise Summary</option>*@
+                    }
+                    @*<option>NRE Presentment Details BranchWise Report</option>*@ <!--hiiden -->
+                    <option>Outward Lodgment Reverse Feed Report</option>
+                    <option>Outward Return Reverse Feed Report</option>
+
+                    <option>Outward MICR Repair Report</option>
+                    <option>SMB Images Report</option>
+                    <option>Source Of Fund Report</option>
+
+                    <!--new-->
+                    <option>Six Month Old Account</option>
+                    <option>Outward Lodgment Failure Report</option>
+                    <option>Outward Return Lodgment Failure Report</option>
+                    <option>All Transactions Lien Report</option>
+                    <option>Cheque Return Charges Report</option>
+                    <option>Outward Return Transaction Report</option>
+                    <option>INR 1 cr and above Cheque Returns Details</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="w3-row">
+        <div class="w3-col m4 w3-col w3-third w3-large w3-theme-d1" id="scanningTypeLevelDiv" style="display:none">
+            <div class="w3-label w3-text-black">Select Scanning Type</div>
+            <select class="w3-select" id="scanningTypeLevel">
+                <option selected="selected">All</option>
+                <option>No AddList File</option>
+                <option>Scanning With AddList File</option>
+                <option>CDK</option>
+                <option>CMS</option>
+            </select>
+        </div>
+    </div>
+    <div class="w3-row">
+        <div class="w3-col m4 w3-col w3-third w3-large w3-theme-d1" id="vflevel" style="display:none">
+            <div class="w3-label w3-text-black">Select Verification Level</div>
+            <select class="w3-select" id="verflevel">
+                <option selected="selected">Select</option>
+                <option>L1 Verification</option>
+                <option>L2 Verification</option>
+                <option>L3 Verification</option>
+            </select>
+        </div>
+
+        <div class="w3-col m4 w3-col w3-third w3-large w3-theme-d1">
+            <div class="w3-label w3-text-black">Select Download File Type</div>
+            <select class="w3-select" id="filedwnldtype">
+                @*<option selected="selected">Select</option>*@
+                <option>EXCEL</option>
+                <option>CSV</option>
+                <option selected="selected">PDF</option>
+            </select>
+        </div>
+    </div>
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col m4">
+            <input class="w3-btn" style="float: initial" type="button" id="btnreport" name="btnreport" value="Get Report">
+        </div>
+    </div>
+</div>

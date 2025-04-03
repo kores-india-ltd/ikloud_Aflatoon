@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.getcustdomname>
+
+<div id="getcustdom">
+    <p class="w3-highway-red">@ViewBag.LabelName</p>
+    <ul>
+        @foreach(var item in Model)
+        {
+            <li>@item.Name</li>
+        }
+
+    </ul>
+</div>

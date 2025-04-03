@@ -1,0 +1,398 @@
+﻿@model IEnumerable<ikloud_Aflatoon.CaptureRawData>
+
+@{
+    /**/
+
+    /**/
+
+
+    ViewBag.header = "BranchDataEntry";
+    ViewBag.Title = "BranchDataEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+<script src="@Url.Content("~/Scripts/Json2.js")"></script>
+
+<script src="@Url.Content("~/Scripts/modernizr-2.8.3.js")"></script>
+@*<script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.min.js")"></script>*@
+@*<script src="@Url.Content("~/Scripts/jquery-2.1.4.min.js")"></script>*@
+<script src="@Url.Content("~/Scripts/jQueryRotate.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.zoom.js")"></script>
+@*<script src="@Url.Content("~/Scripts/angular.min.js")"></script>*@
+@*<link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/CSS/main.css")" rel="stylesheet" />
+@*<link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" />*@
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+<script src="@Url.Content("~/Scripts/BranchDE.js")"></script>
+<script src="@Url.Content("~/Scripts/xlsx.full.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jszip.js")"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.panzoom/3.2.2/jquery.panzoom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-mousewheel/1.0.5/mousewheel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>*@
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    console.log(RootUrl);
+</script>
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+@*<input type="hidden" name="DEbySnpt" id="DEbySnpt" value="@Session["blndebysnippet"].ToString()" />*@
+<input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+<input type="hidden" name="DEbySnpt" id="DEbySnpt" value="@Session["OWDEBySnippet"].ToString()" />
+<input type="hidden" name="toacntlength" id="toacntlength" value="@Session["acto"]" />
+<input type="hidden" name="allowAlpha" id="allowAlpha" value="@Session["ACAlphaAllow"]" />
+
+<input type="hidden" id="PresentingMICR_StartIndex" value="@ViewBag.PresentingMICR_StartIndex" />
+<input type="hidden" id="PresentingMICR_Length" value="@ViewBag.PresentingMICR_Length" />
+<input type="hidden" id="DraweeBank_StartIndex" value="@ViewBag.DraweeBank_StartIndex" />
+<input type="hidden" id="DraweeBank_Length" value="@ViewBag.DraweeBank_Length" />
+<input type="hidden" id="PresentmentDate_StartIndex" value="@ViewBag.PresentmentDate_StartIndex" />
+<input type="hidden" id="PresentmentDate_Length" value="@ViewBag.PresentmentDate_Length" />
+<input type="hidden" id="Amount_StartIndex" value="@ViewBag.Amount_StartIndex" />
+<input type="hidden" id="Amount_Length" value="@ViewBag.Amount_Length" />
+<input type="hidden" id="ChequeNo_StartIndex" value="@ViewBag.ChequeNo_StartIndex" />
+<input type="hidden" id="ChequeNo_Length" value="@ViewBag.ChequeNo_Length" />
+<input type="hidden" id="AccountNo_StartIndex" value="@ViewBag.AccountNo_StartIndex" />
+<input type="hidden" id="AccountNo_Length" value="@ViewBag.AccountNo_Length" />
+<input type="hidden" id="PayeeName_StartIndex" value="@ViewBag.PayeeName_StartIndex" />
+<input type="hidden" id="PayeeName_Length" value="@ViewBag.PayeeName_Length" />
+
+<input type="hidden" id="OWIsDataEntryAllowedForAccountNo" value="@ViewBag.OWIsDataEntryAllowedForAccountNo" />
+<input type="hidden" id="OWIsDataEntryAllowedForPayeeName" value="@ViewBag.OWIsDataEntryAllowedForPayeeName" />
+<input type="hidden" id="OWIsDataEntryAllowedForDate" value="@ViewBag.OWIsDataEntryAllowedForDate" />
+<input type="hidden" id="OWIsDataEntryAllowedForAmount" value="@ViewBag.OWIsDataEntryAllowedForAmount" />
+
+<input type="hidden" id="TotalChequeAmount" value="@ViewBag.TotalChequeAmount" />
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    <body class="w3-container w3-center">
+
+        <br />
+        <div class="row" style="display:none;">
+            <label id="lblCBSDetails" class="control-label pull-left"></label>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label class="control-label"></label>
+            </div>
+            <div class="col-md-6  pull-left">
+                <label id="lblPayeeName" class="control-label pull-left"></label>
+            </div>
+            <div class="col-md-4" style="padding:0px !important;">
+                <div class="" id="UploadExcel" style="padding:0px !important;">
+                    <div class="row" style="padding:0px !important;">
+                        <div class="col-md-4" style="padding:0px !important;">
+                            <label class="pull-left" style="text-align:left !important;">Upload File:</label>
+                        </div>
+                        <div class="col-md-4" style="padding:0px !important;">
+                            <input type="file" name="excelfile" value="Choose" id="excelUpload" style="font-size: 10pt; height: 25px; width:350px;" />
+                        </div>
+                        <div class="col-md-4" style="padding:0px !important;">
+                            <input type="button" value="Upload" class="" id="btnUploadExcel" />
+
+
+                        </div>
+                    </div>
+                    <div class="row" style="padding:0px !important;">
+                        <div class="col-md-offset-4 col-md-4">
+                            <input class="btn btn-danger col-md-6" type="button" name="btnCloseBatch" id="btnCloseBatch" value="Unlock" style="padding-left:5px;" />
+                        </div>
+                        <div class="col-md-4" style="padding:0px !important;">
+                            <input class="btn btn-danger col-md-6" type="button" name="btnCloseBatch" id="btnGoHome" value="Close" style="padding-left:5px;" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        @*<br />*@
+        <div class="row">
+            <div class="col-md-8" style="padding:0px !important;" id="allData">
+                <div class="row">
+                    @*<img id="myfulimg" class="" style="cursor:pointer;width:809px;height:362px;" onclick="fullImage();" src="~/Icons/noimagefound.jpg" />
+                    <div id="divtiff">
+                    </div>
+                    <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                        <img id="myimg" class="" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+                    </div>*@
+
+                    <img id="myimg" class="w3-card-8 w3-image" style="cursor:zoom-in" onclick="fullImage();" src="~/Icons/noimagefound.jpg" />
+                    <div id="divtiff">
+                    </div>
+                    <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                        <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                @*<label class="reset btn btn-primary" onclick="fullImage();">Zoom</label>*@
+                                <label class="btn btn-primary" onclick="callrotate();">Rotate Image</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label btn btn-primary" onclick="ChangeImage('FGray');">Front Gray</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label btn btn-primary" onclick="ChangeImage('BGray');">Back Gray</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label btn btn-primary" onclick="DownloadImage('FTiff');">Front Tiff</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label btn btn-primary" onclick="DownloadImage('BTiff');">Back Tiff</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="control-label btn btn-primary" onclick="ChangeImage('FUV');">Front UV</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-4" id="accountDiv1">
+                                <div class="col-md-4" style="padding-right:0px;">
+                                    <label class="control-label" style="text-align:right;">Account :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="branchAccount" autocomplete="off" name="branchAccount" class="" onfocus="showBackImage();"
+                                           maxlength="@Session["acto"]" />
+                                </div>
+                            </div>
+                            <div class="col-md-4" id="divAmount">
+                                <div class="col-md-4" style=" padding-right:0px;" ">
+                                    <label class="control-label" style="text-align:right;">Amount :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="branchAmount" autocomplete="off" maxlength="15" name="branchAmount" onfocus="showFrontImage();" />
+                                    @*onfocusout="getAmountDetails();" />*@
+                                </div>
+                            </div>
+                            <div class="col-md-4" id="divDate">
+                                <div class="col-md-4" style=" padding-right:0px;" ">
+                                    <label class="control-label" style="text-align:right;">Date :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="chequeDate" autocomplete="off" maxlength="6" name="chequeDate" onfocus="showFrontImage();" /> [DDMMYY]
+                                    @*onfocusout="getAmountDetails();" />*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:5px;" id="divDate">
+                            <div class="col-md-4">
+                                <div class="col-md-4" style="padding-right:0px;">
+                                    <label class="control-label" style="text-align:right;">Cheque No :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="chequeNo" autocomplete="off" name="chequeNo" class="" maxlength="6" onfocus="showFrontImage();" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-4" style="padding-right:0px;" ">
+                                    <label class="control-label" style="text-align:right;">Sort Code :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="sortCode" autocomplete="off" maxlength="9" name="sortCode" onfocus="showFrontImage();" />
+                                    @*onfocusout="getAmountDetails();" />*@
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-4" style="padding-right:0px;" ">
+                                    <label class="control-label" style="text-align:right;">Trans Code :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="transCode" autocomplete="off" maxlength="2" name="transCode" onfocus="showFrontImage();" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:5px;">
+                            <div class="col-md-4">
+                                <div class="col-md-4" style="padding-right:0px;">
+                                    <label class="control-label" style="text-align:right;">SAN :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="san" autocomplete="off" maxlength="6" name="san" onfocus="showFrontImage();" />
+                                </div>
+                            </div>
+                            <div class="col-md-8" id="divPayeeName">
+                                <div class="col-md-4" style="padding-right:0px;">
+                                    <label class="control-label" style="text-align:right;">PayeeName :</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px;">
+                                    <input type="text" id="payeeName" autocomplete="off" name="payeeName" style="width:300px;" maxlength="50" onfocus="showFrontImage();" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="hidden" id="cnt" value="1" />
+                            <input type="hidden" id="tempcnt" value="1" />
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
+                                        <input class="btn btn-success col-md-12" type="button" name="btnAccept1" id="btnAccept1" value="Accept" />
+                                    </div>
+                                    <div class="col-md-2" style="display:none;">
+                                        <input class="btn btn-info col-md-12" type="button" name="btnBack" id="btnBack" value="Back" />
+                                    </div>
+                                    <div class="col-md-2" style="display:none;">
+                                        <input class="btn btn-info col-md-12" type="button" name="btnNext" id="btnNext" value="Next" />
+                                    </div>
+                                    <div class="col-md-2" style="display:none;">
+                                        <input class="btn btn-block col-md-12" type="button" name="btnReject" id="btnRejct" value="Reject" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input class="btn btn-danger col-md-12" type="button" name="btnClose" id="btnClose" value="Close" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md-4" style="padding:0px !important;">
+                @*<div class="" id="SlipChequeAmount" style="padding:0px !important;display:none;">
+                        <div class="row" style="padding:0px !important;">
+                            <div class="col-md-6" style="padding:0px !important;">
+                                <label class="pull-left" style="text-align:left !important;">Slip Amount:</label>
+                            </div>
+                            <div class="col-md-4" style="padding:0px !important;">
+                                <label id="lblSlipAmount" class="control-label"></label>
+                            </div>
+                        </div>
+                        <div class="row" style="padding:0px !important;">
+                            <div class="col-md-6" style="padding:0px !important;">
+                                <label class="pull-left" style="text-align:left !important;">Total Cheque Amt For Slip:</label>
+                            </div>
+                            <div class="col-md-4" style="padding:0px !important;">
+                                <label id="lblChequeAmountTotal" class="control-label"></label>
+                            </div>
+                        </div>
+                    </div>*@
+                @*<br />*@
+                <div class="row" style="padding:0px !important;display:none;">
+                    <div class="col-md-4" style="padding:0px !important;">
+                        <label class="pull-left" style="text-align:left !important;">Scanning Node :</label>
+                    </div>
+                    <div class="col-md-2" style="padding:0px !important;">
+                        <label id="lblScanningNode" class="control-label pull-left"></label>
+                    </div>
+                    <div class="col-md-4" style="padding:0px !important;">
+                        <label class="pull-left" style="text-align:left !important;">Batch No :</label>
+                    </div>
+                    <div class="col-md-2" style="padding:0px !important;">
+                        <label id="lblBatchNumber" class="control-label pull-left"></label>
+                    </div>
+                </div>
+                <div class="row" style="padding:0px !important;display:none;">
+                    <div class="col-md-4" style="padding:0px !important;">
+                        <label class="pull-left" style="text-align:left !important;">Instrument Type :</label>
+                    </div>
+                    <div class="col-md-2" style="padding:0px !important;">
+                        <label id="lblInstrumentType" class="control-label pull-left"></label>
+                    </div>
+                    <div class="col-md-4" style="padding:0px !important;">
+                        <label class="pull-left" style="text-align:left !important;">Batch Sequence No :</label>
+                    </div>
+                    <div class="col-md-2" style="padding:0px !important;">
+                        <label id="lblBatchSequenceNumber" class="control-label pull-left"></label>
+                    </div>
+                </div>
+                <div class="row" style="padding:0px !important;display:none;">
+                    <div class="col-md-4" style="padding:0px !important;">
+                        <label class="pull-left" style="text-align:left !important;">Instrument Count :</label>
+                    </div>
+                    <div class="col-md-2" style="padding:0px !important;">
+                        <label id="lblInstrumentCount" class="control-label pull-left"></label>
+                    </div>
+                </div>
+                <br />
+                <div class="row" style="padding:0px !important;">
+                    <div class="col-md-12" id="divCaptureTable" style="height:400px;overflow: auto;padding:0px !important;">
+                        <table class="table table-responsive table-bordered" id="tblCaptureData"
+                               style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+                            <thead>
+                                <tr style="background-color:lightblue;">
+                                    <th style="display:none;"></th>
+                                    <th>No</th>
+                                    <th>ChequeNo</th>
+                                    <th>Account</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+
+    <script language="javascript" type="text/javascript">
+
+        @*var array = @Html.Raw(
+
+             Json.Encode(
+                 (Model).Select(m=> new
+                 {
+                     Id = m.Id,
+                     ScanningType = m.ScanningType,
+                     ScanningNodeId = m.ScanningNodeId,
+                     BatchNo = m.BatchNo,
+                     BatchSeqNo = m.BatchSeqNo,
+                     InstrumentType = m.InstrumentType,
+                     SlipNo = m.SlipNo,
+                     SlipChequeCount = m.SlipChequeCount,
+                     FrontGreyImage = m.FrontGreyImage,
+                     FrontTiffImage = m.FrontTiffImage,
+                     BackGreyImage = m.BackGreyImage,
+                     BackTiffImage = m.BackTiffImage,
+                     BranchAccount = m.BranchAccount,
+                     BranchAmount = m.BranchAmount
+                 })
+             )
+         );*@
+
+
+
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            var array = @Html.Raw(Json.Encode(Model.ToList()));
+            console.log(array);
+            passval(array);
+        }
+    </script>
+}
+@*<script src="@Url.Content("~/Bootstrap/jquery-3.5.1.js")"></script>*@
+@*<link href="@Url.Content("~/Bootstrap/bootstrap.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Bootstrap/bootstrap.js")"></script>*@
+<div id="result">
+
+</div>

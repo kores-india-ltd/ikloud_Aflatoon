@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace ikloud_Aflatoon.Models
+{
+    using System;
+    using System.Collections.Generic;
+    public class CMSCustProdMaster
+    {
+        public string ClientCode { get; set; }
+        public DateTime ProdEffectiveDate { get; set; }
+        public string ProdDivisionRequired { get; set; }
+        public string ProdDivisionMandate { get; set; }
+        public string ProdHierRequired { get; set; }
+        public string ProdHierMandate { get; set; }
+        public string InstrumentDtlsRequired { get; set; }
+        public string InstrumentDtlsMandate { get; set; }
+        public string ProdDrawerRequired { get; set; }
+        public string ProdDrawerMandate { get; set; }
+        public string ProdAdditionalinfoRequired { get; set; }
+        public string ProdAdditionalinfoMandate { get; set; }
+        public string ProdSubcustomerRequired { get; set; }
+        public string ProdSubcustomerMandate { get; set; }
+        public string ProdSubCustomerEntrylevel { get; set; }
+        public string ProdlccPickupRequired { get; set; }
+        public string ProdCode { get; set; }
+
+    }
+    public class CMSCustAdditionalInput : CMSCustProdMaster
+    {
+        public Int64 ID { get; set; }
+        public int Status { get; set; }
+        public string SlipRefNo { get; set; }
+        public string BranchCode { get; set; }
+        public int BatchNo { get; set; }
+        public int ScanningNodeId { get; set; }
+        public int SlipNo { get; set; }
+        public string HiratchyCode { get; set; }
+        public string DivisionCode { get; set; }
+        public string CustDrawerCode { get; set; }
+        public string Additional1 { get; set; }
+        public string Additional1Legend { get; set; }
+        public string Additional1mandate { get; set; }
+        public Int64 Additional1ID { get; set; }
+        public string Additional2 { get; set; }
+        public string Additional2Legend { get; set; }
+        public string Additional2mandate { get; set; }
+        public Int64 Additional2ID { get; set; }
+        public string Additional3 { get; set; }
+        public string Additional3Legend { get; set; }
+        public string Additional3mandate { get; set; }
+        public Int64 Additional3ID { get; set; }
+        public string Additional4 { get; set; }
+        public string Additional4Legend { get; set; }
+        public string Additional4mandate { get; set; }
+        public Int64 Additional4ID { get; set; }
+        public string Additional5 { get; set; }
+        public string Additional5Legend { get; set; }
+        public string Additional5mandate { get; set; }
+        public Int64 Additional5ID { get; set; }
+        public string SubcustomerCode { get; set; }
+        public string subcustomerEntryLevel { get; set; }
+        public string ProdLCCPickup { get; set; }
+        public string FrontGreyImagePath { get; set; }
+        public string FrontTiffImagePath { get; set; }
+        public string BackTiffImagePath { get; set; }
+        public string BackGreyImagePath { get; set; }
+        public string result { get; set; }
+        public string url { get; set; }
+        public string Legend { get; set; }
+        public string InstrumentType { get; set; }
+    }
+}

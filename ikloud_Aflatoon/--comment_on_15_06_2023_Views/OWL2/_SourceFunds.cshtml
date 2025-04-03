@@ -1,0 +1,22 @@
+﻿
+<div id="cbsdetails1" class="w3-col m1" style="float:left;">
+    
+    <div class="w3-row w3-col">
+        <div class="w3-row w3-col m7">
+            <label class="w3-label w3-theme-dark w3-white" style="font-weight:bold;color:white"> Source Funds:</label> <br />
+            @*@Html.DropDownList("ddSrcFnds", new SelectList(ViewBag.vbSrcFnds), new { onchange = "getselect();", Id = "Id", Name = "Description", style = "width: 50%;" })*@
+            @Html.DropDownList("ddSrcFnds", new SelectList(ViewBag.vbSrcFnds, "Id", "Description"), "", new { onchange = "getSrcFnds();", style = "width: 0px; imp!" })
+            <input type="text" id="NreOrNro" name="NreOrNro" value="@Session["sNR"].ToString()" style="display:none;" />
+        </div>
+    </div>
+
+    <div class="w3-row w3-col">
+        <div class="w3-row w3-col m7">
+            <b>Source of Funds:</b> <br />
+            @Html.TextBox("txtSrcFnds", "", new { style = "width:0px; imp!", autocomplete = "on" })
+
+        </div>
+    </div>
+
+
+</div>

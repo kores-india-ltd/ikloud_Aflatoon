@@ -1,0 +1,86 @@
+﻿@model ikloud_Aflatoon.UserMaster
+@{
+    ViewBag.Title = "Selecteduser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* <script src="@Url.Content("~/Scripts/AbidJS.js")" type="text/javascript"></script>*@
+@*<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>*@
+
+<h2>User Management</h2>
+
+@*<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/UserManagement.js"></script>*@
+
+@using (Html.BeginForm("PasswordReset", "CreateUserNew"))
+{
+     @Html.AntiForgeryToken()
+<table class="ctable">
+    <tr>
+        <th>
+            
+            @Html.DisplayNameFor(model => model.LoginID)
+        </th>
+       @* <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+        <th></th>
+    </tr>
+    
+      <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.LoginID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.EmailID)
+        </td>
+    </tr>
+    </table>
+    <div>
+   
+     <input type="submit" class="NavButton"  name="btn" value="PasswordReset" onclick='return(confirm("Are you sure to Reset?"))' />
+     @{if (@Model.Active == true)
+       {
+           <input type="submit" class="NavButton"  name="btn" value="Disable" onclick='return (confirm("Are you sure to disable?"))' />
+       }
+       else
+       {
+           <input type="submit" class="NavButton"  name="btn" value="Enable" onclick='return (confirm("Are you sure to enable?"))' />
+       }
+      }
+      <input type="submit" class="NavButton"  name="btn" value="Edit"/>
+      <input type="submit" class="NavButton"  name="btn" value="Unlock"/>
+      <input type="submit" class="NavButton"  name="btn" value="Delete"/>
+   </div>
+    @Html.HiddenFor(m => m.ID)
+}
+    <div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

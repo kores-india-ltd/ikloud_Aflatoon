@@ -1,0 +1,63 @@
+﻿@model ikloud_Aflatoon.customerView
+
+@{
+    ViewBag.Title = "Details Customer";
+    ViewBag.header = "Details Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<fieldset>
+    <legend>CustomerMaster</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CustomerCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CustomerCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CustomerName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CustomerName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PresentingBankRouteNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PresentingBankRouteNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GridName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GridName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrganizationName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrganizationName)
+    </div>
+
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.CreationDateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreationDateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy)
+    </div>*@
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) 
+    @Html.ActionLink("Back to List", "Index")
+</p>

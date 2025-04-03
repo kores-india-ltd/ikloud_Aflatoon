@@ -1,0 +1,21 @@
+﻿@*@model IEnumerable<iKloud.Models.Selectedverfnlvel>*@
+@*<select id="selct" style="width:auto">*@
+
+<div class="w3-padding-16" id="br">
+    <table style="padding-left: 10%; padding-right: 10%; width:70%">
+        <tr>
+            <td>
+                Select User Type:
+            </td>
+            <td>@Html.DropDownList("usertype", new SelectList(ViewBag.Vlevel), "Select")</td>
+            <td>Select User Access Level</td>
+            <td>
+                @Html.DropDownList("SelectedAccesslevel", null, "Select")
+            </td>
+            <td><input type="button" class="w3-btn" value="Change" id="chnagebtn" /> </td> <td>&nbsp;</td>
+            <td> <input type="button" class="w3-btn" value="Check Existing Customers / Domains" id="chkcustdomns" onclick="getcustdomainslist();" style="display:none;"></td>
+        </tr>
+    </table>
+</div>
+@*<div id="Venlvl" style="display: none;">@Html.DropDownList("Venlvel", new SelectList(ViewBag.levelID), "Select")</div>*@
+

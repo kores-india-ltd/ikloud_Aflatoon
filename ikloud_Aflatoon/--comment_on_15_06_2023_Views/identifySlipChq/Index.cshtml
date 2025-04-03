@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm()) 
+    {
+    <div>
+        <table>
+        <tr>
+            <td>
+            Slip: @Html.RadioButton("instrument",0,true)
+            </td>
+            <td>
+            Cheque: @Html.RadioButton("instrument",1)
+            </td>
+            <td>
+            <input type="submit" id="selectdoc" value="Go" />
+            </td>
+        </tr>
+        </table>
+    </div>
+    }
+</body>
+</html>

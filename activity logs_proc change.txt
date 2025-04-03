@@ -1,0 +1,19 @@
+
+
+
+
+
+update procedures from 237:
+
+alter table L2Verification 
+
+OwselectL2
+UpdateOWChequeAmount
+UpdateOWSlipAccount
+UpdateOWL1
+UpdateOWL2
+UpdateOWL3
+selectL2Cheques
+UpdateOWL2
+UpdateVerificationSlipOnly
+

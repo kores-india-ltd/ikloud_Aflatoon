@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ikloud_Aflatoon.IWActivityLog>
+<h2>
+    Activity Log
+</h2>
+@{
+    int cnt = 0;
+}
+<div id="activitylogs">
+    <table>
+        <tr style="text-align: left">
+            <th>
+                Log Level
+            </th>
+            <th>
+                Actio Taken
+            </th>
+            <th>
+                Login ID
+            </th>
+            <th>
+                Reject Desc
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>
+                Time Stamp
+            </th>
+        </tr>
+        @foreach (var itm in Model)
+        {
+            if (cnt == 0 && itm.LogLevel == "L2 VERIFICATION" && (itm.Activity.ToUpper() == "A" || itm.Activity.ToUpper() == "R"))
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(a => itm.LogLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.LoginID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.RejectDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Timestamp)
+                    </td>
+                </tr>
+            }
+            else if (cnt == 0 && itm.LogLevel == "L2 VERIFICATION" && itm.Activity.ToUpper() == "C")
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(a => itm.LogLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.LoginID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.RejectDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Timestamp)
+                    </td>
+                </tr>
+            }
+            else if (itm.LogLevel != "L2 VERIFICATION")
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(a => itm.LogLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.LoginID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.RejectDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Timestamp)
+                    </td>
+                </tr>
+            }
+
+            if (itm.LogLevel == "L2 VERIFICATION" && (itm.Activity.ToUpper() == "A" || itm.Activity.ToUpper() == "R"))
+            {
+                cnt = 1;
+            }
+
+        }
+    </table>
+</div>
+
+@*@{string module = ViewBag.backtomodule;
+
+    @Html.ActionLink("Back", module, new { maintid = ViewBag.maintid })
+}*@

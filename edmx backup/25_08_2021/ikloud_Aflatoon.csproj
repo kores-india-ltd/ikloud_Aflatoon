@@ -1,0 +1,1564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FDFC8A47-2213-48C6-ABB5-080D84D24EE1}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ikloud_Aflatoon</RootNamespace>
+    <AssemblyName>ikloud_Aflatoon</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>11972</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccOwnershipCodeMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AccStatusCodeMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ACDetail.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ActivityLog.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AddList_FILE_UPLOAD_Format_BranchDataEntry.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Aflatoon.Context.cs">
+      <DependentUpon>Aflatoon.Context.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Aflatoon.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Aflatoon.Designer.cs">
+      <DependentUpon>Aflatoon.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="ApplicationSetting.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppSecPolicy.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppSetting.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bank.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BankBlockageMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BankBranches.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatchMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Branch.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BranchMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CaptureFileMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CaptureRawData.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChequeAccountNoCapture.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChequeAmountCapture.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChequeDateCapture.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChequeMICRCapture.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CHIRejectReasons.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChiSessionDefinitionMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cities.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CityMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clearinghouse.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClearingHouseInterface.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClearingType.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMSAdditionalTransactions.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_BankBranchMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_BranchAccountMappings.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_CustomerMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_CustomerProductAdditionaInfo.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_CustomerProductLocationMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_CustomerProductMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_OurBranchMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_ProductMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_ProductSuspensionMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CMS_SubCustomerMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CommonSetting.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\branchController.cs" />
+    <Compile Include="Controllers\ChiRejectHandlerController.cs" />
+    <Compile Include="Controllers\CMSAddSlipInfoMissingController.cs" />
+    <Compile Include="Controllers\CMSClientCodeMissingController.cs" />
+    <Compile Include="Controllers\CMSDataEntryController.cs" />
+    <Compile Include="Controllers\CreateUserController.cs" />
+    <Compile Include="Controllers\customerController.cs" />
+    <Compile Include="Controllers\CustomErrorHandlerController.cs" />
+    <Compile Include="Controllers\domainController.cs" />
+    <Compile Include="Controllers\DomainSelectionController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\gridController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\identifySlipChqController.cs" />
+    <Compile Include="Controllers\IWDashboardController.cs" />
+    <Compile Include="Controllers\IWDataEntryController.cs" />
+    <Compile Include="Controllers\IWFileDownloadController.cs" />
+    <Compile Include="Controllers\IWFileUploadController.cs" />
+    <Compile Include="Controllers\IWL1Controller.cs" />
+    <Compile Include="Controllers\IWL2Controller.cs" />
+    <Compile Include="Controllers\IWL3Controller.cs" />
+    <Compile Include="Controllers\IWReportController.cs" />
+    <Compile Include="Controllers\IWReportNewController.cs" />
+    <Compile Include="Controllers\IWSearchController.cs" />
+    <Compile Include="Controllers\IWSMBFileDownloadController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\organizationController.cs" />
+    <Compile Include="Controllers\OutwardDomainDashboardController.cs" />
+    <Compile Include="Controllers\OutwardDomainDashboardV1Controller.cs" />
+    <Compile Include="Controllers\OutwardOrganizationDashboardController.cs" />
+    <Compile Include="Controllers\OutwardSingleDomainDashBoardController.cs" />
+    <Compile Include="Controllers\OWBranchLevelDataEntryController.cs" />
+    <Compile Include="Controllers\OWDataEntryController.cs" />
+    <Compile Include="Controllers\OWL1Controller.cs" />
+    <Compile Include="Controllers\OWL2Controller.cs" />
+    <Compile Include="Controllers\OWL3Controller.cs" />
+    <Compile Include="Controllers\OWReportsController.cs" />
+    <Compile Include="Controllers\OWSearchController.cs" />
+    <Compile Include="Controllers\OWSmbDataEntryController.cs" />
+    <Compile Include="Controllers\OWSmbVerificationController.cs" />
+    <Compile Include="Controllers\settingController.cs" />
+    <Compile Include="Controllers\SODController.cs" />
+    <Compile Include="Controllers\TFL1verificationController.cs" />
+    <Compile Include="Controllers\TFL2VerificationController.cs" />
+    <Compile Include="Controllers\TFL3VerificationController.cs" />
+    <Compile Include="Controllers\UnlockRecordsController.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CustomerMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CxfAcknowledge.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CxfFileStatu.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CxfResponse.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DebitAccountDump.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainLevelSetting.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainUserMapMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadedChiFile.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DownloadedFileSummary.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GridMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICRLog.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDX_IWDateQC.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDX_IWL1.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDX_IWL2.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDX_IWL3.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\CustomHelpers.cs" />
+    <Compile Include="ItemReturnReason.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWActivityLog.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWAmountTmpProcess.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWBatchHeader.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWDateTmpProcess.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWDebtAccountTmpProcess.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWFileHDR.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWFinalMainTransaction.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWImageDtl.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWMainTransaction.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWMICRTmpProcess.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWPayeeTmpProcess.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWProc.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IWProc.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="IwSoD.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWTempL1Verification.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWTempL2Verification.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IWTempL3Verification.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="L1Verification.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="L2Verification.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="L3Verification.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoginLogoutAudit.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainTransaction.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MenuMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CMSCustProdMaster.cs" />
+    <Compile Include="Models\CMSReferral.cs" />
+    <Compile Include="Models\DomainsDates.cs" />
+    <Compile Include="Models\IwDashboard.cs" />
+    <Compile Include="Models\masterview.cs" />
+    <Compile Include="Models\ObjectClass.cs" />
+    <Compile Include="Models\Slider.cs" />
+    <Compile Include="Models\SodusrDbCon.cs" />
+    <Compile Include="Models\UserAflatoonDbContext.cs" />
+    <Compile Include="Models\AppStResult.cs" />
+    <Compile Include="Models\CommonFunction.cs" />
+    <Compile Include="Models\ErrorDisplay.cs" />
+    <Compile Include="Models\UserLogDbContext.cs" />
+    <Compile Include="Models\UserLogs.cs" />
+    <Compile Include="Models\UserMasters.cs" />
+    <Compile Include="Models\UserBrMap.cs" />
+    <Compile Include="ModificationLog.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MOPCodeMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NarrationAccount.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NreNroAccountList.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OCRICR.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OutwardDomainDashBoard.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OutwardDomainDashBoard_V2.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OutwardOrganizationDashBoard.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OutwardSingleDomainDashBoard.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OwCHIFileStatu.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OWProc.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OWProc.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="OwSoD.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordHistory.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Crystal\--DaysSummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>--DaysSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\AuditReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuditReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\BankWiseP2FReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BankWiseP2FReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\BatchWiseSummaryReport2.cs">
+      <DependentUpon>BatchWiseSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\Crystal\BundledFileSummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BundledFileSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\DaysSummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DaysSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\Discrepant_Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Discrepant_Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\DuplicateChequesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DuplicateChequesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\ExtensionReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtensionReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IQAFailureReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IQAFailureReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IWL1RejectedReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IWL1RejectedReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IWL2RejectedReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IWL2RejectedReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IwLxProductivity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IwLxProductivity.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IwLxVerification.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IwLxVerification.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IWP2FDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IWP2FDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IWReturnDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IWReturnDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IwVFUserwiseReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IwVFUserwiseReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\L2ModificationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>L2ModificationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\L3ModificationReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>L3ModificationReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\MICRRepairReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MICRRepairReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\OWReturnPullout.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OWReturnPullout.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\OWReturnPulloutNew.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OWReturnPulloutNew.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\P2FBankwiseSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>P2FBankwiseSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\P2FDetailsWithBranchWise.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>P2FDetailsWithBranchWise.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\P2FDetailsWithBranchWiseSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>P2FDetailsWithBranchWiseSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\P2FPulloutReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>P2FPulloutReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\PresentationDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PresentationDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\PresentationDetailsWithBranchWise.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PresentationDetailsWithBranchWise.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\PresentationDetailsWithBranchWiseSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PresentationDetailsWithBranchWiseSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\ProductivityReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductivityReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\ReturnReportUnmatchMemo.cs">
+      <DependentUpon>ReturnReportUnmatchMemo.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Crystal\ReturnMemo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReturnMemo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\ReturnReportUnmatch.cs">
+      <DependentUpon>ReturnReportUnmatch.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Crystal\RPT_IWSMBImagesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_IWSMBImagesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\RPT_ReturnDetailsWithBranchWiseReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_ReturnDetailsWithBranchWiseReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\RPT_ReturnDetailsWithSummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_ReturnDetailsWithSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\RPT_ReturnMemoWithBranchNameReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_ReturnMemoWithBranchNameReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\RPT_ReturnMemoWithImageReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RPT_ReturnMemoWithImageReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\SettlementDetailsWithBranchWise.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettlementDetailsWithBranchWise.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\SettlementDetailsWithBranchWiseSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SettlementDetailsWithBranchWiseSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\UnbundledChequesReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnbundledChequesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\VerificationCHIRejectReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VerificationCHIRejectReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Crystal\IWFinalStatusReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IWFinalStatusReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RoleMapping.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScannerMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ScanningNodeMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SettingValueMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SlipAccountNoCapture.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SlipAmountCapture.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SMB_Master.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SODs.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TempSnip1.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransCodes.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserCustomerMapping.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDomainMapping.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserGroupMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserMasterActivity.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserOrganizationMapping.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UsertTpeMaster.cs">
+      <DependentUpon>Aflatoon.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Aflatoon.Context.tt">
+      <DependentUpon>Aflatoon.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Aflatoon.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Aflatoon.edmx.diagram">
+      <DependentUpon>Aflatoon.edmx</DependentUpon>
+    </Content>
+    <Content Include="Aflatoon.tt">
+      <DependentUpon>Aflatoon.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Aflatoon.cs</LastGenOutput>
+    </Content>
+    <Content Include="assets\bjqs.css" />
+    <Content Include="assets\demo.css" />
+    <Content Include="assets\img\cloud_computing.png" />
+    <Content Include="assets\img\ctsprocessflow.png" />
+    <Content Include="assets\img\datamigration.jpg" />
+    <Content Include="assets\img\protect_your_business_with_an_electronic_data_management_system.jpg" />
+    <Content Include="assets\js\bjqs-1.3.js" />
+    <Content Include="assets\js\bjqs-1.3.min.js" />
+    <Content Include="assets\js\libs\jquery.secret-source.min.js" />
+    <Content Include="Content\Abids.css" />
+    <Content Include="Content\CSS\bootstrap.min.css" />
+    <Content Include="Content\CSS\jquery.multiselect.css" />
+    <Content Include="Content\CSS\w3-colors-highway.css" />
+    <Content Include="Content\Errors\PageNotFound.htm" />
+    <Content Include="Content\images\progressss.gif" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\jquery-ui.theme.css" />
+    <Content Include="Content\themes\base\jquery-uiii.css" />
+    <Content Include="Content\CSS\font-awsome-min.css" />
+    <Content Include="Content\CSS\RobotoDraft.css" />
+    <Content Include="Content\CSS\w3-theme.css" />
+    <Content Include="Content\CSS\w3.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="Icons\Kores Logo.png" />
+    <Content Include="Icons\login_avatar.png" />
+    <Content Include="Icons\login_avatar_male_blue.png" />
+    <Content Include="Icons\noimagefound.jpg" />
+    <Content Include="Icons\Rupee.png" />
+    <Content Include="Icons\unnamed.png" />
+    <Content Include="OWProc.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>OWProc.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\AxisiKloudPro.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\iKloudProAxisDev.pubxml" />
+    <None Include="Properties\PublishProfiles\iKloudproDEV.pubxml" />
+    <None Include="Properties\PublishProfiles\iKloudProAxis.pubxml" />
+    <None Include="Properties\PublishProfiles\iKloudProLocal.pubxml" />
+    <None Include="Properties\PublishProfiles\iKloudProUAT.pubxml" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\BranchDE.js" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\AbidJS.js" />
+    <Content Include="Scripts\AmountJS.js" />
+    <Content Include="Scripts\ChangePswd.js" />
+    <Content Include="Scripts\ChiRejectHandler.js" />
+    <Content Include="Scripts\CMSEntry.js" />
+    <Content Include="Scripts\CMSEntryGetClient.js" />
+    <Content Include="Scripts\CMSReferral.js" />
+    <Content Include="Scripts\DateJS.js" />
+    <Content Include="Scripts\DateQCJS.js" />
+    <Content Include="Scripts\DebtAc.js" />
+    <Content Include="Scripts\FileDownload.js" />
+    <Content Include="Scripts\FileUpload.js" />
+    <Content Include="Scripts\IWDataEntry.js" />
+    <Content Include="Scripts\IWL1.js" />
+    <Content Include="Scripts\IWL2.js" />
+    <Content Include="Scripts\IWL3.js" />
+    <Content Include="Scripts\IWMICR.js" />
+    <Content Include="Scripts\IWReports.js" />
+    <Content Include="Scripts\IwSearch.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.multiselect.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jQueryRotate.js" />
+    <Content Include="Scripts\Json2.js" />
+    <Content Include="Scripts\LoginJS.js" />
+    <Content Include="Scripts\LoginSelect.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\MyJson.js" />
+    <Content Include="Scripts\NumberToWord.js" />
+    <Content Include="Scripts\OWAmount.js" />
+    <Content Include="Scripts\OWCHQL1.js" />
+    <Content Include="Scripts\OWDate.js" />
+    <Content Include="Scripts\OWL1.js" />
+    <Content Include="Scripts\OWL2.js" />
+    <Content Include="Scripts\OWL3.js" />
+    <Content Include="Scripts\OWMICR.js" />
+    <Content Include="Scripts\OWReports.js" />
+    <Content Include="Scripts\OWSearch.js" />
+    <Content Include="Scripts\OWSLPAccount.js" />
+    <Content Include="Scripts\OWSmbDataEntry.js" />
+    <Content Include="Scripts\OWSmbVerification.js" />
+    <Content Include="Scripts\PayeeName.js" />
+    <Content Include="Scripts\SelectionBranchDataEntry.js" />
+    <Content Include="Scripts\SelectionForBranchCode.js" />
+    <Content Include="Scripts\sha256.js" />
+    <Content Include="Scripts\SlipAmount.js" />
+    <Content Include="Scripts\Test.js" />
+    <Content Include="Scripts\TFL1VF.js" />
+    <Content Include="Scripts\TFL2.js" />
+    <Content Include="Scripts\TFL3.js" />
+    <Content Include="Scripts\UnlockRecords.js" />
+    <Content Include="Scripts\UserManagement.js" />
+    <Content Include="Scripts\ZoomChqImage.js" />
+    <Content Include="Views\Login\ChangePassword.cshtml" />
+    <Content Include="Views\Login\CustDomDateSelection.cshtml" />
+    <Content Include="Views\Login\index.cshtml" />
+    <Content Include="Views\Login\Logdet.cshtml" />
+    <Content Include="Views\Login\_ChangeDomain.cshtml" />
+    <Content Include="Views\Login\_CustomerList.cshtml" />
+    <Content Include="Views\Login\_PolicyDetails.cshtml" />
+    <Content Include="Views\Login\_ProcessingDate.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="xhtml1-transitional.dtd" />
+    <Content Include="Views\Shared\showImage.cshtml" />
+    <Content Include="Views\IWDataEntry\IWAmount.cshtml" />
+    <Content Include="Views\IWDataEntry\Index.cshtml" />
+    <Content Include="Views\IWDataEntry\DeSelection.cshtml" />
+    <Content Include="Views\IWDataEntry\IWDate.cshtml" />
+    <Content Include="Views\IWDataEntry\IWPayee.cshtml" />
+    <Content Include="Views\IWDataEntry\IWDateQC.cshtml" />
+    <Content Include="Views\IWDataEntry\IWMICR.cshtml" />
+    <Content Include="Views\CreateUser\ChangePassword.cshtml" />
+    <Content Include="Views\CreateUser\Create.cshtml" />
+    <Content Include="Views\CreateUser\Delete.cshtml" />
+    <Content Include="Views\CreateUser\Details.cshtml" />
+    <Content Include="Views\CreateUser\Edit.cshtml" />
+    <Content Include="Views\CreateUser\Index.cshtml" />
+    <Content Include="Views\CreateUser\MyAccount.cshtml" />
+    <Content Include="Views\CreateUser\selecteduser.cshtml" />
+    <Content Include="Views\CreateUser\_CreateRolProcess.cshtml" />
+    <Content Include="Views\CreateUser\_EntryField.cshtml" />
+    <Content Include="Views\CreateUser\_PolicyDetails.cshtml" />
+    <Content Include="Views\CreateUser\_SelectDomains.cshtml" />
+    <Content Include="Views\CreateUser\_SelectedUsrDomain.cshtml" />
+    <Content Include="Views\CreateUser\_SelectBrFrDrop.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\CreateUser\_RoleProcess.cshtml" />
+    <Content Include="Views\SOD\OwSods.cshtml" />
+    <Content Include="Views\DomainSelection\SelectDomain.cshtml" />
+    <Content Include="Views\Home\IWIndex.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\IWL1\_RejectReason.cshtml" />
+    <Content Include="Views\IWL1\IWVerificnabid.cshtml" />
+    <Content Include="Views\IWL2\_L2RejectReason.cshtml" />
+    <Content Include="Views\IWL2\_IWActivitylogs.cshtml" />
+    <Content Include="Views\IWL3\_L3RejectReason.cshtml" />
+    <Content Include="Views\IWL3\_IWActivitylogsL2.cshtml" />
+    <Content Include="Views\IWL3\index.cshtml" />
+    <Content Include="Views\IWL3\_L3GetCBSDtls.cshtml" />
+    <Content Include="Views\IWL2\Index.cshtml" />
+    <Content Include="Views\IWL2\_L2GetCBSDtls.cshtml" />
+    <Content Include="Views\IWL1\Index.cshtml" />
+    <Content Include="Views\IWL1\_GetCBSDtls.cshtml" />
+    <Content Include="Views\IWDataEntry\DebtAcNo.cshtml" />
+    <Content Include="Views\IWDataEntry\_RejectDetails.cshtml" />
+    <Content Include="Views\IWSearch\Index.cshtml" />
+    <Content Include="Views\IWSearch\_SearchCheques.cshtml" />
+    <Content Include="Views\IWSearch\_CheqDetls.cshtml" />
+    <Content Include="Views\IWDashboard\Index.cshtml" />
+    <Content Include="Views\IWDashboard\_IWCommanDS.cshtml" />
+    <Content Include="Views\IWDashboard\IWBatchsummary.cshtml" />
+    <Content Include="Views\IWDashboard\_IWSummary.cshtml" />
+    <Content Include="Views\IWSearch\_RejectDetails.cshtml" />
+    <Content Include="Views\IWFileUpload\IWReturnUpload.cshtml" />
+    <Content Include="Views\OWDataEntry\SlipAmount.cshtml" />
+    <Content Include="Views\OWDataEntry\ChqAmount.cshtml" />
+    <Content Include="Views\OWDataEntry\ChqDate.cshtml" />
+    <Content Include="Views\OWL1\Index.cshtml" />
+    <Content Include="Views\OWL2\Index.cshtml" />
+    <Content Include="Views\CMS\Index.cshtml" />
+    <Content Include="Views\OWL1\_GetCBSDtls.cshtml" />
+    <Content Include="Views\OWL1\_RejectReason.cshtml" />
+    <Content Include="Views\OWL1\GetClientDlts.cshtml" />
+    <Content Include="Views\OWL2\_GetCBSDtls.cshtml" />
+    <Content Include="Views\OWL2\_RejectReason.cshtml" />
+    <Content Include="Views\OWL2\GetClientDlts.cshtml" />
+    <Content Include="Views\OWL3\OWL3.cshtml" />
+    <Content Include="Views\OWL3\GetClientDlts.cshtml" />
+    <Content Include="Views\OWL3\RejectReason.cshtml" />
+    <Content Include="Views\OWL3\_OWActivitylogs.cshtml" />
+    <Content Include="Views\CMSDataEntry\UploadDataEntry.cshtml" />
+    <Content Include="Views\CMSDataEntry\AdditionalDataEntry.cshtml" />
+    <Content Include="Views\CMSDataEntry\ClientSlipAdditional.cshtml" />
+    <Content Include="Views\CMSDataEntry\_ChequesAdditionalDetails.cshtml" />
+    <Content Include="Views\IWReport\Report.cshtml" />
+    <Content Include="Views\OWDataEntry\SlpAccountCapture.cshtml" />
+    <Content Include="Views\OutwardDomainDashboard\Index.cshtml" />
+    <Content Include="Views\OWSearch\Query.cshtml" />
+    <Content Include="Views\OWSearch\_OwCheqDetails.cshtml" />
+    <Content Include="Views\OWSearch\_OwSearchCheques.cshtml" />
+    <Content Include="Views\OWSearch\_OwRejectDetails.cshtml" />
+    <Content Include="Views\ChiRejectHandler\ChiReject.cshtml" />
+    <Content Include="Views\ChiRejectHandler\Index.cshtml" />
+    <Content Include="Views\ChiRejectHandler\_ChiRejectHandler.cshtml" />
+    <Content Include="Views\OWDataEntry\OWMICR.cshtml" />
+    <Content Include="Views\IWL2\_Bankname.cshtml" />
+    <Content Include="Views\IWL3\Selection.cshtml" />
+    <Content Include="Views\IWL2\Selection.cshtml" />
+    <Content Include="Views\IWL1\Selection.cshtml" />
+    <Content Include="Views\OutwardOrganizationDashboard\Index.cshtml" />
+    <Content Include="Views\OutwardSingleDomainDashBoard\Index.cshtml" />
+    <Content Include="Views\organization\Create.cshtml" />
+    <Content Include="Views\organization\Delete.cshtml" />
+    <Content Include="Views\organization\Details.cshtml" />
+    <Content Include="Views\organization\Edit.cshtml" />
+    <Content Include="Views\organization\Index.cshtml" />
+    <Content Include="Views\grid\Create.cshtml" />
+    <Content Include="Views\grid\Delete.cshtml" />
+    <Content Include="Views\grid\Details.cshtml" />
+    <Content Include="Views\grid\Edit.cshtml" />
+    <Content Include="Views\grid\Index.cshtml" />
+    <Content Include="Views\domain\Create.cshtml" />
+    <Content Include="Views\domain\Delete.cshtml" />
+    <Content Include="Views\domain\Details.cshtml" />
+    <Content Include="Views\domain\Edit.cshtml" />
+    <Content Include="Views\domain\Index.cshtml" />
+    <Content Include="Views\customer\Create.cshtml" />
+    <Content Include="Views\customer\Delete.cshtml" />
+    <Content Include="Views\customer\Details.cshtml" />
+    <Content Include="Views\customer\Edit.cshtml" />
+    <Content Include="Views\customer\Index.cshtml" />
+    <Content Include="Views\branch\Create.cshtml" />
+    <Content Include="Views\branch\Delete.cshtml" />
+    <Content Include="Views\branch\Details.cshtml" />
+    <Content Include="Views\branch\Edit.cshtml" />
+    <Content Include="Views\branch\Index.cshtml" />
+    <Content Include="Views\setting\Create.cshtml" />
+    <Content Include="Views\setting\Delete.cshtml" />
+    <Content Include="Views\setting\Details.cshtml" />
+    <Content Include="Views\setting\Edit.cshtml" />
+    <Content Include="Views\setting\Index.cshtml" />
+    <Content Include="Views\OWReports\Report.cshtml" />
+    <Content Include="Views\IWFileDownload\InwardFileDownload.cshtml" />
+    <Content Include="Views\IWFileDownload\_IWDownload.cshtml" />
+    <Content Include="Views\CreateUser\_SelectOrgnization.cshtml" />
+    <Content Include="Views\CreateUser\_SelectCustomer.cshtml" />
+    <Content Include="Views\CreateUser\_SelectDomainsDrop.cshtml" />
+    <Content Include="Views\OWL3\_GetCBSDtls.cshtml" />
+    <Content Include="Views\Error\GlobalError.cshtml" />
+    <Content Include="Content\Errors\CustomError.htm" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\OWL2\_OWActivitylogs.cshtml" />
+    <Content Include="Views\identifySlipChq\DisplayDoc.cshtml" />
+    <Content Include="Views\identifySlipChq\Index.cshtml" />
+    <Content Include="Views\UnlockRecords\Index.cshtml" />
+    <Content Include="Views\UnlockRecords\_ShowData.cshtml" />
+    <Content Include="Views\UnlockRecords\_Username.cshtml" />
+    <Content Include="Views\OWL1\_Bankname.cshtml" />
+    <Content Include="Views\OWL2\_Bankname.cshtml" />
+    <Content Include="Views\OWL3\_Bankname.cshtml" />
+    <Content Include="Views\TFL1verification\Index.cshtml" />
+    <Content Include="Views\TFL1verification\_RejectReason.cshtml" />
+    <Content Include="Views\TFL1verification\_GetCBSDtls.cshtml" />
+    <Content Include="Views\TFL1verification\Selection.cshtml" />
+    <Content Include="Views\TFL2Verification\Index.cshtml" />
+    <Content Include="Views\TFL2Verification\Selection.cshtml" />
+    <Content Include="Views\TFL2Verification\_TFL2GetCBSDtls.cshtml" />
+    <Content Include="Views\TFL2Verification\_TFL2RejectReason.cshtml" />
+    <Content Include="Views\TFL2Verification\_IWActivitylogs.cshtml" />
+    <Content Include="Views\TFL2Verification\_Bankname.cshtml" />
+    <Content Include="Views\TFL3Verification\Selection.cshtml" />
+    <Content Include="Views\TFL3Verification\Index.cshtml" />
+    <Content Include="Views\TFL3Verification\_TFL3GetCBSDtls.cshtml" />
+    <Content Include="Views\TFL3Verification\_IWActivitylogsL2.cshtml" />
+    <Content Include="Views\TFL3Verification\_TFL3RejectReason.cshtml" />
+    <Content Include="Views\CMSAddSlipInfoMissing\AdditionalDataEntry.cshtml" />
+    <Content Include="Views\CMSAddSlipInfoMissing\ClientCodeSelection.cshtml" />
+    <Content Include="Views\CMSAddSlipInfoMissing\CMSAddSlipInfoMissing.cshtml" />
+    <Content Include="Views\CMSClientCodeMissing\ClientCode.cshtml" />
+    <Content Include="Views\CMSClientCodeMissing\ClientCodeSelection.cshtml" />
+    <Content Include="Views\CMSClientCodeMissing\GetClientDlts.cshtml" />
+    <Content Include="Views\OWL1\_getTiffImage.cshtml" />
+    <Content Include="Views\OWSearch\_getTiffImage.cshtml" />
+    <Content Include="Views\OWSmbDataEntry\Index.cshtml" />
+    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\OWSmbVerification\Index.cshtml" />
+    <Content Include="Views\OWSmbVerification\GetClientDlts.cshtml" />
+    <Content Include="Views\OWSmbVerification\_GetCBSDtls.cshtml" />
+    <Content Include="Views\OWSmbVerification\_OWActivitylogs.cshtml" />
+    <Content Include="Views\OWSmbVerification\_RejectReason.cshtml" />
+    <Content Include="Views\OWSmbDataEntry\_getTiffImage.cshtml" />
+    <Content Include="Views\OutwardDomainDashboardV1\Index.cshtml" />
+    <Content Include="Views\OWSmbVerification\_getTiffImage.cshtml" />
+    <Content Include="Views\ChangePassword.cshtml" />
+    <Content Include="Views\CustDomDateSelection.cshtml" />
+    <Content Include="Views\_ChangeDomain.cshtml" />
+    <Content Include="Views\_CustomerList.cshtml" />
+    <Content Include="Views\_PolicyDetails.cshtml" />
+    <Content Include="Views\_ProcessingDate.cshtml" />
+    <Content Include="Views\IWSMBFileDownload\IWSMBFileDwnld.cshtml" />
+    <Content Include="Views\OWSmbDataEntry\_GetSMBCBSDetails.cshtml" />
+    <Content Include="Views\IWDataEntry\IWDataEntry.cshtml" />
+    <Content Include="Views\Home\ShowProductivity.cshtml" />
+    <Content Include="Views\Home\_ShowProductivity.cshtml" />
+    <Content Include="Views\IWDataEntry\_ShowProductivity.cshtml" />
+    <Content Include="Views\OWL1\OWChqL1.cshtml" />
+    <Content Include="Views\OWSmbVerification\SelectionForBranchCode.cshtml" />
+    <Content Include="Views\OWBranchLevelDataEntry\BranchDataEntry.cshtml" />
+    <Content Include="Views\OWBranchLevelDataEntry\BranchDataEntry2.cshtml" />
+    <Content Include="Views\OWBranchLevelDataEntry\SelectionForBranchDataEntry.cshtml" />
+    <Content Include="Views\OWBranchLevelDataEntry\_RejectReason.cshtml" />
+    <Content Include="Views\OWBranchLevelDataEntry\_getTiffImage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IWProc.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>IWProc.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IWProc.dbml.layout">
+      <DependentUpon>IWProc.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OWProc.dbml.layout">
+      <DependentUpon>OWProc.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\Crystal\--DaysSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>--DaysSummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\AuditReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AuditReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\BankWiseP2FReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BankWiseP2FReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\BatchWiseSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BatchWiseSummaryReport2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\BundledFileSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BundledFileSummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\DaysSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DaysSummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\Discrepant_Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Discrepant_Report.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\DuplicateChequesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DuplicateChequesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\ExtensionReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ExtensionReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IQAFailureReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IQAFailureReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IWL1RejectedReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IWL1RejectedReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IWL2RejectedReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IWL2RejectedReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IwLxProductivity.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IwLxProductivity.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IwLxVerification.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IwLxVerification.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IWP2FDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IWP2FDetails.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IWReturnDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IWReturnDetails.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IwVFUserwiseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IwVFUserwiseReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\L2ModificationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>L2ModificationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\L3ModificationReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>L3ModificationReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\MICRRepairReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MICRRepairReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\OWReturnPullout.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OWReturnPullout.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\OWReturnPulloutNew.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>OWReturnPulloutNew.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\P2FBankwiseSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>P2FBankwiseSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\P2FDetailsWithBranchWise.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>P2FDetailsWithBranchWise.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\P2FDetailsWithBranchWiseSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>P2FDetailsWithBranchWiseSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\P2FPulloutReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>P2FPulloutReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\PresentationDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PresentationDetails.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\PresentationDetailsWithBranchWise.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PresentationDetailsWithBranchWise.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\PresentationDetailsWithBranchWiseSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PresentationDetailsWithBranchWiseSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\ProductivityReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProductivityReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\ReturnReportUnmatchMemo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReturnReportUnmatchMemo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\ReturnMemo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReturnMemo.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\ReturnReportUnmatch.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReturnReportUnmatch.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\RPT_IWSMBImagesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_IWSMBImagesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\RPT_ReturnDetailsWithBranchWiseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_ReturnDetailsWithBranchWiseReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\RPT_ReturnDetailsWithSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_ReturnDetailsWithSummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\RPT_ReturnMemoWithBranchNameReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_ReturnMemoWithBranchNameReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\RPT_ReturnMemoWithImageReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RPT_ReturnMemoWithImageReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\SettlementDetailsWithBranchWise.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SettlementDetailsWithBranchWise.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\SettlementDetailsWithBranchWiseSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SettlementDetailsWithBranchWiseSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\UnbundledChequesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>UnbundledChequesReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\VerificationCHIRejectReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VerificationCHIRejectReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Crystal\IWFinalStatusReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IWFinalStatusReport.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Aflatoon.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Aflatoon.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>11972</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:11942/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

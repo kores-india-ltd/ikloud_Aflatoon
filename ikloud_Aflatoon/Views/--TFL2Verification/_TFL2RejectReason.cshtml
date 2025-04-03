@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.RejectReason>
+<div class="w3-container">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr><td>Reason Code</td><td>Description</td></tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr class="w3-hover-blue w3-opennav" onclick="reasonselected('@item.ReasonCodeS')">
+                <td>@item.ReasonCodeS</td>
+                <td>@item.Description</td>
+            </tr>
+            @*if (item.ReasonCodeS == "88")
+                {
+                    <tr>
+                        <td>@item.ReasonCodeS</td>
+                        <td>
+                            @item.Description: &nbsp;<input style="width:200px;" maxlength="25" type="text" id="rtndescrp" name="rtndescrp" />&nbsp;&nbsp;
+                            &nbsp;&nbsp;<span style="color:blue" class="w3-hover-blue w3-opennav" onclick="reasonselected(@item.ReasonCodeS)">Select</span>
+                        </td>
+
+                    </tr>
+                }
+                else
+                {
+                    <tr class="w3-hover-blue w3-opennav" onclick="reasonselected(@item.ReasonCodeS)">
+                        <td>@item.ReasonCodeS</td>
+                        <td>@item.Description</td>
+                    </tr>
+                }*@
+
+
+        }
+    </table>
+</div>
+
+

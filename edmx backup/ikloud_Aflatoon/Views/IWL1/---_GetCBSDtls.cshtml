@@ -1,0 +1,174 @@
+﻿@model ikloud_Aflatoon.Infrastructure.cbstetails
+<div id="cbsdetails">
+
+    @Html.HiddenFor(m => m.cbsdls)
+    @Html.HiddenFor(m => m.JoinHldrs)
+    <div class="span4">
+        <div class="row">
+            @if (Model.cbsdls != null)
+            {
+                if (Model.cbsdls.Split('|').ElementAt(1) == "S" && Model.cbsdls.Split('|').ElementAt(2) != "")
+                {
+                    if (Model.cbsdls.Split('|').ElementAt(3) == "SBNRE" || Model.cbsdls.Split('|').ElementAt(3) == "SBFRL" || Model.cbsdls.Split('|').ElementAt(3) == "UBFRL" || Model.cbsdls.Split('|').ElementAt(3) == "SBFCR" || Model.cbsdls.Split('|').ElementAt(3) == "SBFCS" || Model.cbsdls.Split('|').ElementAt(3) == "CAFCR" || Model.cbsdls.Split('|').ElementAt(3) == "CAFCS" || Model.cbsdls.Split('|').ElementAt(4) == "C" || Model.cbsdls.Split('|').ElementAt(4) == "T")
+                    {
+                        <div class="span4 padding10 bg-color-red fg-color-white" style="float: right">
+                            @*<h3 class="fg-color-white">
+                                    <strong>@Html.DisplayFor(modelitem => modelitem.DbtAccNo)</strong>
+                                </h3>*@
+                           
+
+
+                            <h3 class="fg-color-white">
+                                <label>
+                                    Name:
+                                </label>@Model.cbsdls .Split('|').ElementAt(2)
+                            </h3>
+                            @if (Model.JoinHldrs != null)
+                            {
+                                <h4 class="fg-color-white">
+                                    <label>
+                                        Joint Holders:
+                                    </label>
+                                    @for (int i = 3; i < Model.JoinHldrs.Split('|').Count() - 1; i++)
+                                    {
+                                        <label>
+                                            @Model.JoinHldrs.Split('|').ElementAt(i)
+                                        </label>
+
+                                    }
+                                </h4>
+                            }
+                            <h4 class="fg-color-white">
+                                <label>
+                                    Scheme Code:
+                                </label>@Model.cbsdls.Split('|').ElementAt(3)
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    Freeze Code:
+                                </label>@Model.cbsdls.Split('|').ElementAt(4)
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    MOP:
+                                </label>@Model.cbsdls.Split('|').ElementAt(5) - @Model.MOP
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    Account Status:
+                                </label>@Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    Credit Limit:
+                                </label>@Model.cbsdls.Split('|').ElementAt(7)
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    NRE Flag:
+                                </label>@Model.cbsdls.Split('|').ElementAt(10)
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    Scheme Type:
+                                </label>@Model.cbsdls.Split('|').ElementAt(11)
+                            </h4>
+                            <h4 class="fg-color-white">
+                                <label>
+                                    Account Ownership:
+                                </label>@Model.cbsdls.Split('|').ElementAt(12)
+                                - @Model.AccountOwnership
+                            </h4>
+                        </div>
+                    }
+                    else
+                    {
+                        
+                        <div class="span4 padding10 border-color-red" style="float: right">
+
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    Name:
+                                </label>@Model.cbsdls.Split('|').ElementAt(2)
+                            </h4>
+                            @if (Model.JoinHldrs != null)
+                            {
+                                <h4 class="fg-color-dark">
+                                    <label>
+                                        Joint Holders:
+                                    </label>
+                                    @for (int i = 3; i < Model.JoinHldrs.Split('|').Count() - 1; i++)
+                                    {
+                                        <label>
+                                            @Model.JoinHldrs.Split('|').ElementAt(i)
+                                        </label>
+                                    }
+                                </h4>
+                            }
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    Scheme Code:
+                                </label>@Model.cbsdls.Split('|').ElementAt(3)
+                            </h4>
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    Freeze Code:
+                                </label>@Model.cbsdls.Split('|').ElementAt(4)
+                            </h4>
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    MOP:
+                                </label>@Model.cbsdls.Split('|').ElementAt(5) - @Model.MOP
+                            </h4>
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    Account Status:
+                                </label>@Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                            </h4>
+                            @* <h4 class="fg-color-dark">
+                                <label>
+                                    Credit Limit:</label>@Model.ClientAccountDtls.Split('|').ElementAt(7)</h4>*@
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    NRE Flag:
+                                </label>@Model.cbsdls.Split('|').ElementAt(10)
+                            </h4>
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    Scheme Type:
+                                </label>@Model.cbsdls.Split('|').ElementAt(11)
+                            </h4>
+                            <h4 class="fg-color-dark">
+                                <label>
+                                    Account Ownership:
+                                </label>@Model.cbsdls.Split('|').ElementAt(12)
+                                - @Model.AccountOwnership
+                            </h4>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="span4 padding10 bg-color-red fg-color-white" style="float: right">
+                        <h4 class="fg-color-white">@Model.cbsdls.Split('|').ElementAt(2)</h4>
+                        <script type="text/javascript">
+                            document.getElementById("blockkey").value = "1";
+                        </script>
+                    </div>
+                }
+            }
+            else if (Model.cbsdls == null)
+            {
+                <div class="span4 padding10 bg-color-red fg-color-white" style="float: right">
+                    <h3 class="fg-color-white">
+                        <strong>Account Details Not Found!!</strong>
+                    </h3>
+                </div>
+                <script type="text/javascript">
+                    document.getElementById("blockkey").value = "1";
+                </script>
+
+            }
+        </div>
+    </div>
+</div>

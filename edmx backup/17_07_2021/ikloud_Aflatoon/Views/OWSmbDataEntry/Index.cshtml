@@ -1,0 +1,211 @@
+﻿@model ikloud_Aflatoon.SMBDataEntryView
+@{
+    ViewBag.Title = "SMB Data Entry";
+    ViewBag.header = "SMB Data Entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="@Url.Content("~/Scripts/Json2.js")"></script>
+<script src="@Url.Content("~/Scripts/modernizr-2.8.3.js")"></script>
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+@*<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>*@
+<script src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jQueryRotate.js")"></script>
+<script src="@Url.Content("~/Scripts/OWSmbDataEntry.js")"></script>
+<script src="@Url.Content("~/Scripts/angular.min.js")"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    var acmaxlength = '@ViewBag.MaxAclen';
+    var acminlength = '@ViewBag.MinAclen';
+    var payeemaxlength = '@ViewBag.MaxPayeelen';
+
+    acmaxlength = acmaxlength - 1;
+    acminlength = acminlength - 1;
+    payeemaxlength = payeemaxlength - 1;
+</script>
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<!--<link href="~/Content/Abids.css" rel="stylesheet" />
+
+    <script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+-->
+<input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" id="cnt" value="1" />
+<input type="hidden" id="tempcnt" value="1" />
+<input type="hidden" name="blockkey" id="blockkey" value="0" />
+<input type="hidden" id="postdt" value="@Session["PostDate"]" />
+<input type="hidden" id="staledt" value="@Session["StaleDate"]" />
+<input type="hidden" id="oldact" />
+<input type="hidden" id="oldClient" />
+<input type="hidden" id="NarrationID" value="@Session["Narration"]" />
+<input type="hidden" id="ofc" value="0" />
+<input type="hidden" name="allowAlpha" id="allowAlpha" value="@Session["ACAlphaAllow"]" />
+
+<div class="w3-hide">
+ 
+</div>
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+
+    using (Html.BeginForm("OWL1", "OWSMBDataEntry", FormMethod.Post))
+    {
+        <div class="w3-row">
+            <!--Column 1-->
+
+            <div class="w3-col m9 w3-grey w3-padding w3-large" id="ClntsDtlsdiv" style="display: none">
+
+                <div class="w3-container" style="float: initial">
+                    <label class="w3-label w3-padding w3-text-dark-grey w3-left-align" style="float: initial">Client Code </label>
+                    <input class=" w3-input   w3-border-blue w3-padding" style="width: 150px; float: left; font-weight: 500" type="text" id="ClientCd" name="ClientCd" maxlength="8" />
+                    <input class="w3-btn w3-margin-left" type="button" value="Get" id="ClntsDtls" name="ClntsDtls" onclick="clientdtls();" />
+
+                    <div id="clientdetails" class="w3-container" style="float: right; font-weight: 500; color: darkblue">
+                    </div>
+                </div>
+            </div>
+            <!--Column 2-->
+            <div class="w3-col m9  w3-xlarge ">
+                <div class="w3-row">
+                    <div class="w3-container w3-col m4">
+
+                    </div>
+                    <div class="w3-container w3-col m4">
+                    </div>
+                    <div class="w3-container w3-col m4">
+                    </div>
+                </div>
+
+                <div class="w3-col m4  w3-xlarge">
+                    <span class="w3-text-red" style="display:none" id="bankname"></span>
+                </div>
+
+            </div>
+
+
+            <!--Column 3-->
+
+        </div>
+        <div class="w3-row w3-grey">
+
+            <div class="w3-col m7 w3-center w3-dark-grey w3-padding">
+                <img id="myimg" class="w3-card-8 w3-image" style="cursor: zoom-in" onclick="fullImage();" src="@Url.Content(Model.FrontGreyImage)" />
+
+                <div id="divtiff">
+                </div>
+
+
+                <div id="iwimg" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width: 90%; cursor: zoom-out" src="~/Icons/noimagefound.jpg" />></div>
+
+                <div class="w3-row w3-large w3-padding" style="display: none" id="MICR">
+                    <div class="w3-col w3-center m2 ">
+                        MICR:
+                    </div>
+                    <div class="w3-col w3-center m8 ">
+                    </div>
+                    <div class="w3-col w3-center m2" id="divctsnoncts" style="display: none">
+                        <select id="ctsnocts" name="ctsnocts">
+                            <option value="01">CTS</option>
+                            <option value="11">Non-CTS</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="w3-row w3-padding">
+                    <div class="w3-col m8">
+                        <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontTiffImage');">Front Tiff</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontGreyImage');">Front Gray</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.BackTiffImage');">Back Tiff</label>
+                        <label class="w3-btn" id="lblslpimg" style="display:none">Slip Image</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="w3-text-white">
+               <br />
+                <div class="w3-container w3-card-4">
+                    <h3>&nbsp;&nbsp;<b>Cheque Data Entry Details</b></h3>
+                    <br />
+                    <table >
+                        
+                        @Html.HiddenFor(m => m.Id)
+                        @Html.HiddenFor(m => m.captureRawId)
+                        @Html.HiddenFor(m => m.InstrumentType)
+                        @Html.HiddenFor(m => m.CustomerId)
+                        @Html.HiddenFor(m => m.DomainId)
+                        @Html.HiddenFor(m => m.ScanningNodeId)
+
+                        <tr>
+                            <td>&nbsp;&nbsp;<b>Date: </b></td>
+                            <td></td>
+                            <td>
+                                @Html.TextBoxFor(m => m.ChqDate, new { autocomplete = "off",@maxlength=6 })
+                                &nbsp;&nbsp;<b>[ ddmmyy] </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;&nbsp;<b>Amount: </b></td>
+                            <td></td>
+                            <td>
+                                @Html.TextBoxFor(m => m.ChqAmt, new { autocomplete = "off",@maxlength=15 })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;&nbsp;<b>Account No: </b></td>
+                            <td></td>
+                            <td>
+                                @Html.TextBoxFor(m => m.ChqAcno,
+                                new
+                                {
+                                    style = "width:150px",
+                                    @onfocus = "ChangeImage('" + Model.BackTiffImage + "')",
+                                    @onblur = "ChangeImage('" + Model.FrontGreyImage + "')",
+                                    @onfocusout = "RemoveWhiteSpace()",
+                                    autocomplete = "off" ,@maxlength=17
+                                })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;&nbsp;<b>Payee Name: </b></td>
+                            <td></td>
+                            <td>
+                                @Html.TextBoxFor(m => m.ChqPayeeName, new { autocomplete = "off",@maxlength=50 })
+                            </td>
+                        </tr>
+                        <tr><td><br /></td><td></td><td></td></tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Save" id="btnSubmit" name="btnSubmit" onclick="return IsEmpty();" />
+                                <input type="button" value="Close" id="btnClose" name="btnClose" />
+                            </td>
+                        </tr>
+                    </table>
+                        
+                </div>
+            </div>
+            </div>
+            }
+           
+}
+
+
+
+            
+

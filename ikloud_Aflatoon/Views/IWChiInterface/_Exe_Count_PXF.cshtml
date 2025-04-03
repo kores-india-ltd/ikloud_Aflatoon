@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.Exe_Count_PXF>
+
+<div class="row" id="tableData">
+    <div class="col-md-12">
+        <h3>@ViewBag.Heading</h3>
+        <table class="table table-responsive table-bordered table-condensed" style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+            <thead>
+                <tr style="background-color:lightblue;">
+
+                    <th>ClearingType</th>
+                    <th>DocType</th>
+                    <th>TotalCount</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.ClearingType</td>
+                        <td>@item.DocType</td>
+                        <td>@item.TotalCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

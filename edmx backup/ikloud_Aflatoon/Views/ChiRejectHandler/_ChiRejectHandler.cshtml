@@ -1,0 +1,110 @@
+﻿@model ikloud_Aflatoon.Infrastructure.ChiReject
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/ChiRejectHandler.js"></script>
+<div id="chidetls">
+    @*@using (Html.BeginForm("ChiReject", "ChiRejectHandler", FormMethod.Post))
+        {*@
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Customerid)
+    @Html.HiddenFor(m => m.Customer_ID)
+    @Html.HiddenFor(m => m.DomainID)
+    @Html.HiddenFor(m => m.ScanningNodeId)
+    @Html.HiddenFor(m => m.RawDataID)
+
+    <div class="w3-row w3-center w3-container">
+        <div class="w3-col w3-large w3-center w3-border w3-margin-bottom  w3-theme-d5">
+            <label class="w3-label w3-text-white" id="chidesc" style="font-weight:900">@Model.ChiRejectdescription</label>
+        </div>
+    </div>
+    <div class="w3-row w3-grey">
+        <div class="w3-col m8 w3-center w3-dark-grey w3-padding">
+            <img id="myimg" class="w3-card-8 w3-image " style="cursor:zoom-in" onclick="fullImage();" src="@Model.FrontGreyImagePath" />
+
+            <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                <img id="myfulimg" class="w3-modal-content w3-card-8 w3-center w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+            </div>
+            <div class="w3-row w3-large w3-center w3-margin-top w3-padding">
+                <div class="w3-col m3   w3-center">
+                    <label class="w3-label w3-text-white" style="font-weight:800">Cheque No</label>
+                    @Html.TextBoxFor(m => m.ChequeNoFinal, new { style = "width:100px;font-weight:600" })
+                </div>
+                <div class="w3-col m3 w3-center">
+                    <label class="w3-label w3-text-white" style="font-weight:800">Sort Code</label>
+                    @Html.TextBoxFor(m => m.SortCodeFinal, new { style = "width:110px;font-weight:600" })
+                </div>
+                <div class="w3-col m3  w3-center" style="font-weight:800">
+                    <label class="w3-label w3-text-white">SAN</label>
+                    @Html.TextBoxFor(m => m.SANFinal, new { style = "width:100px;font-weight:600" })
+                </div>
+                <div class="w3-col m3 w3-center" style="font-weight:800">
+                    <label class="w3-label w3-text-white">Trans Code</label>
+                    @Html.TextBoxFor(m => m.TransCodeFinal, new { style = "width:50px;font-weight:600" })
+                </div>
+            </div>
+            <div class="w3-row w3-padding">
+                <div class="w3-col m8">
+                    <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                    <label class="w3-btn" onclick="ChangeImage('FTiff');">Front Tiff</label>
+                    <label class="w3-btn" onclick="ChangeImage('FGray');">Front Gray</label>
+                    <label class="w3-btn" onclick="ChangeImage('BTiff');">Back Tiff</label>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col w3-third w3-large  w3-grey">
+            <div class="w3-card-4 w3-margin w3-light-grey">
+                <div class="w3-row w3-text-light-grey">
+                    <label class="w3-label w3-text-black" style="font-weight:700">Ignore IQA</label>
+                    @if (Model.IgnoreIQA == false)
+                    {
+
+                        <input type="checkbox" id="ignriqa" name="ignriqa" class="w3-check" style="width: 35px; float:initial">
+                    }
+                    else
+                    {
+
+                        <input type="checkbox" id="ignriqa" name="ignriqa" class="w3-check" checked="checked" style="float: initial">
+                    }
+                </div>
+                <div class="w3-row w3-text-light-grey ">
+                    <label class="w3-label w3-text-black" style="font-weight:700">Doc Type: </label>
+                    <label class="w3-label w3-text-blue" style="font-weight:900">@Model.DocType</label>
+                </div>
+            </div>
+            <div class="w3-container w3-dark-grey w3-card-2 w3-margin">
+                <div class="w3-container">
+                    <label class="w3-label w3-text-light-gray" style="font-weight:900;float:left">Decision: </label>
+                    <input class="w3-margin-left w3-text-black" id="Decision" name="Decision" type="text" style="width: 35px; float: initial; font-weight: 700; text-align: center" maxlength="1" />
+
+                </div>
+                <div class="w3-container" style="float: initial">
+                    <input class="w3-btn" name="btnacept" type="button" id="btnacept" value="OK" />
+                    @*onclick='return (validMICR());'*@
+                    <input class="w3-btn" type="button" name="btnClose" id="btnClose" value="Close" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w3-row">
+
+        <div class="w3-col w3-large w3-center w3-border w3-margin-bottom  w3-theme-d5">
+            <label class="w3-label w3-border w3-left w3-text-white" style="font-weight:800">Decisions:</label>&nbsp;
+            <label class="w3-label w3-border w3-text-white" style="font-weight:800">P=></label>&nbsp;
+            <label class="w3-label w3-text-white" style="font-weight:600">Mark To P2F</label>&nbsp;
+            <label class="w3-label w3-border w3-text-white" style="font-weight:800">S=></label>&nbsp;
+            <label class="w3-label w3-text-white" style="font-weight:600">Send To CHI</label>&nbsp;
+            <label class="w3-label w3-border w3-text-white" style="font-weight:800">N=></label>&nbsp;
+            <label class="w3-label w3-text-white" style="font-weight:600">Do Not Present</label>&nbsp;
+            <label class="w3-label w3-border w3- w3-text-white" style="font-weight:800">B=></label>&nbsp;
+            <label class="w3-label w3-text-white" style="font-weight:600">Bank On Blockage</label>&nbsp;
+            <label class="w3-label w3-border w3-text-white" style="font-weight:800">G=></label>&nbsp;
+            <label class="w3-label w3-text-white" style="font-weight:600">Government Cheque</label>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        $("#Customer").prop("disabled", true);
+    </script>
+
+    @*}*@
+</div>

@@ -1,0 +1,77 @@
+﻿
+@model ikloud_Aflatoon.HolidayMaster
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+
+
+        //$("#datepicker").datepicker();
+        @*$datepicker.datepicker('setDate', '@ViewBag.Holiday_Date');*@
+        document.getElementById('datepicker').value = '@ViewBag.Holiday_Date';
+
+        document.getElementById('txtHolidayDesc').value = '@ViewBag.Holiday_Descripton';
+
+
+        //============ Adding validation by amol on 06/06/2023 =================================
+        $("#txtHolidayDesc").keypress(function (event) {
+
+            debugger;
+            //console.log("Event code - " + event.keyCode);
+            if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 20 || event.keyCode == 32 || event.keyCode == 40 || event.keyCode == 44 || (event.keyCode > 47 && event.keyCode < 58)
+                || (event.keyCode > 64 && event.keyCode < 91)) {
+
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+
+    });
+
+    function EditHoliday() {
+        debugger;
+        var Rooturl = '@Url.Content("~/")';
+        var ID = 0;
+        var Holiday_Date = "";
+        var Holiday_Descripton = "";
+         ID = '@ViewBag.ID';
+         Holiday_Date = document.getElementById('datepicker').value;
+         Holiday_Descripton = document.getElementById('txtHolidayDesc').value;
+
+
+        $.ajax({
+            type: "POST",
+            url: Rooturl + "holiday/SaveEdit",
+            data: { ID: ID, Holiday_Date: Holiday_Date, Holiday_Descripton: Holiday_Descripton },
+            success: function (data) {
+                alert("Data Updated Successfully!!");
+            }
+        });
+    }
+
+</script>
+
+<div>
+
+    <div class="row">
+        <div class="col-sm-3 padding-0" align="center"><label><b>Holiday Date:</b></label></div>
+        <div class="col-sm-2 padding-0" align="center">
+            <input type="date" id="datepicker">
+        </div>
+        <div class="col-sm-4" align="center"><label><b>Description:</b></label></div>
+        <div class="col-sm-2 padding-0" align="center">
+            <input class="form-control" type="text" id="txtHolidayDesc" />
+        </div>
+        <div class="col-sm-2 padding-0" align="center">
+            <button id="EditHoliday" type="button" class="btn btn-danger btn-sm" onclick="EditHoliday();">Save</button>
+        </div>
+    </div>
+    <p align="center"> @Html.ActionLink("Back To Holiday List", "Index") <p>
+</div>

@@ -1,0 +1,199 @@
+﻿@model IEnumerable<ikloud_Aflatoon.IWActivityLog>
+<h2>
+    Activity Log
+</h2>
+@{
+    int cnt = 0;
+    int index = 0;
+}
+<div id="activitylogs">
+    <table>
+        <tr style="text-align: left">
+            <th>
+                Log Level
+            </th>
+            <th>
+                Actio Taken
+            </th>
+            <th>
+                Login ID
+            </th>
+            <th>
+                Reject Desc
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>
+                Time Stamp
+            </th>
+        </tr>
+        @foreach (var itm in Model)
+        {
+            if (index == 0)
+            {
+                <tr>
+                    <td>
+                        MICR_AIDecision
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AIMICRDecision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.MICR_AIRejectReason)
+                    </td>
+                    <td>AI</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>
+                        AccountNo_AIDecision
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AIAccountDecision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AccountNo_AIRejectReason)
+                    </td>
+                    <td>AI</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>
+                        AmountFigure_AIDecision
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AIFigureAmtDecision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AmountFigure_AIRejectReason)
+                    </td>
+                    <td>AI</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>
+                        AmountWord_AIDecision
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AIWordAmtDecision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AmountWord_AIRejectReason)
+                    </td>
+                    <td>AI</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>
+                        Date_AIDecision
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AIDateDecision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Date_AIRejectReason)
+                    </td>
+                    <td>AI</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+                <tr>
+                    <td>
+                        Signature_AIDecision
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.AISignautre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Signature_AIRejectReason)
+                    </td>
+                    <td>AI</td>
+                    <td>NA</td>
+                    <td>NA</td>
+                </tr>
+            }
+
+            if (cnt == 0 && itm.LogLevel == "L2 VERIFICATION" && (itm.Activity.ToUpper() == "A" || itm.Activity.ToUpper() == "R"))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(a => itm.LogLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.LoginID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.RejectDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Timestamp)
+                    </td>
+                </tr>
+            }
+            else if (cnt == 0 && itm.LogLevel == "L2 VERIFICATION" && itm.Activity.ToUpper() == "C")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(a => itm.LogLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.LoginID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.RejectDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Timestamp)
+                    </td>
+                </tr>
+            }
+            else if (itm.LogLevel != "L2 VERIFICATION")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(a => itm.LogLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Activity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.LoginID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.RejectDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Comments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(a => itm.Timestamp)
+                    </td>
+                </tr>
+            }
+
+            if (itm.LogLevel == "L2 VERIFICATION" && (itm.Activity.ToUpper() == "A" || itm.Activity.ToUpper() == "R"))
+            {
+                cnt = 1;
+            }
+            index=+1;
+        }
+    </table>
+</div>
+

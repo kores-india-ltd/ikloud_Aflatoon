@@ -1,0 +1,33 @@
+﻿@model ikloud_Aflatoon.Models.CMSCustAdditionalInput
+
+<div id="getcheqs">
+   
+    @*<script type="text/javascript">
+        @*var RootUrl = '@Url.Content("~/")';
+        alert('Updated');
+    </script>*@
+    @if (Model.result == "Redirect")
+    {
+        <p>Update successfully!!!</p>
+        @*<script type="text/javascript">
+            $.ajax({
+                url: RootUrl + 'CMSDataEntry/AdditionalDataEntry',
+                data: { clientCode: @Model.ClientCode },
+                type: 'POST',
+                dataType: 'html',
+                success: function (result) {
+                    if (result == false) {
+                        window.location = RootUrl + 'Home/IWIndex?id=1';
+                    }
+                    else {
+                        $('#clntSlip').html(result);
+                    }
+                }
+
+            });
+            
+        </script>*@
+    }
+
+
+</div>

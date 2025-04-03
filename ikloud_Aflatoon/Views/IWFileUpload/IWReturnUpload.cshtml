@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "File Upload";
+    ViewBag.header = "File Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/FileUpload.js"></script>
+
+<script type="text/javascript">
+    function lode()
+    {
+        document.getElementById('loader').style.display = "";
+    }
+</script>
+<h3 style="color: green">@ViewBag.Message</h3>
+<h4>@ViewBag.Counts</h4>
+<div class="w3-container  w3-grey">
+
+    @using (Html.BeginForm("IWReturnUpload", "IWFileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary();
+        <div><br /></div>
+        <div class="w3-center">
+            <input class="w3-large" style="font-weight:900" type="file" id="fileToUpload" name="file" />
+            <span class="field-validation-error w3-label" id="spanfile"></span>
+            <input class="w3-btn" type="submit" id="btnSubmit" value="Upload" onclick="lode();" />
+            <label id="loader" style="display:none"> <span style="color:red">  Uploading...</span><img src="~/Content/images/progressss.gif" /></label>
+        </div>
+
+
+        @*<div id="fileupld" class="w3-modal w3-animate-zoom ">
+
+                <div class="w3-modal-content">
+                    <div class="w3-container w3-theme-dark">
+                        <span onclick="document.getElementById('fileupld').style.display = 'none';"
+                              class="w3-closebtn">&times;</span>
+                    </div>
+                    <div>
+                        <input type="file" id="fileToUpload" name="file" />
+                        <span class="field-validation-error w3-label" id="spanfile"></span>
+                    </div>
+                    <div><br /></div>
+                    <div class="w3-container">
+                        <input class="w3-btn" type="submit" id="btnSubmit" value="Upload" />
+                    </div>
+                </div>
+            </div>*@
+
+    }
+
+    @*<script type="text/javascript">
+            document.getElementById('fileupld').style.display = 'block';
+        </script>*@
+    <div class="w3-card-12 w3-dark-grey w3-center">
+        @if (ViewBag.dwnFname != null || ViewBag.dwnFname != "")
+        {
+            <a href='@Url.Action("IWCreateFile", "IWFileUpload", new { id = ViewBag.dwnFname })'>@ViewBag.dwnFname</a>
+            <script type="text/javascript">
+                document.getElementById('loader').style.display = "none";
+            </script>
+        }
+    </div>
+</div>
+

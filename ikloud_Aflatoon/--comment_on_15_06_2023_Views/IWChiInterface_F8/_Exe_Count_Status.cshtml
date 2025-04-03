@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.Exe_Count_Status>
+
+<div class="row" id="tableData">
+    <div class="col-md-12">
+        <h3>@ViewBag.Heading</h3>
+        <table class="table table-responsive table-bordered table-condensed" style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+            <thead>
+                <tr style="background-color:lightblue;">
+
+                    <th>ClearingType</th>
+                    <th>DocType</th>
+                    <th>TotalCount</th>
+                    <th>Available</th>
+                    <th>Presented</th>
+                    <th>Duplicate</th>
+                    <th>HomeClearing</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.ClearingType</td>
+                        <td>@item.DocType</td>
+                        <td>@item.TotalCount</td>
+                        <td>@item.Available</td>
+                        <td>@item.Presented</td>
+                        <td>@item.Duplicate</td>
+                        <td>@item.HomeClearing</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

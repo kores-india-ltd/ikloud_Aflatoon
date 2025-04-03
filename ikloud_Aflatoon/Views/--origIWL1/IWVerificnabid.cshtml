@@ -1,0 +1,468 @@
+﻿@model iKloud.Models.IW_VerificationEntery
+@{
+    ViewBag.Title = "IWVerificnabid";
+    if (Model.notfound)
+    {
+    <script type="text/javascript">
+        alert('Invalid Reason Code!');
+    </script>  
+    }
+
+    if (ViewBag.L2 == true && Model.ClientAccountDtls.Substring(1, 1) != "F")
+    {
+        if (Model.ClientAccountDtls.Split('|').ElementAt(3) == "SBFCR" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "SBFCS" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "CAFCR" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "CAFCS")
+        {
+    <script type="text/javascript">
+        alert('Alert! FCRA A/C Check Branch confirmation for source of Funds!!');
+    </script>
+        }
+    }
+}
+@section scripts{
+    <script src="@Url.Content("~/Scripts/jquery.zoom.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ZoomChqImage.js")" type="text/javascript"></script>
+}
+<script type="text/javascript">
+    function rotateimg(imgname) {
+        if (imgname.style.filter == "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)") {
+            // alert('Ok');
+            imgname.style.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=4)';
+        }
+        else {
+            imgname.style.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2)';
+
+        }
+    }
+    //    //--------Signature Window---------
+    //    function windowcall() {
+    //        //    javascript:window.history.forward();
+    //        //  alert('Ohh!');
+    //        var url = document.getElementById('sign').value;
+    //        url = url + '=' + document.getElementById('DbtAccNo').value;
+    //        // alert(url);
+    //        window.open(url, 'Signature', 'width=500,height=500,left=900,scrollbars=yes,titlebar=yes,resizable=no,location=yes,toolbar=0,status=1').focus();
+
+    //    }
+
+</script>
+<input type="hidden" name="blockkey" id="blockkey" value="0" />
+<input type="hidden" name="cntt" id="cntt" value="0" />
+<input type="hidden" name="actntype" id="actntype" value="@Session["actiontype"]" />
+<div class="page">
+    <div class="page-region">
+        <div class="page-region-content">
+            @*@using (Html.BeginForm("IWVerificAbid", "SignVerification", "POST"))*@
+            @using (Html.BeginForm())
+            { 
+                @Html.AntiForgeryToken()
+                <div class="grid">
+                    <div class="row">
+                        <div class="span8">
+                            <div class="row">
+                                @if (Model.modf)
+                                {
+                                    <div class="span8">
+                                        @Html.TextBoxFor(modelitem => modelitem.PayeeName, new { style = "width: 500px; color: blue;font-size:x-large;font-weight:bold" })
+                                    </div>
+                                }
+                                else
+                                {
+@*<div>
+                                        Payee Name:</div>*@
+                                    <div class="span8" style="font-size: x-large; width: 500px; color: Blue; font-weight: bold">
+                                        @Html.DisplayFor(modelitem => modelitem.PayeeName)
+                                    </div>
+                                }
+                                <div class="span8" id="cimg">
+                                    @Html.Action("ShowImage", "QCcheqs_Kotak", new { imgurl = Model.FrontGreyImagePath })
+                                </div>
+                                <div>
+                                    <span class="label">P2F Indicater : @Model.DOCType</span> <span class="label info">Presenting Bank : @Model.PresentingBank</span> <a class="button" onclick="windowcall();"><i class="icon-pencil fg-color-darken">Sign</i></a>
+                                    @Ajax.ActionLink("Front Gray", "ShowImage", "QCcheqs_Kotak", new { imgurl = Model.FrontGreyImagePath }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "cimg" })| |@Ajax.ActionLink("Front Tiff", "ShowImage", "QCcheqs_Kotak", new { imgurl = Model.FrontTiffImagePath, imgtype = "tiff" }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "cimg" })|
+                                    @Ajax.ActionLink("Back Tiff", "ShowImage", "QCcheqs_Kotak", new { imgurl = Model.BackTiffImagePath, imgtype = "tiff" }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "cimg" })
+                                    @*@Ajax.ActionLink("Back Gray", "ShowImage", "QCcheqs_Kotak", new { imgurl = Model.BackGreyImagePath }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "Chqimg" })*@
+                                </div>
+                                <div>
+                                    @if (Model.L1Descision != null)
+                                    {
+                                        if (Model.L1Descision == "Y")
+                                        {
+                                        <span class="label success">Level1 Decision : @Model.L1Descision</span>
+                                        }
+                                        else
+                                        {
+                                        <span class="label important">Level1 Decision : @Model.L1Descision - @Model.RejectDescription
+                                        </span>
+                                        }
+
+                                    }
+                                    @if (Model.L2Descision != null)
+                                    {
+                                        if (Model.L2Descision == "Y")
+                                        {
+                                        <span class="label success">Level2 Decision : @Model.L2Descision </span>
+                                        }
+                                        else
+                                        {
+                                        <span class="label important">Level2 Decision : @Model.L2Descision - @Model.L2RejectDescription
+                                        </span>
+                                        }
+
+                                    }
+                                    @if (ViewBag.backtomodule != null)
+                                    {
+                                        @Html.ActionLink("Show Activity Logs", "ShowActivityLogs", new { id = Model.MID, module = ViewBag.backtomodule })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="row">
+                                @if (Model.ClientAccountDtls != null)
+                                {
+                                    if (@Model.ClientAccountDtls.Split('|').ElementAt(1) == "S" && @Model.ClientAccountDtls.Split('|').ElementAt(2) != "")
+                                    {
+                                        if (Model.ClientAccountDtls.Split('|').ElementAt(3) == "SBNRE" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "SBFRL" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "UBFRL" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "SBFCR" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "SBFCS" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "CAFCR" || Model.ClientAccountDtls.Split('|').ElementAt(3) == "CAFCS" || Model.ClientAccountDtls.Split('|').ElementAt(4) == "C" || Model.ClientAccountDtls.Split('|').ElementAt(4) == "T")
+                                        {
+                                            <div class="span4 padding10 bg-color-red fg-color-white" style="float: right">
+                                                <h3 class="fg-color-white">
+                                                    <strong>@Html.DisplayFor(modelitem => modelitem.DbtAccNo)</strong></h3>
+                                                <h3 class="fg-color-white">
+                                                    <img alt="" src="~/Content/Images/Rupee.png" />
+                                                    <strong>@Html.Action("FormatAMT", "Home", new { amt = Model.Amount.ToString() })</strong></h3>
+                                                <h3 class="fg-color-white">
+                                                    <label>
+                                                        Name:</label>@Model.ClientAccountDtls.Split('|').ElementAt(2)</h3>
+                                                @if (Model.JointHolders != null)
+                                                {
+                                                    <h4 class="fg-color-white">
+                                                        <label>
+                                                            Joint Holders:</label>
+                                                        @for (int i = 3; i < Model.JointHolders.Split('|').Count() - 1; i++)
+                                                        {
+                                                            <label>
+                                                                @Model.JointHolders.Split('|').ElementAt(i)
+                                                            </label>
+                                                                                   
+                                                        }
+                                                    </h4>
+                                                }
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        Scheme Code:</label>@Model.ClientAccountDtls.Split('|').ElementAt(3)</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        Freeze Code:</label>@Model.ClientAccountDtls.Split('|').ElementAt(4)</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        MOP:</label>@Model.ClientAccountDtls.Split('|').ElementAt(5) - @Model.MOP</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        Account Status:</label>@Model.ClientAccountDtls.Split('|').ElementAt(6) - @Model.AccountStatus</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        Credit Limit:</label>@Model.ClientAccountDtls.Split('|').ElementAt(7)</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        NRE Flag:</label>@Model.ClientAccountDtls.Split('|').ElementAt(10)</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        Scheme Type:</label>@Model.ClientAccountDtls.Split('|').ElementAt(11)</h4>
+                                                <h4 class="fg-color-white">
+                                                    <label>
+                                                        Account Ownership:</label>@Model.ClientAccountDtls.Split('|').ElementAt(12)
+                                                    - @Model.AccountOwnership</h4>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="span4 padding10 border-color-red" style="float: right">
+                                                <h3 class="fg-color-dark">
+                                                    <strong>@Html.DisplayFor(modelitem => modelitem.DbtAccNo)</strong></h3>
+                                                <h3 class="fg-color-dark">
+                                                    <img alt="" src="~/Content/Images/Rupee.png" />
+                                                    <strong>@Html.Action("FormatAMT", "Home", new { amt = Model.Amount.ToString() })</strong></h3>
+                                                <h4 class="fg-color-dark">
+                                                    <label>
+                                                        Name:</label>@Model.ClientAccountDtls.Split('|').ElementAt(2)</h4>
+                                                @if (Model.JointHolders != null)
+                                                {
+                                                    <h4 class="fg-color-dark">
+                                                        <label>
+                                                            Joint Holders:</label>
+                                                        @for (int i = 3; i < Model.JointHolders.Split('|').Count() - 1; i++)
+                                                        {
+                                                            <label>
+                                                                @Model.JointHolders.Split('|').ElementAt(i)
+                                                            </label>
+                                                        }
+                                                    </h4>
+                                            }
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    Scheme Code:</label>@Model.ClientAccountDtls.Split('|').ElementAt(3)</h4>
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    Freeze Code:</label>@Model.ClientAccountDtls.Split('|').ElementAt(4)</h4>
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    MOP:</label>@Model.ClientAccountDtls.Split('|').ElementAt(5) - @Model.MOP</h4>
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    Account Status:</label>@Model.ClientAccountDtls.Split('|').ElementAt(6) - @Model.AccountStatus</h4>
+                                            @* <h4 class="fg-color-dark">
+                                                <label>
+                                                    Credit Limit:</label>@Model.ClientAccountDtls.Split('|').ElementAt(7)</h4>*@
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    NRE Flag:</label>@Model.ClientAccountDtls.Split('|').ElementAt(10)</h4>
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    Scheme Type:</label>@Model.ClientAccountDtls.Split('|').ElementAt(11)</h4>
+                                            <h4 class="fg-color-dark">
+                                                <label>
+                                                    Account Ownership:</label>@Model.ClientAccountDtls.Split('|').ElementAt(12)
+                                                - @Model.AccountOwnership</h4>
+                                        </div>
+                                      }
+                                    }
+                                    else
+                                    {
+                                        <div class="span4 padding10 bg-color-red fg-color-white" style="float: right">
+                                            <h3 class="fg-color-white">
+                                                <strong>@Html.DisplayFor(modelitem => modelitem.DbtAccNo)</strong></h3>
+                                            <h3 class="fg-color-white">
+                                                <img alt="" src="~/Content/Images/Rupee.png" />
+                                                <strong>@Html.Action("FormatAMT", "Home", new { amt = Model.Amount.ToString() })</strong></h3>
+                                            <h4 class="fg-color-white">@Model.ClientAccountDtls.Split('|').ElementAt(2)</h4>
+                                            <script type="text/javascript">
+                                                document.getElementById("blockkey").value = "1";
+                                            </script>
+                                        </div>
+                                    }
+                                }
+                                else if (Model.ClientAccountDtls == null)
+                                {
+                                    <div class="span4 padding10 bg-color-red fg-color-white" style="float: right">
+                                     <h3 class="fg-color-white">
+                                                <strong>@Html.DisplayFor(modelitem => modelitem.DbtAccNo)</strong></h3>
+                                    </div>
+                                    <script type="text/javascript">
+                                        document.getElementById("blockkey").value = "1";
+                                    </script>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="row">
+                        <div>
+                            <table class="span12 fg-color-dark padding10 border-color-green">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center fg-color-dark">
+                                            Chq No
+                                        </th>
+                                        <th class="text-center fg-color-dark">
+                                            SortCode
+                                        </th>
+                                        <th class="text-center fg-color-dark">
+                                            SAN
+                                        </th>
+                                        <th class="text-center fg-color-dark">
+                                            Tr Cd
+                                        </th>
+                                        @*<th class="text-center fg-color-dark">
+                                            Amount
+                                        </th>*@ @*  <th class="text-center fg-color-dark">
+                                            Payee Name
+                                        </th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="padding: 5px">
+                                        <td class="span1 center">@Html.DisplayFor(modelitem => modelitem.ChqNo, new { maxlength = 6 })
+                                        </td>
+                                        <td class="span2 center">@Html.DisplayFor(modelitem => modelitem.SortCode, new { maxlength = 9 })
+                                        </td>
+                                        <td class="span1 center">@Html.DisplayFor(modelitem => modelitem.SAN, new { maxlength = 7 })
+                                        </td>
+                                        <td class="span1 center">@Html.DisplayFor(modelitem => modelitem.TrCode, new { maxlength = 3 })
+                                        </td>
+                                        @* <td class="span2 center">@Html.Action("FormatAMT", "Home", new { amt = Model.Amount.ToString() })
+                                        </td>*@ @*@if (Model.modf)
+                                        {
+                                            <td class="span2 center">@Html.EditorFor(modelitem => modelitem.PayeeName)
+                                            </td> 
+                                        }
+                                        else
+                                        {
+                                            <td class="span2 center">@Html.DisplayFor(modelitem => modelitem.PayeeName)
+                                            </td>
+                                        }*@
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="row">
+                        <div class="span12">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="row">
+                        <div class="span12">
+                            <b>@Html.LabelFor(modelitem => modelitem.Decision, new { style = "font-weight:bold;" })</b>
+                            @Html.TextBoxFor(modelitem => modelitem.IWDecision, new { onkeyup = "javascript:SlpVerification('IW');", maxlength = 1, style = "width:30px;" })
+                            <label id="lblRemark" style="display: none">
+                                Remark</label>
+                            <label id="Remark" style="display: none">
+                                Reason Code</label>
+                            @Html.TextBoxFor(modelitem => modelitem.IWRemark, new { style = "display:none;width:60px;", maxlength = 2 })
+                            <label id="selt" style="display: none">
+                                @Html.ActionLink("Reject Reason", "RejectReason", new { im = Model.ID, mid = Model.MID, rtnmodule = ViewBag.rtnmodule })
+                            </label>
+                            <label id="lblComment" style="display: none">
+                                Comment:</label>
+                            @Html.TextBoxFor(modelitem => modelitem.Comment, new { style = "display:none" })
+                            <input id="Submit1" type="submit" value="OK" onclick="return (chkpt2f('IW'));" />
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="grid">
+                    <div class="row">
+                        <div class="span12">
+                            <table class="bg-color-lighten" border="1" cellpadding="0" cellspacing="0">
+                                <tr id="CMDdivhint">
+                                    <td class="span3">
+                                        A = Accept
+                                    </td>
+                                    <td class="span3">
+                                        C = Correction
+                                    </td>
+                                    <td class="span3">
+                                        R = Reject
+                                    </td>
+                                    <td class="span3">
+                                        F2 = Show Signature
+                                    </td>
+                                </tr>
+                                <tr id="divhint" style="display: none">
+                                    <td class="span6">
+                                        A = Account
+                                    </td>
+                                    <td class="span6">
+                                        P = Payee Name
+                                    </td>
+                                    @*<td class="span3">D = Date
+                                    </td>*@ @*<td class="span3">
+                                    M = MICR
+                                </td>*@
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Abid----------------------------------------------- -->
+                <div class="grid">
+                    <div class="row">
+                        <div class="span12">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center fg-color-green">
+                                            Branch Name
+                                        </th>
+                                        <th class="text-center fg-color-green">
+                                            Batch No
+                                        </th>
+                                        @* <th class="text-center fg-color-green">
+                                    Slip No
+                                </th>*@
+                                        <th class="text-center fg-color-green">
+                                            File Seq No
+                                        </th>
+                                        <th class="text-center fg-color-green">
+                                            Total Pending
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="padding: 10px">
+                                        <td class="span4 center">@Html.DisplayFor(modelitem => modelitem.BranchName)
+                                        </td>
+                                        <td class="span3 center">@Html.DisplayFor(modelitem => modelitem.BatchNo)
+                                        </td>
+                                        <td class="span3 center">@Html.DisplayFor(modelitem => modelitem.FileSeqNo)
+                                        </td>
+                                        <td class="span3 center">@ViewBag.pendingcount @*@Html.Action("IWGetCounts", "Home", new { module = "VF" })*@
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- --------------------------------------END-->
+                                if (Model.IWDecision == "R")
+                                {
+                <script type="text/javascript">
+                    document.getElementById('IWRemark').style.display = "";
+                    document.getElementById('IWRemark').style.width = "10%";
+                    document.getElementById('IWRemark').focus();
+                    document.getElementById('selt').style.display = "";
+                    document.getElementById('Remark').style.display = "";
+                </script>
+                                }
+                                if (ViewBag.Acct == true)
+                                {
+                <script type="text/javascript">
+                    document.getElementById('IWDecision').value = "C";
+                    document.getElementById('IWRemark').style.display = "";
+                    document.getElementById('IWRemark').value = "A";
+                    document.getElementById('Comment').style.display = "";
+                    document.getElementById('Comment').focus();
+                    document.getElementById("blockkey").value = "1";
+
+                </script>
+                                }
+    
+                @Html.HiddenFor(m => m.ID)
+                @Html.HiddenFor(m => m.MID)
+                @Html.HiddenFor(m => m.Maintransactionid)
+                @Html.HiddenFor(m => m.FrontTiffImagePath)
+                @Html.HiddenFor(m => m.BackTiffImagePath)
+                @Html.HiddenFor(m => m.FrontGreyImagePath)
+                @Html.HiddenFor(m => m.BackGreyImagePath)
+                @Html.HiddenFor(m => m.File_ID)
+                @Html.HiddenFor(m => m.ProcessID)
+                @Html.HiddenFor(m => m.FileSeqNo)
+                @Html.HiddenFor(m => m.sign)
+                @Html.HiddenFor(m => m.DbtAccNo)
+                @Html.HiddenFor(modelitem => modelitem.BatchNo)
+                @Html.HiddenFor(modelitem => modelitem.ReasonCode)
+                @Html.HiddenFor(m => m.ChqNo)
+                @Html.HiddenFor(m => m.Amount)
+                @Html.HiddenFor(m => m.SortCode)
+                @Html.HiddenFor(m => m.SAN)
+                @Html.HiddenFor(m => m.TrCode)
+                @Html.HiddenFor(m => m.JointHolders)
+                @Html.HiddenFor(m => m.ClientAccountDtls)
+                @Html.HiddenFor(m => m.BranchName)
+                @Html.HiddenFor(m => m.DbtAccNo)
+                @Html.HiddenFor(m => m.ChqDate)
+                @Html.HiddenFor(m => m.PayeeName)
+                // @Html.HiddenFor(m=>m.signchk)
+
+
+            }
+        </div>
+    </div>
+</div>

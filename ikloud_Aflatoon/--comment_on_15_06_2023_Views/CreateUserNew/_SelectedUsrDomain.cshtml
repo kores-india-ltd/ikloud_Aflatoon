@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Models.SelectedUsrDomain>
+
+@{
+    //int i = 1;
+    foreach (var x in Model)
+    {
+             <script type="text/javascript">
+                 var fldname = document.getElementById("@x.domainName").value;
+                 document.getElementById(fldname).checked = true;
+             </script>
+    }
+}

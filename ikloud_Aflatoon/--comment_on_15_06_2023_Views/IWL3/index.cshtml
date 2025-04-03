@@ -1,0 +1,256 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.L2Helper>
+@{
+    ViewBag.Title = "L3 Verification";
+    ViewBag.header = "L3 Verification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+
+<script src="~/Scripts/IWL3.js"></script>
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+</script>
+<script src="~/Scripts/angular.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@*<link href="~/Content/Abids.css" rel="stylesheet" />*@
+<!--
+ <script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+-->
+<div class="w3-hide">
+    <input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+    <input type="hidden" id="nodata" value="@ViewBag.cnt" />
+    <input type="hidden" id="cnt" value="1" />
+    <input type="hidden" id="tempcnt" value="1" />
+    <input type="hidden" id="sign" value="@Session["sign"]">
+    <input type="hidden" id="stlmnt" value="@Session["PostDate"]" />
+    <input type="hidden" id="sesson" value="@Session["StaleDate"]" />
+
+    <input type="hidden" id="mtrn" />
+    <input type="hidden" id="oldact" />
+    <input type="hidden" name="blockkey" id="blockkey" value="0" />
+    <input type="hidden" name="Allowcase" id="Allowcase" value="0" />
+
+
+    @Html.DropDownList("rtnlist", new SelectList(ViewBag.rtnlist), "Select")
+
+    @Html.DropDownList("rtnlistDescrp", new SelectList(ViewBag.rtnlistDescrp), "Select")
+</div>
+@if (ViewBag.cnt == false)
+{
+
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    <form class="w3-form">
+        <div class="w3-row">
+            <!--Column 1-->
+
+            <div class="w3-col w3-third  w3-large">
+                <div class="w3-container" id="l1dec">
+                    <label class="w3-label w3-text-black" style="font-weight:700">L1 Decision:</label>
+                    <span class="w3-label" style="font-weight:700" id="l1decision"></span>
+                    <span class="w3-label w3-text-red" style="display:none;font-weight:700" id="L1rejectDecrp"></span>
+                </div>
+                <div class="w3-container" id="l2dec">
+                    <label class="w3-label w3-text-black" style="font-weight:700">L2 Decision:</label>
+                    <span class="w3-label" style="font-weight:700" id="l2decision"></span>
+                    <span class="w3-label w3-text-red" style="display:none;font-weight:700" id="L2rejectDecrp"></span>
+                </div>
+
+            </div>
+            <!--Column 2-->
+            <div class="w3-col w3-third  w3-xlarge ">
+
+                <div class="w3-container w3-right">
+                    <label class="w3-label w3-text-dark-grey" style="float: left">Date: </label>
+                    <input class="w3-input w3-border w3-border-blue " type="text" style="width: 150px;font-weight:700" id="ChqDate" name="ChqDate" maxlength="6" />
+                </div>
+                <div class="w3-container w3-right">
+                    <label class="w3-label w3-text-dark-grey">Amount: Rs.</label>
+                    <label class="w3-label w3-text-blue" style="font-weight:800" id="iwAmt"></label>/-
+                </div>
+            </div>
+            <!--Column 3-->
+            <div class="w3-col w3-third w3-grey w3-padding w3-large">
+                <label class="w3-label w3-padding w3-text-white" style="float: initial;font-weight:700">Account Number </label>
+                <div class="w3-container" style="float: initial">
+                    <input class="w3-input w3-border w3-border-blue w3-padding" style="width: auto; float: left;font-weight:700" type="text" id="accnt" name="accnt" maxlength="@Session["acto"]" />
+                    <input class="w3-btn w3-margin-left" type="button" value="GetDetails" id="getdtls" name="getdtls" onclick="getcbsdtls();" />
+                </div>
+            </div>
+        </div>
+        <div class="w3-row w3-grey">
+            <div class="w3-col m8 w3-center w3-dark-grey w3-padding">
+                @* <img  id="myimg" src="http://10.144.3.31/Ikloud_Pro_test\IkloudPro_Test_Images\20160307\11\4_002\1_Front.jpg" style="width: 95%" />*@
+                <div class="w3-container">
+                    <img id="myimg" class="w3-card-8 w3-image" style="cursor:zoom-in" onclick="fullImage();" src="~/Icons/noimagefound.jpg">
+                </div>
+                <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                    @*<div class="w3-modal-content m12">*@
+                    @*<header class="w3-container w3-theme-dark m12">
+                            <span onclick="document.getElementById('iwimg').style.display = 'none'" class="w3-closebtn">&times;</span>
+                            <h2>Full Image</h2>
+                        </header>*@
+
+                    <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+
+                    @*<footer class="w3-container w3-theme-dark"></footer>*@
+                </div>
+                @*</div>*@
+                <div class="w3-row w3-large w3-padding">
+                    <div class="w3-col w3-center m3 ">
+                        MICR:
+                    </div>
+                    <div class="w3-col w3-center m2 ">
+                        <label class="w3-label w3-text-light-grey" id="ChqnoQC"> </label>
+                    </div>
+                    <div class="w3-col w3-center m2 ">
+                        <label class="w3-label  w3-text-light-grey" id="SortQC"></label>
+                    </div>
+                    <div class="w3-col w3-center m1 ">
+                        <label class="w3-label w3-text-light-grey" id="SANQC"></label>
+                    </div>
+                    <div class="w3-col w3-center m1 ">
+                        <label class="w3-label  w3-text-light-grey" id="TransQC"></label>
+                    </div>
+                </div>
+                <div class="w3-row w3-padding">
+                    <div class="w3-col m8">
+                        <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                        <label class="w3-btn" onclick="ChangeImage('FTiff');">Front Tiff</label>
+                        <label class="w3-btn" onclick="ChangeImage('FGray');">Front Gray</label>
+                        <label class="w3-btn" onclick="ChangeImage('BTiff');">Back Tiff</label>
+                    </div>
+                    <div class="w3-col m4" id="aidisplay" style="display:none">
+                        <label class="w3-label w3-large w3-text-white">AI Decision: </label>
+                        <label class="w3-label w3-large" id="aival"></label>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="w3-col w3-third w3-large  w3-grey">
+                <div id="cbsdetails">
+                </div>
+
+                <div class="w3-card-4 w3-margin w3-dark-gray">
+                    <div class="w3-row w3-text-light-grey " id="doctype"></div>
+                    <div class="w3-row w3-text-light-grey " id="presenting"></div>
+                    <div class="w3-row w3-text-light-grey ">
+                        <span class="w3-text-light-grey" id="bankname"></span>
+                    </div>
+                    <div class="w3-row w3-text-light-grey ">
+                        Credit A/C :
+                        <span class="w3-label" id="Acdtls"></span>
+                    </div>
+                    <div class="w3-row w3-text-light-grey">
+                        MICR Status :
+                        <span class="w3-label" id="Micrdtls"></span>
+                    </div>
+                </div>
+                <div class="w3-container w3-dark-grey w3-card-2 w3-margin">
+                    <div class="w3-container" style="float:left">
+                        <label class="w3-label w3-text-light-grey" style="float: left">Decision: </label>
+                        <input class="w3-margin-left w3-text-dark-grey" id="IWDecision" name="IWDecision" type="text" style="width: 35px; float: left;font-weight:700;text-align:center" maxlength="1" onkeyup="IWVef();" />
+
+                    </div>
+                    <div class="w3-container" id="rtncd" style="display:none">
+                        <span class="w3-opennav w3-margin-left" onclick="document.getElementById('RejectReason').style.display = 'block';">&#9776;</span>
+                        <label class="w3-label w3-margin-left w3-text-light-grey" style="float: left">Reason Code: </label>
+                        <input class="w3-margin-left w3-text-dark-grey " type="text" style="width: 35px; float: left;font-weight:700;text-align:center" maxlength="2" id="IWRemark" name="IWRemark" />
+                        <input class="w3-input w3-margin-top w3-text-dark-grey" type="text" id="rejectreasondescrpsn" style="float: initial;font-weight:700" />
+                    </div>
+                    <div class="w3-container" style="float:initial">
+                        <input class="w3-btn w3-margin-left" type="button" value="Ok" id="ok" name="ok" />
+                        <input class="w3-btn" type="button" id="btnback" value="Back" />
+                        <input class="w3-btn" type="button" id="btnClose" value="Close" />
+                        <span class="w3-opennav w3-text-black w3-large w3-hover-amber" onclick="getIwlogs();">&#9776; AL</span>
+                        <span class="w3-opennav w3-text-black w3-large w3-hover-amber" onclick="windowcall();">&#9776; SG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    @*<div id="dialogEditUser" title="Reject Reason">
+        </div>*@
+    <div id="RejectReason" class="w3-modal w3-animate-zoom ">
+        @*@Html.Action("RejectReason", "IWDataEntry");*@
+        <div class="w3-modal-content">
+            <div class="w3-container w3-theme-dark">
+                <span onclick="document.getElementById('RejectReason').style.display = 'none';"
+                      class="w3-closebtn">&times;</span>
+                <h2>Select Reject Reason</h2>
+            </div>
+            <div class="w3-container">
+
+                @Html.Action("RejectReason", "IWL3")
+            </div>
+            <div class="w3-container">&nbsp;</div>
+        </div>
+    </div>
+    <div id="activitylogs" title="Activity Logs">
+    </div>
+    <script language="javascript" type="text/javascript">
+
+        var array = @Html.Raw(
+
+                 Json.Encode(
+                     (Model).Select(m=> new
+                     {
+                         ID = m.ID,
+                        FrontGreyImagePath = m.FrontGreyImagePath,
+                        FrontTiffImagePath= m.FrontTiffImagePath,
+                        BackTiffImagePath = m.BackTiffImagePath,
+                        XMLAmount=m.XMLAmount,
+                        ActualAmount=m.ActualAmount,
+                        DbtAccountNo=m.DbtAccountNo,
+                        Date=m.Date,
+                        XMLSerialNo = m.XMLSerialNo,
+                        XMLPayorBankRoutNo = m.XMLPayorBankRoutNo,
+                        XMLSAN = m.XMLSAN,
+                        XMLTransCode = m.XMLTransCode,
+                         //EntrySerialNo = m.EntrySerialNo,
+                         //EntryPayorBankRoutNo = m.EntryPayorBankRoutNo,
+                         //EntrySAN = m.EntrySAN,
+                         //EntryTransCode = m.EntryTransCode,
+                         CBSClientAccountDtls = m.CBSClientAccountDtls,
+                         CBSJointHoldersName = m.CBSJointHoldersName,
+                         RejectReason = m.RejectReason,
+                         OpsStatus = m.OpsStatus,
+                         ReturnReasonDescription = m.ReturnReasonDescription,
+                         L2Opsts = m.L2Opsts,
+                         L2RejectReason=m.L2Rejectreason,
+                         L2ReturnReasonDescription = m.L2ReturnReasonDescription,
+                         DbtAccountNoOld=m.DbtAccountNoOld,
+                         DateOld=m.DateOld,
+                         L1Status = m.L1Status,
+                         L2Status = m.L2Status,
+                         PresentingBankRoutNo = m.PresentingBankRoutNo,
+                         DocType = m.DocType,
+                         XMLMICRRepairFlags = m.XMLMICRRepairFlags,
+                         AIStatus = m.AIStatus,
+
+
+                     })
+                 )
+             );
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            passval(array);
+        }
+    </script>
+}

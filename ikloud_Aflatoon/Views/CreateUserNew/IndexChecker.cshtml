@@ -1,0 +1,199 @@
+﻿@model IEnumerable<ikloud_Aflatoon.UserMaster>
+@{
+    ViewBag.Title = "User Management Checker";
+    ViewBag.header = "User Management Checker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<h2>User Management Checker</h2>
+
+@if (Session["RoleName"].ToString() == "IDM CHECKER")
+{
+    if (ViewBag.mesg != null)
+    {
+        ViewBag.message = ViewBag.mesg;
+    }
+    <p>
+        @ViewBag.message
+    </p>
+    <p>
+        @Html.ActionLink("View Report", "Report")
+    </p>
+}
+
+<table class="ctable">
+    @{
+        if (ViewBag.mesg != null)
+        {
+            ViewBag.message = ViewBag.mesg;
+        }
+        if (ViewBag.modf == true)
+        {
+            ViewBag.modf = false;
+            ViewBag.message = "User modified successfully!";
+        }
+
+    }
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginID)
+        </th>
+        @* <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoginID)
+                @*<a href='@Url.Action("selecteduser", "CreateUserNew", new { id = item.ID })'>
+
+                </a>*@
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailID)
+            </td>
+            <td>
+                @using (Html.BeginForm("ActiveInactiveUser", "CreateUserNew", new { id = item.ID }))
+                {
+                    <input type="submit" class="NavButton" name="btn" value="Approve" onclick='return (confirm("Are you sure to approve user?"))' />
+                    <span style="width:5px;">|</span>
+                    <input type="submit" class="NavButton" name="btn" value="Reject" onclick='return (confirm("Are you sure to reject user?"))' />
+                    <span style="width:5px;">|</span>
+                    <input type="button" class="NavButton" name="btn" value="Detail" onclick="getChangeRequestData(@item.ID);" />
+                    @*if (item.Active == true)
+                    {
+                        <input type="submit" class="NavButton" name="btn" value="Disable" onclick='return (confirm("Are you sure to disable?"))' />
+                    }
+                    else
+                    {
+                        <input type="submit" class="NavButton" name="btn" value="Enable" onclick='return (confirm("Are you sure to enable?"))' />
+                    }*@
+                }
+
+                @*@Html.ActionLink("Active", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Deactive", "Details", new { id = item.ID })*@
+            </td>
+        </tr>
+    }
+</table>
+
+<div id="changeRequestData" class="w3-modal w3-animate-zoom ">
+    <div class="w3-modal-content">
+        <div class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('changeRequestData').style.display = 'none';"
+                  class="w3-closebtn">&times;</span>
+            <h2>Change Request Data</h2>
+        </div>
+        <div class="w3-container">
+            <br />
+            <div class="row">
+                <div class="col-md-12" style="height: 400px; overflow: auto; padding: 0px !important;">
+                    <table class="table table-responsive table-bordered" id="dataTable" border="1"
+                           style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+                        <thead>
+                            <tr style="background-color:lightblue;">
+                                
+                                <th>ID</th>
+                                <th>Action</th>
+                                <th>Comments</th>
+                                <th>Action Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+            @*@Html.Action("RejectReason", "OWL2")*@
+        </div>
+        <div class="w3-container">&nbsp;</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+
+    function getChangeRequestData(id) {
+        debugger;
+        document.getElementById('changeRequestData').style.display = 'block';
+
+        $.ajax({
+            url: RootUrl + 'CreateUserNew/GetChangeRequest',
+            // type: 'Post',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
+            data: { currentId: id },
+            async: false,
+            success: function (userData) {
+                debugger;
+                var userDatas = JSON.parse(userData);
+
+                $("#dataTable").find("tr:gt(0)").remove();
+                var dataString = "";
+
+                $.each(userDatas, function (i, item) {
+                    debugger;
+                    //var formattedDate = item.ActionDate.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                    // Assuming item.ActionDate is a Unix timestamp
+                    var timestamp = parseInt(item.ActionDate.substr(6)); // Extract the milliseconds
+                    var actionDate = new Date(timestamp); // Create a Date object from the timestamp
+
+                    // Format the date as 'YYYY-MM-DD HH:mm:ss'
+                    var formattedDate = actionDate.toISOString().replace(/T/, ' ').replace(/\..+/, '');
+                    dataString = dataString + "<tr><td>" + item.ID + "</td ><td>"
+                        + item.Action + "</td> <td>" + item.Comments + "</td> <td>"
+                        + formattedDate + "</td></tr > ";
+
+
+                });
+                $('#tbody').append(dataString);
+                //document.getElementById("divBatch").style.display = "none";
+
+            }
+        });
+    }
+
+</script>
+

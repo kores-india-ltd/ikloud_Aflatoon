@@ -1,0 +1,182 @@
+﻿@model ikloud_Aflatoon.Infrastructure.UserRoles
+
+@{
+    ViewBag.Title = "CreateRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Create User Roles";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+<h2>CreateRole</h2>
+
+<script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+</script>
+<script src="~/Scripts/UserRole.js"></script>
+
+@{
+    if (ViewBag.Success == "Y")
+    {
+        <script type="text/javascript">
+            alert("Role created successfully");
+        </script>
+    }
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false)
+
+
+        <div style="width: 100%; padding-left:10%;padding-right:10%">
+            <b>@Html.LabelFor(model => model.RoleName)</b>
+            <span style="width: 100%; padding-left:10px;">
+                @Html.EditorFor(model => model.RoleName, new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => model.RoleName)
+            </span>
+        </div>
+        <br />
+        <div>
+            <table id="chkt" style="width: 100%; padding-left:10%;padding-right:10%">
+                <tr>
+                    <th style="font-size: 14px; text-align:left">
+                        <b>Select Role Process</b>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="rc" id="rc" />
+                        Reject Repaire
+                    </td>
+                    <td>
+                        <input type="checkbox" name="de" id="de" />
+                        Data Entry
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="qc" id="qc" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="qc" id="qc" />
+                        QC
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="vf" id="vf" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="vf" id="vf" />
+                        Verification
+                    </td>
+                    <td>
+                        <input type="checkbox" name="rpt" id="rpt" />
+                        Reports
+                    </td>
+                    <td>
+                        <input type="checkbox" name="fildwnd" id="fildwnd" />
+                        File Download
+                    </td>
+                    <td>
+                        <input type="checkbox" name="ds" id="ds" />
+                        Dashboard
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="qury" id="qury" />
+                        Query
+                    </td>
+                    <td>
+                        <input type="checkbox" name="quryMd" id="quryMd" />
+                        Query with modification
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chirjct" id="chirjct" />
+                        CHI Reject
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="rvf" id="rvf" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="rvf" id="rvf" />
+                        RE-Verification
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="rvf4" id="rvf4" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="rvf4" id="rvf4" />
+                        L4-Verification
+                    </td>
+                    <td colspan="1">
+                        <input type="checkbox" name="CCPH" id="CCPH" />
+                        CCPH-Verification
+                    </td>
+                </tr>
+                <tr id="rowadmin">
+                    <td>
+                        <input type="checkbox" name="um" id="um" />
+                        User Managment
+                    </td>
+                    <td>
+                        <input type="checkbox" name="sod" id="sod" />
+                        SOD
+                    </td>
+                    <td>
+                        <input type="checkbox" name="master" id="master" />
+                        Master
+                    </td>
+                    <td>
+                        <input type="checkbox" name="settg" id="settg" />
+                        Settings
+                    </td>
+                    <td>
+                        <input type="checkbox" name="role" id="role" />
+                        Role
+                    </td>
+                    <td>
+                        <input type="checkbox" name="archv" id="archv" />
+                        Archival
+                    </td>
+                    <td>
+                        <input type="checkbox" name="mesgbrd" id="mesgbrd" />
+                        DEM Interface
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="umc" id="umc" />
+                        User Management Checker
+                    </td>
+                    <td>
+                        <input type="checkbox" name="roleChecker" id="roleChecker" />
+                        Role Checker
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr id="l1" style="display:none">
+                    <td>QC amount Limit From</td>
+                    <td><input type="text" id="l1frm" name="l1lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l1to" name="l1to" maxlength="14" /></td>
+                </tr>
+                <tr id="l2" style="display:none">
+                    <td>Verification amount Limit From</td>
+                    <td><input type="text" id="l2frm" name="l2lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l2to" name="l2to" maxlength="14" /></td>
+                </tr>
+                <tr id="l3" style="display:none">
+                    <td>Re-Verification amount Limit From</td>
+                    <td><input type="text" id="l3frm" name="l3lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l3to" name="l3to" maxlength="14" /></td>
+                </tr>
+                <tr id="l4" style="display:none">
+                    <td>L4-Verification amount Limit From</td>
+                    <td><input type="text" id="l4frm" name="l4lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l4to" name="l4to" maxlength="14" /></td>
+                </tr>
+            </table>
+        </div>
+
+        <input type="hidden" id="verlvel" name="verlvel" />
+        <div style="padding-left: 10%; padding-right: 10%; padding-top: 5%">
+            <input class="w3-btn" type="submit" id="create_role" name="create_role" value="CreateRole" onclick="return (valid());" />&nbsp;&nbsp;
+            <input type="reset" class="w3-btn" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        <input type="hidden" id="hddomain" name="hddomain" />
+
+
+
+    }
+}

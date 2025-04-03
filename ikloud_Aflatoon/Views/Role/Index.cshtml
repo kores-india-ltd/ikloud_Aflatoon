@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ikloud_Aflatoon.RoleMaster>
+
+
+@{
+    ViewBag.Title = "User Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.header = "User Roles";
+}
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<h2>User Roles</h2>
+
+<p>
+    @Html.ActionLink("Create New Role", "CreateRole")
+</p>
+@{
+    if (ViewBag.Updated != null)
+    {
+        if (ViewBag.Updated != "")
+        {
+            if (ViewBag.Updated == "Y")
+            {
+                <script type="text/javascript">
+                    alert("Role Updated Successfully");
+                </script>
+            }
+        }
+
+    }
+
+}
+<table class="ctable">
+
+    @if (Model != null)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th></th>
+        </tr>
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href='@Url.Action("selecteduser", "CreateUser", new { Id = item.ID })'>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.ID }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Home", "IWIndex", "Home")
+</div>

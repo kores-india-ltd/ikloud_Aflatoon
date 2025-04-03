@@ -1,0 +1,196 @@
+﻿@model IEnumerable<ikloud_Aflatoon.IwSuspenseQueueView>
+@{
+    ViewBag.header = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cheques Details";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    $(document).ready(function () {
+
+        
+
+    });
+
+    function showDetails(id) {
+        console.log("Id :- " + id);
+
+        $.ajax({
+            url: RootUrl + 'IwSuspenseQueue/ShowIwSuspenseQueueDetails',
+            //type: 'Post',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'JSON',
+            data: { id: id },
+            //data: JSON.stringify({ dat: sendData }),
+            //async: false,
+            success: function (data) {
+
+                console.log(data);
+                var url = RootUrl + "OWCDKCheckerVerification/SelectionForBatch";
+                window.location.href = url;
+
+            }
+        });
+    }
+</script>
+
+
+
+<div class="container-fluid">
+    <h2>Suspension Queue Details</h2>
+    <div class="">
+        <table class="table table-responsive table-bordered" id="tblDetails">
+
+            @if (Model != null)
+            {
+                <tr style="background-color:lightblue;">
+                    <th>
+                        Sr.No.
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AvailabeAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ShadowBalance)
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.ChequeNumber)*@
+                        ChequeNo
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PPSFlag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LienFlag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PONumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.POStatus)
+                    </th>
+		    <th>
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </th>
+                    <th>Status Icons</th>
+                    <th>Actions</th>
+                </tr>
+                int index = 1;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @index
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AvailabeAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShadowBalance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ChequeNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PPSFlag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LienFlag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PONumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.POStatus)
+                        </td>
+			<td>
+                            @Html.DisplayFor(modelItem => item.Remarks)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Verify", "Verify", new { id = item.Id }) |*@
+                            @*<a style="font-size:1.5em;" id="statusIcons" class="" onclick="showDetails(@item.Id);">*@
+                            @if (item.Status == 0)
+                            {
+                                <img src="~/Icons/ProgressWarn.ico" />
+                                @*@Html.ActionLink("|", "ShowIwSuspenseQueueDetails", new { id = item.Id })*@
+
+                                @*<a href="@Url.Action("ShowIwSuspenseQueueDetails", "IwSuspenseQueue", new { id = item.Id })" title="Pending View" class="">
+                                    <img alt="Pending" src="@Url.Content("~/Icons/ProgressWarn.ico")">
+
+                                </a>
+                                <img alt="Pending" src="@Url.Content("~/Icons/ProgressWarn.ico")">*@
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <img src="~/Icons/ProgressSkip.ico" />
+                                @*@Html.ActionLink("|", "ShowIwSuspenseQueueDetails", new { id = item.Id })*@
+
+                                @*<a href="@Url.Action("ShowIwSuspenseQueueDetails", "IwSuspenseQueue", new { id = item.Id })" title="Accept View" class="">
+                                    <img alt="Accept" src="@Url.Content("~/Icons/ProgressSkip.ico")">
+
+                                </a>
+                                <img alt="Accept" src="@Url.Content("~/Icons/ProgressSkip.ico")">*@
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <img src="~/Icons/ProgressError.ico" />
+                                @*@Html.ActionLink("|", "ShowIwSuspenseQueueDetails", new { id = item.Id })*@
+
+                                @*<a href="@Url.Action("ShowIwSuspenseQueueDetails", "IwSuspenseQueue", new { id = item.Id })" title="Reject View" class="">
+                                    <img alt="Reject" src="@Url.Content("~/Icons/ProgressError.ico")">
+
+                                </a>
+                                <img alt="Reject" src="@Url.Content("~/Icons/ProgressError.ico")">*@
+                            }
+
+                            @*</a>*@
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "ShowIwSuspenseQueueDetails", new { id = item.Id })
+                        </td>
+                    </tr>
+                    index++;
+                }
+            }
+
+        </table>
+    </div>
+</div>

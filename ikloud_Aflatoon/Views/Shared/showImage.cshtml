@@ -1,0 +1,10 @@
+﻿@if (ViewBag.imgtype == "")
+{
+    <img id="cimg" src="@ViewBag.imgurl" alt="ItemImg" onclick="rotateimg();" style="width:@ViewBag.iwidth" />
+}
+else
+{
+    <embed id="cimg" src="@ViewBag.imgurl" toolbar=bottom access=1022  style="width:@ViewBag.iwidth;height:@ViewBag.iheight" />   
+}
+
+

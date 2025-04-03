@@ -1,0 +1,127 @@
+﻿@model ikloud_Aflatoon.Models.CMSReferral
+@{
+    ViewBag.Title = "ClientCode";
+    ViewBag.header = "ClientCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+<script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+<script src="~/Scripts/CMSReferral.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+
+    function done() {
+
+    }
+</script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+
+    <body class="w3-container w3-center">
+
+
+        @using (Ajax.BeginForm("ClientCode", "CMSClientCodeMissing", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "clientdetails", OnSuccess = "done" }))
+        {
+            <div class="w3-container w3-center">
+                <span class="w3-label " style="font-weight:700;text-align:left">  Client Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="ClientCode" maxlength="14" autocomplete="off" name="ClientCode" />
+                <input class="w3-btn" type="submit" name="btn" id="btnClientCode" value="Get Client Name" />
+              
+                <input type="hidden" id="SubClntReq" name="SubClntReq" />
+                <input type="hidden" id="PayeeNameValidation" name="PayeeNameValidation" />
+                @*<input type="hidden" id="Brnchcode" name="Brnchcode" value=@Model.BranchCode />*@
+                @Html.HiddenFor(model => model.BranchCode)
+                       @*><input type="text" id="SubClntCode" name="SubClntCode" style="display:none" />*@
+
+            </div>
+    <div id="SubClntID" class="w3-container w3-center">
+        <span class="w3-label " id="lblSubClntCode" style="width: auto;font-weight:700;display:none"> Sub ClientCode: </span>
+        <input style="width: auto;font-weight:700;display:none" type="text" id="SubClntCode" maxlength="14" autocomplete="off" name="SubClntCode" />
+    </div>
+
+
+        }
+        @using (Html.BeginForm())
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.CustomerId)
+            @Html.HiddenFor(model => model.DomainId)
+            @Html.HiddenFor(model => model.ScanningNodeId)
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.SlipNo)
+            @Html.HiddenFor(model => model.RawDataID)
+            @Html.HiddenFor(model => model.FrontGrayImagePath)
+            @Html.HiddenFor(model => model.BackGreyImagePath)
+            @Html.HiddenFor(model => model.BatchNo)
+           
+            <input type="hidden" id="ProcType" name="ProcType" value="@ViewBag.ProcType" />
+            <input type="hidden" id="oldClient" />
+            <div id="clientdetails" style="font-weight: 500; color: darkblue"> </div>
+            <div>
+                <br />
+            </div>
+            <img id="myimg" class="w3-card-8 w3-image" style="cursor: zoom-in" onclick="fullImage();" src=@Model.FrontGrayImagePath />
+
+            <div id="Vouimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+                <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width: 90%; cursor: zoom-out" src="~/Icons/noimagefound.jpg" />
+            </div>
+
+
+            <div>
+                <br />
+            </div>
+            @*<div class="w3-col w3-center m3" id="ImgToggle">*@
+            <div class="w3-center">
+                <input class="w3-radio " type="radio" name="ImgToggle" id="frontimg" value="Front" checked /> <b>Front</b> &nbsp;&nbsp;
+                <input class="w3-radio " type="radio" name="ImgToggle" id="backimg" value="Back" /> <b>Back</b>
+
+            </div>
+
+            @*<select id="BackImg" name="BackImg">*@
+
+            @*<form class="w3-form">*@
+
+            <div id="DivRejectDesc" style="display:none">
+                <span style="font-weight:700; color: darkblue;text-align:left">  Reject Reason:</span>
+                <input style="width: auto;font-weight:700" type="text" id="RejectDesc" maxlength="100" autocomplete="off" name="RejectDesc" />
+            </div>
+
+            <div>
+                <br />
+            </div>
+            <div style="float:inherit" class="w3-container">
+
+                <input class="w3-btn w3-margin-left" type="submit" name="btn" id="btnAccept" value="Accept" />
+                <input class="w3-btn" type="submit" name="btn" id="btnReject" value="Reject" />
+                <input class="w3-btn" type="submit" name="btn" id="btnHold" value="Hold" />
+                <input class="w3-btn" type="button" name="btn" id="btnShowChq" value="Show Cheque" />
+                <input class="w3-btn" type="button" name="btn" id="btnSupDoc" value="Show Supporting Doc" />
+
+                @*@*<input class="w3-btn" type="button" id="btnRefer" value="Refer" />
+                    <input class="w3-btn" type="button" id="btnRejct" value="Reject" />*@
+                <input class="w3-btn" type="button" name="btnClose" id="btnClose" value="Close" />
+
+            </div>
+            @*</form>*@
+        }
+    </body>
+
+}

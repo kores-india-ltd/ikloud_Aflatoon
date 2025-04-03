@@ -1,0 +1,28 @@
+﻿<div id="cbsdetails1" class="w3-container w3-light-green w3-margin w3-card-8" style="float:left;">
+    <div class="w3-row w3-col m12">
+        <div class="w3-row w3-col m12" style="display:none;">
+            <label class="w3-label w3-theme-dark w3-white" style="font-weight:bold;color:white"> Source Of Funds:</label> <br />
+            @*@Html.DropDownList("ddSrcFnds", new SelectList(ViewBag.vbSrcFnds), new { onchange = "getselect();", Id = "Id", Name = "Description", style = "width: 50%;" })*@
+
+            @*<input type="text" id="NreOrNro" name="NreOrNro" value="@Session["sNR"].ToString()" style="display:none;" />*@
+            @if (Session["sNR"].ToString() == "NRE")
+            {
+                @Html.DropDownList("ddSrcFndsNRE", new SelectList(ViewBag.vbSrcFndsNRE, "Id", "Description"), "", new { onchange = "getSrcFndsNRE();", style = "width: 230px; imp!" })
+            }
+            else
+            {
+                @Html.DropDownList("ddSrcFndsNRO", new SelectList(ViewBag.vbSrcFndsNRO, "Id", "Description"), "", new { onchange = "getSrcFndsNRO();", style = "width: 230px; imp!" })
+            }
+        </div>
+    </div>
+
+    <div class="w3-row w3-col m12">
+        <div class="w3-row w3-col m12">
+            <b>Source Of Funds:</b> <br />
+            @Html.TextBox("txtSrcFnds", "", new { style = "width:230px; imp!", autocomplete = "on", @readonly="readonly" })
+
+        </div>
+    </div>
+
+
+</div>

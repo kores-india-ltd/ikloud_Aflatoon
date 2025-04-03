@@ -1,0 +1,39 @@
+﻿@model ikloud_Aflatoon.Models.CMSReferral
+<div id="clientdetails">
+    @if (ViewBag.customer != null)
+    {
+        if (ViewBag.Subcustomer_Required == "Y")
+        {
+
+            <script type="text/javascript">
+                document.getElementById('SubClntReq').value = '@ViewBag.Subcustomer_Required'
+                document.getElementById('lblSubClntCode').style.display = 'block';
+                document.getElementById('SubClntCode').style.display = 'block';
+                document.getElementById('SubClntCode').focus();
+            </script>
+
+        }
+        else
+        {
+            <script type="text/javascript">
+                document.getElementById('PayeeNameValidation').value = '@ViewBag.customer'
+            </script>
+            <input type="hidden" id="Brnchcode" name="Brnchcode" value=@Model.BranchCode />
+            <input type="hidden" id="txtpayee" name="txtpayee" value="@ViewBag.customer" />
+            <input type="hidden" id="txtClntCode" name="txtClntCode" value="@ViewBag.ClntCode" />
+    <label id="lblclientdetails">
+        Payee:  @ViewBag.customer
+    </label>
+        }
+
+    }
+    else
+    {
+        <script type="text/javascript">
+           
+            alert('@ViewBag.MsgType' + ' was not found!!');
+            document.getElementById('@ViewBag.MsgType').focus();
+        </script>
+    }
+
+</div>

@@ -1,0 +1,35 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @*<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />*@
+    <div class="w3-modal-content w3-card-8 w3-animate-zoom w3-padding-xlarge" style="max-width: 300px">
+        <div class="w3-container w3-border-top w3-padding-24 w3-light-grey">
+            @*<div class="w3-section">*@
+            <div class="w3-center w3-border w3-margin-bottom">
+                <input class="w3-radio " type="radio" name="ClientCode" id="ClNormal" value="Normal" checked /> <b>Normal</b> &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="w3-radio " type="radio" name="ClientCode" id="ClHold" value="Hold" /> <b>Hold</b>
+            </div>
+            <div></div>
+            <div class="w3-center  ">
+                <input class="w3-btn" type="submit" name="btn" id="btnOk" value="OK" />
+                <input class="w3-btn" type="submit" name="btn" id="btnCloseClnt" value="Close" />
+                @*  </div>*@
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.msg != null)
+{
+    <script type="text/javascript">
+       // alert('Aila!!!');
+        //document.getElementById('nodatafound').style.display = 'block';
+        alert('@ViewBag.msg');
+    </script>
+}

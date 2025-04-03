@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    ViewBag.header = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+@*<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>*@
+<script src="~/Scripts/IWReports.js"></script>
+
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+<link href="~/Content/themes/base/jquery-uiii.css" rel="stylesheet" />
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+</script>
+<div class="w3-container">
+    <div class="w3-row">
+        <div class=" w3-col w3-third w3-large w3-theme-d1">
+            <div>
+                <label class="w3-label w3-padding-16 w3-text-black"> Select Processing Date:</label>
+                <input class="w3-text" type="text" readonly="readonly" id="procdate" name="procdate" />
+            </div>
+        </div>
+    </div>
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Clearing Type</div>
+                <select class="w3-select" id="clrtype">
+                    <option selected="selected">Select</option>
+                    <option>CTS</option>
+                    <option>Non CTS</option>
+                </select>
+            </div>
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Report Type</div>
+                <select class="w3-select" id="rpttype">
+                    <option selected="selected">Select</option>
+                    <option>Productivity Report</option>
+                    <option>Verification Report</option>
+                    <option>P2FDetails Report</option>
+                    <option>Return Details Report</option>
+                    <option>Audit Report</option>
+                    <option>L1 Rejected Report</option>
+                    <option>L2 Rejected Report</option>
+                    <option>Final Status Report</option>
+                    <option>SMB Images Report</option>
+                </select>
+            </div>
+            <div class="m4">
+                <div id="vflevel" style="display:none">
+                    <div class="w3-label w3-text-black">Select Verification Level</div>
+                    <select class="w3-select" id="verflevel">
+                        <option selected="selected">Select</option>
+                        <option>L1 Verification</option>
+                        <option>L2 Verification</option>
+                        <option>L3 Verification</option>
+                        <option>PayeeName Verification</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+            <div class="m4">
+                <div id="userdiv" style="display:none">
+                    @*<label class="w3-label w3-text-black">Select User</label>*@
+                    @*<select id="listuser" class="w3-select"></select>*@
+                    @*@Html.DropDownListFor((SelectList)ViewBag.Provinces, new { @Id = "listuser", @class = "w3-select" })*@
+                    @*@Html.DropDownList("listuser", null, new { @Id = "listuser", style = "width: 150px;" })*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Download File Type</div>
+                <select class="w3-select" id="filedwnldtype">
+                    <option selected="selected">Select</option>
+                    <option>EXCEL</option>
+                    @*<option>CSV</option>*@
+                    <option>PDF</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    @*</div>*@
+
+    @*</div>*@
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col m4">
+            <input class="w3-btn" style="float: initial" type="button" id="btnreport" name="btnreport" value="Get Report">
+        </div>
+    </div>
+</div>

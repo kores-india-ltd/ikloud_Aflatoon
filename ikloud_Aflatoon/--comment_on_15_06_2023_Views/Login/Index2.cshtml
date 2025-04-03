@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("Url_Code: " + @ViewBag.Url_code);
+            console.log("Url_Code: " + @ViewBag.Url_iss);
+            console.log("Url_Code: " + @ViewBag.Url_client_id);
+
+            document.getElementById('lblUrl_code').innerText = @ViewBag.Url_code;
+            document.getElementById('lblUrl_iss').innerText = @ViewBag.Url_iss;
+            document.getElementById('lblUrl_client_id').innerText = @ViewBag.Url_client_id;
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <label>Url Code : </label><label id="lblUrl_code"></label>
+        <br />
+        <label>Url ISS : </label><label id="lblUrl_iss"></label>
+        <br />
+        <label>Url ClientId : </label><label id="lblUrl_client_id"></label>
+    </div>
+</body>
+</html>

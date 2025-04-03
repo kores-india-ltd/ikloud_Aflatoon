@@ -1,0 +1,262 @@
+﻿@model IEnumerable<ikloud_Aflatoon.IwSuspenseQueueViewCM>
+@{
+    ViewBag.header = "Suspense Queue CM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cheques Details";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    $(document).ready(function () {
+
+
+
+    });
+
+    function showDetails(id) {
+        console.log("Id :- " + id);
+
+        $.ajax({
+            url: RootUrl + 'IwSuspenseQueue/ShowIwSuspenseQueueDetails',
+            //type: 'Post',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'JSON',
+            data: { id: id },
+            //data: JSON.stringify({ dat: sendData }),
+            //async: false,
+            success: function (data) {
+
+                console.log(data);
+                var url = RootUrl + "OWCDKCheckerVerification/SelectionForBatch";
+                window.location.href = url;
+
+            }
+        });
+    }
+</script>
+
+
+
+
+
+    <div class="container-fluid">
+        <h2>CM Suspense Queue Details</h2>
+        <div class="" style="overflow:auto; max-height:600px;">
+            <table class="table table-responsive table-bordered" id="tblDetails">
+
+                @if (Model != null)
+                {
+                    <tr style="background-color:lightblue;">
+                        <th>
+                            Sr.No.
+                        </th>
+                        <th>
+                            Account No
+                        </th>
+                        <th>
+                            Account Name
+                        </th>
+                        <th>
+                            SOL ID
+                        </th>
+                        <th>
+                            Initial Available Balance
+                        </th>
+                        <th>
+                            Current Available Balance
+                        </th>
+                        <th>
+
+                            ChequeNo
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                            RBI Sequence No
+                        </th>
+                        <th>
+                            CPPS Flag
+                        </th>
+                        <th>
+                            Exception Reason
+                        </th>
+                        <th>
+                            Exception ID
+                        </th>
+                        <th>
+                            Maker Decision
+                        </th>
+                        <th>
+                            Maker Id
+                        </th>
+                        <th>Checker Decision</th>
+                        <th>Checker Id</th>
+                        <th>Expiry Time</th>
+                        @if (Session["RoleName"].ToString() == "Maker")
+                        {
+                            <th>Status</th>
+                        }
+                        else if (Session["RoleName"].ToString() == "Checker")
+                        {
+                            <th>Status</th>
+                        }
+
+
+
+
+
+                        <th>View Image</th>
+                    </tr>
+                    int index = 1;
+                    if (Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @index
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.Id)
+                                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AccountName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SOLID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InitialAvailableBalance)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CurrentAvailableBalance)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ChequeNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RBISequenceNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CPPS_Flag)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExceptionReson)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExceptionID)
+                                </td>
+                                <td>
+                                    @if (item.MakerDecision == "2")
+                                    {
+                                        <span style="color: green;">Maker Passed</span>
+                                    }
+                                    else if (item.MakerDecision == "3")
+                                    {
+                                        <span style="color: red;">Maker Rejected</span>
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MakerId)
+                                </td>
+                                <td>
+                                    @if (item.CheckerDecision == "5")
+                                    {
+                                        <span style="color: orange;">Checker Return To Maker</span>
+                                    }
+                                    else if (item.CheckerDecision == "2")
+                                    {
+                                        <span style="color: green;">Checker Passed</span>
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CheckerId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpiryTime)
+
+                                </td>
+                                <td>
+
+                                    @if (Session["RoleName"].ToString() == "Maker")
+                                    {
+                                        if (item.CheckerDecision == "2")
+                                        {
+                                            <span style="color: green;">Checker Passed</span>
+                                        }
+                                        else if (item.CheckerDecision == "3")
+                                        {
+                                            <span style="color: red;">Checker Rejected</span>
+                                        }
+                                        else if (item.CheckerDecision == "5")
+                                        {
+                                            <span style="color: orange;">Checker Return To Maker</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (item.CheckerDecision == "2")
+                                        {
+                                            <span style="color: green;">Checker Passed</span>
+                                        }
+                                        else if (item.CheckerDecision == "5")
+                                        {
+                                            <span style="color: orange;">Checker Return To Maker</span>
+                                        }
+                                    }
+                                </td>
+
+                                <td>
+
+                                    @if (Session["RoleName"].ToString() == "Maker")
+                                    {
+                                        if (item.MakerDecision == "" || item.MakerDecision == null || item.CheckerDecision == "5")
+                                        {
+                                            @Html.ActionLink("View Image", "ShowIwSuspenseQueueDetailsCM", new { id = item.Id })
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (item.MakerDecision == "2" || item.MakerDecision == "3")
+                                        {
+                                            @Html.ActionLink("View Image", "ShowIwSuspenseQueueDetailsCM", new { id = item.Id })
+                                        }
+                                    }
+
+
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="19" style="color:red;text-align:center;">No data found</td>
+                        </tr>
+                    }
+                }
+
+            </table>
+        </div>
+    </div>

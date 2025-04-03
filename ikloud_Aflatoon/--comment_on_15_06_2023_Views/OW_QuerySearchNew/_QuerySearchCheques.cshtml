@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.IWSearch>
+
+<div class="w3-container" id="chqsrch">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr>
+                <td>SerialNo</td>
+                <td>Amount</td>
+                <td>PayeeName</td>
+                <td>PayorBankRoutNo</td>
+                <td>SAN</td>
+                <td>TransCode</td>
+                <td>Account Number</td>
+                <td>Return</td>
+                <td>ChqDate</td>
+                <td>P2F</td>
+                <td>ChqInfo</td>
+
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.XMLSerialNo</td>
+                <td>@item.XMLAmount</td>
+                <td>@item.XMLPayeeName</td>
+                <td>@item.XMLPayorBankRoutNo</td>
+                <td>@item.XMLSAN</td>
+                <td>@item.XMLTrns</td>
+                <td>@item.CreditAccountNo</td>
+                @if (item.chiStatus != null && item.chiStatus == "206")
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" checked="checked" disabled="disabled" /> </td>
+                }
+                else
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" disabled="disabled" /> </td>
+                }
+                <td>
+                    @item.chequedate
+                </td>
+                @if (item.P2F == "C")
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" checked="checked" disabled="disabled" /> </td>
+                }
+                else
+                {
+                    <td><input class="w3-dark-grey" type="checkbox" disabled="disabled" /> </td>
+                }
+                <td>
+                    <span class="w3-hover-blue w3-opennav w3-text-blue" onclick="selectedcheque('@item.ID')">Details</span>&nbsp;|&nbsp;
+                </td>
+            </tr>
+
+        }
+    </table>
+    <input type="hidden" id="rtnID" name="rtnID">
+</div>

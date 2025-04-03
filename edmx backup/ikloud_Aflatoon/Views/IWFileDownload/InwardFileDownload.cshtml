@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "File Download";
+    ViewBag.header = "File Download";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/FileDownload.js"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+<div class="w3-container">
+    <div class="w3-row w3-light-gray">
+        @using (Ajax.BeginForm("IWDownload", "IWFileDownload", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "IWResultView", InsertionMode = InsertionMode.Replace, LoadingElementId = "progress" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="w3-col m3 w3-left">
+                <label class="w3-label" style="font-weight:700">Download File :</label>
+                <select name="FileType" id="FileType">
+                    <option>Select</option>
+                    @* <option>CBS Upload File</option>*@
+                    <option>Disbusrsement DD</option>
+                    <option>CMS</option>
+                    <option>SMB-804</option>
+                </select>
+            </div>
+            <div class="w3-col m3 w3-left">
+                <label class="w3-label" style="font-weight:700">Clearing Type:</label>
+                @Html.DropDownList("ClearingType", null, "Select", new { style = "width: 150px;" })
+            </div>
+            <div class="w3-col m4 w3-left">
+                <input class="w3-btn" type="submit" name="btnView" id="btnView" disabled="disabled" value="View" />
+                <input class="w3-btn" type="submit" name="btnView" id="btnDown" disabled="disabled" value="Download" />
+                <span id="progress" style="display: none; padding-left: 50px">
+                    <img src="~/Content/images/progressss.gif" alt="Downloding..." />
+                </span>
+            </div>
+            @*</div>*@
+
+            @*<div class="w3-row w3-center">
+                    <input type="hidden" id="FilePath" name="FilePath" />
+                </div>*@
+            @*</div>*@
+        }
+        <div class="w3-col m2 w3-left">
+            <input class="w3-btn" type="button" name="btnView" id="btnClose" value="Close" />
+        </div>
+
+
+
+    </div>
+    <div class="w3-row">
+        <div id="IWResultView">
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,478 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Models.commonUserCreate>
+<table id="chkt" style="width: 100%;">
+    <tr>
+        <th style=" font-size: 14px;text-align:left">
+            Select Role Process
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="rc" id="rc" />
+            Reject Repaire
+        </td>
+        <td>
+            <input type="checkbox" name="de" id="de" />
+            Data Entry
+        </td>
+        <td>
+            <input type="checkbox" name="qc" id="qc" onclick="amtlimit();" />
+            QC
+        </td>
+        <td>
+            <input type="checkbox" name="vf" id="vf" onclick="amtlimit();" />
+            Verification
+        </td>
+        <td>
+            <input type="checkbox" name="rpt" id="rprt" />
+            Reports
+        </td>
+        <td>
+            <input type="checkbox" name="fildwnd" id="fildwnd" />
+            File Download
+        </td>
+        <td>
+            <input type="checkbox" name="ds" id="ds" />
+            Dashboard
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="qury" id="qury" />
+            Query
+        </td>
+        <td>
+            <input type="checkbox" name="quryMd" id="quryMd" />
+            Query with modification
+        </td>
+        <td>
+            <input type="checkbox" name="chirjct" id="chirjct" />
+            CHI Reject
+        </td>
+        <td>
+            <input type="checkbox" name="rvf" id="rvf" onclick="amtlimit();" />
+            RE-Verification
+        </td>
+        <td >
+            <input type="checkbox" name="rvf4" id="rvf4" onclick="amtlimit();"/>
+            L4-Verification
+        </td>
+        <td colspan="1">
+            <input type="checkbox" name="CCPH" id="CCPH"/>
+            CCPH-Verification
+        </td>
+         
+    </tr>
+
+    <tr>
+        <td>
+            <input type="checkbox" name="um" id="um" />
+            User Managment
+        </td>
+        <td>
+            <input type="checkbox" name="sod" id="sod" />
+            SOD
+        </td>
+        <td>
+            <input type="checkbox" name="master" id="master" />
+            Master
+        </td>
+        <td>
+            <input type="checkbox" name="settg" id="settg" />
+            Settings
+        </td>
+        <td>
+            <input type="checkbox" name="archv" id="archv" />
+            Archive
+        </td>
+        <td colspan=3>
+            <input type="checkbox" name="mesgbrd" id="mesgbrd" />
+            Message Broadcasting
+        </td>
+    </tr>
+</table>
+@{
+    if (ViewBag.DGDetails == true)
+    {
+        foreach (var chk in Model)
+        {
+            //------------- Admin Rights----------------//
+            if (chk.process == "UserManagment")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('um').checked = true;
+                        //------------------------------------
+                        //document.getElementById("chkadmin").checked = true;
+                        //if (document.getElementById("chkadmin").checked == true) {
+                        //    document.getElementById('rowadmin').style.display = 'block';
+                        //}
+                        //else {
+                        //    document.getElementById('rowadmin').style.display = 'none';
+                        //}
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('um').checked = false;
+                    </script>
+                }
+            }
+            if (chk.process == "sod")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('sod').checked = true;
+                        //------------------
+                       // document.getElementById("chkadmin").checked = true;
+                        //if (document.getElementById("chkadmin").checked == true) {
+                        //    document.getElementById('rowadmin').style.display = 'block';
+                        //}
+                        //else {
+                        //    document.getElementById('rowadmin').style.display = 'none';
+                        //}
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('sod').checked = false;
+                    </script>
+                }
+            }
+            if (chk.process == "master")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('master').checked = true;
+                        //---------------------
+                        //document.getElementById("chkadmin").checked = true;
+                        //if (document.getElementById("chkadmin").checked == true) {
+                        //    document.getElementById('rowadmin').style.display = 'block';
+                        //}
+                        //else {
+                        //    document.getElementById('rowadmin').style.display = 'none';
+                        //}
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('master').checked = false;
+                    </script>
+                }
+            }
+            if (chk.process == "settg")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('settg').checked = true;
+                        //-----------------------
+                        //document.getElementById("chkadmin").checked = true;
+                        //if (document.getElementById("chkadmin").checked == true) {
+                        //    document.getElementById('rowadmin').style.display = 'block';
+                        //}
+                        //else {
+                        //    document.getElementById('rowadmin').style.display = 'none';
+                        //}
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('settg').checked = false;
+                    </script>
+                }
+            }
+            if (chk.process == "archv")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('archv').checked = true;
+                        //------------------------------------------
+                        //document.getElementById("chkadmin").checked = true;
+                        //if (document.getElementById("chkadmin").checked == true) {
+                        //    document.getElementById('rowadmin').style.display = 'block';
+                        //}
+                        //else {
+                        //    document.getElementById('rowadmin').style.display = 'none';
+                        //}
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('archv').checked = false;
+                    </script>
+                }
+            }
+            if (chk.process == "mesgbrd")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('mesgbrd').checked = true;
+                        //------------------------------------------------
+                        //document.getElementById("chkadmin").checked = true;
+                        //if (document.getElementById("chkadmin").checked == true) {
+                        //    document.getElementById('rowadmin').style.display = 'block';
+                        //}
+                        //else {
+                        //    document.getElementById('rowadmin').style.display = 'none';
+                        //}
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('mesgbrd').checked = false;
+                    </script>
+                }
+            }
+            //------------- End==----------------------//
+            if (chk.process == "chirjct")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('chirjct').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('chirjct').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "RejectRepair")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rc').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rc').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "DE")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('de').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('de').checked = false;
+                    </script>
+                }
+
+            }
+
+            if (chk.process == "QC")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('qc').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('qc').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "VF")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('vf').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('vf').checked = false;
+                    </script>
+                }
+
+            }
+            if (chk.process == "RVF")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rvf').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rvf').checked = false;
+                    </script>
+                }
+
+            }
+            if (chk.process == "RVF4")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rvf4').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rvf4').checked = false;
+                    </script>
+                }
+
+            }
+
+            if (chk.process == "Report")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rprt').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('rprt').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "fildwnd")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('fildwnd').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('fildwnd').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "Ds")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('ds').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('ds').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "Query")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('qury').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('qury').checked = false;
+                    </script>
+                }
+            }
+
+            if (chk.process == "QueryMod")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('quryMd').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('quryMd').checked = false;
+                    </script>
+                }
+            }
+            //-----------CCPH---------------
+            if (chk.process == "CCPH")
+            {
+                if (chk.active == true)
+                {
+                    <script type="text/javascript">
+                        document.getElementById('CCPH').checked = true;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('CCPH').checked = false;
+                    </script>
+                }
+            }
+
+
+
+
+        }
+    }
+    else
+    {
+        <script type="text/javascript">
+            document.getElementById('um').checked = false;
+            document.getElementById('sod').checked = false;
+            document.getElementById('master').checked = false;
+            document.getElementById('settg').checked = false;
+            document.getElementById('archv').checked = false;
+            document.getElementById('mesgbrd').checked = false;
+            document.getElementById('rc').checked = false;
+            document.getElementById('de').checked = false;
+            document.getElementById('qc').checked = false;
+            document.getElementById('vf').checked = false;
+            document.getElementById('rvf').checked = false;
+            document.getElementById('rprt').checked = false;
+            document.getElementById('fildwnd').checked = false;
+            document.getElementById('ds').checked = false;
+            document.getElementById('qury').checked = false;
+            document.getElementById('quryMd').checked = false;
+            document.getElementById('chirjct').checked = false;
+            document.getElementById('rvf4').checked = false;
+            document.getElementById('CCPH').checked = false;
+        </script>
+    }
+
+}

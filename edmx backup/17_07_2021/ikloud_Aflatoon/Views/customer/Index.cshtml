@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ikloud_Aflatoon.customerView>
+
+
+@{
+    ViewBag.Title = "Customer List";
+    ViewBag.header = "Customer List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.Display("Grid Name")
+        </th>
+        <th>
+            @Html.Display("Organization Name")
+        </th>
+        <th>
+            @Html.Display("CustomerName")
+        </th>
+        <th>
+            @Html.Display("CustomerCode")
+        </th>
+        <th>
+            @Html.Display("PresentationBank")
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CreationDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(x => item.GridName)
+        </td>
+        <td>
+            @Html.DisplayFor(x => item.OrganizationName)
+        </td>
+        <td>
+            @Html.DisplayFor(x => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(x => item.CustomerCode)
+        </td>
+        <td>
+            @Html.DisplayFor(x => item.PresentingBankRouteNo)
+        </td>
+        
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CreationDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>*@
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id })*@
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+        </td>
+    </tr>
+}
+
+</table>

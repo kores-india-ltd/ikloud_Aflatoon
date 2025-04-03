@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="@Url.Content("~/Scripts/ScanningCutOffTime.js")"></script>
+@*<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <link href="@Url.Content("~/Content/CSS/bootstrap.min.css")" rel="stylesheet" />*@
+
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<body>
+
+    <div class="container mt-2">
+        <h2>Scanning CutOffTime</h2>
+        <br />
+        <form onsubmit="">
+
+            <div class="row mb-3">
+                <label for="DomainSelect" class="col-sm-2 col-form-label">Domain:</label>
+                <div class="col-sm-3">
+                    @*<select class="form-select form-control" id="dropdown" name="dropdown">
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                        </select>*@
+                    @Html.DropDownList("DomainSelect", new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "Select Domain",
+                                                            new { @class = "form-select form-control" })
+                </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+                <label for="" class="col-sm-2 col-form-label">Status:</label>
+                <div class="col-sm-3">
+                    <div class="col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="rdEnable" value="Enable" checked>
+                            <label class="form-check-label" for="rdEnable">
+                                Enable
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="rdDisable" value="Disable">
+                            <label class="form-check-label" for="rdDisable">
+                                Disable
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+                <label for="scanningCutOffTime" class="col-sm-2 col-form-label">Scanning CutOff Time (HH:MM):</label>
+                <div class="col-sm-3">
+                    <label class="">HH</label>
+                    <input type="number" class="" id="scanningCutOffTimeHours" name="scanningCutOffTimeHours" oninput="limitTo23(this)"
+                           style="width:100px;height:34px;border:1px solid #ccc;border-radius:4px;font-size:16px;margin-right:5px;">
+
+                    <label class="">MM</label>
+                    <input type="number" class="" id="scanningCutOffTimeMinutes" name="scanningCutOffTimeMinutes" oninput="limitTo59(this)"
+                           style="width:100px;height:34px;border:1px solid #ccc;border-radius:4px;font-size:16px;">
+                    @*<div class="col-sm-6">
+                            <label class="col-sm-2 col-form-label">HH</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="scanningCutOffTimeHours" name="scanningCutOffTimeHours">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4 col-form-label">MM</label>
+                            <input type="number" class="col-sm-6 form-control" id="scanningCutOffTimeMinutes" name="scanningCutOffTimeMinutes">
+                        </div>*@
+                </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+                <label for="tempExtensionTime" class="col-sm-2 col-form-label">Temporary Extension Time In Minutes:</label>
+                <div class="col-sm-3">
+                    @*<input type="text" class="form-control" id="tempExtensionTime" name="tempExtensionTime" placeholder="MM">*@
+                    <input type="number" class="form-control" id="tempExtensionTime" name="tempExtensionTime"
+                           placeholder="Enter Minutes"
+                           oninput="limitToFourDigits(this)" />
+                </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+                <label for="allowedInstrumentCount" class="col-sm-2 col-form-label">Allowed Instrument Count:</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" id="allowedInstrumentCount" name="allowedInstrumentCount"
+                           placeholder="Enter a numeric value"
+                           oninput="limitToFourDigits(this)" />
+                    @*maxlength="4">*@
+                </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+                <label for="allowedInstrumentCount" class="col-sm-2 col-form-label">Instrument Scanned After CutOffTime:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="instrumentScannedAfterCutOffTime" name="instrumentScannedAfterCutOffTime" readonly />
+                    @*maxlength="4">*@
+                </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+                <label for="scanAlertTime" class="col-sm-2 col-form-label">Scan Alert Time:</label>
+                <div class="col-sm-3">
+                    <label class="">HH</label>
+                    <input type="number" class="" id="scanAlertTimeHours" name="scanAlertTimeHours" oninput="limitTo23(this)"
+                           style="width:100px;height:34px;border:1px solid #ccc;border-radius:4px;font-size:16px;margin-right:5px;">
+
+                    <label class="">MM</label>
+                    <input type="number" class="" id="scanAlertTimeMinutes" name="scanAlertTimeMinutes" oninput="limitTo59(this)"
+                           style="width:100px;height:34px;border:1px solid #ccc;border-radius:4px;font-size:16px;">
+                </div>
+            </div>
+            <br />
+            @*<div class="mb-3">
+                    <label for="dropdown" class="form-label">Select an option:</label>
+                    <select class="form-select" id="dropdown" name="dropdown">
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time (HH:MM):</label>
+                    <input type="text" class="form-control" id="time" name="time" placeholder="HH:MM">
+                </div>
+                <div class="mb-3">
+                    <label for="numeric" class="form-label">Numeric Value:</label>
+                    <input type="number" class="form-control" id="numeric" name="numeric" placeholder="Enter a numeric value">
+                </div>*@
+            @*<button type="submit" class="btn btn-primary" id="btnOk" onclick="return validateForm();">Submit</button>*@
+            <button type="submit" class="btn btn-primary" id="btnOk">Submit</button>
+        </form>
+    </div>
+
+</body>

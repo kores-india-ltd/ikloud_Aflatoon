@@ -1,0 +1,170 @@
+﻿
+
+@model ikloud_Aflatoon.Infrastructure.GetSignatureModal
+
+<style>
+    thead, tbody { display: block; }
+
+tbody {
+    height: 250px;       /* Just for the demo          */
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+}
+
+.zoom {
+   
+  
+    transition: transform .2s;
+  
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    -ms-transform: scale(1); /* IE 9 */
+    -webkit-transform: scale(1); /* Safari 3-8 */
+    transform: scale(2); 
+}
+</style>
+<div class="w3-container w3-white" id="sSign" style="text-align:left;border:10px">
+   
+    <table class="w3-table w3-table-all " border="1"  >
+        <tbody>
+            @if (Session["signL1"].ToString() != "Fail")
+            {
+                <tr style="text-align: left">
+                    <th>
+                        Operating Instruction 1
+                    </th>
+                    <td>
+                        @Model.txt_acct_oper_instrs1[0].ToString()
+                    </td>
+                    <th>
+                        Operating Instruction 2
+                    </th>
+                    <td>
+                        @Model.txt_acct_oper_instrs2[0].ToString()
+                    </td>
+                </tr>
+                <tr style="text-align: left">
+                    <th>
+                        Operating Instruction 3
+                    </th>
+                    <td>
+                        @Model.txt_acct_oper_instrs3[0].ToString()
+                    </td>
+                    <th>
+                        Operating Instruction 4
+                    </th>
+                    <td>
+                        @Model.txt_acct_oper_instrs4[0].ToString()
+                    </td>
+                </tr>
+            }
+            <tr style="text-align: left">
+                @*<th style="color:white">
+                jaslkdfjlksdjjsdlkfjlaskj
+            </th>*@
+                <th>
+                    Signature
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Remarks
+                </th>
+                <th></th>
+            </tr>
+            @if (Session["signL1"].ToString() != "Fail")
+            {
+                for (int i = 0; i < Model.bMaps.Count; i++)
+                {
+                    <tr>
+                        @*<td>
+
+                    </td>*@
+                        <td class="zoom">
+                            <img style="width:250%;max-width:300px;cursor:zoom-in" src="@String.Format("data:image/png;base64,{0}", Model.bMaps[i])" />
+                        </td>
+                        <td>
+                            @Model.sNames[i]
+                        </td>
+                        <td>
+                            @*@Model.sRemarks[i]*@
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    @*<td>
+
+                </td>*@
+                    <td class="zoom">
+                        No Img - Invalid Acount
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+            @*@for (int i = 0; i < Model.bMaps.Count ; i++)
+        {
+            <tr>*@
+            @*<td>
+
+        </td>*@
+            @*<td class="zoom">
+                    <img style="width:100%;max-width:210px;cursor:zoom-in" src="@String.Format("data:image/png;base64,{0}", Model.bMaps[i])" />
+                </td>
+                <td>
+                    @Model.sNames[i]
+                </td>
+                <td>
+                    @Model.sRemarks[i]
+                </td>
+            </tr>
+        }*@
+            @*@foreach (var itm in Model.sNames)
+            {
+                <tr>
+                    @*<td>
+                        <img  src="@itm.bMaps" />
+                    </td>
+                    <td>
+                        @itm
+                    </td>
+                    @*<td>
+                       @itm.sRemarks
+                    </td>
+                </tr>
+        }
+        @foreach (var itm in Model.sRemarks)
+        {
+            <tr>
+                <td>
+                    @itm
+                </td>
+            </tr>
+        }
+        @foreach (var itm in Model.bMaps)
+        {
+            <tr>
+                <td>
+                    <img src="@String.Format("data:image/png;base64,{0}", itm)" />
+
+                    @*<img src="@itm" />
+
+                </td>
+            </tr>
+        }*@
+        </tbody>
+    </table>
+</div>
+
+@*<div id="sSign" style="text-align:left;border:10px">
+   <h4>lable</h4>
+<object type="text/html" data="@ViewBag.sign" style=" width:1000px; height: 150px; overflow:auto;border:5px"></object>
+</div>*@

@@ -1,0 +1,9 @@
+﻿
+<div>
+    @*@Html.DropDownList("ABC", new List<SelectListItem>
+    {
+        new SelectListItem { Text = "A", Value = "0" },
+        new SelectListItem { Text = "B", Value = "1" },
+    })*@
+    @Html.DropDownList("Payee", new SelectList(ViewBag.vbAcctName), "Select Name", new { onchange = "getselect();", Id = "Payee", Name = "Payee" })
+</div>

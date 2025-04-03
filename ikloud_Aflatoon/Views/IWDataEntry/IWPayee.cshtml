@@ -1,0 +1,132 @@
+﻿@model IEnumerable<ikloud_Aflatoon.IWPayeeTmpProcess>
+@{
+    ViewBag.Title = "Payee Name";
+    ViewBag.header = "Payee Name And LAR Amount Verification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+
+
+<script src="~/Scripts/PayeeName.js"></script>
+<script src="~/Scripts/NumberToWord.js"></script>
+
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+
+    </script>
+}
+else
+{
+    <div class="w3-modal-content w3-card-4 w3-center" id="AcSnipimg">
+        <img id="myimg" class="w3-card-8 w3-image" style="cursor:pointer" src="~/Icons/noimagefound.jpg" /> 
+    </div>
+    @*<div class="w3-modal-content w3-card-4 w3-center" id="AcFullimg" style="display: none">
+            <object id="myfulimg" data="~/Icons/noimagefound.jpg" type="image/jpg"></object>
+
+        </div>*@
+    <div class="w3-row w3-center">
+        <div class="w3-col m12">
+            <label class="w3-btn" onclick="ChangeImage('FTiff');">Front Tiff</label>
+            <label class="w3-btn" onclick="ChangeImage('FGray');">Front Gray</label>
+            <label class="w3-btn" onclick="ChangeImage('BTiff');">Back Tiff</label>
+            <label class="w3-btn" onclick="fullImage();">Zoom Image</label>
+        </div>
+    </div>
+    <div id="iwimg" class="w3-modal w3-animate-zoom ">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-theme-dark">
+                <span onclick="document.getElementById('iwimg').style.display = 'none'" class="w3-closebtn">&times;</span>
+                <h2>Full Image</h2>
+            </header>
+            <div class="w3-container">
+                <img id="modelmyfulimg" class="w3-modal-content w3-card-8 w3-image" style="width:90%;cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+            </div>
+            <footer class="w3-container w3-theme-dark"></footer>
+        </div>
+    </div>
+    <div>
+        <br />
+    </div>
+
+    <form class="w3-modal-content">
+
+        <div class="w3-container">
+            <span style="font-weight: bold; font-size: medium">Enter Payee:</span>
+            <input class="w3-input w3-border w3-margin-bottom" type="text" id="PayeeName" name="PayeeName" maxlength="50" style="font-weight: bold; font-size: larger" />
+
+        </div>
+
+
+
+        <div class="w3-container">
+            <span style="font-weight: bold; font-size: medium">Amount:</span>
+            <span style="font-weight: bold; color: blue; font-size: larger" id="amtwrd"></span>
+        </div>
+
+        <div id="rjctrsn" class="w3-modal w3-animate-zoom ">
+            @*@Html.Action("RejectReason", "IWDataEntry");*@
+            <div class="w3-modal-content">
+                <div class="w3-container w3-theme-dark">
+                    <span onclick="selectedReason('Close')"
+                          class="w3-closebtn">&times;</span>
+                    <h2>Select Reject Reason</h2>
+                </div>
+                <div class="w3-container">
+
+                    @Html.Action("RejectReason", "IWDataEntry")
+                </div>
+                <div class="w3-container">&nbsp;</div>
+            </div>
+        </div>
+        <div>
+            <input type="hidden" id="cnt" value="1" />
+            <input type="hidden" id="tempcnt" value="1" />
+        </div>
+        <div>
+            <br />
+        </div>
+        <div class="w3-center" style="width: auto">
+            <input class="w3-btn w3-margin-left" type="button" name="btnok" id="btnok" value="Accept" />&nbsp;&nbsp;&nbsp;&nbsp;
+            <input class="w3-btn" type="button" id="btnback" value="Back" />&nbsp;&nbsp;&nbsp;
+            <input class="w3-btn" type="button" id="btnrjct" value="Reject" onclick=" document.getElementById('rjctrsn').style.display = 'block';" />&nbsp;&nbsp;&nbsp;
+            <input class="w3-btn" type="button" name="bbtnClose" id="bbtnClose" value="Close" />
+
+        </div>
+    </form>
+
+    <script language="javascript" type="text/javascript">
+
+        var array = @Html.Raw(
+
+                 Json.Encode(
+                     (Model).Select(m => new
+                     {
+                         ID = m.ID,
+                         FrontGreyImagePath = m.FrontGreyImagePath,
+                         XMLPayee = m.XMLPayee,
+                         XMLAmount = m.XMLAmount,
+                         OpsStatus = m.OpsStatus,
+                         RejectReason = m.RejectReason,
+                         FrontTiffImagePath = m.FrontTiffImagePath,
+                     })
+                 )
+             );
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            passval(array);
+        }
+    </script>
+}
+<div id="result">
+</div>

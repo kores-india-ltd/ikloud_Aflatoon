@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.Exe_Count_BRF>
+
+<div class="row" id="tableData">
+    <div class="col-md-12">
+        <h3>@ViewBag.Heading</h3>
+        <table class="table table-responsive table-bordered table-condensed" style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+            <thead>
+                <tr style="background-color:lightblue;">
+
+                    <th>ClearingType</th>
+                    <th>TotalCount</th>
+                    <th>Presented</th>
+                    <th>Returned</th>
+                    <th>Extention</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.ClearingType</td>
+                        <td>@item.TotalCount</td>
+                        <td>@item.Presented</td>
+                        <td>@item.Returned</td>
+                        <td>@item.Extention</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

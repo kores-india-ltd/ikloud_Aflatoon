@@ -1,0 +1,139 @@
+﻿@*@model IEnumerable<ikloud_Aflatoon.ChequeAmountCapture>*@
+@{
+    ViewBag.Title = "CMS Additional Data Capture";
+}
+
+@{
+    ViewBag.Title = "CMS Additional Data Capture";
+    ViewBag.header = "CMS Additional Data Capture";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+@*<script src="~/Scripts/OWAmount.js"></script>*@
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" name="DEbySnpt" id="DEbySnpt" value="@Session["blndebysnippet"].ToString()" />
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    <body>
+        <div id="AcSnipimg" style="padding-left: 30%;display:none" >
+            <object id="myimg" data="~/Icons/noimagefound.jpg" type="image/jpg" style="width: 300px; height: 150px"></object>
+        </div>
+        <div>
+            <div id="AcFullimg" style="padding-left: 10%">
+                <object id="myfulimg" data="http://10.144.3.31/Ikloud_Pro_test\IkloudPro_Test_Images\20160307\11\4_002\1_Front.jpg" type="image/jpg" style="width: 600px; height: 300px"></object>
+            </div>
+        </div>
+        @*<div style="padding-left:10%">
+                <img id="myimg" src="http://ABID//ImageServer//iKloudIwImages/09.11.2015/4/11.jpg" alt="ItemImg" style="width:600px;height:300px" />
+            </div>*@
+        <div>
+            <br />
+        </div>
+        <form>
+            <div style="padding-left:5%">
+                <span class="2" style="font-weight:700;text-align:left">  Pickup Location:</span>
+                <input style="width: auto;font-weight:700" type="text" id="chqAmount" autocomplete="off" name="chqAmount" />
+                <span class="2" style="font-weight:700;text-align:left">  Pickup Point Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Pickup" autocomplete="off" name="Pickup" />
+                <span class="2" style="font-weight:700;text-align:left">  Deposit Division Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Deposit" autocomplete="off" name="Deposit" />
+            </div>
+            <div style="padding-left:5%">
+                <span class="2" style="font-weight:700;text-align:left">  Deposit Slip No:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Slip" autocomplete="off" name="Slip" />
+                <span class="2" style="font-weight:700;text-align:left">  Customer Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Customer" autocomplete="off" name="Customer" />
+                <span class="2" style="font-weight:700;text-align:left">  Product Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Product" autocomplete="off" name="Product" />
+            </div>
+            <div style="padding-left:5%">
+                <span class="2" style="font-weight:700;text-align:left">  Client Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Client" autocomplete="off" name="Client" />
+                <span class="2" style="font-weight:700;text-align:left">  Client Name:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Name" autocomplete="off" name="Name" />
+                <span class="2" style="font-weight:700;text-align:left">  Hierarchy Code:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Hierarchy" autocomplete="off" name="Hierarchy" />
+            </div>
+            <div style="padding-left:5%">
+                <span class="2" style="font-weight:700;text-align:left">  Deposit Branch:</span>
+                <input style="width: auto;font-weight:700" type="text" id="Branch" autocomplete="off" name="Branch" />
+            </div>
+                
+            
+            <div style="padding-left:30%">
+                <input type="hidden" id="cnt" value="1" />
+                <input type="hidden" id="tempcnt" value="1" />
+            </div>
+            <div>
+                <br />
+            </div>
+            <div style="padding-left:30%;float:inherit" class="w3-container">
+
+                <input class="w3-btn w3-margin-left" type="button" name="btnok" id="btnok" value="Accept" />
+                <input class="w3-btn" type="button" id="btnback" value="Back" />
+                @*@*<input class="w3-btn" type="button" id="btnRefer" value="Refer" />
+                    <input class="w3-btn" type="button" id="btnRejct" value="Reject" />*@
+                <input class="w3-btn" type="button" name="bbtnClose" id="bbtnClose" value="Close" />
+
+            </div>
+        </form>
+
+    </body>
+
+    @*<script language="javascript" type="text/javascript">
+
+        var array = @Html.Raw(
+
+             Json.Encode(
+                 (Model).Select(m=> new
+                 {
+                     Id = m.Id,
+                     FrontGreyImagePath = m.FrontGreyImagePath,
+                     Amount1 = m.Amount1,
+                     Amount2=m.Amount2,
+                     FrontTiffImagePath = m.FrontTiffImagePath,
+                     Status= m.Status,
+                     Action=m.Action,
+                     RawDataId = m.RawDataId,
+                     CustomerId = m.CustomerId,
+                     DomainId=m.DomainId,
+                     ScanningNodeId=m.ScanningNodeId,
+                     ChequeAmountSettings=m.ChequeAmountSettings,
+                 })
+             )
+         );
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            passval(array);
+        }
+    </script>*@
+}
+<div id="result">
+
+</div>
+
+@*<script type="text/javascript">
+        function Sclose()
+        {
+            // alert('ok');
+            document.getElementById('frmclose').submit();
+        }
+    </script>*@

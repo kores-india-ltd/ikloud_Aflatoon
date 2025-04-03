@@ -1,0 +1,645 @@
+﻿@using ikloud_Aflatoon;
+@using System;
+@model IEnumerable<OutwardDomainDashBoard_V2>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<style type="text/css">
+        tr:nth-of-type(2n)
+        {
+        background-color:azure
+        }
+        tr:nth-of-type(2n-1)
+        {
+            background-color:white
+        }
+    </style>*@
+
+@using (Html.BeginForm("Index", "OutwardDomainDashBoard", FormMethod.Post, new { id = "refresh" }))
+{
+
+   <button type="submit" id="btnRefresh" name="refresh" value="btnrefresh">Refresh</button>
+
+    <br />
+    if (Model != null)
+    {
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                if (i == 0)
+                {
+                    <div class="w3-panel w3-center w3-dark-grey">
+                        <h2><b> @item.CustomerName</b></h2>
+                    </div>
+
+
+                    i++;
+                }
+            }
+        }
+
+        <br />
+
+        <div class="w3-row">
+            <div class="w3-responsive w3-col s6 w3-border-right">
+                <table class="w3-table w3-card-4">
+                    <tr class="w3-light-grey w3-large">
+                        <th colspan="4">
+                            Slip Amount Data Entry
+
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Domain Name
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            Pending
+                        </th>
+                        <th>
+                            Completed
+                        </th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.SlipAmtTotal > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @item.DomainName
+                                </td>
+                                <td>
+                                    @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                                    @item.SlipAmtTotal
+                                </td>
+                                <td>
+                                    @item.SlipAmtPending
+                                </td>
+                                <td>
+                                    @item.SlipAmtComplete
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+            <div class="w3-responsive w3-col s6 w3-border-right">
+
+                <table class="w3-table w3-card-4">
+                    <tr class="w3-light-grey w3-large">
+                        <th colspan="5">
+                            Slip Account Data Entry
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Domain Name
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            D1 Pending
+                        </th>
+                        <th>
+                            D2 Pending
+                        </th>
+                        <th>
+                            Completed
+                        </th>
+
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.SlipAccountTotal > 0)
+                        {
+
+                            <tr>
+                                <td>
+                                    @item.DomainName
+                                </td>
+                                <td>
+                                    @item.SlipAccountTotal
+                                </td>
+                                <td>
+                                    @item.SlipAccountD1Pending
+                                </td>
+                                <td>
+                                    @item.SlipAccountD2Pending
+                                </td>
+                                <td>
+                                    @item.SlipAccountComplete
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                </table>
+
+            </div>
+        </div>
+
+
+        <br />
+
+
+        <div class="w3-row">
+
+            <div class="w3-responsive w3-col s6 w3-border-right">
+
+                <table class="w3-table w3-card-4">
+                    <tr class="w3-light-grey w3-large">
+                        <th colspan="5">
+                            Cheque Amount Data Entry
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Domain Name
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            D1 Pending
+                        </th>
+                        <th>
+                            D2 Pending
+                        </th>
+                        <th>
+                            Completed
+                        </th>
+
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.ChequeAmtTotal > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @item.DomainName
+                                </td>
+                                <td>
+                                    @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                                    @item.ChequeAmtTotal
+                                </td>
+                                <td>
+                                    @item.ChequeAmtD1Pending
+                                </td>
+                                <td>
+                                    @item.ChequeAmtD2Pending
+                                </td>
+                                <td>
+                                    @item.ChequeAmtComplete
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </table>
+
+            </div>
+            <div class="w3-responsive w3-col s6 w3-border-right">
+
+                <table class="w3-table w3-card-4">
+                    <tr class="w3-light-grey w3-large">
+                        <th colspan="5">
+                            Cheque Date Data Entry
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Domain Name
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            D1 Pending
+                        </th>
+                        <th>
+                            D2 Pending
+                        </th>
+                        <th>
+                            Completed
+                        </th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.ChequeDateTotal > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @item.DomainName
+                                </td>
+                                <td>
+                                    @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                                    @item.ChequeDateTotal
+                                </td>
+                                <td>
+                                    @item.ChequeDateD1Pending
+                                </td>
+                                <td>
+                                    @item.ChequeDateD2Pending
+                                </td>
+                                <td>
+                                    @item.ChequeDateComplete
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+            </div>
+            <div class="w3-responsive w3-col s6 w3-border-right">
+
+                <table class="w3-table  w3-card-4">
+                    <tr class="w3-light-grey w3-large">
+                        <th colspan="5">
+                            Cheque MICR Repair Data Entry
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Domain Name
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                        <th>
+                            Pending
+                        </th>
+                        <th>
+                            Completed
+                        </th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.ChequeMICRRepairTotal > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @item.DomainName
+                                </td>
+                                <td>
+                                    @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                                    @item.ChequeMICRRepairTotal
+                                </td>
+                                <td>
+                                    @item.ChequeMICRRepairPending
+                                </td>
+                                <td>
+                                    @item.ChequeMICRRepairComplete
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+
+            </div>
+        </div>
+
+        <br />
+
+        <div class="w3-responsive w3-border-top">
+            <table class="w3-table w3-card-4">
+                <tr class="w3-light-grey w3-large">
+                    <th colspan="9">
+                        L1 Verification
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Domain Name
+                    </th>
+                    <th>
+                        Total Slips
+                    </th>
+                    <th>
+                        Pending Slips
+                    </th>
+                    <th>
+                        Accepted Slips
+                    </th>
+                    <th>
+                        Rejected Slips
+                    </th>
+                    <th>
+                        Total Cheques
+                    </th>
+                    <th>
+                        Pending Cheques
+                    </th>
+                    <th>
+                        Accepted Cheques
+                    </th>
+                    <th>
+                        Rejected Cheques
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    if (item.L1VerificationSlipPending > 0)
+                    {
+                        <tr>
+                            <td>
+                                @item.DomainName
+                            </td>
+                            <td>
+                                @item.L1VerificationTotalSlips
+                            </td>
+                            <td>
+                                @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                                @item.L1VerificationSlipPending
+                            </td>
+                            <td>
+                                @item.L1VerificationSlipAccepted
+                            </td>
+                            <td>
+                                @item.L1VerificationSlipRejected
+                            </td>
+                            <td>
+                                @item.L1VerificationTotalCheques
+                            </td>
+                            <td>
+                                @item.L1VerificationChequePending
+                            </td>
+                            <td>
+                                @item.L1VerificationChequeAccepted
+                            </td>
+                            <td>
+                                @item.L1VerificationChequeRejected
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+
+        <br />
+
+        <div class="w3-responsive w3-border-top">
+
+            <table class="w3-table w3-card-4">
+                <tr class="w3-light-grey w3-large">
+                    <th colspan="11">
+                        L2 Verification
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Domain Name
+                    </th>
+                    <th>
+                        Total Slips
+                    </th>
+                    <th>
+                        Pending Slips
+                    </th>
+                    <th>
+                        Accepted Slips
+                    </th>
+                    <th>
+                        Rejected Slips
+                    </th>
+                    <th>
+                        Total Cheques
+                    </th>
+                    <th>
+                        Pending Cheques
+                    </th>
+                    <th>
+                        Accepted Cheques
+                    </th>
+                    <th>
+                        Rejected Cheques
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    if (item.L2VerificationTotalSlips > 0)
+                    {
+                        <tr>
+                            <td>
+                                @item.DomainName
+                            </td>
+                            <td>
+                                @item.L2VerificationTotalSlips
+                            </td>
+                            <td>
+                   
+                                @item.L2VerificationSlipPending
+                            </td>
+                            <td>
+                                @item.L2VerificationSlipAccepted
+                            </td>
+                            <td>
+                                @item.L2VerificationSlipRejected
+                            </td>
+                            <td>
+                                @item.L2VerificationTotalCheques
+                            </td>
+                            <td>
+                                @item.L2VerificationChequePending
+                            </td>
+                            <td>
+                                @item.L2VerificationChequeAccepted
+                            </td>
+                            <td>
+                                @item.L2VerificationChequeRejected
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+        </div>
+
+        <br />
+
+        <div class="w3-responsive w3-border-top">
+
+            <table class="w3-table w3-card-4">
+                <tr class="w3-light-grey w3-large">
+                    <th colspan="11">
+                        L3 Verification
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Domain Name
+                    </th>
+                    <th>
+                        Total Slips
+                    </th>
+                    <th>
+                        Pending Slips
+                    </th>
+                    <th>
+                        Accepted Slips
+                    </th>
+                    <th>
+                        Rejected Slips
+                    </th>
+                    <th>
+                        Total Cheques
+                    </th>
+                    <th>
+                        Pending Cheques
+                    </th>
+                    <th>
+                        Accepted Cheques
+                    </th>
+                    <th>
+                        Rejected Cheques
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    if (item.L3VerificationTotalSlips > 0)
+                    {
+                        <tr>
+                            <td>
+                                @item.DomainName
+                            </td>
+                            <td>
+                                @item.L3VerificationTotalSlips
+                            </td>
+                            <td>
+                                @item.L3VerificationSlipPending
+                            </td>
+                            <td>
+                                @item.L3VerificationSlipAccepted
+                            </td>
+                            <td>
+                                @item.L3VerificationSlipRejected
+                            </td>
+                            <td>
+                                @item.L3VerificationTotalCheques
+                            </td>
+                            <td>
+                                @item.L3VerificationChequePending
+                            </td>
+                            <td>
+                                @item.L3VerificationChequeAccepted
+                            </td>
+                            <td>
+                                @item.L3VerificationChequeRejected
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+        </div>
+
+        <br />
+
+
+            <div class="w3-row">
+            <div class="w3-responsive w3-border-top">
+                <table class="w3-table w3-card-4">
+                    <tr class="w3-light-grey w3-large">
+                        <th colspan="11">
+                            Cheques Presentation Status
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Domain Name
+                        </th>
+                        <th>
+                            Scanned Slip
+                        </th>
+                        <th>
+                            Scanned Chq
+                        </th>
+                        <th>
+                            Ver Chq Rej
+                        </th>
+                        @*<th>Hold Chq
+                            </th>*@
+                        <th>
+                            Ready for Bundling
+                        </th>
+                        <th>
+                            Bundled
+                        </th>
+                        <th>
+                            Uploaded
+                        </th>
+                        <th>
+                            Chi Reject
+                        </th>
+                        <th>
+                            Resp Recvd
+                        </th>
+                        <th>
+                            Oack Recvd
+                        </th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.TotalScannedSlip > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @item.DomainName
+                                </td>
+                                <td>
+                                    @*String.Format("{0:ddd, MMM d, yyyy}", @item.ProcessDate);*@
+                                    @item.TotalScannedSlip
+                                </td>
+                                <td>
+                                    @item.TotalScannedCheque
+                                </td>
+                                <td>
+                                    @item.TotalVerificationChequeReject
+                                </td>
+                                @*<td>
+                                        @item.TotalChequeHold
+                                    </td>*@
+                                <td>
+                                    @item.TotalReadyforBundling
+                                </td>
+                                <td>
+                                    @item.TotalBundled
+                                </td>
+                                <td>
+                                    @item.TotalUploadedRespNotRecvd
+                                </td>
+                                <td>
+                                    @item.TotalChiRejects
+                                </td>
+                                <td>
+                                    @item.TotalRespRecvd
+                                </td>
+                                <td>
+                                    @item.TotalOackRecvd
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+
+
+    }
+}

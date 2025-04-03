@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.header = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Index", "IwDashboard"))
+{
+    @Html.AntiForgeryToken()
+    <div class="w3-container w3-left" style="padding-top: 10px; padding-left: 10px;">
+        Select Session Type &nbsp;&nbsp;
+        <select id="sesntp" name="sesntp">
+            <option>01</option>
+            <option>11</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;
+        <input class="w3-btn" type=submit value="Ok" name="btn" />
+    </div>
+
+}
+
+<input type=hidden id="Clr" value="@Session["Clrtype"]" />
+
+@{
+    <script type="text/javascript">
+  var cllt= document.getElementById('Clr').value;
+
+      if (cllt=="01") {
+          document.getElementById('sesntp').selectedIndex=0;
+      }
+      else {
+          document.getElementById('sesntp').selectedIndex = 1;
+      }
+    </script>
+}
+<div class="w3-container w3-right-align">
+    <a href='@Url.Action("index", "iwdashboard")' style="color:blue; font-weight:bolder; font-size:large">[Refresh]</a>
+</div>
+<div class="w3-modal-content w3-center">
+    @Html.Action("_IWCommanDS")
+</div>
+<div class="w3-row">
+    <div class="w3-col l6 s12 w3-center">
+        @Html.Action("IWBatchsummary")
+    </div>
+    <div class="w3-col l6 s12 w3-center">
+        @Html.Action("_IWSummary")
+    </div>
+</div>
+
+@*<table style="width: 40%">
+    <tr>
+        <td>
+           
+        </td>
+    </tr>
+</table>*@
+@*<table style="width: 80%">
+    <tr>
+        <td>
+         
+        </td>
+        <td style="vertical-align: top">
+           
+        </td>
+    </tr>
+</table>*@

@@ -1,0 +1,172 @@
+﻿@model IEnumerable<ikloud_Aflatoon.SANMICRMaster>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        debugger;
+        //============ Adding validation by amol on 06/06/2023 =================================
+        $("#MICR,#SAN").keypress(function (event) {
+
+            debugger;
+            //console.log("Event code - " + event.keyCode);
+            if (event.shiftKey) {
+                event.preventDefault();
+            }
+
+            if (event.keyCode == 8 || event.keyCode == 9 || (event.keyCode > 47 && event.keyCode < 58)) {
+
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+    });
+
+    function AddSANMICR() {
+        var Rooturl = '@Url.Content("~/")';
+        var MICR_Code = "";
+        var SAN = "";
+        MICR_Code = document.getElementById('MICR').value;
+        SAN = document.getElementById('SAN').value;
+
+        if (MICR_Code == "" || SAN == "")
+        {
+            alert("MICR or SAN values cannot be null");
+            return;
+        }
+        if (MICR_Code == SAN)
+        {
+            alert("MICR or SAN Values cannot be same");
+            return;
+        }
+
+         $.ajax({
+             type: "POST",
+             url: Rooturl + "sanmicr/AddSANMICR",
+             data: { MICR_Code: MICR_Code, SAN: SAN },
+             success: function (data) {
+                 alert("Data Added Successfully!!");
+                 location.reload();
+             }
+         });
+    }
+
+    function Deletesanmicr(e) {
+        debugger;
+        var Rooturl = '@Url.Content("~/")';
+
+        var $row = $(this).closest("tr");
+        var $tds = $row.find("td");             // Finds all children <td> elements
+
+        $.each($tds, function () {               // Visits every single <td> element
+            console.log($(this).text());        // Prints out the text within the <td>
+        });
+
+        $.ajax({
+            type: "POST",
+            url: Rooturl + "sanmicr/Deletesanmicr",
+            data: { ID: ID },
+            success: function (data) {
+                alert("Data Deleted Successfully!!");
+                location.reload();
+            }
+        });
+    }
+</script>
+<div>
+
+    <div class="row">
+
+        <div align="center">
+            <h3>SAN MICR Master</h3>
+        </div>
+
+
+        <div class="col-sm-2 padding-0" align="center">
+            <label><b>MICR:</b></label><input class="form-control" type="text" id="MICR" maxlength="9" />
+            <label><b>SAN:</b></label><input class="form-control" type="text" id="SAN" maxlength="6" />
+        </div><br />
+
+        <div class="col-sm-2 padding-0" align="center">
+            <button id="SANMICR" type="button" class="btn btn-danger btn-sm" onclick="AddSANMICR();">Add</button>
+        </div><br />
+
+        <div class="col-sm-2 padding-0" align="center">
+            @using (Html.BeginForm("IndexCSV", "sanmicr", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="postedFile" />
+                <input type="submit" value="Import" />
+            }
+        </div><br />
+
+
+    </div>
+
+</div>
+
+<style>
+    table, th, td {
+        border: 2px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+<table id="HolidayTable" style="width:30%" align="center">
+    <tr>
+        <th hidden>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Holiday_Date)*@
+            MICR
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Holiday_Descripton)*@
+            SAN
+        </th>
+        <th>
+            Action
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.MICR_Code)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.SAN)
+            </td>
+
+
+            <td align="center">
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @*@Html.ActionLink("Delete", "DeleteHoliday", new { id = item.ID })*@
+                @Html.ActionLink(
+                "Delete",
+                "Deletesanmicr",
+                new { id = item.ID },
+                new { onclick = "return confirm('Are you sure you wish to delete?');" })
+
+
+                @*<button id="DeleteHoliday" type="button" class="btn btn-danger btn-sm" onclick="DeleteHoliday(this);">Delete</button>*@
+
+
+            </td>
+
+
+
+        </tr>
+    }
+
+</table>

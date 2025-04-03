@@ -1,0 +1,112 @@
+﻿@model ikloud_Aflatoon.CMS_LocationMaster_DBS_View
+@{
+    ViewBag.Title = "EditCMS_LocationData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "EditCMS_LocationData";
+}
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+
+    function checkForDuplicate() {
+
+        if ($("#LocationCode").val() == "" || $("#LocationCode").val() == null) {
+            alert('Please Enter Location Code!!!');
+            return false;
+        }
+        if ($("#LocationName").val() == "" || $("#LocationName").val() == null) {
+            alert('Please Enter Location Name!!!');
+            return false;
+        }
+
+        var location_code = document.getElementById("LocationCode").value;
+        var location_name = document.getElementById("LocationName").value;
+        var ID = document.getElementById("ID").value;
+        var result = "";
+
+        $.ajax({
+            url: RootUrl + 'CMS_LocationMaster/CheckForDuplicateRecordUpdate',
+            // type: 'Post',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
+            data: {
+                location_code: location_code, location_name: location_name, ID: ID
+            },
+            async: false,
+            success: function (data) {
+                debugger;
+                console.log("data - " + data);
+                result = JSON.parse(data);
+                console.log("result - " + result);
+
+            }
+        });
+
+        if (result == "true" || result == true) {
+            console.log("IN IF result");
+            alert("Duplicate record found , please enter different value.");
+            return false;
+        }
+        else {
+            console.log("IN ELSE result");
+            return true;
+        }
+    }
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="col-md-12 form-horizontal">
+            <h4>Update Location</h4>
+            <div>
+                @Html.ActionLink("Back to CMS Location List", "Index")
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LocationCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LocationCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LocationCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LocationName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Update" class="btn btn-default" onclick="return checkForDuplicate();" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="color:green">
+                        @ViewBag.Message
+
+                    </div>
+                </div>*@
+        </div>
+    </div>
+}

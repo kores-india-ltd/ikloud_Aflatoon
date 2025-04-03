@@ -1,0 +1,111 @@
+﻿@model IEnumerable<ikloud_Aflatoon.SlipAmountCapture>
+@{
+    ViewBag.Title = "SlipAmount";
+}
+
+@{
+    ViewBag.Title = "Slip Amount";
+    ViewBag.header = "Slip Amount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+<script src="~/Scripts/SlipAmount.js"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" name="DEbySnpt" id="DEbySnpt" value="@Session["blndebysnippet"].ToString()" />
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    <body class="w3-container w3-center">
+        <div id="AcSnipimg" class="w3-container">
+            <object id="myimg" class="w3-card-8 w3-image" data="~/Icons/noimagefound.jpg" type="image/jpg"></object>
+        </div>
+        <div class="w3-container">
+            <div id="AcFullimg" style="display:none">
+                <object class="w3-card-8 w3-image" id="myfulimg" data="~/Icons/noimagefound.jpg" type="image/jpg"></object>
+            </div>
+        </div>
+        @*<div style="padding-left:10%">
+                <img id="myimg" src="http://ABID//ImageServer//iKloudIwImages/09.11.2015/4/11.jpg" alt="ItemImg" style="width:600px;height:300px" />
+            </div>*@
+        <div>
+            <br />
+        </div>
+        <form class="w3-form">
+            <div class="w3-container w3-row">
+                <span  style="font-weight:700;text-align:left">  Slip Amount:</span>
+                <input  style="width: auto;font-weight:700" type="text" id="SlpAmount" autocomplete="off" maxlength="15" name="SlpAmount" />
+            </div>
+            <div>
+                <input type="hidden" id="cnt" value="1" />
+                <input type="hidden" id="tempcnt" value="1" />
+            </div>
+            <div>
+                <br />
+            </div>
+            <div style="float:inherit" class="w3-container">
+
+                <input class="w3-btn w3-margin-left" type="button" name="btnok" id="btnok" value="Accept" />
+                <input class="w3-btn" type="button" id="btnback" value="Back" />
+                @*<input class="w3-btn" type="button" id="btnRefer" value="Refer" />
+                    <input class="w3-btn" type="button" id="btnRejct" value="Reject" />*@
+                <input class="w3-btn" type="button" name="bbtnClose" id="bbtnClose" value="Close" />
+
+            </div>
+        </form>
+
+    </body>
+
+    <script language="javascript" type="text/javascript">
+
+        var array = @Html.Raw(
+
+             Json.Encode(
+                 (Model).Select(m=> new
+                 {
+                     Id = m.Id,
+                     FrontGreyImagePath = m.FrontGrayImagePath,
+                     SlipAmount = m.SlipAmount,
+                     Action = m.Action,
+                     FrontTiffImagePath = m.FrontTiffImagePath,
+                     Status= m.Status,
+                     RawDataId = m.RawDataId,
+                     CustomerId = m.CustomerId,
+                     DomainId=m.DomainId,
+                     ScanningNodeId=m.DomainId,
+                 })
+             )
+         );
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            passval(array);
+        }
+    </script>
+}
+<div id="result">
+
+</div>
+
+@*<script type="text/javascript">
+        function Sclose()
+        {
+            // alert('ok');
+            document.getElementById('frmclose').submit();
+        }
+    </script>*@

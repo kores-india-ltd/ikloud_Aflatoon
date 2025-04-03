@@ -1,0 +1,91 @@
+﻿@model ikloudprowebapp.Models.instrumentView
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/SlipChqValidation.js"></script>
+<head>
+    <title>DisplayDoc</title>
+
+</head>
+
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.Hidden("domainid") 
+        @Html.Hidden("scannodeid") 
+        @Html.Hidden("brnchno")  
+        @Html.Hidden("btchid")  
+        @Html.Hidden("btchno")   
+        @Html.Hidden("captureRawId")    
+        @Html.Hidden("doctype")    
+        @Html.Hidden("slipno")   
+        @Html.HiddenFor(m=>m.FrontGreyImage) 
+        @Html.HiddenFor(m=>m.BackGreyImage) 
+        
+        <div>
+            <table>
+
+                <tr>
+                    <td>Domain : </td>
+                    <td>@Html.DisplayFor(m => m.domainId)</td>
+                </tr>
+                <tr>
+                    <td>Scanning Node : </td>
+                    <td>@Html.DisplayFor(m => m.scanningNodeId)</td>
+                </tr>
+                <tr>
+                    <td>Branch Code : </td>
+                    <td>@Html.DisplayFor(m => m.branchNo)</td>
+                </tr>
+                <tr>
+                    <td>Batch Number: </td>
+                    <td>@Html.DisplayFor(m => m.batchNo)</td>
+                </tr>
+                <tr>
+                    @if (Model.InstrumentType == "S")
+                    {
+                        <td>Slip Seq Number: </td>
+                        <td>@Html.DisplayFor(m => m.slipSeqNo)</td>
+                    }
+                    else
+                    {
+                        <td>Batch Seq Number: </td>
+                        <td>@Html.DisplayFor(m => m.batchSeqNo)</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Front Image:<input name="rd1" type="radio" checked="checked" onclick="displayimg('F');" />
+                    </td>
+                    <td>Back Image:
+                        <input name="rd1" type="radio" onclick="displayimg('B');"  /></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            @*<img src='@Model.FrontGreyImage' alt="Sample Image" width="300px" />*@
+            <img id="imgfront" src="@Model.FrontGreyImage" />
+
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(m => m.InstrumentType)
+            &nbsp;
+            @Html.EditorFor(m => m.InstrumentType, new { htmlAttributes = new { @style = "width:100px", @maxlength = "1" } })
+            @Html.ValidationMessageFor(m => m.InstrumentType)
+        </div>
+        <div>
+            <br />
+            <input type="submit" id="btnsubmit" name="command" value="Save" />
+            &nbsp;
+            <input type="submit" id="btnsubmit" name="command" value="Close" />
+        </div>
+            
+        
+    }
+</body>
+</html>

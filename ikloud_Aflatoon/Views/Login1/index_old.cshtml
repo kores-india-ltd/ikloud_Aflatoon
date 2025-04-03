@@ -1,0 +1,145 @@
+﻿@model ikloud_Aflatoon.Models.AppStResult
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.disable == true)
+    {
+        <script type="text/javascript">
+            alert('@ViewBag.meg');
+        </script>
+    }
+}
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/LoginJS.js"></script>
+<script src="~/Scripts/MyJson.js"></script>
+@*<script src="~/Scripts/sha256.js"></script>*@
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+<script type="text/javascript">
+
+    
+
+    //$(document).ready(function () {
+    //    //document.getElementById("name").focus();
+    //    debugger;
+    //    alert(encrypt("jayant", "kores@1234"));
+
+    //});
+    function set() {
+        document.getElementsByName("name").focus();
+    }
+
+    function TempvalLogin() {
+
+
+        var clearing = $('input[name=clearing]:checked').val();
+
+        if (clearing == "") {
+            alert('Please select Clearing type!!');
+            document.getElementById('clOw').focus();
+            return false;
+        }
+        if (clearing == "Outward") {
+            var procdt = document.getElementById('ProcDate')
+
+            var selectdate = procdt.options[procdt.selectedIndex].text;
+
+            if (selectdate == "Select") {
+                alert('Please select processing date!!');
+                document.getElementById('ProcDate').focus();
+                return false;
+            }
+        }
+        //else if (clearing == "Inward") {
+        //    alert('Inward clearing  is disable !!!');
+        //    return false;
+        //}
+    }
+</script>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+@if (ViewBag.sessionout != null)
+{
+    <script type="text/javascript">
+        alert('@ViewBag.sessionout');
+    </script>
+}
+
+<div class="w3-form">
+
+
+    @using (Html.BeginForm("Index_Old", "Login", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width: 600px">
+
+            <div class="w3-center">
+                <br>
+
+                <img src="~/Icons/login_avatar_male_blue.png" alt="Avatar" style="width: 30%" class="w3-circle w3-margin-top">
+            </div>
+
+            <div class="w3-container">
+                <div class="w3-section">
+                    <label><b>Username</b></label>
+                    @*<input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username">*@
+                    @*@Html.EditorFor(model => model.name)*@
+
+                    <input class="w3-input w3-border w3-margin-bottom" data-val="true" id="name" name="name" autocomplete="off" type="text" value="" maxlength="10" placeholder="Enter Username" />
+                    @Html.ValidationMessageFor(model => model.name)
+
+                    <label><b>Password</b></label>
+                    @*<input class="w3-input w3-border" type="text" placeholder="Enter Password">*@
+                    @*@Html.PasswordFor(model => model.pass, new { autocomplete = "OFF" } )*@
+                    <input class="w3-input w3-border" autocomplete="OFF" data-val="true" id="pass" name="pass" type="password" maxlength="20" placeholder="Enter Password" />
+
+                    @Html.ValidationMessageFor(model => model.pass)
+
+                    @*<label><b>Processing Type</b></label>
+                        <select class="w3-select" name="Proctype" id="Proctype">
+                            <option value="select" disabled selected>Select Clearing Type</option>
+                            <option value="OW">OW</option>
+                            <option value="IW">IW</option>
+                        </select>*@
+
+
+
+                    @*<button class="w3-btn w3-btn-block w3-green">Login</button>*@
+                    @*<input class="w3-btn w3-btn-block w3-theme" type="submit" name="templogn" id="templogn" value="Login" onclick="return(TempvalLogin())" style="display:none" />
+                        <input class="w3-btn w3-btn-block w3-theme" type="button" name="logn" id="logn" value="Login" onclick="(login());" style="display:none" />*@
+                    @* <input class="w3-check w3-margin-top" type="checkbox" checked="checked">
+                        onclick="changeclr('IW')"  onclick="changeclr('OW');" Remember me*@
+                </div>
+                <div class="w3-center">
+                    <input class="w3-radio " type="radio" name="clearing" id="clOw" value="Outward" checked="checked" /><b>Outward</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w3-radio" type="radio" name="clearing" id="clIw" value="Inward"  /><b>Inward</b>
+                </div>
+                @*@Html.Action("Index", new { OW = "OW" })*@
+                <div id="divprocdate" class="w3-section">
+
+                </div>   @*onclick="return (formatdate())"*@
+                <input class="w3-btn w3-btn-block w3-theme" type="submit" name="templogn" id="templogn" value="Login" onclick="return (formatdate())"   />
+                @* <input class="w3-btn w3-btn-block w3-theme" type="button" name="logn" id="logn" value="Login" onclick="(login());" style="display:none" />*@
+            </div>
+
+            <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+                @*<button type="reset" class="w3-btn w3-red" onclick="set()">Reset</button>*@
+                @*<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>*@
+            </div>
+
+        </div>
+
+        @*<script type="text/javascript">
+                document.getElementById("name").focus();
+            </script>*@
+    }
+
+
+</div>
+
+

@@ -1,0 +1,108 @@
+﻿@model ikloud_Aflatoon.UserMaster
+<input type="hidden" id="accesschange" value="1" />
+<table style="width:100%; padding-left:10%;padding-right:10%" id="tt">
+    <tr>
+        <td>
+            Select User Type
+        </td>
+        <td>@Html.DropDownList("usertype", new SelectList(ViewBag.Vlevel), "Select")</td>
+        <td>Select User Access Level</td>
+        <td>
+            @Html.DropDownList("SelectedAccesslevel", null, "Select")
+        </td>
+        <td>Select Vendor<font color="red">*</font></td>
+        <td>@Html.DropDownList("VendorCode", new SelectList(ViewBag.VendorCode), "Select")</td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.LoginID)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.LoginID)
+            @Html.ValidationMessageFor(model => model.LoginID)
+        </td>
+        <td>
+            @Html.LabelFor(model => model.Password)
+        </td>
+        <td class="editor-field">
+            @* @Html.DisplayFor(model => model.Password)*@
+            @Html.HiddenFor(model => model.Password)
+            @Html.TextBoxFor(model => model.Password, new { disabled = "disabled", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </td>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </td>
+        <td>
+            <select name="title" id="title">
+                <option value="select">Select</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Dr.">Dr.</option>
+            </select>
+            @* @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)*@
+        </td>
+    </tr>
+    <tr>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </td>
+        <td class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </td>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </td>
+        <td class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </td>
+        <td class="editor-label">
+            Date Of Birth
+        </td>
+        <td>
+            <!--onclick="javascript:NewCssCal('udob');" style="cursor: pointer;-->
+            <input type="text" id="datepicker" name="datepicker" readonly="true" style="cursor:pointer; width: 90px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.EmailID)
+        </td>
+        <td class="editor-field">
+            @Html.EditorFor(model => model.EmailID)
+            @Html.ValidationMessageFor(model => model.EmailID)
+        </td>
+        <td class="editor-label">
+            @Html.LabelFor(model => model.Active)
+        </td>
+        <td class="editor-field">
+            @Html.CheckBoxFor(model => model.Active)
+            @Html.ValidationMessageFor(model => model.Active)
+        </td>
+        <td>
+            Select Location<font color="red">*</font>
+        </td>
+        <td>
+            @Html.DropDownList("city", new SelectList(ViewBag.city), "Select")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Password Policy
+        </td>
+        <td>
+            @Html.DropDownList("policynm", new SelectList(ViewBag.policy), "Select")&nbsp;&nbsp; <input type=button value="Details" onclick="policydetails();" />
+        </td>
+    </tr>
+</table>
+<div id="dialogEditUser" title="Policy Details">
+</div>
+<script>
+    document.getElementById("Active").checked = true;
+</script>
+@* <div id="changdetls" style="display:none">
+    </div>*@

@@ -1,0 +1,90 @@
+﻿@model ikloud_Aflatoon.Infrastructure.SelectionForBranchDataEntry
+
+@{
+    /**/
+
+    ViewBag.Title = "SelectionForBranchDataEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+@*<script src="~/Scripts/jquery-2.1.4.js"></script>*@
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+@*<script src="~/Scripts/modernizr-2.8.3.js"></script>*@
+<script src="@Url.Content("~/Scripts/modernizr-2.8.3.js")"></script>
+<script src="@Url.Content("~/Scripts/SelectionBranchDataEntry.js")"></script>
+@*<script src="~/Scripts/SelectionBranchDataEntry.js"></script>*@
+
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+
+<div class="w3-form" style="padding-top:40%">
+    @using (Html.BeginForm("SelectionForBranchDataEntry", "OWBranchLevelDataEntry", FormMethod.Post, Model))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.BranchCodeList)
+        @Html.HiddenFor(m => m.BatchNoList)
+
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom w3-round-xlarge w3-padding-16 w3-light-grey" style="max-width: 600px">
+            <div class="w3-container">
+                <div id="divScanNode" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Scanning Node</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @Html.DropDownList("ScanningNodeSelect", new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "Select Scanning Node",
+                                                        new { @class = "form-control" })
+                    </div>
+                </div>
+                <div id="divBranch" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Branch Code</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @Html.DropDownList("BranchSelect", new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "Select Branch",
+                                                        new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div id="divBranch" class="w3-row w3-padding-16">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Scanning Type</label>&nbsp;&nbsp;
+                    </div>
+                    <div class="w3-col m8">
+                        @Html.DropDownList("SelectScanningType", new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "Select Scanning Type",
+                                                        new { @class = "form-control" })
+                    </div>
+                </div>
+                <div id="divBatch" class="w3-row w3-padding-12">
+                    <div class="w3-col m4">
+                        <label class="w3-label w3-text-black" style="font-weight:600">Select Batch No.</label>
+                    </div>
+                    <div class="w3-col m8">
+                        <span>
+                            @Html.DropDownList("BatchSelect", new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"), "Select Batch",
+                                new { @class = "form-control" })
+                        </span>
+                    </div>
+                </div>
+                <div class="w3-center w3-padding-16">
+                    <input class="w3-btn" type="submit" name="select" id="select" value="Select" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w3-btn" type="button" name="cancel" id="cancel" value="Cancel" onclick="GoToHomePage();" />
+                    <input class="w3-btn" type="button" name="btnCloseBatch" id="btnCloseBatch" value="Unlock" style="padding-left:5px;" />
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

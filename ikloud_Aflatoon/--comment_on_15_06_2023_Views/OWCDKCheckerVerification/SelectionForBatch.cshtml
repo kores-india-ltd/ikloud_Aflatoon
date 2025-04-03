@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ikloud_Aflatoon.BatchMaster>
+
+@{
+    ViewBag.Title = "SelectionForBatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Batch";
+}
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    $(document).ready(function () {
+        $("#Close").click(function () {
+
+            console.log("In Close Home button");
+            var url = RootUrl + "Home/IWIndex";
+            window.location.href = url;
+        });
+
+    });
+</script>
+
+<h2>Selection For Batch</h2>
+<button type="button" id="Close" value="Close" class="btn-info col-md-1" onclick="Close()">Close</button>
+<br />
+<br />
+<div class="row">
+    <table class="table table-responsive table-bordered">
+
+        @if (Model != null)
+        {
+            <tr style="background-color:lightblue;">
+                <th>
+                    Sr.No.
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BatchNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ScanningNodeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BranchCode)
+                </th>
+                <th></th>
+            </tr>
+            int index = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @index
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScanningNodeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BranchCode)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+
+    </table>
+</div>
+

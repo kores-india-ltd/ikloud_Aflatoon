@@ -1,0 +1,119 @@
+﻿<table id="chkt" style="width: 100%; padding-left:10%;padding-right:10%">
+    <tr>
+        <th style="font-size: 14px; text-align:left">
+            <b>Select Role Process</b>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="rc" id="rc" />
+            Reject Repaire
+        </td>
+        <td>
+            <input type="checkbox" name="de" id="de" />
+            Data Entry
+        </td>
+        <td>
+            <input type="checkbox" name="qc" id="qc" onclick="amtlimit();" />
+            QC
+        </td>
+        <td>
+            <input type="checkbox" name="vf" id="vf" onclick="amtlimit();" />
+            Verification
+        </td>
+        <td>
+            <input type="checkbox" name="rpt" id="rprt" />
+            Reports
+        </td>
+        <td>
+            <input type="checkbox" name="fildwnd" id="fildwnd" />
+            File Download
+        </td>
+        <td>
+            <input type="checkbox" name="ds" id="ds" />
+            Dashboard
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="qury" id="qury" />
+            Query
+        </td>
+        <td>
+            <input type="checkbox" name="quryMd" id="quryMd" />
+            Query with modification
+        </td>
+        <td>
+            <input type="checkbox" name="chirjct" id="chirjct" />
+            CHI Reject
+        </td>
+        <td>
+            <input type="checkbox" name="rvf" id="rvf" onclick="amtlimit();" />
+            RE-Verification
+        </td>
+        <td >
+            <input type="checkbox" name="rvf4" id="rvf4" onclick="amtlimit();"/>
+            L4-Verification
+        </td>
+        <td colspan="1">
+            <input type="checkbox" name="CCPH" id="CCPH"/>
+            CCPH-Verification
+        </td>
+    </tr>
+    @*<tr>
+            <td colspan="8">
+                <input type="checkbox" id="chkadmin" name="chkadmin" onchange="openadmin();" /><b> &nbsp; Admin Rights</b>
+            </td>
+        </tr>*@
+    <tr id="rowadmin">
+        <td>
+            <input type="checkbox" name="um" id="um" />
+            User Managment
+        </td>
+        <td>
+            <input type="checkbox" name="sod" id="sod" />
+            SOD
+        </td>
+        <td>
+            <input type="checkbox" name="master" id="master" />
+            Master
+        </td>
+        <td>
+            <input type="checkbox" name="settg" id="settg" />
+            Settings
+        </td>
+        <td>
+            <input type="checkbox" name="archv" id="archv" />
+            Archive
+        </td>
+        <td colspan="1">
+            <input type="checkbox" name="mesgbrd" id="mesgbrd" />
+            Message Broadcasting
+        </td>
+    </tr>
+    <tr></tr>
+    <tr id="l1" style="display:none">
+        <td>QC amount Limit From</td>
+        <td><input type="text" id="l1frm" name="l1lfrm" maxlength="14" /></td>
+        <td>To <input type="text" id="l1to" name="l1to" maxlength="14" /></td>
+
+    </tr>
+    <tr id="l2" style="display:none">
+        <td>Verification amount Limit From</td>
+        <td><input type="text" id="l2frm" name="l2lfrm" maxlength="14" /></td>
+        <td>To <input type="text" id="l2to" name="l2to" maxlength="14" /></td>
+
+    </tr>
+    <tr id="l3" style="display:none">
+        <td>Re-Verification amount Limit From</td>
+        <td><input type="text" id="l3frm" name="l3lfrm" maxlength="14" /></td>
+        <td>To <input type="text" id="l3to" name="l3to" maxlength="14" /></td>
+
+    </tr>
+    <tr id="l4" style="display:none">
+        <td>L4-Verification amount Limit From</td>
+        <td><input type="text" id="l4frm" name="l4lfrm" maxlength="14" /></td>
+        <td>To <input type="text" id="l4to" name="l4to" maxlength="14" /></td>
+
+    </tr>
+</table>

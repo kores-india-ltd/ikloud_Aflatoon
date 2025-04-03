@@ -1,0 +1,15 @@
+﻿@*<script src="~/Scripts/UserManagement.js"></script>*@
+
+<div id="ajaxDom" style="padding-left:10%">
+    <label class="w3-label w3-text-black" style="font-weight:600">  Select Domains:</label>
+    @Html.DropDownList("Dom", null, new { @multiple = true, @name = "Dom[]", style = "width: 100%" })
+</div>
+
+<script src="~/Scripts/jquery.multiselect.js"></script>
+
+<script type="text/javascript">
+    $('#Dom').multiselect({
+        columns: 6,
+        placeholder: 'Select Domains'
+    });
+</script>

@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+<script src="~/Scripts/LoginNew.js"></script>
+
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+
+    function ShowLoginSelectionForm() {
+        //console.log("In home page");
+        var url = RootUrl + "Outward";
+        //var url = RootUrl + "Home/IWIndex";
+        window.location.href = url;
+    }
+</script>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginIndex</title>
+</head>
+<body>
+    @*@if (ViewBag.msg != null)
+    {
+        <script type="text/javascript">
+            alert('@ViewBag.msg');
+        </script>
+    }*@
+    <div class="w3-form">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width: 600px">
+            <div class="w3-container">
+                <br />
+                <br />
+                <br />
+                <div class="w3-center">
+                    <div class="row col-md-12">
+                        <button type="button" id="btnOutward" name="clearing" value="Outward" class="btn-info btn-lg col-md-offset-2 col-md-3" onclick="ShowLoginSelectionForm()">Outward</button>
+                        <button type="button" id="btnInward" name="clearing" value="Inward" class="btn-info btn-lg col-md-offset-2 col-md-3" onclick="ShowLoginSelectionForm()">Inward</button>
+
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

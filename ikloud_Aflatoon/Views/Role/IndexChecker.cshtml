@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ikloud_Aflatoon.RoleMaster>
+
+@{
+    ViewBag.Title = "RoleChecker";
+    ViewBag.header = "Role Checker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+
+<h2>Role Checker</h2>
+@{
+    if (ViewBag.mesg != null)
+    {
+        ViewBag.message = ViewBag.mesg;
+    }
+    <p>
+        @ViewBag.message
+    </p>
+}
+<table class="ctable">
+
+    @if (Model != null)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleName)
+            </th>
+            <th></th>
+        </tr>
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href='@Url.Action("selecteduser", "CreateUser", new { Id = item.ID })'>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+                    @using (Html.BeginForm("ApproveRole", "Role", new { id = item.ID }))
+                    {
+                        <input type="submit" class="NavButton" name="btn" value="Approve" onclick='return (confirm("Are you sure to approve role?"))' />
+                    }
+
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Home", "IWIndex", "Home")
+</div>

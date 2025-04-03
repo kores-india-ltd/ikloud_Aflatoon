@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ikloud_Aflatoon.ActivityLog>
+@*<h2>
+    Activity Log
+</h2>*@
+@{
+    int cnt = 0;
+    int index = 0;
+}
+
+<div id="activitylogs">
+    @if (Model != null)
+    {
+        if(index == 0)
+        {
+            cnt = cnt + 1;
+            <div class="">
+                <h3><a>Logs</a></h3>
+                <table border="1">
+                    @if (cnt == 1)
+                    {
+                        <tr style="text-align: left">
+                            <th>
+                                Log Level
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                            <th>
+                                Login ID
+                            </th>
+                            <th>
+                                Reject Desc
+                            </th>
+                            <th>
+                                Time Stamp
+                            </th>
+                        </tr>
+                    }
+                    @foreach (var itm in Model)
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(a => itm.LogLevel)
+                            </td>
+                            <td>
+                                @{ 
+                                    string result = "";
+                                    string val = itm.ActionTaken;
+                                    if(val == "2")
+                                    {
+                                        result = "A";
+                                    }
+                                    else if(val == "8")
+                                    {
+                                        result = "M";
+                                    }
+                                    else if(val == "A")
+                                    {
+                                        result = "A";
+                                    }
+                                    else if (val == "M")
+                                    {
+                                        result = "M";
+                                    }
+                                    else
+                                    {
+                                        result = "R";
+                                    }
+                                }
+                                @Html.DisplayFor(a => result)
+                                @*@Html.DisplayFor(a => itm.ActionTaken == "2" ? "A" : (itm.ActionTaken == "8" ? "M" : "R"))*@
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.LoginId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.RejectDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.TimeStamp)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+        
+    }
+</div>
+

@@ -1,0 +1,58 @@
+1.Narration in applicationsettings should be Y
+2.10th column value in cbsdetails should be Y for narration
+
+
+insert into MOPCodeMasters
+values('00','NOT FOUND')
+
+insert into AccStatusCodeMasters
+values('00','NOT FOUND')
+
+
+
+
+type of ac's
+
+CURRENT AC 55000537615 white
+AC STOPP   11010114200 red **
+SAVING     55000460209 white
+DORMANT AC 11010252343 red**
+CLOSED AC  11011871566 red**
+NRE        11010425487 yellow**
+NRO        11010044365 red
+
+
+
+|S|DARBY  ABRAHAM|1021|NO STOP|01|C||||Y|SBCHQ-NRE-IND-INR|O|INR|187156|ALL TO SIGN JOINT|
+|S|KOCHANTHONY KURUTHUKULAM K.M|1021|NO STOP|03|D||||Y|SBCHQ-NRE-IND-INR|O|INR|025234|EITHER OR SURVIVOR|
+|S|SONITA  GURBUXANI|1011|NO STOP|15|A||||Y|SBCHQ-RES-IND-INR|O|INR|004436|MINOR/NATU GUARDIAN|
+|S|ERROL CANUTE  LAZRADO|1021|NO STOP|03|A||||Y|SBCHQ-NRE-STF-INR|O|INR|042548|EITHER OR SURVIVOR|
+|S|IMAAN FOUNDATION|1011|STOP|26|A||||Y|SBCHQ-RES-NONIND-INR|O|INR|011420|AUTHORISED SIGNATORY|
+|S|SHAH SAFE HARDWARE STORES|3038|NO STOP|04|A||||Y|BURHANI COMMUNITY CA IND|O|INR|100103|SINGLE|
+|S|NITA WINES|3011|NO STOP|03|A||||Y|CA-RES-NON IND-INR|O|INR|100142|EITHER OR SURVIVOR|
+
+
+
+
+
+foreach (DateTime item in lstdt)
+{
+	string foldrnm = item.Year
+                        + item.Month.ToString().PadLeft(2, '0')
+                        + item.Day.ToString().PadLeft(2, '0');
+
+                    string foldrpath = sourcefolderpath + "\\" + foldrnm;
+                    string btchsummryfilename = sourcefolderpath + "\\" + foldrnm + "\\" + batchsummaryfilename;
+	 if (Directory.Exists(foldrpath))
+                    {
+                        if (File.Exists(btchsummryfilename))
+                        {
+				dtconfig.Clear();
+	                        dtconfig.ReadXml(fname);
+				 foreach (DataRow btchrow in dtconfig.Tables["BatchDetails"].Rows)
+                            	 {
+					
+ 				 }
+			}
+
+}

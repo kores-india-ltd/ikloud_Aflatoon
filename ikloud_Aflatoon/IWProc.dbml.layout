@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 20" name="IWProc">
+  <DataContextMoniker Name="/IWProcDataContext" />
+  <nestedChildShapes>
+    <classShape Id="0bddae1b-411f-4df9-b57c-9346f31fafed" absoluteBounds="5.5, 0.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/IWProcDataContext/IWBatchSummary" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f1ec49d9-73f3-4c6f-8587-449a2926f7ca" absoluteBounds="5.515, 1.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bf937543-dc8e-41aa-97b1-896bf903b596" absoluteBounds="2.625, 0.625, 2, 7.7322412109375005">
+      <DataClassMoniker Name="/IWProcDataContext/IWDashboardNew" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b2b18900-4d0a-42d0-a501-4f211e49ce06" absoluteBounds="2.6399999999999997, 1.085, 1.9700000000000002, 7.1722412109375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0b24629f-641a-4020-99d5-0e98b39a8e79" absoluteBounds="6.875, 4.5, 2, 15.2319970703125">
+      <DataClassMoniker Name="/IWProcDataContext/EOD_IWFinalMainTransaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6e4d043e-b29b-4e2c-bd65-e7172f491180" absoluteBounds="6.89, 4.96, 1.9700000000000002, 14.6719970703125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

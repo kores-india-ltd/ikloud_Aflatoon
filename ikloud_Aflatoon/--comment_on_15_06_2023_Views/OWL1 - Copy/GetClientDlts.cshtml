@@ -1,0 +1,58 @@
+﻿<div id="clientdetails">
+
+    @if (ViewBag.customer != null)
+    {
+        if (ViewBag.customer == "Not Found")
+        {
+            <script type="text/javascript">
+                alert('Client Code was not found!!');
+                document.getElementById('ClientCd').focus();
+            </script>
+        }
+        else if (ViewBag.customer == "Customer are Suspended")
+        {
+            <script type="text/javascript">
+                alert('Customer are Suspended!!');
+                document.getElementById('ClientCd').focus();
+            </script>
+        }
+        else if (ViewBag.customer == "location")
+        {
+            <script type="text/javascript">
+                alert('Customer location and cheque scan branch location are different!!');
+                document.getElementById('ClientCd').focus();
+            </script>
+        }
+        else if (ViewBag.customer == "Sub Client Not Found")
+        {
+            <script type="text/javascript">
+                alert('Sub Client Code Was Not Found!!');
+                document.getElementById('subclient').focus();
+            </script>
+        }
+        else
+        {
+            if (ViewBag.subcustomercode == "true")
+            {
+                <div id="divsubclientcd">
+                    <input type="text" id="subclient" name="subclient" />
+                    <label class="w3-btn" id="btnsubclientcode">GetSubClient</label>
+                </div>
+
+            }
+            <input type="hidden" id="txtpayee" name="txtpayee" value="@ViewBag.customer" />
+            <label id="lblpayee">
+                Payee:  @ViewBag.customer
+            </label>
+        }
+
+    }
+    else
+    {
+        <script type="text/javascript">
+            alert('Client Code was not found!!');
+            document.getElementById('ClientCd').focus();
+        </script>
+    }
+
+</div>

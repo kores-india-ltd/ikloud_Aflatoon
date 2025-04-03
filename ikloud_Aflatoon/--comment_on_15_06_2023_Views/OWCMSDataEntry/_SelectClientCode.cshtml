@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ikloud_Aflatoon.CMS_CustomerMaster_DBS_View>
+<div class="w3-container">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr><td>Customer Code</td><td>Customer Name</td></tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr class="w3-hover-blue w3-opennav" onclick="clientCodeSelected('@item.CustomerCode', '@item.CustomerName', '@item.CustomerAccountNo')">
+                <td>@item.CustomerCode</td>
+                <td>@item.CustomerName</td>
+            </tr>
+        }
+    </table>
+</div>
+
+

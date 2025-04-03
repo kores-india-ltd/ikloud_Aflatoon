@@ -1,0 +1,40 @@
+﻿@model ikloud_Aflatoon.Models.PolicyDetails
+
+@Html.HiddenFor(m=>m.policyname)
+@Html.HiddenFor(m => m.pwdexprydat)
+@Html.HiddenFor(m => m.minpwdlength)
+@Html.HiddenFor(m => m.maxpwdlength)
+@Html.HiddenFor(m => m.Aplhanumericmadate)
+@Html.HiddenFor(m => m.Specialcharmandate)
+@Html.HiddenFor(m => m.Invalidattamtallow)
+@Html.HiddenFor(m => m.Deactivationdays)
+@Html.AntiForgeryToken()
+
+<div  id="dialogEditUser">
+<table>
+<tr>
+<th>Policy Name:@Model.policyname</th>
+</tr>
+<tr>
+<td>Password Expiry Days: @Model.pwdexprydat</td>
+</tr>
+<tr>
+<td>Min Password Length: @Model.minpwdlength </td>
+</tr>
+<tr>
+<td>Max Password Length: @Model.maxpwdlength </td>
+</tr>
+<tr>
+<td>AlphaNumeric Mandate: @Model.Aplhanumericmadate </td>
+</tr>
+<tr>
+<td>Special Character Mandate: @Model.Specialcharmandate </td>
+</tr>
+<tr>
+<td>InvalidAttempt Allow: @Model.Invalidattamtallow</td>
+</tr>
+<tr>
+<td>Deactivation Days: @Model.Deactivationdays</td>
+</tr>
+</table>
+</div>

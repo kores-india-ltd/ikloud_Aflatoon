@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "DeSelection";
+}
+
+<p>
+    @Html.ActionLink("Date QC", "IWDateQC")
+</p>
+@if (ViewBag.msg!=null)
+{
+    <script type="text/javascript">
+       
+        alert('@ViewBag.msg');
+    </script>
+}
+<span class="element brand">
+    <small>
+        @Html.ActionLink("Home", "index", "Home")
+    </small>
+</span>
+@using (Html.BeginForm("Index", "IWDataEntry"))
+{
+    <div style="padding-left:30%; padding-top:10%; align-content:center;" >
+        <label>Select Field</label>
+        <select id="selctDE" name="selctDE">
+            <option value="DebtAcct">DebtAccount</option>
+            <option value="Amount">Amount</option>
+            <option value="Date">Date</option>
+            <option value="Payee">Payee Name</option>
+            <option value="IWMICR">IWMICR</option>
+        </select>&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Ok" style="height:30px; width:80px" />
+    </div>
+}
+<script type="text/javascript">
+    document.getElementById('selctDE').focus();
+</script>

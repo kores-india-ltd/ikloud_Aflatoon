@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Suspense Que";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px; /* Adjust the gap between cards as needed */
+    }
+
+    .card {
+        background-color: #f0f0f0;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        .card a {
+            text-decoration: none; /* Remove the underline */
+            color: inherit; /* Use the color of the parent element (black by default) */
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Change the box-shadow on hover */
+        }
+</style>
+<h1>Suspense Queue</h1>
+
+<script>
+ 
+</script>
+
+<div class="card-container justify-content-center" style="align-content:center">
+    @if (Session["RoleName"].ToString() == "OPS Maker")
+    {
+        <div class="card">
+
+            <a href="#">
+                <h2>@Html.ActionLink("Maker", "SelectionForBranchCode", "IwSuspenseQueueCM", new { flg = "maker" }, null)</h2>
+
+
+            </a>
+        </div>
+
+    }
+    else if (Session["RoleName"].ToString() == "OPS Checker")
+    {
+        <div class="card">
+
+            <a href="#">
+                <h2>@Html.ActionLink("Maker", "SelectionForBranchCode", "IwSuspenseQueueCM", new { flg = "maker" }, null)</h2>
+                @*<h2>@Html.ActionLink("Checker", "SelectionForBranchCode", "ReferralQue")</h2>*@
+
+            </a>
+        </div>
+
+        <div class="card">
+
+            <a href="#">
+                <h2>@Html.ActionLink("Checker", "SelectionForBranchCode", "IwSuspenseQueueCM", new { flg = "checker" }, null)</h2>
+                @*<h2>@Html.ActionLink("Checker", "SelectionForBranchCode", "ReferralQue")</h2>*@
+
+            </a>
+        </div>
+    }
+   
+
+
+    <div>
+
+    </div>
+    <div>
+
+    </div>
+
+</div>

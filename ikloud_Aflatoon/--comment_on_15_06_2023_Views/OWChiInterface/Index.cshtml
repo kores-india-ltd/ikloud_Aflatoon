@@ -1,0 +1,248 @@
+﻿@{
+                /**/
+
+                ViewBag.Title = "DEM Interface";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/Json2.js"></script>
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+<script src="~/Scripts/OWChiInterface.js"></script>
+<link href="~/Content/themes/base/jquery-uiii.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+@*<input type="hidden" id="IS_Create_CXF_RecordID" value="@Session["IS_Create_CXF_RecordID"]" />
+<input type="hidden" id="IS_Create_CXF_Status" value="@Session["IS_Create_CXF_Status"]" />
+<input type="hidden" id="IS_Create_CXF_Clicked" value="@Session["IS_Create_CXF_Clicked"]" />*@
+
+<style>
+    /*#div3 {
+        background-color: cornflowerblue;
+        width: 23.33%;
+        float: left;
+        margin: 0 auto;
+    }
+
+    #div1 {
+        background-color: aquamarine;
+        width: 23.33%;
+        float: left;
+    }
+
+    #div2 {
+        background-color: burlywood;
+        width: 23.33%;
+        margin: 0 auto;
+    }*/
+</style>
+
+<br />
+<div class="row col-md-12">
+    <button type="button" id="Close" value="Close" class="btn-info col-md-1" onclick="Close()">Close</button>
+    <button type="button" id="TerminateRequest" value="TerminateRequest" class="btn-info col-md-offset-1 col-md-1" onclick="TerminateRequest()">Terminate</button>
+    <button type="button" id="CheckStatus" value="CheckStatus" class="btn-info col-md-offset-1 col-md-1" onclick="CheckStatus()">Check Status</button>
+</div>
+<br />
+<div class="row col-md-12">
+    <div id="div1" class="col-md-5" style="background-color:aliceblue;padding:5px;">
+        <div class="row col-md-12">
+            <label class="label col-md-offset-2 col-md-8 text-center" style="font-size:x-large;text-align:center;color:Highlight;"><b style="text-align:center;">CXF : DBS Outward Processing</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="CreateCXF" class="btn-info col-md-offset-3 col-md-6" onclick="CreateCXF()"> Create CXF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('1')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="UploadCXF" class="btn-info col-md-offset-3 col-md-6" onclick="UploadCXF()"> Upload CXF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('2')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="DownloadRES_OACK_CXF" class="btn-info col-md-offset-3 col-md-6" onclick="DownloadRES_OACK_CXF()"> Download RES/OACK </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('3')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <a id="Show_Records_CXF" class="col-md-offset-3 col-md-3" onclick="Show_Records_CXF()" data-toggle="modal" data-target="#basicModal"> Show Record </a>
+            <a id="Show_Files_CXF" class="col-md-offset-1 col-md-3" onclick="Show_Files_CXF()" data-toggle="modal" data-target="#basicModal"> Show Files </a>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div id="div2" class="col-md-5" style="background-color:aliceblue;padding:5px;">
+        <div class="row col-md-12">
+            <label class="label col-md-offset-2 col-md-8" style="font-size:x-large;text-align:center;color:Highlight;"><b>PPS : Positive Pay Processing</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="Read_PPS_File" class="btn-info col-md-offset-3 col-md-6" onclick="Read_PPS_File()"> Read PPS File </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('10')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="CreateCIIF" class="btn-info col-md-offset-3 col-md-6" onclick="CreateCIIF()"> Create CIIF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('11')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="UploadCIIF" class="btn-info col-md-offset-3 col-md-6" onclick="UploadCIIF()"> Upload CIIF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('12')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="DownloadRES" class="btn-info col-md-offset-3 col-md-6" onclick="DownloadRES()"> Download RES </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('13')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <a id="Show_Records_CIIF" class="col-md-offset-3 col-md-3" onclick="Show_Records_PPS()" data-toggle="modal" data-target="#basicModal"> Show Record </a>
+            <a id="Show_Files_CIIF" class="col-md-offset-1 col-md-3" onclick="Show_Files_CIIF()" data-toggle="modal" data-target="#basicModal"> Show Files </a>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row col-md-12">
+    <div id="div3" class="col-md-5" style="background-color:aliceblue;padding:5px;">
+        <div class="row col-md-12">
+            <label class="label col-md-offset-2 col-md-8" style="font-size:x-large;text-align:center;color:Highlight;"><b>DBS Outward Return</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="ReadBRF" class="btn-info col-md-offset-3 col-md-6" onclick="ReadBRF()"> Read BRF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('20')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <a id="Show_Records_BRF" class="col-md-offset-3 col-md-3" onclick="Show_Records_BRF()" data-toggle="modal" data-target="#basicModal"> Show Record </a>
+            <a id="Show_Files_BRF" class="col-md-offset-1 col-md-3" onclick="Show_Files_BRF()" data-toggle="modal" data-target="#basicModal"> Show Files </a>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <label class="label col-md-offset-2 col-md-8" style="font-size:x-large;text-align:center;color:Highlight;"><b>Vendor Processing</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="ReadVendorFile" class="btn-info col-md-offset-3 col-md-6" onclick="ReadVendorFile()"> Load Vendor File </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('23')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <a id="Show_Records_VendorFile" class="col-md-offset-3 col-md-3" onclick="Show_Records_VendorFile()" data-toggle="modal" data-target="#basicModal"> Show Record </a>
+            <a id="Show_Files_VendorFile" class="col-md-offset-1 col-md-3" onclick="Show_Files_VendorFile()" data-toggle="modal" data-target="#basicModal"> Show Files </a>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <label class="label col-md-offset-2 col-md-8" style="font-size:x-large;text-align:center;color:Highlight;"><b>CBS Extract</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="OutwardExtract" class="btn-info col-md-offset-3 col-md-6" onclick="OutwardExtract()"> Outward Extract </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('23')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            @*<button type="button" id="ReturnExtract" class="btn-info col-md-offset-3 col-md-6" onclick="ReturnExtract()"> Return Extract </button>*@
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('23')"> Terminate </button>*@
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div id="div4" class="col-md-5" style="background-color:aliceblue;padding:5px;">
+        <div class="row col-md-12">
+            <label class="label col-md-offset-2 col-md-8" style="font-size:x-large;text-align:center;color:Highlight;"><b>LVB Outward And Return Processing</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="Read_LVB_CXF" class="btn-info col-md-offset-3 col-md-6" onclick="Read_LVB_CXF()"> Read LVB CXF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('24')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <a id="Show_Records_LVB_CXF" class="col-md-offset-3 col-md-3" onclick="Show_Records_LVB_CXF()" data-toggle="modal" data-target="#basicModal"> Show Record </a>
+            <a id="Show_Files_LVB_CXF" class="col-md-offset-1 col-md-3" onclick="Show_Files_LVB_CXF()" data-toggle="modal" data-target="#basicModal"> Show Files </a>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="Read_LVB_BRF" class="btn-info col-md-offset-3 col-md-6" onclick="Read_LVB_BRF()"> Read LVB BRF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('21')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <a id="Show_Records_LVB_BRF" class="col-md-offset-3 col-md-3" onclick="Show_Records_LVB_BRF()" data-toggle="modal" data-target="#basicModal"> Show Record </a>
+            <a id="Show_Files_LVB_BRF" class="col-md-offset-1 col-md-3" onclick="Show_Files_LVB_BRF()" data-toggle="modal" data-target="#basicModal"> Show Files </a>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="Read_LVB_PPS" class="btn-info col-md-offset-3 col-md-6" onclick="Read_LVB_PPS()"> Read LVB PPS </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('21')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <label class="label col-md-offset-4 col-md-4" style="font-size:x-large;text-align:center;color:Highlight;"><b>InterBank</b></label>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="Create_IB_CXF" class="btn-info col-md-offset-3 col-md-6" onclick="Create_IB_CXF()"> Create IB CXF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('25')"> Terminate </button>*@
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <button type="button" id="Read_IB_RRF" class="btn-info col-md-offset-3 col-md-6" onclick="Read_IB_RRF()"> Read IB RRF </button>
+            @*<button type="button" class="btn-info col-md-offset-1 col-md-2" onclick="TerminateRequest('26')"> Terminate </button>*@
+        </div>
+    </div>
+</div> 
+
+<br />
+@*<div class="row col-md-12">
+        <div id="div5" class="col-md-5" style="background-color:aliceblue;padding:5px;">
+
+
+
+        </div>
+
+    </div>*@
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width:1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Display Data</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @*<h3>Modal Body</h3>*@
+                @*@Html.Action("RejectReason", "OWBranchLevelDataEntry")*@
+                <div id="tableData">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+        alert("@ViewBag.Message");
+        //var url = RootUrl + "IWChiInterface/Index";
+        //window.location.href = url;
+    </script>
+}

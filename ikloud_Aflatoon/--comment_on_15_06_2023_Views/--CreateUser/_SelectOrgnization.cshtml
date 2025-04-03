@@ -1,0 +1,15 @@
+﻿@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+@*<link href="~/Content/CSS/jquery.multiselect.css" rel="stylesheet" />*@
+
+<div id="ajaxorg" style="padding-left:10%">
+    <label class="w3-label w3-text-black" style="font-weight:600"> Select Orgnization:</label>
+    @Html.DropDownList("Org", null, new { @multiple = true, @name = "Org[]" })
+</div>
+<script src="~/Scripts/jquery.multiselect.js"></script>
+
+<script type="text/javascript">
+    $('#Org').multiselect({
+        columns: 1,
+        placeholder: 'Select Orgnization'
+    });
+</script>

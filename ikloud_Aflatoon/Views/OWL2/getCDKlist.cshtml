@@ -1,0 +1,53 @@
+﻿@*@model IEnumerable<ikloud_Aflatoon.Infrastructure.CdkList>*@
+@using PagedList.Mvc
+@model  PagedList.IPagedList<ikloud_Aflatoon.Infrastructure.CdkList>
+@{
+    ViewBag.Title = "getCDKlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="w3-container">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr>
+                <td>Domain Name</td>
+                <td>Branch Name</td>
+                <td>CDK Name</td>
+                <td>Count</td>
+                <td>Select</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr >
+                @*<tr class="w3-hover-blue w3-opennav" onclick="CdkSelectbranch('@item.CustomerID','@item.DomainId','@item.BranchCode')">*@
+                <td>@item.DomainName</td>
+                <td>@item.BranchName</td>
+                <td>@item.CDKName</td>
+                <td>@item.Count</td>
+                <td class="w3-hover-blue w3-opennav">@Html.ActionLink("Select", "OWL2Chq", new { id = 5, DomainId = @item.DomainId, BranchCode = item.BranchCode })</td>
+
+            </tr>
+
+        }
+    </table>
+</div>
+<div>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("getCDKlist", new { page }))
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function CdkSelectbranch(CustomerID, DomainId, BranchCode) {
+
+        
+    }
+</script>

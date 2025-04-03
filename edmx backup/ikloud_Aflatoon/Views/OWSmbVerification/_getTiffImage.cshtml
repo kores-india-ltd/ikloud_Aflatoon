@@ -1,0 +1,10 @@
+﻿@{int id = 0;
+
+}
+
+    @*<img id="myimg" class="w3-card-8 w3-image" style="cursor: zoom-in" onclick="fullImage();" src="~/Icons/noimagefound.jpg" />*@
+    <img id="myimg" class="w3-card-8 w3-image" src="@ViewBag.ImageData" style="cursor: zoom-in" onclick="fullImageTiff();" />
+
+    <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+    <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width: 90%; cursor: zoom-out" src="~/Icons/noimagefound.jpg" />
+</div>

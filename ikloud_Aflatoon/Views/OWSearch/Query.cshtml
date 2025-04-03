@@ -1,0 +1,143 @@
+﻿@model ikloud_Aflatoon.Infrastructure.IWSearch
+@{
+    ViewBag.Title = "Query";
+    ViewBag.header = "Query";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+
+
+<script src="@Url.Content("~/Scripts/OWSearch.js")"></script>
+<link href="@Url.Content("~/Content/themes/base/jquery-uiii.css")" rel="stylesheet" />
+
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+
+    //$("#btnsrch").click(function () {
+
+    //    var flg = validEmpty();
+    //    if (flg === true) {
+    //        document.getElementById('loader').style.display = "";
+
+    //        var p2f = "false";
+    //        var eod = "";
+    //        if ($("#p2f").is(":checked")) {
+    //            // alert("Checkbox is checked.");
+    //            p2f = "true";
+    //        }
+    //        var extrvalarry = [];
+    //        extrvalarry.push($("#ProcessingDate").val());
+    //        extrvalarry.push($("#ToProcessingDate").val());
+    //        extrvalarry.push($("#XMLSerialNo").val());
+    //        extrvalarry.push($("#XMLAmount").val());
+    //        extrvalarry.push($("#AccountNo").val());
+    //        extrvalarry.push($("#XMLPayorBankRoutNo").val());
+    //        extrvalarry.push($("#XMLTrns").val());
+    //        extrvalarry.push($("#BranchCode").val());
+    //        console.log(RootUrl);
+    //        console.log(extrvalarry);
+    //        $.ajax({
+    //            //url: RootUrl + 'OWSearch/Query',
+    //            //data: JSON.stringify({ extrafields: extrvalarry, P2f: p2f }),
+    //            //type: 'POST',
+    //            //url: RootUrl + 'OWSearch/SearchQuery',
+    //            url: RootUrl + 'Query_OW_Module/SearchQuery',
+    //            data: {
+    //                ProcessingDate: extrvalarry[0], ToProcessingDate: extrvalarry[1], XMLSerialNo: extrvalarry[2], XMLAmount: extrvalarry[3],
+    //                AccountNo: extrvalarry[4], XMLPayorBankRoutNo: extrvalarry[5], XMLTrns: extrvalarry[6], BranchCode: extrvalarry[7], P2f: p2f, EOD: eod
+    //            },
+    //            contentType: 'application/json; charset=utf-8',
+    //            dataType: 'html',
+    //            success: function (data) {
+    //                $('#chqsrch').html(data);
+    //                document.getElementById('loader').style.display = "none";
+    //            },
+    //            error: function (data) {
+    //                alert(data);
+    //            }
+    //        });
+    //    }
+    });
+</script>
+    @using (Html.BeginForm("QueryNew", "Query_OW_Module", FormMethod.Post))
+    {
+        <div class="w3-container">
+
+            <input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+            <input type="hidden" name="procdate" id="procdate" value="@Session["processdate"]" />
+
+            <div class="w3-row w3-large w3-grey w3-padding">
+                <div class="w3-col w3-center m2 w3-left ">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">From Date</label><span class="w3-left" style="color:red">*</span>  @Html.TextBoxFor(x => x.ProcessingDate, new { @class = "w3-left", @readonly = "readonly", style = "cursor:pointer;float:center;font-weight: 700;width:150px", autocomplete = "off" })
+                </div>
+                <div class="w3-col w3-center m2 w3-left ">
+                    <label class="w3-label w3-text-black w3-left" style="float: left;font-weight: 700">To Date</label> @Html.TextBoxFor(x => x.ToProcessingDate, new { @class = "w3-left", @readonly = "readonly", style = "cursor:pointer;float:center;font-weight: 700;width:150px", autocomplete = "off" })
+                </div>
+                <div class="w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black w3-left" style="float: left;font-weight: 700">Cheque No</label>  @Html.TextBoxFor(x => x.XMLSerialNo, new { @maxlength = 6, @class = "w3-left", style = "float: center;font-weight: 700;width:150px", autocomplete = "off" })
+                </div>
+
+                <div class="w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">Amount</label>  @Html.TextBoxFor(x => x.XMLAmount, new { @class = "w3-left", style = "float: center;font-weight: 700;width:160px", autocomplete = "off" })
+
+                </div>
+                <div class="w3-col w3-center m4 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">AccountNo</label>  @Html.TextBoxFor(x => x.AccountNo, new { @maxlength = Session["acto"], @class = "w3-left", style = "float: center;font-weight: 700;width:170px", autocomplete = "off" })
+                </div>
+
+            </div>
+            <div class="w3-row w3-large w3-grey w3-padding">
+                <div class=" w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">Sort Code</label>  @Html.TextBoxFor(x => x.XMLPayorBankRoutNo, new { @maxlength = 9, @class = "w3-left", style = "float: center;font-weight: 700;width:110px", autocomplete = "off" })
+
+                </div>
+                <div class="w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">Trans Code</label>  @Html.TextBoxFor(x => x.XMLTrns, new { @maxlength = 2, @class = "w3-left", style = "float: center;font-weight: 700;width:80px", autocomplete = "off" })
+
+                </div>
+                <div class="w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">P2F</label> &nbsp;&nbsp;<input type="checkbox" id="p2f" class=" w3-check w3-left" />
+                </div>
+                <div class="w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">Branch Code</label>  @Html.TextBoxFor(x => x.BranchCode, new { @maxlength = 10, @class = "w3-left", style = "float: center;font-weight: 700;width:80px", autocomplete = "off" })
+
+                </div>
+                <div class="w3-col w3-center m2 w3-left">
+                    <label class="w3-label w3-text-black" style="float: left;font-weight: 700">Search In EOD</label> &nbsp;&nbsp;<input type="checkbox" id="eod" class=" w3-check w3-left" />
+                </div>
+            </div>
+            <div class="w3-row w3-large w3-left w3-padding">
+                <div class="w3-container">
+                    <input class="w3-btn" type="submit" value="Search" id="btnsrch" />
+                    <input class="w3-btn" type="button" value="Close" id="btncls" />
+                    <label id="loader" style="display:none"> <span style="color:red">  Loading...</span><img src="~/Content/images/progressss.gif" /></label>
+                </div>
+            </div>
+
+            <!--}-->
+        </div>
+    }
+<div id="chqsrch">
+</div>
+
+<div id="iwimg" class="w3-modal w3-animate-zoom ">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('iwimg').style.display = 'none'" class="w3-closebtn">&times;</span>
+            <h2>Cheque Image</h2>
+        </header>
+        <div class="w3-container">
+            <object class="w3-card-8" id="myfulimg" data="~/Icons/noimagefound.jpg" type="image/jpg" style="width:100%"></object>
+        </div>
+        <footer class="w3-container w3-theme-dark"></footer>
+    </div>
+</div>
+<div id="chqdtls"></div>

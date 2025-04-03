@@ -1,0 +1,172 @@
+﻿@model IEnumerable<ikloud_Aflatoon.IWTempL1Verification>
+@{
+    ViewBag.Title = "L1 Verification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+
+<script src="~/Scripts/IWL1.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/Abids.css" rel="stylesheet" />
+<!--
+    <script src="~/Scripts/Json2.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+-->
+
+<header>
+    <h1>L1 Verification</h1>
+</header>
+<input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" id="cnt" value="1" />
+<input type="hidden" id="tempcnt" value="1" />
+<input type="hidden" name="blockkey" id="blockkey" value="0" />
+<input type="hidden" id="stlmnt" value="@Session["Settelmentdate"]" />
+<input type="hidden" id="sesson" value="@Session["SessionDate"]" />
+
+<div style="display:none">
+    @Html.DropDownList("rtnlist", new SelectList(ViewBag.rtnlist), "Select")
+</div>
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    <form>
+        <div class="left">
+            <table style="width:100%">
+                <tr>
+                    <td>AccountNo</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="accnt" name="accnt" maxlength="@Session["acto"]" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" id="getdtls" name="getdtls" value="GetDetails" onclick="getcbsdtls();" />
+                    </td>
+                </tr>
+            </table>
+            <div id="cbsdetails"></div>
+        </div>
+        <div class="content">
+            <img id="myimg" src="http://ABID//ImageServer//iKloudIwImages/09.11.2015/4/11.jpg" width="600" height="300" />
+        </div>
+        <div class="right" ng-app="">
+            <!--ng-app=""-->
+
+            <table style="width:60%">
+                <tr>
+                    <td>Date</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="ChqDate" name="ChqDate" maxlength="6" min="6"></td>
+                </tr>
+                <tr>
+                    <td>Amount</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="iwAmt" name="iwAmt" ng-model="iwAmt" /></td>
+                </tr>
+                <tr><td><h2 style="color:red"> {{iwAmt|number:2}} </h2></td></tr>
+            </table>
+        </div>
+
+        <div class="bottom">
+            <table style="width:100%">
+                <tr>
+                    <th>Chq No</th>
+                    <th>Sort Code</th>
+                    <th>SAN</th>
+                    <th>Trans Code</th>
+                </tr>
+                <tr>
+
+                    <td><input type="text" id="ChqnoQC" name="ChqnoQC" placeholder="Cheque No" style="width:70px;"></td>
+
+                    <td><input type="text" id="SortQC" name="SortQC" placeholder="Sort Code" style="width:100px;" /></td>
+
+                    <td><input type="text" id="SANQC" name="SANQC" placeholder="SAN" style="width:70px;" /></td>
+
+                    <td><input type="text" id="TransQC" name="TransQC" placeholder="Trans Code" style="width:70px;" /></td>
+                </tr>
+            </table>
+            <div class="left1">
+                <table style="width:100%;">
+                  
+                    <tr id="rtncd" style="display:none">
+                        <td>
+                            Reason Code<input type="text" id="IWRemark" name="IWRemark" maxlength="2" style="width:30px;">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label style="color:blue; text-decoration:underline" onclick="getreason();">Click here for reject reason</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Decision&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" id="IWDecision" name="IWDecision" style="width:30px;" maxlength="1" onkeyup="IWVef();" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" value="Ok" id="ok" name="ok" />&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" id="btnback" value="Back" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </form>
+
+    <div id="dialogEditUser" title="Reject Reason">
+    </div>
+    <script language="javascript" type="text/javascript">
+
+        var array = @Html.Raw(
+
+                 Json.Encode(
+                     (Model).Select(m=> new
+                     {
+                         ID = m.ID,
+                         FrontGreyImagePath = m.FrontGreyImagePath,
+                        FrontTiffImagePath= m.FrontTiffImagePath,
+                        XMLAmount=m.XMLAmount,
+                        ActualAmount=m.ActualAmount,
+                        DbtAccountNo=m.DbtAccountNo,
+                        Date=m.Date,
+                         XMLSerialNo = m.XMLSerialNo,
+                         XMLPayorBankRoutNo = m.XMLPayorBankRoutNo,
+                         XMLSAN = m.XMLSAN,
+                         XMLTransCode = m.XMLTransCode,
+                         EntrySerialNo = m.EntrySerialNo,
+                         EntryPayorBankRoutNo = m.EntryPayorBankRoutNo,
+                         EntrySAN = m.EntrySAN,
+                         EntryTransCode = m.EntryTransCode,
+                         CBSClientAccountDtls = m.CBSClientAccountDtls,
+                         CBSJointHoldersName = m.CBSJointHoldersName,
+                         RejectReason = m.RejectReason,
+
+                     })
+                 )
+             );
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            passval(array);
+        }
+    </script>
+
+}
+
+@*<div id="result">
+
+    </div>*@
+
+

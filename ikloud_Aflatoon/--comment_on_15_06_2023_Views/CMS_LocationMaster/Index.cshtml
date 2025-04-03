@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ikloud_Aflatoon.CMS_LocationMaster_DBS_View>
+@{
+    ViewBag.Title = "CMS LocationMaster Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CMS LocationMaster Index";
+}
+
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        alert('@ViewBag.Message');
+    </script>
+}
+
+<div class="container">
+    @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:green">
+                @ViewBag.Message
+
+            </div>
+        </div>*@
+    <br />
+    <p>
+        @Html.ActionLink("Add New CMS Location", "AddLocation")
+    </p>
+    <br />
+    <div class="row">
+        <table class="table table-responsive table-bordered">
+            @if (Model != null)
+            {
+                <tr style="background-color:lightblue;">
+                    <th>
+                        Sr.No.
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th></th>
+                </tr>
+                int index = 1;
+                foreach (var item in Model)
+                {
+                    @Html.HiddenFor(model => item.ID)
+                    <tr>
+                        <td>
+                            @index
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationName)
+                        </td>
+                        <td>
+                            @(item.IsActive ? "Active" : "InActive")
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditCMS_LocationData", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "DeleteCMS_LocationData", new { id = item.ID }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                        </td>
+                    </tr>
+
+                    index++;
+
+                }
+            }
+
+        </table>
+    </div>
+</div>

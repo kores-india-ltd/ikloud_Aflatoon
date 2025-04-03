@@ -1,0 +1,110 @@
+﻿@model IEnumerable<iKloud_Aflatoon.Models.DomainsDates>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+@if (ViewBag.userlogin == false)
+{
+
+    <script type="text/javascript">
+
+        var conval = confirm("This user already loged in if you contiue previuos session will expire!!");
+
+        if (conval == false) {
+            //alert(username);
+            window.location = RootUrl + "Login/Logout?user=" + '@Session["LoginID"].ToString()';
+        }
+        else {
+            //window.location = "/Home/setSession";
+            $.ajax({
+                url: RootUrl + 'Home/setSession',
+                dataType: 'html',
+                success: function (data) {
+                }
+            });
+        }
+
+    </script>
+
+}
+
+
+
+@if (Model.ToList().Count() == 0)
+{
+    <strong>@Html.ActionLink("Run SOD", "SOD", "SOD")</strong>
+}
+<div class="page secondary">
+
+
+    <div class="w3-container">
+
+        <div>
+            <h2>Select Domain And Date</h2>
+            <table class="w3-table w3-striped w3-bordered">
+                <thead class="w3-theme-d5">
+                    <tr>
+                        @* <th></th>*@
+                        <td>
+                            <h3>@Html.DisplayNameFor(model => model.DomainName)</h3>
+                        </td>
+
+                        <td>
+                            <h3>@Html.DisplayNameFor(model => model.ClearingType)</h3>
+                        </td>
+                        <td>
+                            <h3>@Html.DisplayNameFor(model => model.ProcessDates)</h3>
+                        </td>
+                        @* <th></th>*@
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @*<tr>
+                                <th>
+                                    @Html.HiddenFor(modelItem => item.DomainID)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DomainName)
+                                </td>
+                                <td>
+                                    @item.ProcessDates.ToString("dd-MMM-yyyy")
+                                    @* @Html.DisplayFor(modelItem => item.ProcessDates.ToString("dd-MMM-yyyy"))
+                                </td>
+                                <td>
+                                @Html.ActionLink(, "SelectedDomain", new { id = item.DomainID, name = item.DomainName, dt = item.ProcessDates, type = item.ClearingType })
+                                    @Html.DisplayFor(modelItem => item.ClearingType)
+                                </td>
+                              @*  <td>
+                                    @Html.ActionLink("Select", "SelectedDomain", new { id = item.DomainID, name = item.DomainName, dt = item.ProcessDates, type = item.ClearingType })
+                                </td>
+                            </tr>*@
+                        <tr>
+                            <td style="width: 60%; white-space:normal;text-align:left">
+                                @Html.DisplayFor(modelItem => item.DomainName)
+                            </td>
+                            <td style="width: 25%;text-align:left">
+                                @Html.DisplayFor(modelItem => item.ClearingType)
+                            </td>
+                            @* <td>
+                                    @item.ProcessDates.ToString("dd-MMM-yyyy")
+
+                                </td>*@
+
+                            <td style="width: 20%;text-align:left">
+                                @Html.ActionLink(item.ProcessDates.ToString("dd-MMM-yyyy"), "SelectedDomain", new { id = item.DomainID, name = item.DomainName, dt = item.ProcessDates, type = item.ClearingType, PostDate = item.PostDate, StaleDate = item.StaleDate, CustomerID = item.CustomerID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ikloud_Aflatoon.CMS_LocationMaster_DBS_View>
+<div class="w3-container">
+    <table class="w3-table w3-striped w3-bordered">
+        <thead class="w3-dark-grey">
+            <tr><td>Location Code</td><td>Location Name</td></tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr class="w3-hover-blue w3-opennav" onclick="pickupCodeSelected('@item.LocationCode', '@item.LocationName', '@item.ID')">
+                <td>@item.LocationCode</td>
+                <td>@item.LocationName</td>
+            </tr>
+        }
+    </table>
+</div>
+
+

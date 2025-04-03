@@ -1,0 +1,16 @@
+﻿<div id="clientdetails">
+    @if (ViewBag.customer != null)
+    {
+        <input type="hidden" id="txtpayee" name="txtpayee" value="@ViewBag.customer" />
+        <label id="lblpayee">
+            Payee:  @ViewBag.customer
+        </label>
+    }
+    else
+    {
+        <script type="text/javascript">
+            alert('Client Code was not found!!');
+        </script>
+    }
+
+</div>

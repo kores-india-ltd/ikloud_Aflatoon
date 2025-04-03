@@ -1,0 +1,181 @@
+﻿@model ikloud_Aflatoon.Models.AppStResult
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.disable == true)
+    {
+        <script type="text/javascript">
+            alert('@ViewBag.meg');
+        </script>
+    }
+}
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/LoginJS.js"></script>
+<script src="~/Scripts/MyJson.js"></script>
+<script src="~/Scripts/aes.js"></script>
+@*<script src="~/Scripts/sha256.js"></script>*@
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+<script type="text/javascript">
+
+    
+
+    //$(document).ready(function () {
+    //    //document.getElementById("name").focus();
+    //    debugger;
+    //    alert(encrypt("jayant", "kores@1234"));
+
+    //});
+    function set() {
+        document.getElementsByName("name").focus();
+    }
+
+    function TempvalLogin() {
+
+
+        var clearing = $('input[name=clearing]:checked').val();
+
+        if (clearing == "") {
+            alert('Please select Clearing type!!');
+            document.getElementById('clOw').focus();
+            return false;
+        }
+        if (clearing == "Outward") {
+            var procdt = document.getElementById('ProcDate')
+
+            var selectdate = procdt.options[procdt.selectedIndex].text;
+
+            if (selectdate == "Select") {
+                alert('Please select processing date!!');
+                document.getElementById('ProcDate').focus();
+                return false;
+            }
+        }
+        //else if (clearing == "Inward") {
+        //    alert('Inward clearing  is disable !!!');
+        //    return false;
+        //}
+    }
+
+    function LoginVal() {
+        debugger;
+        //var i1 = document.getElementById("name").value;
+        //var i2 = document.getElementById("pass").value;
+        //var s = document.getElementById("sess").value;
+        //console.log("i1 : " + i1);
+        //console.log("session : " + s);
+        if (document.getElementById("name").value == null || document.getElementById("name").value == "") {
+            alert("Enter Username !");
+            return false;
+        }
+        else if (document.getElementById("pass").value == null || document.getElementById("pass").value == "") {
+            alert("Enter Password !");
+            return false;
+        }
+        else {
+            //console.log("this is else");
+
+            //var key = CryptoJS.enc.Utf8.parse('8080808080808080');
+            var key = CryptoJS.enc.Utf8.parse(document.getElementById("sess").value);
+            //console.log("key");
+            var iv = CryptoJS.enc.Utf8.parse(document.getElementById("sess").value);
+            //console.log("iv");
+
+            //var encryptedLogin = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(i1), key, { keySize: 128 / 8, iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+            var encryptedLogin = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(document.getElementById("name").value), key, { keySize: 128 / 8, iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+            //console.log("encryptedLogin");
+            document.getElementById("valN").value = encryptedLogin;
+            //console.log("Login Assigned");
+            document.getElementById("name").value = "";
+
+            var encryptedPassword = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(document.getElementById("pass").value), key, { keySize: 128 / 8, iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+            //console.log("encryptedPass");
+            document.getElementById("valY").value = encryptedPassword;
+            //console.log("Pass Assigned");
+            document.getElementById("pass").value = "";
+
+            //document.getElementById("pass").value = "Password";
+            //document.getElementById("name").value = "LoginId";
+        }
+
+        //document.getElementById("valN").value = i1;
+        //document.getElementById("valY").value = i2;
+        //var c = document.getElementById("valN").value;
+        return true;
+    }
+
+</script>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+@if (ViewBag.sessionout != null)
+{
+    <script type="text/javascript">
+        alert('@ViewBag.sessionout');
+    </script>
+}
+
+<div class="w3-form">
+
+
+    @using (Html.BeginForm("Index_Old", "Login", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <input type="hidden" name="valN" id="valN" value="" />
+        <input type="hidden" name="valY" id="valY" value="" />
+        <input type="hidden" name="sess" id="sess" value="@Session["sessionVal"].ToString()" />
+
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width: 600px">
+
+            <div class="w3-center">
+                <br>
+
+                <img src="~/Icons/login_avatar_male_blue.png" alt="Avatar" style="width: 30%" class="w3-circle w3-margin-top">
+            </div>
+
+            <div class="w3-container">
+                <div class="w3-section">
+                    <label><b>Username</b></label>
+
+                    <input class="w3-input w3-border w3-margin-bottom" data-val="true" id="name" name="name" autocomplete="off" type="text" value="" maxlength="20" placeholder="Enter Username" />
+                    @Html.ValidationMessageFor(model => model.name)
+
+                    <label><b>Password</b></label>
+                    
+                    <input class="w3-input w3-border" autocomplete="OFF" data-val="true" id="pass" name="pass" type="password" maxlength="20" placeholder="Enter Password" />
+
+                    @Html.ValidationMessageFor(model => model.pass)
+
+                </div>
+                <div class="w3-center">
+                    <input class="w3-radio " type="radio" name="clearing" id="clOw" value="Outward" checked="checked" /><b>Outward</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input class="w3-radio" type="radio" name="clearing" id="clIw" value="Inward" /><b>Inward</b>
+                </div>
+                @*@Html.Action("Index", new { OW = "OW" })*@
+                <div id="divprocdate" class="w3-section">
+
+                </div>   @*onclick="return (formatdate())"*@
+                <input class="w3-btn w3-btn-block w3-theme" type="submit" name="templogn" id="templogn" value="Login" onclick="return LoginVal();" />
+                @* <input class="w3-btn w3-btn-block w3-theme" type="button" name="logn" id="logn" value="Login" onclick="(login());" style="display:none" />*@
+            </div>
+
+            <div class="w3-container w3-border-top w3-padding-hor-16 w3-light-grey">
+                @*<button type="reset" class="w3-btn w3-red" onclick="set()">Reset</button>*@
+                @*<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>*@
+            </div>
+
+        </div>
+
+        @*<script type="text/javascript">
+                document.getElementById("name").focus();
+            </script>*@
+    }
+
+
+</div>
+
+

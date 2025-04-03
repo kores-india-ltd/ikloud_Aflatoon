@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ikloud_Aflatoon.ChequeMICRCapture>
+@{
+    ViewBag.Title = "MICR";
+    ViewBag.header = "MICR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+
+<script src="@Url.Content("~/Scripts/Json2.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-2.1.4.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/modernizr-2.8.3.js")" type="text/javascript"></script>
+<script src="~/Scripts/jQueryRotate.js"></script>
+<script src="@Url.Content("~/Scripts/OWMICR.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+@*<script src="~/Scripts/angular.min.js"></script>*@
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" name="DEbySnpt" id="DEbySnpt" value="@Session["OWDEBySnippet"].ToString()" />
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    <div class="w3-container w3-row w3-center">
+        <div class="w3-container w3-col" id="AcSnipimg">
+            <img id="myimg" class="w3-card-8 w3-image" style="cursor:zoom-in" onclick="fullImage();" src="~/Icons/noimagefound.jpg" />
+        </div>
+        <div id="AcFullimg" style="display:none">
+            <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" src="~/Icons/noimagefound.jpg">
+        </div>
+        <div id="iwimg" class="w3-modal w3-animate-zoom " onclick="this.style.display='none'">
+            <img id="fulimg" class="w3-modal-content w3-card-8 w3-image" style="cursor:zoom-out" src="~/Icons/noimagefound.jpg" />
+        </div>
+    </div>
+    <body class="w3-container w3-center">
+        <form class="w3-form">
+
+            <div class="w3-row w3-center w3-margin-top">
+                <!--ng-app=""-->
+                @*<p>Your value: {{ChqnoQC|number:2}}</p>*@
+                <span class="2" style="font-weight:700">Cheque No:</span>
+                <input  type="text" id="ChqnoQC" name="ChqnoQC" ng-model="ChqnoQC" maxlength="6" style="font-weight: bold;font-size:x-large;width:120px;letter-spacing:2px" />
+                <span class="2" style="font-weight:700">SortCode:</span>
+                <input  type="text" id="SortQC" name="SortQC" maxlength="9" style="font-weight: bold;font-size:x-large;width:175px;letter-spacing:2px" />
+                <span class="2" style="font-weight:700">SAN No:</span>
+                <input  type="text" id="SANQC" name="SANQC" maxlength="6" style="font-weight: bold;font-size:x-large;width:140px;letter-spacing:2px" />
+                <span class="2" style="font-weight:700">Trans Code:</span>
+                <input  type="text" id="TransQC" name="TransQC" maxlength="2" style="font-weight: bold;font-size:x-large;width:73px;letter-spacing:2px" />
+            </div>
+            <div class="w3-hide">
+                <input type="hidden" id="cnt" value="1" />
+                <input type="hidden" id="tempcnt" value="1" />
+            </div>
+            <div>
+                <br />
+            </div>
+            <div class="w3-row w3-center">
+
+                <input class="w3-btn" type="button" name="btnok" id="btnok" value="Accept" />
+                <input class="w3-btn" type="button" id="btnback" value="Back" />
+                <input class="w3-btn" type="button" name="bbtnClose" id="bbtnClose" value="Close" />
+            </div>
+        </form>
+
+    </body>
+    <script language="javascript" type="text/javascript">
+
+        var array = @Html.Raw(
+
+                 Json.Encode(
+                     (Model).Select(m=> new
+                     {
+                         Id = m.Id,
+                         FrontGreyImagePath = m.FrontGreyImagePath,
+                         ChequeNoMICR = m.ChequeNoMICR,
+                         SortCodeMICR = m.SortCodeMICR,
+                         SANMICR = m.SANMICR,
+                         TransCodeMICR = m.TransCodeMICR,
+                         ChequeNoNI = m.ChequeNoNI,
+                         SortCodeNI = m.SortCodeNI,
+                         SANNI = m.SANNI,
+                         TransCodeNI = m.TransCodeNI,
+                         ChequeNoPara = m.ChequeNoPara,
+                         SortCodePara = m.SortCodePara,
+                         SANPara = m.SANPara,
+                         TransCodePara = m.TransCodePara,
+                         MICRRepairStatus = m.MICRRepairStatus,
+                         FrontTiffImagePath = m.FrontTiffImagePath,
+                         ChequeNoFinal= m.ChequeNoFinal,
+                         SortCodeFinal=m.SortCodeFinal,
+                         SANFinal=m.SANFinal,
+                         TransCodeFinal=m.TransCodeFinal,
+                         RawDataId = m.RawDataId,
+                         CustomerId = m.CustomerId,
+                         DomainId = m.DomainId,
+                         ScanningNodeId = m.ScanningNodeId,
+                     })
+                 )
+             );
+        if (document.getElementById('nodata').value != false)
+        {
+            //alert('ok');
+            passval(array);
+        }
+    </script>
+}
+<div id="result">
+
+</div>
+
+<script type="text/javascript">
+    function Sclose()
+    {
+        // alert('ok');
+        document.getElementById('frmclose').submit();
+    }
+</script>

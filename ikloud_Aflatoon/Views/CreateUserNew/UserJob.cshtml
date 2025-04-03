@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ikloud_Aflatoon.UserMaster>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.header = "User Management";
+    ViewBag.Title = "User Management";
+}
+
+<style type="text/css">
+    /* Styling for table and form elements */
+    table.ctable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        table.ctable th, table.ctable td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table.ctable tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table.ctable tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        table.ctable th {
+            background-color: #f2f2f2;
+        }
+
+    .alert-message {
+        padding: 15px;
+        background-color: #4CAF50; /* Green */
+        color: white;
+        margin-bottom: 20px;
+    }
+</style>
+
+<h2>User Activity</h2>
+<br />
+
+@if (ViewBag.modf == true)
+{
+    <div class="alert-message">
+        @ViewBag.message
+    </div>
+}
+
+<table class="ctable">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.LoginID)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+        <th>@Html.DisplayNameFor(model => model.DOB)</th>
+        <th>@Html.DisplayNameFor(model => model.EmailID)</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.LoginID)</td>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+            <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.DOB)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmailID)</td>
+            @*<td>*@
+            @* @using (Html.BeginForm("ResetUser", "CreateUserNew", FormMethod.Post))*@
+            @*{*@
+            @*-->*@
+            @* Include hidden field for user ID *@
+            @*@Html.HiddenFor(modelItem => item.ID)*@
+            @*<input type="submit" class="NavButton" value="Reset User" onclick='return confirm("Are you sure to reset this user?")' />*@
+            @*}*@
+            @* </td>*@
+            <td>
+                @Html.ActionLink("Reset User", "ResetUser", new { id = item.ID }, new { @class = "NavButton", onclick = "return confirm('Are you sure you want to reset this user?');" })
+            </td>
+        </tr>
+    }
+</table>
+
+    @*<div>
+        @Html.ActionLink("Back to Home", "Index", new { @class = "btn btn-primary" })
+    </div>*@

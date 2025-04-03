@@ -1,0 +1,202 @@
+﻿@model IEnumerable<ikloud_Aflatoon.HolidayMaster>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+
+        //$("#datepicker").datepicker();
+
+        //============ Adding validation by amol on 06/06/2023 =================================
+        $("#txtHolidayDesc").keypress(function (event) {
+
+            debugger;
+            //console.log("Event code - " + event.keyCode);
+            if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 20 || event.keyCode == 32 || event.keyCode == 40 || event.keyCode == 44 || (event.keyCode > 47 && event.keyCode < 58)
+                || (event.keyCode > 64 && event.keyCode < 91)) {
+
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+    });
+
+    function DeleteHoliday(e) {
+        debugger;
+        var Rooturl = '@Url.Content("~/")';
+
+        var $row = $(this).closest("tr");
+        var $tds = $row.find("td");             // Finds all children <td> elements
+
+        $.each($tds, function () {               // Visits every single <td> element
+            console.log($(this).text());        // Prints out the text within the <td>
+        });
+
+
+        $.ajax({
+            type: "POST",
+            url: Rooturl + "holiday/DeleteHoliday",
+            data: { ID: ID },
+            success: function (data) {
+                alert("Data Deleted Successfully!!");
+                location.reload();
+            }
+        });
+    }
+
+    function AddHoliday(){
+        var Rooturl = '@Url.Content("~/")';
+        var Holiday_Date = "";
+        var Holiday_Descripton = "";
+        Holiday_Date = document.getElementById('datepicker').value;
+        Holiday_Descripton = document.getElementById('txtHolidayDesc').value;
+
+        //-----------------------------anandi holiday-------------------------
+        var t = "";
+        $.ajax({
+            type: "POST",
+            url: Rooturl + 'holiday/ExistinHolidayMaster',
+            dataType: 'html',
+            data: { procdate: Holiday_Date },
+            async: false,
+            success: function (accresult) {
+                t = accresult.replace("\"", "");
+
+                //cbsbtn = true;
+            }
+
+        });
+
+        if (t == 'True"') {
+            alert('Holidate can not be same, Please select different Holiday Date !!!');
+            return false;
+        }
+
+        //-------------------------------anandi holiday-----------------
+
+
+        $.ajax({
+            type: "POST",
+            url: Rooturl + "holiday/AddHoliday",
+            data: { Holiday_Date: Holiday_Date, Holiday_Descripton: Holiday_Descripton },
+            success: function (data) {
+                alert("Data Added Successfully!!");
+                location.reload();
+            }
+        });
+    }
+
+</script>
+
+<div>
+
+    <div class="row">
+        <div class="col-sm-3 padding-0" align="center"><label><b>Holiday Date:</b></label></div>
+        <div class="col-sm-2 padding-0" align="center">
+            <input type="date" id="datepicker">
+        </div>
+        <div class="col-sm-4" align="center"><label><b>Description:</b></label></div>
+        <div class="col-sm-2 padding-0" align="center">
+            <input class="form-control" type="text" id="txtHolidayDesc" />
+        </div>
+
+        <div class="col-sm-2 padding-0" align="center">
+            <button id="ManualEntry" type="button" class="btn btn-danger btn-sm" onclick="AddHoliday();">Add</button>
+        </div>
+
+
+    </div>
+
+</div>
+
+<style>
+    table, th, td {
+        border: 2px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+<table id="HolidayTable" style="width:70%" align="center">
+    <tr>
+        <th hidden>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Holiday_Date)*@
+            Holiday Date
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Holiday_Descripton)*@
+            Holiday Descripton
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Created_by)*@
+            Created by
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Created_on)*@
+            Created on
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Modified_by)*@
+            Modified by
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Modified_on)*@
+            Modified on
+        </th>
+        <th>
+            Action
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Holiday_Date)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Holiday_Descripton)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Created_by)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Created_on)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Modified_by)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Modified_on)
+            </td>
+
+            <td align="center">
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @*@Html.ActionLink("Delete", "DeleteHoliday", new { id = item.ID })*@
+                @Html.ActionLink(
+                 "Delete",
+                 "DeleteHoliday",
+                 new { id = item.ID },
+                 new { onclick = "return confirm('Are you sure you wish to delete?');" })
+
+
+                @*<button id="DeleteHoliday" type="button" class="btn btn-danger btn-sm" onclick="DeleteHoliday(this);">Delete</button>*@
+
+
+            </td>
+        </tr>
+    }
+
+</table>

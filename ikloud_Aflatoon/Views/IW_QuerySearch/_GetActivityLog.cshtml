@@ -1,0 +1,439 @@
+﻿@model ikloud_Aflatoon.Infrastructure.IWActivityLogViewModal
+
+<style>
+
+     /* Style for scrollable table container */
+    .scrollable-table {
+        overflow-x: auto; /* Enable horizontal scrolling */
+        overflow-y: auto; /* Enable vertical scrolling */
+        max-height: 400px; /* Set a fixed height for the container */
+        border: 1px solid #ccc; /* Optional border for clarity */
+        padding: 8px;
+        background-color: #f9f9f9; /* Light background for better visibility */
+    }
+
+    /* Table styles */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .styled-table thead {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .styled-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Style for <hr> separator */
+    hr {
+        border: 0;
+        border-top: 2px solid #ccc;
+        margin: 24px 0;
+    }
+</style>
+
+
+<div class="scrollable-table">
+
+
+    <div>
+        <h4>L1 Verification</h4>
+        <div class="scrollable-table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ChequeNo</th>
+                        <th>L1 ChequeNo</th>
+                        <th>Cheque Modified</th>
+
+                        <th>SortCode</th>
+                        <th>L1 SortCode</th>
+                        <th>SortCode Modified</th>
+
+                        <th>SAN</th>
+                        <th>L1 SAN</th>
+                        <th>SAN Modified</th>
+
+                        <th>TC</th>
+                        <th>L1 TC</th>
+                        <th>TC Modified</th>
+
+                        <th>AccountNo</th>
+                        <th>L1 AccountNo</th>
+                        <th>Account Modified</th>
+
+                        <th>L1 Status</th>
+                        <th>L1 By</th>
+                        <th>L1 TimeStamp</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Get_OWL1ActivityLog != null && Model.Get_OWL1ActivityLog.Any())
+                    {
+
+                        foreach (var item in Model.Get_OWL1ActivityLog)
+                        {
+                            <tr>
+                                <td>@item.L1_ChequeNo</td>
+                                <td>@item.L1_AL_ChequeNo</td>
+                                <td>
+                                    @(item.L1_ChequeNo_Comparison == "Matched" ? "N" : "Y")
+                                </td>
+
+
+                                <td>@item.L1_SortCode</td>
+                                <td>@item.L1_AL_SortCode</td>
+                                <td>@(item.L1_SortCode_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L1_SAN</td>
+                                <td>@item.L1_AL_SAN</td>
+                                <td>@(item.L1_SAN_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L1_TC</td>
+                                <td>@item.L1_AL_TC</td>
+                                <td>@(item.L1_TC_Comparison == "Matched" ? "N" : "Y")</td>
+
+
+                                <td>@item.L1_CreditAccNo</td>
+                                <td>@item.L1_AL_CreditAccNo</td>
+                                <td>@(item.L1_CreditAccNo_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@(item.L1_status == "1" ? "Accept" : (item.L1_status=="2"?"Reject":"Exception"))</td>
+
+                                
+
+                                <td>@item.AL_L1_LoginId</td>
+
+                                <td>@item.L1timestamp</td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                        <tr>
+                            <td colspan="18" style="text-align: center;color:red;">No data found</td>
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+
+    <div>
+        <h4>L2 Verification</h4>
+        <div class="scrollable-table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ChequeNo</th>
+                        <th>L2 ChequeNo</th>
+                        <th>Cheque Modified</th>
+
+                        <th>SortCode</th>
+                        <th>L2 SortCode</th>
+                        <th>SortCode Modified</th>
+
+                        <th>SAN</th>
+                        <th>L2 SAN</th>
+                        <th>SAN Modified</th>
+
+                        <th>TC</th>
+                        <th>L2 TC</th>
+                        <th>TC Modified</th>
+
+                        <th>AccountNo</th>
+                        <th>L2 AccountNo</th>
+                        <th>Account Modified</th>
+
+                        <th>L2 Status</th>
+                        <th>L2 By</th>
+                        <th>L2 TimeStamp</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Get_OWL2ActivityLog != null && Model.Get_OWL2ActivityLog.Any())
+                    {
+                        foreach (var item in Model.Get_OWL2ActivityLog)
+                        {
+                            <tr>
+                                <td>@item.L2_ChequeNo</td>
+                                <td>@item.L2_AL_ChequeNo</td>
+                                <td>
+                                    @(item.L2_ChequeNo_Comparison== "Matched" ? "N" : "Y")
+                                </td>
+
+                                <td>@item.L2_SortCode</td>
+                                <td>@item.L2_AL_SortCode</td>
+                                <td>@(item.L2_SortCode_Comparison== "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L2_SAN</td>
+                                <td>@item.L2_AL_SAN</td>
+                                <td>@(item.L2_SAN_Comparison== "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L2_TC</td>
+                                <td>@item.L2_AL_TC</td>
+                                <td>@(item.L2_TC_Comparison== "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L2_CreditAccNo</td>
+                                <td>@item.L2_AL_CreditAccNo</td>
+                                <td>@(item.L2_CreditAccNo_Comparison== "Matched" ? "N" : "Y")</td>
+
+                                <td>@(item.L2_status == "1" ? "Accept" : (item.L2_status=="2"?"Reject":"Exception"))</td>
+                                <td>@item.AL_L2_LoginId</td>
+
+                                <td>@item.L2timestamp</td>
+
+                            </tr>
+                        }
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="18" style="text-align: center;color:red;">No data found</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+    <div>
+        <h4>L3 Verification</h4>
+        <div class="scrollable-table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ChequeNo</th>
+                        <th>L3 ChequeNo</th>
+                        <th>Cheque Modified</th>
+
+                        <th>SortCode</th>
+                        <th>L3 SortCode</th>
+                        <th>SortCode Modified</th>
+
+                        <th>SAN</th>
+                        <th>L3 SAN</th>
+                        <th>SAN Modified</th>
+
+                        <th>TC</th>
+                        <th>L3 TC</th>
+                        <th>TC Modified</th>
+
+                        <th>AccountNo</th>
+                        <th>L3 AccountNo</th>
+                        <th>Account Modified</th>
+
+                        <th>L3 Status</th>
+                        <th>L3 By</th>
+                        <th>L3 TimeStamp</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Get_OWL3ActivityLog != null && Model.Get_OWL3ActivityLog.Any())
+                    {
+
+
+                        foreach (var item in Model.Get_OWL3ActivityLog)
+                        {
+                            <tr>
+                                <td>@item.L3_ChequeNo</td>
+                                <td>@item.L3_AL_ChequeNo</td>
+                                <td>
+                                    @(item.L3_ChequeNo_Comparison == "Matched" ? "N" : "Y")
+                                </td>
+
+                                <td>@item.L3_SortCode</td>
+                                <td>@item.L3_AL_SortCode</td>
+                                <td>@(item.L3_SortCode_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L3_SAN</td>
+                                <td>@item.L3_AL_SAN</td>
+                                <td>@(item.L3_SAN_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L3_TC</td>
+                                <td>@item.L3_AL_TC</td>
+                                <td>@(item.L3_TC_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@item.L3_CreditAccNo</td>
+                                <td>@item.L3_AL_CreditAccNo</td>
+                                <td>@(item.L3_CreditAccNo_Comparison == "Matched" ? "N" : "Y")</td>
+
+                                <td>@(item.L3_status == "1" ? "Accept" : (item.L3_status=="2"?"Reject":"Exception"))</td>
+                                <td>@item.AL_L3_LoginId</td>
+
+                                <td>@item.L3timestamp</td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                        <tr>
+                            <td colspan="18" style="text-align: center;color:red;">No data found</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <h4>Suspence Queue</h4>
+        <div class="scrollable-table">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ChequeNo</th>
+                        <th>SQ ChequeNo</th>
+                        <th>Cheque Modified</th>
+
+                        <th>SortCode</th>
+                        <th>SQ SortCode</th>
+                        <th>SortCode Modified</th>
+
+                        <th>SAN</th>
+                        <th>SQ SAN</th>
+                        <th>SAN Modified</th>
+
+                        <th>TC</th>
+                        <th>SQ TC</th>
+                        <th>TC Modified</th>
+
+                        <th>AccountNo</th>
+                        <th>SQ AccountNo</th>
+                        <th>Account Modified</th>
+
+                        <th>SQ Maker Status</th>
+                        <th>SQ Maker ID</th>
+
+                        <th>SQ Checker Status</th>
+                        <th>SQ Checker ID</th>
+
+                        <th>SQ Maker TimeStamp</th>
+                        <th>SQ Checker TimeStamp</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Get_IWSQActivityLog != null && Model.Get_IWSQActivityLog.Any())
+                    {
+
+
+                        foreach (var item in Model.Get_IWSQActivityLog)
+                        {
+                            <tr>
+                                <td>@item.SQ_ChequeNo</td>
+                                <td>@item.SQ_AL_ChequeNo</td>
+                                <td>
+                                    @(item.SQ_ChequeNo_Comparison == "Matched" ? "N" :
+                                     item.SQ_ChequeNo_Comparison == "Not Matched" ? "Y" : " ")
+                                </td>
+
+                                <td>@item.SQ_SortCode</td>
+                                <td>@item.SQ_AL_SortCode</td>
+                                <td>
+                                    @(item.SQ_SortCode_Comparison == "Matched" ? "N" :
+                                    item.SQ_SortCode_Comparison == "Not Matched" ? "Y" : " ")
+                                </td>
+
+                                @*<td>@(item.SQ_SortCode_Comparison == "Matched" ? "N" : "Y")</td>*@
+
+                                <td>@item.SQ_SAN</td>
+                                <td>@item.SQ_AL_SAN</td>
+                                <td>
+                                    @(item.SQ_SAN_Comparison == "Matched" ? "N" :
+                                     item.SQ_SAN_Comparison == "Not Matched" ? "Y" : " ")
+                                </td>
+
+                                @*<td>@(item.SQ_SAN_Comparison == "Matched" ? "N" : "Y")</td>*@
+
+                                <td>@item.SQ_TC</td>
+                                <td>@item.SQ_AL_TC</td>
+                                <td>
+                                    @(item.SQ_TC_Comparison == "Matched" ? "N" :
+                                     item.SQ_TC_Comparison == "Not Matched" ? "Y" : " ")
+                                </td>
+
+                                @*<td>@(item.SQ_TC_Comparison == "Matched" ? "N" : "Y")</td>*@
+
+                                <td>@item.SQ_CreditAccNo</td>
+                                <td>@item.SQ_AL_CreditAccNo</td>
+                                <td>
+                                    @(item.SQ_CreditAccNo_Comparison == "Matched" ? "N" :
+                                    item.SQ_CreditAccNo_Comparison == "Not Matched" ? "Y" : " ")
+                                </td>
+
+                                @*<td>@(item.SQ_CreditAccNo_Comparison == "Matched" ? "N" : "Y")</td>*@
+
+
+                                <td>
+                                    @(item.SQ_Maker_status=="2" ? "Accept" :
+                                    item.SQ_Maker_status=="3" ? "Reject" : " ")
+                                </td>
+
+                                @*<td>@(item.SQ_Maker_status == "2" ? "Accept" : "Reject")</td>*@
+                                <td>@item.SQ_MakerID</td>
+
+
+
+                                <td>
+                                    @(item.SQ_Checker_status == "2" ? "Accept" :
+                                    item.SQ_Checker_status == "3" ? "Reject" :
+                                    item.SQ_Checker_status=="5" ? "Return To Maker": " ")
+                                </td>
+                                @*<td>
+                                    @(item.SQ_Checker_status == "2" ? "Accept" : (item.SQ_Checker_status == "5" ? "Return to Maker" : "Reject"))
+                                </td>*@
+                                <td>@item.SQ_CheckerID</td>
+
+
+
+                                <td>@item.SQ_MakerTime</td>
+                                <td>@item.SQ_CheckerTime</td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                        <tr>
+                            <td colspan="21" style="text-align: center;color:red;">No data found</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,347 @@
+﻿@model ikloud_Aflatoon.Models.IWDEStatus
+@if (Model != null)
+{
+
+    <div class="w3-row">
+        <!-- <div class="w3-col s4 w3-center">
+             <table border="1">
+                 <thead>
+                     <tr>
+                         <td colspan="4">
+                             <h3 style="font-weight:bold; background-color:#0f7a97">
+                                 MICR
+                             </h3>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td style="color:#000000">
+                             Total Record
+                         </td>
+                         <td style="color: #000000">
+                             Accepted
+                         </td>
+                         <td style="color: #000000">
+                             Rejected
+                         </td>
+                         <td style="color: #000000">
+                             Pending
+                         </td>
+
+                     </tr>
+                 </thead>
+                 <tr>
+                     <td>
+                         @Html.DisplayFor(m => m.TotalIW)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(m => m.MicrCompletedDE)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(m => m.MicrRejectedDE)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(m => m.MicrPendingDE)
+                     </td>
+                 </tr>
+             </table>
+         </div>-->
+        <!-- <div class="w3-col s4 w3-center">
+             <table border="1">
+                 <tr>
+                     <td colspan="3">
+                         <h3  style="font-weight:bold;background-color:#0f7a97">
+                             Account No
+                         </h3>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td style="color: #000000">
+                         Accepted
+                     </td>
+                     <td style="color: #000000">
+                         Rejected
+                     </td>
+                     <td style="color: #000000">
+                         Pending
+                     </td>
+
+                 </tr>
+                 <tr>
+                     <td>
+                         @Html.DisplayFor(m => m.ACompletedDE)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(m => m.ARejectedDE)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(m => m.APendingDE)
+                     </td>
+
+                 </tr>
+             </table>
+         </div>-->
+        <!--<div class="w3-col s4 w3-center">
+                <table border="1">
+                    <tr>
+                        <td colspan="3">
+                            <h3 style="font-weight:bold;background-color:#0f7a97">
+                                Amount
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #000000">
+                            Accepted
+                        </td>
+                        <td style="color: #000000">
+                            Rejected
+                        </td>
+                        <td style="color: #000000">
+                            Pending
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.AmtCompletedDE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.AmtRejectedDE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.AmtPendingDE)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>-->
+
+       <!-- <div class="w3-row">
+
+
+            <div class="w3-col s4 w3-center">
+                <table border="1">
+                    <tr>
+                        <td colspan="3">
+                            <h3 style="font-weight:bold;background-color:#0f7a97">
+                                Date
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #000000">
+                            Accepted
+                        </td>
+                        <td style="color: #000000">
+                            Rejected
+                        </td>
+                        <td style="color: #000000">
+                            Pending
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.DCompletedDE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.DRejectedDE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.DPendingDE)
+                        </td>
+                    </tr>
+                </table>
+            </div>-->
+           <!-- <div class="w3-col s4 w3-center">
+                <table border="1">
+                    <tr>
+                        <td colspan="3">
+                            <h3 style="font-weight:bold;background-color:#0f7a97">
+                                Date QC
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #000000">
+                            Accepted
+                        </td>
+                        <td style="color: #000000">
+                            Rejected
+                        </td>
+                        <td style="color: #000000">
+                            Pending
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.DCompletedQC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.DRejectedQC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.DPendingQC)
+                        </td>
+                    </tr>
+                </table>
+            </div>-->
+            <div class="w3-col s4 w3-center">
+                <table border="1">
+                    <tr>
+                        <td colspan="4">
+                            <h3 style="font-weight:bold;background-color:#0f7a97">
+                                Verification(L1)
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #000000">
+                            Verified
+                        </td>
+                        <td style="color: #000000">
+                            Accepted
+                        </td>
+                        <td style="color: #000000">
+                            Rejected
+                        </td>
+                        <td style="color: #000000">
+                            Pending
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.ATotalVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.AAcceptedVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ARjctVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.APendingVerf)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="w3-row">
+
+            <div class="w3-col s4 w3-center">
+                <table border="1">
+                    <tr>
+                        <td colspan="4">
+                            <h3 style="font-weight:bold;background-color:#0f7a97">
+                                Signverification(L2)
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #000000">
+                            Verified
+                        </td>
+                        <td style="color: #000000">
+                            Accepted
+                        </td>
+                        <td style="color: #000000">
+                            Rejected
+                        </td>
+                        <td style="color: #000000">
+                            Pending
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.ATotalsVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.AAcceptedsVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ARjctsVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.APendingsVerf)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="w3-col s4 w3-center">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td colspan="3">
+                                <h3 style="font-weight:bold;background-color:#0f7a97">
+                                    PayeeName
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: #000000">
+                                Accepted
+                            </td>
+                            <td style="color: #000000">
+                                Rejeted
+                            </td>
+                            <td style="color: #000000">
+                                Pending
+                            </td>
+
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.PCompletedDE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.PRejectedDE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.PPendingDE)
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="w3-col s4 w3-center">
+                <table border="1">
+                    <tr>
+                        <td colspan="4">
+                            <h3 style="font-weight:bold;background-color:#0f7a97">
+                                Reverification(L3)
+                            </h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #000000">
+                            Verified
+                        </td>
+                        <td style="color: #000000">
+                            Accepted
+                        </td>
+                        <td style="color: #000000">
+                            Rejected
+                        </td>
+                        <td style="color: #000000">
+                            Pending
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.ATotalRVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.AAcceptedRVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ARjctRVerf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.APendingRVerf)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        }

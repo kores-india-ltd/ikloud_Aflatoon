@@ -1,0 +1,154 @@
+﻿@model ikloud_Aflatoon.IWDataEntryView
+@{
+    /**/
+
+    ViewBag.Title = "IWDataEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="@Url.Content("~/Scripts/IWDataEntry.js")"></script>
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+    var acmaxlength = '@ViewBag.MaxAclen';
+    var acminlength = '@ViewBag.MinAclen';
+    var payeemaxlength = '@ViewBag.MaxPayeelen';
+
+    acmaxlength = acmaxlength - 1;
+    acminlength = acminlength - 1;
+    //payeemaxlength = payeemaxlength - 1;
+</script>
+
+<input type="hidden" id="accValidation" value="@Session["AccValidation"]" />
+<input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+<input type="hidden" id="nodata" value="@ViewBag.cnt" />
+<input type="hidden" name="DEbySnpt" id="DEbySnpt" value="@Session["blndebysnippet"].ToString()" />
+<input type="hidden" id="deCount" value="@Session["CurrentDataEntryCount"]" />
+<input type="hidden" id="deEntryAccountNo" value="@Session["deEntryAccountNo"]" />
+<input type="hidden" id="deEntryChqDate" value="@Session["deEntryChqDate"]" />
+<input type="hidden" id="deXMLPayeeName" value="@Session["deXMLPayeeName"]" />
+<input type="hidden" id="deID" value="@Model.Id" />
+<input type="hidden" id="BackButton" value="@ViewBag.BackButton" />
+@*<input type="hidden" id="currentId" value="@Model.Id" />
+<input type="hidden" id="id_Lists" value="@Session["IdLists"]" />*@
+
+@if (ViewBag.cnt == false)
+{
+    <script type="text/javascript">
+        alert('No Data Found!!');
+    </script>
+}
+else
+{
+    using (Html.BeginForm("IWDataEntry", "IWDataEntry", FormMethod.Post))
+    {
+        <div class="w3-row">
+            <div class="w3-col m12 w3-center w3-padding">
+                <img id="myimg" class="w3-card-8 w3-image" style="cursor: zoom-in" onclick="fullImage();" src="@Url.Content(Model.FrontGreyImagePath)" />
+
+                <div id="divtiff" class="m7">
+                </div>
+
+
+                <div id="iwimg" class="w3-modal w3-animate-zoom" onclick="this.style.display='none'">
+                    <img id="myfulimg" class="w3-modal-content w3-card-8 w3-image" style="width: 90%; cursor: zoom-out" src="~/Icons/noimagefound.jpg" />>
+                </div>
+
+                <div class="w3-row w3-large w3-padding" style="display: none" id="MICR">
+                    <div class="w3-col w3-center m2 ">
+                        MICR:
+                    </div>
+                    <div class="w3-col w3-center m8 ">
+                    </div>
+                    <div class="w3-col w3-center m2" id="divctsnoncts" style="display: none">
+                        <select id="ctsnocts" name="ctsnocts">
+                            <option value="01">CTS</option>
+                            <option value="11">Non-CTS</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="w3-row w3-padding">
+                    <div class="w3-col m12">
+                        <label class="w3-btn" onclick="callrotate();">Rotate Image</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontTiffImagePath');">Front Tiff</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.FrontGreyImagePath');">Front Gray</label>
+                        <label class="w3-btn" onclick="ChangeImage('@Model.BackTiffImagePath');">Back Tiff</label>
+                        <label class="w3-btn" id="lblslpimg" style="display:none">Slip Image</label>
+                        <label class="w3-btn" onclick="document.getElementById('divProductivity').style.display = 'block';">Show Count</label>
+                        <label>Count : </label><label id="currentCount"></label>
+                    </div>
+
+                </div>
+                @*<br />*@
+
+                <div class="m12">
+                    <div class="w3-container w3-card-8">
+                        @*<h3>&nbsp;&nbsp;<b>Cheque Data Entry Details</b></h3>*@
+                        @*<br />*@
+                        <table style="width:100%;">
+                            @Html.HiddenFor(m => m.Id)
+                            
+                            <tr>
+                                <td style="text-align:left;"><b>Account No: </b></td>
+                                <td style="text-align:left;"><b>Date: </b></td>
+                                <td style="text-align:left;"><b>PayeeName: </b></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">
+                                    @*<input type="text" id="accountNo" autocomplete="off" maxlength="16" />*@
+                                    @Html.TextBoxFor(m => m.EntryAccountNo,
+                                    new
+                                    {
+                                        style = "width:200px",
+                                        //@onfocus = "ChangeImage('" + Model.BackTiffImagePath + "')",
+                                        //@onblur = "ChangeImage('" + Model.FrontGreyImagePath + "')",
+                                        autocomplete = "off"
+                                    })
+                                    &nbsp;&nbsp;<b>[ 1.2.3 ] </b>
+                                </td>
+                                <td style="text-align:left;">
+                                    @*<input type="text" id="chequeDate" autocomplete="off" />&nbsp;&nbsp;<b>[ ddmmyy] </b>*@
+                                    @Html.TextBoxFor(m => m.EntryChqDate, new { autocomplete = "off", @maxlength = 6 })
+                                    &nbsp;&nbsp;<b>[ ddmmyy] </b>
+                                </td>
+                                <td style="text-align:left;">
+                                    @*<input type="text" id="payeeName" autocomplete="off" maxlength="50" />*@
+                                    @Html.TextBoxFor(m => m.XMLPayeeName, new { style = "width:400px", autocomplete = "off", @maxlength = 50 })
+                                    @Html.TextBoxFor(m => m.Id, new { style = "display:none" })
+                                </td>
+                                <td>
+                                    <input type="submit" value="Save" id="btnSubmit" name="btnSubmit" />
+                                    <input type="submit" value="Close" id="btnClose" name="btnSubmit" />
+                                    <input type="submit" value="Back" id="btnBack" name="btnSubmit" />
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    <div id="divProductivity" class="w3-modal w3-animate-zoom ">
+        <div class="w3-modal-content">
+            <div class="w3-container w3-theme-dark">
+                <span onclick="document.getElementById('divProductivity').style.display = 'none';"
+                      class="w3-closebtn">&times;</span>
+                <h2>User Productivity</h2>
+            </div>
+            <div class="w3-container">
+                @*@Html.Action("RejectReason", "OWL2")*@
+                @Html.Action("ShowProductivity", "IWDataEntry")
+            </div>
+            <div class="w3-container">&nbsp;</div>
+        </div>
+    </div>
+}

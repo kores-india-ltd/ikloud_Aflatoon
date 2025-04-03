@@ -1,0 +1,273 @@
+﻿@model ikloud_Aflatoon.Infrastructure.cbstetails
+<div id="cbsdetails">
+
+    @Html.HiddenFor(m => m.cbsdls)
+    @Html.HiddenFor(m => m.JoinHldrs)
+    <div class="w3-container w3-light-grey w3-margin w3-card-4">
+        <!--cbsdiv-->
+        @if (Model.CustomError != null)
+        {
+            <div class="w3-container w3-highway-red">
+                <h3 class="w3-container">
+                    <strong>Model.CustomError</strong>
+                </h3>
+            </div>
+            <script type="text/javascript">
+                document.getElementById("blockkey").value = "1";
+            </script>
+        }
+        else
+        {
+            if (Model.cbsdls != null)
+            {
+                if (Model.cbsdls.Substring(1, 1) != "F")
+                {
+                    if (Model.cbsdls.Split('|').ElementAt(3) == "SBFCR" || Model.cbsdls.Split('|').ElementAt(3) == "SBFCS" || Model.cbsdls.Split('|').ElementAt(3) == "CAFCR" || Model.cbsdls.Split('|').ElementAt(3) == "CAFCS")
+                    {
+                        <script type="text/javascript">
+                            alert('Alert! FCRA A/C Check Branch confirmation for source of Funds!!');
+                        </script>
+                    }
+                }
+                if (Model.cbsdls.Split('|').ElementAt(1) == "S" && Model.cbsdls.Split('|').ElementAt(2) != "")
+                {
+                    if (Model.cbsdls.Split('|').ElementAt(3) == "SBNRE" || Model.cbsdls.Split('|').ElementAt(3) == "SBFRL" || Model.cbsdls.Split('|').ElementAt(3) == "UBFRL" || Model.cbsdls.Split('|').ElementAt(3) == "SBFCR" || Model.cbsdls.Split('|').ElementAt(3) == "SBFCS" || Model.cbsdls.Split('|').ElementAt(3) == "CAFCR" || Model.cbsdls.Split('|').ElementAt(3) == "CAFCS" || Model.cbsdls.Split('|').ElementAt(4) == "C" || Model.cbsdls.Split('|').ElementAt(4) == "T")
+                    {
+                        <script type="text/javascript">
+                            document.getElementById("blockkey").value = "0";
+
+                        </script>
+                        <div class="w3-container w3-highway-red">
+                            <div class="w3-container">
+                                <label>
+                                    Name:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(2)
+                                </label>
+                            </div>
+                            <div class="w3-container">
+                                @if (Model.JoinHldrs != null)
+                                {
+                                    <h4>
+                                        <label>
+                                            Joint Holders:
+                                        </label>
+                                        @for (int i = 3; i < Model.JoinHldrs.Split('|').Count() - 1; i++)
+                                        {
+                                            <label>
+                                                @Model.JoinHldrs.Split('|').ElementAt(i)
+                                            </label>
+                                        }
+                                    </h4>
+                                }
+                            </div>
+
+                            <div class="w3-container">
+                                <label>
+                                    Scheme Code:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(3)
+                                </label>
+                            </div>
+
+                            <div class="w3-container">
+                                <label>
+                                    Freeze Code:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(4)
+                                </label>
+                            </div>
+                            <div class="w3-container">
+                                <label>
+                                    MOP:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(5) - @Model.MOP
+                                </label>
+                            </div>
+
+                            <div class="w3-container">
+                                <label>
+                                    Account Status:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                                </label>
+                            </div>
+                            <div class="w3-container">
+                                <label>
+                                    NRE Flag:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(10)
+                                </label>
+                            </div>
+
+                            <div class="w3-container">
+                                <label>
+                                    Scheme Type:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(11)
+                                </label>
+                            </div>
+                            <div class="w3-container">
+                                <label>
+                                    Account Ownership:
+                                </label>
+                                <label>
+                                    @Model.cbsdls.Split('|').ElementAt(12)
+                                    - @Model.AccountOwnership
+                                </label>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <script type="text/javascript">
+                            document.getElementById("blockkey").value = "0";
+
+                        </script>
+
+                        <div class="w3-container">
+                            <label>
+                                Name:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(2)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            @if (Model.JoinHldrs != null)
+                            {
+                                <h4>
+                                    <label>
+                                        Joint Holders:
+                                    </label>
+                                    @for (int i = 3; i < Model.JoinHldrs.Split('|').Count() - 1; i++)
+                                    {
+                                        <label>
+                                            @Model.JoinHldrs.Split('|').ElementAt(i)
+                                        </label>
+                                    }
+                                </h4>
+                            }
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Scheme Code:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(3)
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Freeze Code:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(4)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                MOP:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(5) - @Model.MOP
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Account Status:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(6) - @Model.AccountStatus
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                NRE Flag:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(10)
+                            </label>
+                        </div>
+
+                        <div class="w3-container">
+                            <label>
+                                Scheme Type:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(11)
+                            </label>
+                        </div>
+                        <div class="w3-container">
+                            <label>
+                                Account Ownership:
+                            </label>
+                            <label>
+                                @Model.cbsdls.Split('|').ElementAt(12)
+                                - @Model.AccountOwnership
+                            </label>
+                        </div>
+                        //------------------------Added on 29-08-2019----------Start-------Pop
+                        if (Model.SchemeCode == Model.cbsdls.Split('|').ElementAt(3))
+                        {
+                            if (Model.popRqd == "Y")
+                            {
+                                <script type="text/javascript">
+                                        alert('@Model.Message');
+                                </script>
+                            }
+                            if (Model.AllowToBlock == "Y")
+                            {
+                                <script type="text/javascript">
+                                    document.getElementById("blockkey").value = "1";
+                                </script>
+                            }
+                            if (Model.Color != "N")
+                            {
+                                <script type="text/javascript">
+                                        document.getElementById("normaldiv").classList.add("w3-highway-@Model.Color");
+                                </script>
+
+                            }
+                        }
+                        //------------------------Added on 29-08-2019----------END-------
+
+                    }
+                }
+                else
+                {
+                    <div class="w3-container w3-highway-red">
+                        <h4 class="w3-container">@Model.cbsdls.Split('|').ElementAt(2)</h4>
+                        <script type="text/javascript">
+                            document.getElementById("blockkey").value = "1";
+                        </script>
+                    </div>
+                }
+            }
+            else if (Model.cbsdls == null)
+            {
+                <div class="w3-container w3-highway-red">
+                    <h3 class="w3-container">
+                        <strong>Account Details Not Found!!</strong>
+                    </h3>
+                </div>
+                <script type="text/javascript">
+                    document.getElementById("blockkey").value = "1";
+                </script>
+
+            }
+        }
+
+
+    </div>
+</div>

@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="iKloudProSMBF8" Class="IWProcDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=10.168.202.11,2433;Initial Catalog=iKloudProSMBF8;User ID=iklouduser" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ikloudProConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.IWBatchSummary" Member="IWBatchSummaries">
+    <Type Name="IWBatchSummary">
+      <Column Name="Processdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Batchno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BatchCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BatchAmount" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BatchDescrp" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ClearingType" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IWDashboardNew" Member="IWDashboardNews">
+    <Type Name="IWDashboardNew">
+      <Column Name="DomainName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="domid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProcessDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TotalIW" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RVerified" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RAccepted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Verified" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Accepted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Rejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QCDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QCAccepted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QCRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QCPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayeeNDEDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayeeRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayeeNDEPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccDEDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccDEPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AmountDEDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AmountRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AmountDEPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MICRDEDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MICRRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MICRDEPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateDEDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateDEPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateQCDEDone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateQCRejected" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateQCDEPending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClearingType" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EOD_IWFinalMainTransactions" Member="EOD_IWFinalMainTransactions">
+    <Type Name="EOD_IWFinalMainTransaction">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProcessingDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="File_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FileSeqNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BatchNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OpsStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MiscStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CHIStatus" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="ItemSeqNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="XMLSerialNo" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="EntrySerialNo" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="XMLPayorBankRoutNo" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="EntryPayorBankRoutNo" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="XMLSAN" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="EntrySAN" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="XMLTransCode" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="EntryTransCode" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="XMLAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="EntryAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="XMLPayeeName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="EntryPayeeName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ChqDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DbtAccNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PresentingBankRoutNo" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="PresentmentDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CycleNo" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="NumOfImageViews" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="ClearingType" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="DocType" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="MICRRepairFlags" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="SpecialHandling" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="TruncatingRTNo" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="IQAIgnoreInd" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="CurrencyInd" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="ItemStatus" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="BOFDRoutNo" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="BOFDBusDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DepositorAcct" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="IFSC" Type="System.String" DbType="NVarChar(11)" CanBeNull="true" />
+      <Column Name="ReturnCode" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="RRFName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="CHIRejectCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CBSClientAccountDtls" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CBSJointHoldersName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="FrontTiffImagePath" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="BackTiffImagePath" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="FrontGreyImagePath" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="BackGreyImagePath" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="UVImagePath" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="UVStatus" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="ReturnReasonDescription" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="ReturnMarkedBy_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DIN" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RECEIVERBRANCHNO" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RrfUploadTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ChiFileId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RrfCreationDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SmbPDFGen" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="L1By" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L1Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L2By" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L2Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L3By" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L3Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L1RejectReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L2RejectReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="L3RejectReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CBSStatus" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="PxfGenerationFlag" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="SessionDate" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="SessionNumber" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="SettlementDate" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.IWSelectDebtAccount" Method="IWSelectDebtAccount">
+    <Parameter Name="uid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IWSelectMICR" Method="IWSelectMICR">
+    <Parameter Name="uid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IWSelectAmount" Method="IWSelectAmount">
+    <Parameter Name="uid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IWActivityLog" Method="IWActivityLog">
+    <Parameter Name="IMGprocID" Parameter="iMGprocID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MAinTID" Parameter="mAinTID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LogLevel" Parameter="logLevel" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Activity" Parameter="activity" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="rejectDescr" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="commets" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWDebtAccountTmpProcess" Method="UpdateIWDebtAccountTmpProcess">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DebtAccNo" Parameter="debtAccNo" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWAmountTmpProcess" Method="UpdateIWAmountTmpProcess">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Double" DbType="Float" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWDateQCTmpProcess" Method="UpdateIWDateQCTmpProcess">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWDateTmpProcess" Method="UpdateIWDateTmpProcess">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWMICRTmpProcess" Method="UpdateIWMICRTmpProcess">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EntrySerialNo" Parameter="entrySerialNo" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="EntrypayorRoutNo" Parameter="entrypayorRoutNo" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="EntrySAN" Parameter="entrySAN" Type="System.String" DbType="VarChar(7)" />
+    <Parameter Name="TransCode" Parameter="transCode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetOnlyIWUpdateCBSAccInfo" Method="GetOnlyIWUpdateCBSAccInfo">
+    <Parameter Name="AccNo" Parameter="accNo" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="MaitId" Parameter="maitId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AccDet" Parameter="accDet" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <Parameter Name="JointHold" Parameter="jointHold" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SelectIWBatchSumry" Method="SelectIWBatchSumry">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IWQueryRntMark" Method="IWQueryRntMark">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="NPCICode" Parameter="nPCICode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Action" Parameter="action" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="updateFlg" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ReturnReasonDescription" Parameter="returnReasonDescription" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateDwnloadFile" Method="UpdateDwnloadFile">
+    <Parameter Name="Clertype" Parameter="clertype" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="Filetype" Parameter="filetype" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="TRnID" Parameter="tRnID" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWL3Verification" Method="UpdateIWL3Verification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DbtAccno" Parameter="dbtAccno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="OpsStatus" Parameter="opsStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReasonDescrp" Parameter="reasonDescrp" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="ReturnReasonDescription" Parameter="returnReasonDescription" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="cbsdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="jointdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="XmlAmount" Parameter="xmlAmount" Type="System.Double" DbType="Float" />
+    <Parameter Name="AmountLimit" Parameter="amountLimit" Type="System.Double" DbType="Float" />
+    <Parameter Name="Decision" Parameter="decision" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="L1Status" Parameter="l1Status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="L2Status" Parameter="l2Status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWL2Verification" Method="UpdateIWL2Verification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DbtAccno" Parameter="dbtAccno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="OpsStatus" Parameter="opsStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReasonDescrp" Parameter="reasonDescrp" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="ReturnReasonDescription" Parameter="returnReasonDescription" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="cbsdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="jointdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="XmlAmount" Parameter="xmlAmount" Type="System.Double" DbType="Float" />
+    <Parameter Name="AmountLimit" Parameter="amountLimit" Type="System.Double" DbType="Float" />
+    <Parameter Name="Decision" Parameter="decision" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="L1Status" Parameter="l1Status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWL1Verification" Method="UpdateIWL1Verification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EntrySerialNo" Parameter="entrySerialNo" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="EntrypayorRoutNo" Parameter="entrypayorRoutNo" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="EntrySAN" Parameter="entrySAN" Type="System.String" DbType="VarChar(7)" />
+    <Parameter Name="TransCode" Parameter="transCode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="DbtAccno" Parameter="dbtAccno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Double" DbType="Float" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReasonDescrp" Parameter="reasonDescrp" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="cbsdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="jointdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWPayeeTmpProcess" Method="UpdateIWPayeeTmpProcess">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Payee" Parameter="payee" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RejectReason" Parameter="rejectReason" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateTFL1Verification" Method="UpdateTFL1Verification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EntrySerialNo" Parameter="entrySerialNo" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="EntrypayorRoutNo" Parameter="entrypayorRoutNo" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="EntrySAN" Parameter="entrySAN" Type="System.String" DbType="VarChar(7)" />
+    <Parameter Name="TransCode" Parameter="transCode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="DbtAccno" Parameter="dbtAccno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Double" DbType="Float" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReasonDescrp" Parameter="reasonDescrp" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="cbsdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="jointdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Sp_IWReturnSummary" Method="Sp_IWReturnSummary">
+    <Parameter Name="prosDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="clrtype" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="CustomerID" Parameter="customerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Setlmntdate" Parameter="setlmntdate" Type="System.DateTime" DbType="DateTime" Direction="InOut" />
+    <Parameter Name="ReturnCount" Parameter="returnCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ReturnAmount" Parameter="returnAmount" Type="System.Double" DbType="Float" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateTFL2Verification" Method="UpdateTFL2Verification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DbtAccno" Parameter="dbtAccno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="OpsStatus" Parameter="opsStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReasonDescrp" Parameter="reasonDescrp" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="ReturnReasonDescription" Parameter="returnReasonDescription" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="cbsdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="jointdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="XmlAmount" Parameter="xmlAmount" Type="System.Double" DbType="Float" />
+    <Parameter Name="AmountLimit" Parameter="amountLimit" Type="System.Double" DbType="Float" />
+    <Parameter Name="Decision" Parameter="decision" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="L1Status" Parameter="l1Status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateTFL3Verification" Method="UpdateTFL3Verification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DbtAccno" Parameter="dbtAccno" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Date" Parameter="date" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="OpsStatus" Parameter="opsStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReasonDescrp" Parameter="reasonDescrp" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="ReturnReasonDescription" Parameter="returnReasonDescription" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="cbsdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="jointdtls" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="XmlAmount" Parameter="xmlAmount" Type="System.Double" DbType="Float" />
+    <Parameter Name="AmountLimit" Parameter="amountLimit" Type="System.Double" DbType="Float" />
+    <Parameter Name="Decision" Parameter="decision" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="L1Status" Parameter="l1Status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="L2Status" Parameter="l2Status" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateSMBVerification" Method="UpdateSMBVerification">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="RawDataId" Parameter="rawDataId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="InstrumentType" Parameter="instrumentType" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="FinalAmount" Parameter="finalAmount" Type="System.Double" DbType="Float" />
+    <Parameter Name="FinalDate" Parameter="finalDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="FinalChqNo" Parameter="finalChqNo" Type="System.String" DbType="VarChar(6)" />
+    <Parameter Name="FinalSortcode" Parameter="finalSortcode" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="FinalSAN" Parameter="finalSAN" Type="System.String" DbType="VarChar(7)" />
+    <Parameter Name="FinalTransCode" Parameter="finalTransCode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="CreditAccountNo" Parameter="creditAccountNo" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="PayeName" Parameter="payeName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RejectReason" Parameter="rejectReason" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="ActionTaken" Parameter="actionTaken" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CustomerId" Parameter="customerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DomainId" Parameter="domainId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ScanningNodeId" Parameter="scanningNodeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ChequeAmtotal" Parameter="chequeAmtotal" Type="System.Double" DbType="Float" />
+    <Parameter Name="SlipAmount" Parameter="slipAmount" Type="System.Double" DbType="Float" />
+    <Parameter Name="ChequeTotal" Parameter="chequeTotal" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserNarration" Parameter="userNarration" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="RejectReasonDescription" Parameter="rejectReasonDescription" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="CTSNONCTS" Parameter="cTSNONCTS" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CBSAccountInformation" Parameter="cBSAccountInformation" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CBSJointAccountInformation" Parameter="cBSJointAccountInformation" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="IgnoreIQA" Parameter="ignoreIQA" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="DocType" Parameter="docType" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="Modified" Parameter="modified" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="strHoldReason" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SMB_GetSMBFileDownloadLinkDetails" Method="SMB_GetSMBFileDownloadLinkDetails">
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CustID" Parameter="custID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SMB_GetSMBFileDownloadLinkDetailsResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProcessingDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DownloadLink" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[Total Inward Count]" Member="Total_Inward_Count" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Total Inward Amount]" Member="Total_Inward_Amount" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SMB_GetSMBFileDownloadLink" Method="SMB_GetSMBFileDownloadLink">
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CustID" Parameter="custID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ID" Parameter="iD" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DownloadURL" Parameter="downloadURL" Type="System.String" DbType="VarChar(100)" Direction="InOut" />
+    <Parameter Name="PhysicalFilePath" Parameter="physicalFilePath" Type="System.String" DbType="VarChar(100)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWDataEntry" Method="UpdateIWDataEntry">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EntryAccountNo" Parameter="entryAccountNo" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="EntryChqDate" Parameter="entryChqDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="EntryPayeeName" Parameter="entryPayeeName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CustomerId" Parameter="customerId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.IWSearchRnt" Method="IWSearchRnt">
+    <Parameter Name="File_ID" Parameter="file_ID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="FileSeqno" Parameter="fileSeqno" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NPCICode" Parameter="nPCICode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="PresentingBankRtNo" Parameter="presentingBankRtNo" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="CycleNo" Parameter="cycleNo" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="Itemseqno" Parameter="itemseqno" Type="System.String" DbType="VarChar(14)" />
+    <Parameter Name="ChequeNo" Parameter="chequeNo" Type="System.String" DbType="VarChar(7)" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Double" DbType="Float" />
+    <Parameter Name="updateFlg" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Reason" Parameter="reason" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UnlockRecords" Method="UnlockRecords">
+    <Parameter Name="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="module" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CustomerId" Parameter="customerId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UpdateIWL2VerificationF8" Method="UpdateIWL2VerificationF8">
+    <Parameter Name="ID" Parameter="iD" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Uid" Parameter="uid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EntryAccountNo" Parameter="entryAccountNo" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="EntryChqDate" Parameter="entryChqDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="EntryPayeeName" Parameter="entryPayeeName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LName" Parameter="lName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="ProcessingDate" Parameter="processingDate" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="CustomerId" Parameter="customerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Decision" Parameter="decision" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="Reasoncode" Parameter="reasoncode" Type="System.String" DbType="VarChar(3)" />
+    <Parameter Name="ReturnReasonDescription" Parameter="returnReasonDescription" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

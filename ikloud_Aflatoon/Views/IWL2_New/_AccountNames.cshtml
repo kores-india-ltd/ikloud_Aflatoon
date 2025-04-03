@@ -1,0 +1,138 @@
+﻿
+
+
+
+<br />
+
+
+<div id="cbsdetails" style="left:auto">
+    @*@Html.HiddenFor(m => m.sCAPA)*@
+    @*<div style="padding-left:10%">*@
+    <div>
+        @*<label class="w3-label w3-theme-dark w3-white" style="font-weight:600;color:white">  Select Account Holder:</label>*@
+
+
+
+        @if (ViewBag.vbcbsdls == null)
+        {
+            if (ViewBag.vbstatus == "SUCCESS")
+            {
+                @*@Html.HiddenFor(m => m.payeenameselected)*@
+                @*<div class="w3-container w3-light-green w3-margin w3-card-8">*@
+                <div>
+                    @if (ViewBag.vbAcctName != null)
+                    {
+                        <label class="w3-label w3-theme-dark w3-white" style="font-weight:bold;color:white">  Select Account Holder:</label>
+                        @Html.DropDownList("Payee", new SelectList(ViewBag.vbAcctName), new { onchange = "getselect();", Id = "Payee", Name = "Payee", style = "width: 50%;" })
+
+
+                        @Html.DropDownList("partialSrcFnds", new SelectList(ViewBag.vbNRE), new { style = "display:none; width: 250px;" })
+                        @*<input id="hdnSrcFnds" type="text" value=@ViewBag.vbNRE />*@
+
+                        //style = "display:none"
+
+                        <script type="text/javascript">
+                            document.getElementById("blockkey").value = "0";
+                            document.getElementById("currencyVal").value = @Html.Raw(Json.Encode(ViewBag.Currency));
+                            document.getElementById("productCode").value = @Html.Raw(Json.Encode(Session["productCode"]));
+                            document.getElementById("productType").value = @Html.Raw(Json.Encode(Session["productType"]));
+                            document.getElementById("accountBalances").value = @Html.Raw(Json.Encode(Session["accountBalances"]));
+                            document.getElementById("IsOpenedDateOld").value = @Html.Raw(Json.Encode(Session["IsOpenedDateOld"]));
+                            $("#btnSubmit").focus();
+                        </script>
+
+                        <div class="w3-container w3-highway-red" style="float: right">
+                            <h3 class="w3-container">
+                                <strong>@ViewBag.vberror</strong>
+
+
+
+                            </h3>
+
+
+                        </div>
+                    }
+                    else
+                    {
+                        <script type="text/javascript">
+                            debugger;
+                            document.getElementById("blockkey").value = "1";
+                        </script>
+                        <div class="w3-container w3-highway-red" style="float: right">
+                            <h3 class="w3-container">
+                                <strong>@ViewBag.vberror</strong>
+
+
+
+                            </h3>
+
+
+                        </div>
+
+
+                    }
+                </div>
+
+                if (ViewBag.block == 1)
+                {
+                    <script type="text/javascript">
+                        debugger;
+                        document.getElementById("blockkey").value = "1";
+                    </script>
+                }
+
+            }
+            else
+            {
+
+                <script>
+                    debugger;
+                    document.getElementById("blockkey").value = "1";
+                    //alert(document.getElementById("blockkey").value);
+
+                    //$("#ChqPayeeName").val(sChqPayeeName.toString());
+                </script>
+                <div class="w3-container w3-highway-red" style="float: right">
+                    <h3 class="w3-container">
+                        <strong>@ViewBag.vberror</strong>
+                    </h3>
+                </div>
+                <input class="w3-btn w3-margin-left" type="button" value="Retry" id="btnRetry" name="btnRetry" style="width:150px;" />
+
+
+
+                <script type="text/javascript">
+                        $(document).ready(function () {
+
+                            var sChqPayeeName = '@ViewBag.vberror';
+
+                            //this will remove all the special characters
+                            sChqPayeeName = sChqPayeeName.toString().replace(/[_\W]+/g, " ");
+
+                            $("#ChqPayeeName").val(sChqPayeeName.toString());
+
+                            });
+
+
+                        document.getElementById("blockkey").value = "1";
+                        if ($("#NarrationID").val() == "Y") {
+                            document.getElementById('narsndiv').style.display = "none";
+                            document.getElementById('ofc').value = "0";
+                            narrationReqirdflg = false;
+                        }
+                </script>
+            }
+        }
+
+
+
+
+        <script>
+            $("#Payee").focusout(function (event) {
+                document.getElementById("btnSubmit").focus();
+            });
+        </script>
+
+
+    </div>
+</div>

@@ -1,0 +1,612 @@
+﻿@model ikloud_Aflatoon.RoleMaster
+@{
+    /**/
+
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit User Roles";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+<h2>Edit</h2>
+<script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+</script>
+<script src="~/Scripts/UserRoleEdit.js"></script>
+
+<script type="text/javascript">
+    function clearFields() {
+        document.getElementById("RoleName").value = "";
+        //$("#RoleName").val('');
+        $('input[type="checkbox"]:checked').prop('checked', false);
+    }
+</script>
+
+<input type="hidden" id="l1StartValue" value="@Model.L1StartLimit" />
+<input type="hidden" id="l1StopValue" value="@Model.L1StopLimit" />
+<input type="hidden" id="l2StartValue" value="@Model.L2StartLimit" />
+<input type="hidden" id="l2StopValue" value="@Model.L2StopLimit" />
+<input type="hidden" id="l3StartValue" value="@Model.L3StartLimit" />
+<input type="hidden" id="l3StopValue" value="@Model.L3StopLimit" />
+<input type="hidden" id="l4StartValue" value="@Model.L4StartLimit" />
+<input type="hidden" id="l4StopValue" value="@Model.L4StopLimit" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log('Hiii');
+
+        console.log("Hiii");
+        console.log(document.getElementById("l1StartValue").value);
+        document.getElementById("l1frm").value = document.getElementById("l1StartValue").value;
+        document.getElementById("l1to").value = document.getElementById("l1StopValue").value;
+        console.log("l1");
+        console.log(document.getElementById("l1to").value);
+        document.getElementById("l2frm").value = document.getElementById("l2StartValue").value;
+        document.getElementById("l2to").value = document.getElementById("l2StopValue").value;
+        document.getElementById("l3frm").value = document.getElementById("l3StartValue").value;
+        document.getElementById("l3to").value = document.getElementById("l3StopValue").value;
+        document.getElementById("l4frm").value = document.getElementById("l4StartValue").value;
+        document.getElementById("l4to").value = document.getElementById("l4StopValue").value;
+    });
+
+</script>
+
+@{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false)
+
+
+        <div style="width: 100%; padding-left:10%;padding-right:10%">
+            <b>@Html.LabelFor(model => model.RoleName)</b>
+            <span style="width: 100%; padding-left:10px;">
+                @Html.EditorFor(model => model.RoleName, new { style = "width:150px" })
+                @Html.ValidationMessageFor(model => model.RoleName)
+            </span>
+        </div>
+        <br />
+        <div>
+            <table id="chkt" style="width: 100%; padding-left:10%;padding-right:10%">
+                <tr>
+                    <th style="font-size: 14px; text-align:left">
+                        <b>Select Role Process</b>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="rc" id="rc" />
+                        Reject Repaire
+                    </td>
+                    <td>
+                        <input type="checkbox" name="de" id="de" />
+                        Data Entry
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="qc" id="qc" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="qc" id="qc" />
+                        QC
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="vf" id="vf" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="vf" id="vf" />
+                        Verification
+                    </td>
+                    <td>
+                        <input type="checkbox" name="rpt" id="rpt" />
+                        Reports
+                    </td>
+                    <td>
+                        <input type="checkbox" name="fildwnd" id="fildwnd" />
+                        File Download
+                    </td>
+                    <td>
+                        <input type="checkbox" name="ds" id="ds" />
+                        Dashboard
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="qury" id="qury" />
+                        Query
+                    </td>
+                    <td>
+                        <input type="checkbox" name="quryMd" id="quryMd" />
+                        Query with modification
+                    </td>
+                    <td>
+                        <input type="checkbox" name="chirjct" id="chirjct" />
+                        CHI Reject
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="rvf" id="rvf" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="rvf" id="rvf" />
+                        RE-Verification
+                    </td>
+                    <td>
+                        @*<input type="checkbox" name="rvf4" id="rvf4" onclick="amtlimit();" />*@
+                        <input type="checkbox" name="rvf4" id="rvf4" />
+                        L4-Verification
+                    </td>
+                    <td colspan="1">
+                        <input type="checkbox" name="CCPH" id="CCPH" />
+                        CCPH-Verification
+                    </td>
+                </tr>
+                <tr id="rowadmin">
+                    <td>
+                        <input type="checkbox" name="um" id="um" />
+                        User Managment
+                    </td>
+                    <td>
+                        <input type="checkbox" name="sod" id="sod" />
+                        SOD
+                    </td>
+                    <td>
+                        <input type="checkbox" name="masters" id="masters" />
+                        Master
+                    </td>
+                    <td>
+                        <input type="checkbox" name="settg" id="settg" />
+                        Settings
+                    </td>
+                    <td>
+                        <input type="checkbox" name="role" id="role" />
+                        Role
+                    </td>
+                    <td>
+                        <input type="checkbox" name="archv" id="archv" />
+                        Archival
+                    </td>
+                    <td>
+                        <input type="checkbox" name="mesgbrd" id="mesgbrd" />
+                        DEM Interface
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="umc" id="umc" />
+                        User Management Checker
+                    </td>
+                    <td>
+                        <input type="checkbox" name="roleChecker" id="roleChecker" />
+                        Role Checker
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr id="l1" style="display:none">
+                    <td>QC amount Limit From</td>
+                    <td><input type="text" id="l1frm" name="l1lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l1to" name="l1to" maxlength="14" /></td>
+                </tr>
+                <tr id="l2" style="display:none">
+                    <td>Verification amount Limit From</td>
+                    <td><input type="text" id="l2frm" name="l2lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l2to" name="l2to" maxlength="14" /></td>
+                </tr>
+                <tr id="l3" style="display:none">
+                    <td>Re-Verification amount Limit From</td>
+                    <td><input type="text" id="l3frm" name="l3lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l3to" name="l3to" maxlength="14" /></td>
+                </tr>
+                <tr id="l4" style="display:none">
+                    <td>L4-Verification amount Limit From</td>
+                    <td><input type="text" id="l4frm" name="l4lfrm" maxlength="14" /></td>
+                    <td>To <input type="text" id="l4to" name="l4to" maxlength="14" /></td>
+                </tr>
+            </table>
+        </div>
+
+        <input type="hidden" id="verlvel" name="verlvel" />
+        <div style="padding-left: 10%; padding-right: 10%; padding-top: 5%">
+            <input class="w3-btn" type="submit" id="create_role" name="create_role" value="Edit" onclick="return (valid());" />&nbsp;&nbsp;
+            <input type="button" class="w3-btn" value="Reset" style="width:100px;" onclick="clearFields();" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        <input type="hidden" id="hddomain" name="hddomain" />
+
+        if (Model != null)
+        {
+            if (Model.IsRejectRepaire == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('rc').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('rc').checked = false;
+                </script>
+            }
+
+            if (Model.IsDataEntry == true)
+            {
+                <script type="text/javascript">
+                    debugger;
+                    document.getElementById('de').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    debugger;
+                    document.getElementById('de').checked = false;
+                </script>
+            }
+
+            if (Model.IsVerification == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('qc').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('qc').checked = false;
+                </script>
+            }
+
+            if (Model.IsVerification == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('vf').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('vf').checked = false;
+                </script>
+            }
+
+            if (Model.IsReport == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('rpt').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('rpt').checked = false;
+                </script>
+            }
+
+            if (Model.IsFileDownload == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('fildwnd').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('fildwnd').checked = false;
+                </script>
+            }
+
+            if (Model.IsDashboard == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('ds').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('ds').checked = false;
+                </script>
+            }
+
+            if (Model.IsQuery == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('qury').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('qury').checked = false;
+                </script>
+            }
+
+            if (Model.IsQueryWithModification == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('quryMd').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('quryMd').checked = false;
+                </script>
+            }
+
+            if (Model.IsChiReject == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('chirjct').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('chirjct').checked = false;
+                </script>
+            }
+
+            if (Model.IsReVerification == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('rvf').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('rvf').checked = false;
+                </script>
+            }
+
+            if (Model.IsL4Verification == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('rvf4').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('rvf4').checked = false;
+                </script>
+            }
+
+            if (Model.IsCCPH_Verification == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('CCPH').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('CCPH').checked = false;
+                </script>
+            }
+
+            if (Model.IsUserManagement == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('um').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('um').checked = false;
+                </script>
+            }
+
+            if (Model.IsSOD == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('sod').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('sod').checked = false;
+                </script>
+            }
+
+            if (Model.IsMasters == true)
+            {
+                <script type="text/javascript">
+                    debugger;
+                    document.getElementById('masters').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    debugger;
+                    document.getElementById('masters').checked = false;
+                </script>
+            }
+
+            if (Model.IsSettings == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('settg').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('settg').checked = false;
+                </script>
+            }
+
+            if (Model.IsArchieve == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('archv').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('archv').checked = false;
+                </script>
+            }
+
+            if (Model.IsMessageBroadcasting == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('mesgbrd').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('mesgbrd').checked = false;
+                </script>
+            }
+            if (Model.IsRoleMaster == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('role').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('role').checked = false;
+                </script>
+            }
+            if (Model.IsUserManagementChecker == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('umc').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('umc').checked = false;
+                </script>
+            }
+            if (Model.IsRoleMasterChecker == true)
+            {
+                <script type="text/javascript">
+                    document.getElementById('roleChecker').checked = true;
+                </script>
+            }
+            else
+            {
+                <script type="text/javascript">
+                    document.getElementById('roleChecker').checked = false;
+                </script>
+            }
+
+            @*if (Model.L1StartLimit != 0)
+                {
+                    var l1StartLimit = Model.L1StartLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l1frm').value = Model.L1StartLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l1frm').value = 0;
+                    </script>
+                }
+
+                if (Model.L1StopLimit != 0)
+                {
+                    var l1StopLimit = Model.L1StopLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l1to').value = l1StopLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l1to').value = 0;
+                    </script>
+                }
+
+                if (Model.L2StartLimit != 0)
+                {
+                    var l2StartLimit = Model.L2StartLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l2frm').value = l2StartLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l2frm').value = 0;
+                    </script>
+                }
+
+                if (Model.L2StopLimit != 0)
+                {
+                    var l2StopLimit = Model.L2StopLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l2to').value = l2StopLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l2to').value = 0;
+                    </script>
+                }
+
+                if (Model.L3StartLimit != 0)
+                {
+                    var l3StartLimit = Model.L3StartLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l3frm').value = l3StartLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l3frm').value = 0;
+                    </script>
+                }
+
+                if (Model.L3StopLimit != 0)
+                {
+                    var l3StopLimit = Model.L3StopLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l3to').value = l3StopLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l3to').value = 0;
+                    </script>
+                }
+
+                if (Model.L4StartLimit != 0)
+                {
+                    var l4StartLimit = Model.L4StartLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l4frm').value = l4StartLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l4frm').value = 0;
+                    </script>
+                }
+
+                if (Model.L4StopLimit != 0)
+                {
+                    var l4StopLimit = Model.L4StopLimit.ToString();
+                    <script type="text/javascript">
+                        document.getElementById('l4to').value = l4StopLimit;
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        document.getElementById('l4to').value = 0;
+                    </script>
+                }*@
+        }
+
+    }
+}

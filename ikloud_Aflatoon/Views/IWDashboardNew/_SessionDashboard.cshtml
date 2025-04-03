@@ -1,0 +1,95 @@
+﻿@model List<ikloud_Aflatoon.Infrastructure.IwSessionDashBoardData>
+@{
+    ViewBag.Title = "_SessionDashboard";
+}
+
+<div class="w3-container">
+
+    
+    
+
+        <table border="1" class="table table-light" style="border:solid;">
+            <!--header-->
+            <tr> <td colspan="14" bgcolor="#4474c3" style="text-align:center; color:#f9f8f8;"><h5>@*(selected settlement period or range to be displayed)*@</h5></td></tr>
+            <tr>
+
+                <td colspan="2" bgcolor="#4474c3" align="center" style="color: #f9f8f8;">Inward Date:<br> DD/MM/YYYY</td>
+                <td colspan="2" bgcolor="#bcd4eb" align="center" style="text-align:center;">Total Cheques Received</td>
+                <td colspan="2" bgcolor="#a9d08e" align="center" style="text-align:center;">Response Submitted</td>
+                <td colspan="3" bgcolor="white" align="center" style="text-align:center;">CBS Posting</td>
+                <td colspan="10" bgcolor="#f8cbad" align="center" style="text-align:center;">Pending for Verification</td>
+            </tr>
+            <tr>
+                <td bgcolor="#4474c3" align="center" style="color: #f9f8f8; font-weight:bolder;">Settlement Period</td>
+                <td bgcolor="#bcd4eb" align="center" style="color: black;">Total Cheques Received</td>
+                <td bgcolor="#f8cbad" align="center">Pending for Submission</td>
+                <td bgcolor="#a9d08e" align="center">Response Submitted</td>
+                <td bgcolor="#a9d08e" align="center">Success Posted</td>
+                <td bgcolor="#a9d08e" align="center">Return Posted</td>
+
+                <td bgcolor="#ff8f75" align="center">Failed Postings</td>
+                <td bgcolor="#ff8f75" align="center">Pending For Posting</td>
+                <td bgcolor="a9d08e" align="center">Sucess Posted</td>
+
+                <td bgcolor="#f8cbad" align="center">L1 Pending</td>
+                <td bgcolor="#f8cbad" align="center">L2 Pending</td>
+                <td bgcolor="#f8cbad" align="center">L3 Pending</td>
+                <td bgcolor="#f8cbad" align="center">Locked (L1+L2+L3)</td>
+                <td bgcolor="#f8cbad" align="center">Kores SQ Pending</td>
+            </tr>
+            <!--header-->
+            <!--data-->
+            @if (Model.Any())
+            {
+
+                foreach (var detail in Model)
+                {
+                    <tr>
+                        <td bgcolor="#4474c3" align="center" style="color: #f9f8f8;">@detail.ExpiryTime</td>
+                        <td bgcolor="#bcd4eb" align="center" style="color: black;">@detail.TotalInstruments</td>
+
+
+
+                        @* <td bgcolor="#f8cbad" align="center">@detail.PendingforNPCI test  @Convert.ToInt32(detail.PendingforL1 + detail.PendingforL2 + detail.PendingforL3 +detail.PendingSQ + detail.L1LockCount +detail.L2LockCount + detail.L3LockCount) </td>*@
+                        @{
+                            int lockcount = Convert.ToInt32(detail.L1LockCount + detail.L2LockCount + detail.L3LockCount);
+                        }
+                       @* <td bgcolor="#f8cbad" align="center">@Convert.ToInt32(detail.PendingforL1 + detail.PendingforL2 + detail.PendingforL3 + detail.PendingSQ + detail.FailedCBSPosted + detail.PendingforCBSPosting + lockcount) </td>*@
+
+                        <td bgcolor="#f8cbad" align="center">@Convert.ToInt32(detail.PendingforL1 + detail.PendingforL2 + detail.PendingforL3 + detail.PendingSQ  + lockcount) </td>
+
+                        @*<td bgcolor="#f8cbad" align="center">@detail.PendingforNPCI</td>*@
+
+                        <td bgcolor="#a9d08e" align="center">@Convert.ToInt32(detail.ReturnPosted + detail.SuccessPosted)</td>
+                        <td bgcolor="#a9d08e" align="center">@detail.SuccessPosted </td>
+                        <td bgcolor="#a9d08e" align="center">@detail.ReturnPosted </td>
+
+                        <td bgcolor="#ff8f75" align="center">@detail.FailedCBSPosted </td>
+                        <td bgcolor="#ff8f75" align="center">@detail.PendingforCBSPosting </td>
+                        <td bgcolor="#a9d08e" align="center">@detail.SucessCBSPosted </td>
+
+                        <td bgcolor="#f8cbad" align="center">@detail.PendingforL1</td>
+                        <td bgcolor="#f8cbad" align="center">@detail.PendingforL2</td>
+                        <td bgcolor="#f8cbad" align="center">@detail.PendingforL3</td>
+                        <td bgcolor="#f8cbad" align="center">@Convert.ToInt32(detail.L1LockCount + detail.L2LockCount + detail.L3LockCount)</td>
+                        <td bgcolor="#f8cbad" align="center">@detail.PendingSQ</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="19" style="color:red;text-align:center;">No data found</td>
+                </tr>
+            }
+
+
+
+        </table>
+
+    
+
+
+
+
+</div>

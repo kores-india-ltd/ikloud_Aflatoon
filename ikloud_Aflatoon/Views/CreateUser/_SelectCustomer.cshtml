@@ -1,0 +1,42 @@
+﻿
+
+<div id="ajaxCust" style="padding-left:10%">
+    <label class="w3-label w3-text-black" style="font-weight:600">  Select Customer:</label>
+
+    @Html.DropDownList("CustBag", null, new { @multiple = true, @name = "CustBag[]" })
+
+</div>
+
+<script type="text/javascript">
+
+    $('#CustBag').multiselect({
+        columns: 2,
+        placeholder: 'Select Customer'
+    });
+
+    //$("#CustBag").change(function () {
+    //    debugger;
+    //    //alert('ok');
+
+    //    if ($("#CustBag").val() != null && $("#CustBag").val() != "") {
+    //        $.ajax({
+    //            url: RootUrl + 'CreateUser/_SelectDomains',
+    //            data: JSON.stringify({ customerIds: $("#CustBag").val() }),
+    //            type: 'POST',
+    //            contentType: 'application/json; charset=utf-8',
+    //            dataType: 'html',
+    //            success: function (data) {
+    //                $('#ajaxDom').html(data);
+    //                ////alert(data);
+    //                //$('#dialogEditUser').html(data);
+    //                //$('#dialogEditUser').dialog('open');
+    //            }
+    //        });
+    //    }
+
+    //});
+
+</script>
+
+
+

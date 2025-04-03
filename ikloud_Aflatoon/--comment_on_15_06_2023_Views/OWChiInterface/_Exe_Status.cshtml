@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.Exe_Status>
+
+<div class="row" id="tableData">
+    <div class="col-md-12">
+        <h3>@ViewBag.Heading</h3>
+        <table class="table table-responsive table-bordered table-condensed" style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+            <thead>
+                <tr style="background-color:lightblue;">
+                    <th>FileId</th>
+                    <th>FileName</th>
+                    <th>Status</th>
+                    <th>ClearingType</th>
+                    <th>ItemCount</th>
+                    <th>AcceptCount</th>
+                    <th>RejectCount</th>
+                    <th>CreationTimeStamp</th>
+                    <th>UploadTimeStamp</th>
+                    <th>RESTimeStamp</th>
+                    <th>OACKTimeStamp</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FileId</td>
+                        <td>@item.FileName</td>
+                        <td>@item.Status</td>
+                        <td>@item.ClearingType</td>
+                        <td>@item.ItemCount</td>
+                        <td>@item.AcceptCount</td>
+                        <td>@item.RejectCount</td>
+                        <td>@item.CreationTimeStamp</td>
+                        <td>@item.UploadTimeStamp</td>
+                        <td>@item.RESTimeStamp</td>
+                        <td>@item.OACKTimeStamp</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

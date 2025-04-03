@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Report";
+    ViewBag.header = "UserManagement Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/UserManagementReports.js"></script>
+<link href="~/Content/themes/base/jquery-uiii.css" rel="stylesheet" />
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<div class="w3-container w3-padding-left w3-padding-top">
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+            <div class="m4">
+                <label class="w3-label w3-padding-16 w3-text-black"> Select From Date:</label>
+                <input class="w3-text" type="text" readonly="readonly" id="fromdate" name="fromdate" />
+            </div>
+            <div class="m4 w3-white"><br /></div>
+            <div class="m4">
+                <label class="w3-label w3-padding-16 w3-text-black"> Select To Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="w3-text" type="text" readonly="readonly" id="todate" name="todate" />
+            </div>
+        </div>
+
+    </div>
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col w3-third w3-large w3-theme-d1">
+            <div class="m4">
+                <div class="w3-label w3-text-black">Select Report Type</div>
+                <select class="w3-select" id="rpttype">
+                    <option selected="selected">Select</option>
+                    <option>Login Report</option>
+                    <option>User Management Report</option>
+                    <option>Role Management Report</option>
+                    <option>UnAuthorized User Report</option>
+                    <option>UnAuthentication User Report</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="w3-row">
+        <div class="w3-col m4 w3-col w3-third w3-large w3-theme-d1">
+            <div class="w3-label w3-text-black">Select Download File Type</div>
+            <select class="w3-select" id="filedwnldtype">
+                @*<option selected="selected">Select</option>*@
+                <option>EXCEL</option>
+                <option>CSV</option>
+                <option selected="selected">PDF</option>
+            </select>
+        </div>
+    </div>
+    <div class="w3-row"><br /></div>
+    <div class="w3-row">
+        <div class="w3-col m4">
+            <input class="w3-btn" style="float: initial" type="button" id="btnreport" name="btnreport" value="Get Report">
+        </div>
+    </div>
+</div>

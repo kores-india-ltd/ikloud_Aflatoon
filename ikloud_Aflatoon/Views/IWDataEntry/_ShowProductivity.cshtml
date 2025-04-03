@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.ProductivityLogs>
+
+@{
+    ViewBag.Title = "ShowProductivity";
+    ViewBag.header = "ShowProductivity";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Productivity</h2>*@
+
+
+@*<style type="text/css">
+    body {
+        margin: 0 auto;
+        width: 500px;
+    }
+
+    .mainDiv {
+        font-family: Verdana;
+        font-size: 14px;
+        padding-left: 20px;
+        padding-right: 5px;
+    }
+
+    .expandableCollapsibleDiv img {
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 5px;
+        padding-left: 10px;
+        float: left;
+    }
+
+    .expandableCollapsibleDiv ul {
+        border-bottom: 1px solid #000;
+        clear: both;
+        list-style: outside none none;
+        margin: 0;
+        padding-bottom: 10px;
+        display: none;
+    }
+</style>*@
+
+@{
+    int cnt = 0;
+    int index = 0;
+    int Deindex = 0;
+    int L3cnt = 0;
+    //int L1cnt = 0;
+}
+
+<div id="divProductivity" class="w3-container">
+    @if (Model != null)
+    {
+        foreach (var itm in Model)
+        {
+            if (index == 0)
+            {
+                cnt = cnt + 1;
+                <div class="">
+                    @*<img src="~/Content/images/down-arrow.jpg" />*@
+                    <h3><a>Logs</a></h3>
+                    <table border="1">
+                        @if (cnt == 1)
+                        {
+                            <tr style="text-align: left">
+                                <th>
+                                    Log Level
+                                </th>
+                                <th>
+                                    Login ID
+                                </th>
+                                <th>
+                                    Count
+                                </th>
+
+                                <th>
+                                    Processing Date
+                                </th>
+                            </tr>
+
+                        }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(a => itm.LogLevel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.LoginId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.Count)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(a => itm.ProcessingDate)
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            }
+        }
+    }
+</div>

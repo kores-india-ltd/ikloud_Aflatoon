@@ -1,0 +1,366 @@
+﻿@model ikloud_Aflatoon.UserMaster
+@{
+    ViewBag.Title = "User Edit";
+    ViewBag.header = "User Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script src="@Url.Content("~/Scripts/jquery-ui-1.13.2.js")"></script>
+<script src="@Url.Content("~/Scripts/UserManagementNew.js")"></script>
+<link href="@Url.Content("~/Content/themes/base/jquery-uiii.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/CSS/jquery.multiselect.css")" rel="stylesheet" />
+
+
+
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+
+<input type=hidden id="tit" value="@Model.Title" />
+<input type="hidden" id="usrtyp" value="@Model.UsertType" />
+<input type="hidden" id="cty" value="@Model.City" />
+<input type="hidden" id="lname" value="@Session["LoginID"]" />
+<input type="hidden" id="vname" value="@Model.VendorCode" />
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <input type="hidden" id="accesschange" name="accesschange" value="0" />
+
+    @Html.HiddenFor(model => model.AccessLevel)
+    @Html.HiddenFor(model => model.creationdate)
+    @Html.HiddenFor(model => model.FirstLogin)
+    @Html.HiddenFor(model => model.createdby)
+    @Html.HiddenFor(model => model.sessionid)
+    <input type="hidden" id="polname" name="polname" value="@ViewBag.policynamee" />
+    <input type="hidden" id="hddomain" name="hddomain" />
+    <input type="hidden" id="roleName" name="roleName" value="@ViewBag.UserRoleName" />
+    <input type="hidden" id="roleId" name="roleId" value="@ViewBag.UserRoleId" />
+
+    @Html.Partial("_SelectBrFrDrop")
+    <div style="width: 100%; padding-left: 10%; padding-right: 10%">
+        <table>
+            @Html.HiddenFor(model => model.ID)
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.LoginID)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.LoginID)
+                    @Html.ValidationMessageFor(model => model.LoginID)
+                </td>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Password)
+                </td>
+                <td class="editor-field">
+                    @* @Html.EditorFor(model => model.Password)*@
+                    @Html.HiddenFor(model => model.Password)
+                    @*@Html.TextBoxFor(model => model.Password, new { disabled = "disabled", @readonly = "readonly" })*@
+                    <input type="password" value="*********************" readonly="true" disabled="disabled" />
+                    @Html.ValidationMessageFor(model => model.Password)
+                </td>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Title)
+                </td>
+                <td class="editor-field">
+                    @* @Html.EditorFor(model => model.Title)
+                        @Html.ValidationMessageFor(model => model.Title)*@
+                    <select id="title" name="title">
+                        <option value="select">Select</option>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Ms.">Ms.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Dr.">Dr.</option>
+                    </select>
+                </td>
+                <td>Select Vendor<font color="red">*</font></td>
+                <td>@Html.DropDownList("VendorCode", new SelectList(ViewBag.VendorCode), "Select")</td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.FirstName)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.FirstName)
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </td>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.LastName)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.LastName)
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </td>
+                <td class="editor-label">
+                    @* @Html.LabelFor(model => model.DOB)*@ Date Of Birth
+                </td>
+                <td class="editor-field">
+                    @*@Html.EditorFor(model => model.DOB, new { onclick = "NewCssCal('model.DOB');" })
+                        @Html.ValidationMessageFor(model => model.DOB)*@
+                    <input type=text id="datepicker" name="datepicker" readonly="true" value="@Convert.ToDateTime(Model.DOB).ToString("dd/MM/yyyy")" style="cursor:pointer; width:90px;" />
+                </td>
+            </tr>
+            <tr>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.EmailID)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.EmailID)
+                    @Html.ValidationMessageFor(model => model.EmailID)
+                </td>
+                <td class="editor-label">
+                    @Html.LabelFor(model => model.Active)
+                </td>
+                <td class="editor-field">
+                    @Html.EditorFor(model => model.Active)
+                    @Html.ValidationMessageFor(model => model.Active)
+                </td>
+                <td>
+                    Select Location<font color="red">*</font>
+                </td>
+                <td>
+                    @Html.DropDownList("city", new SelectList(ViewBag.city), "Select")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password Policy
+                </td>
+                <td>
+                    @Html.DropDownList("policynm", new SelectList(ViewBag.policy), "Select")&nbsp;&nbsp;
+                    <input type="button" value="Details" onclick="policydetails();" />
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <div style="padding-left: 10%; padding-right: 10%; display:none;">
+        @Html.Action("_RolProcess", "CreateUserNew", new { id = @Model.ID })
+    </div>
+    <div style="padding-left: 10%; padding-right: 10%; display:none;">
+        <table>
+            <tr></tr>
+            <tr id="l1" style="display: none">
+                <td>QC amount Limit From</td>
+                <td>
+                    <input type="text" id="l1frm" name="l1lfrm" maxlength="20" value="@Model.L1StartLimit" />
+                </td>
+                <td>
+                    To
+                    <input type="text" id="l1to" name="l1to" maxlength="20" value="@Model.L1StopLimit" />
+                </td>
+            </tr>
+            <tr id="l2" style="display: none">
+                <td>Verification amount Limit From</td>
+                <td>
+                    <input type="text" id="l2frm" name="l2lfrm" maxlength="20" value="@Model.L2StartLimit" />
+                </td>
+                <td>
+                    To
+                    <input type="text" id="l2to" name="l2to" maxlength="20" value="@Model.L2StopLimit" />
+                </td>
+            </tr>
+            <tr id="l3" style="display: none">
+                <td>Re-Verification amount Limit From</td>
+                <td>
+                    <input type="text" id="l3frm" name="l3lfrm" maxlength="20" value="@Model.L3StartLimit" />
+                </td>
+                <td>
+                    To
+                    <input type="text" id="l3to" name="l3to" maxlength="20" value="@Model.L3StopLimit" />
+                </td>
+            </tr>
+            <tr id="l4" style="display: none">
+                <td>L4-Verification amount Limit From</td>
+                <td>
+                    <input type="text" id="l4frm" name="l4lfrm" maxlength="20" value="@Model.L4StartLimit" />
+                </td>
+                <td>
+                    To
+                    <input type="text" id="l4to" name="l4to" maxlength="20" value="@Model.L4StopLimit" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="w3-row" id="ajaxorg">
+    </div>
+
+
+    <div class="w3-row" id="ajaxCust">
+    </div>
+
+    <div class="w3-row" id="ajaxDom">
+    </div>
+
+    //  @Html.Action("_SelectedUsrDomains", new { id = @Model.ID })
+    <p style="padding-left: 10%; padding-right: 10%">
+        <input type="submit" value="Save" onclick="return(valid());" />
+    </p>
+
+    if (Model != null)
+    {
+        if (Model.RoleId != null)
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    console.log("HIII");
+                //var va1 = $("#SelectRoles").val();
+                //var SelectRoles = document.getElementById('SelectRoles').options;
+                //console.log("selectRoles " + SelectRoles[0].value);
+
+                //var selectRoleName = document.getElementById('roleName').value;
+                //console.log("selectRoleName " + selectRoleName);
+                //var roleId = @Model.RoleId;
+                //console.log(roleId);
+                //    var selectedval = SelectRoles.options;
+                //    console.log("length " + selectedval.length);
+                //for (var i = 0; i <= SelectRoles.options.length; i++) {
+                //    console.log("selectedval[i].value " + selectedval[i].value);
+                //    if (selectedval[i].value == selectRoleName) {
+                //        SelectRoles.options[i].selected = true;
+                //    }
+                //}
+                });
+
+
+                //for (var i = 0; i <= SelectRoles.options.length; i++)
+                //{
+                //    console.log(selectedval[i].value);
+                //    console.log(selectedval[i].text);
+                //    if (selectedval[i].value == roleId) {
+                //        SelectRoles.options[i].selected = true;
+                //    }
+                //}
+            </script>
+        }
+    }
+
+    <div id="divShowAllDetails" style="display:none;border:1px solid black;padding:5px;" class="container">
+        <div id="divOrgLevel" style="display:none;">
+            <label>Organization Name :- &nbsp;</label><label id="lblOrgName"></label>
+        </div>
+        <div id="divCustLevel" style="display:none;">
+            <label>Customer Name :- &nbsp;</label><label id="lblCustomerName"></label>
+        </div>
+        <div id="divDomLevel" style="display:none;">
+            <label>Domain Name :- &nbsp;</label><label id="lblDomainName"></label>
+        </div>
+        <input type="button" value="close" onclick="document.getElementById('divShowAllDetails').style.display = 'none';" />
+    </div>
+
+    
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<div id="getcustdom" title="Customers Or Domains Name">
+</div>
+<div id="dialogEditUser" title="Policy Details">
+</div>
+<div id="login" class="w3-modal w3-animate-zoom ">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('login').style.display = 'none'" class="w3-closebtn">&times;</span>
+            <h2>Login Please....</h2>
+        </header>
+        <div class="w3-row w3-center">
+            <div class="w3-col">
+                <label class="w3-label">Username</label>
+                <input type="text" id="user" name="user" autocomplete="off" placeholder="Enter username" />
+            </div>
+        </div>
+        <div class="w3-row w3-center">
+            <div class="w3-col">
+                <label class="w3-label">Password</label>
+                <input type="password" id="passd" name="passd" autocomplete="off" placeholder="Enter password" />
+            </div>
+        </div>
+        <div class="w3-row w3-center w3-margin-top">
+            <input class="w3-btn" type="button" value="Login" id="slogin" name="slogin" />
+        </div>
+    </div>
+</div>
+
+<div id="dialogEditUserDetails" title="User Details">
+</div>
+
+<script type="text/javascript">
+
+    var selectObj = document.getElementById('policynm');
+    var selectObjj = document.getElementById('usertype');
+    var selectObjjj = document.getElementById('city');
+    var SelectedAccesslevel = document.getElementById('SelectedAccesslevel');
+    var SelectVendorcode = document.getElementById('VendorCode');
+    var SelectRoles1 = document.getElementById('SelectRoles1');
+
+    document.getElementById('title').value = document.getElementById('tit').value;
+    // document.getElementById('usertype').value = document.getElementById('usrtyp').value;
+
+    for (var i = 0; i < selectObj.options.length; i++) {
+        if (selectObj.options[i].text == document.getElementById('polname').value) {
+            selectObj.options[i].selected = true;
+        }
+    }
+    //----------------------user Type----------------------------//
+    for (var i = 0; i < selectObjj.options.length; i++) {
+        if (selectObjj.options[i].text == document.getElementById('usrtyp').value) {
+            selectObjj.options[i].selected = true;
+        }
+    }
+    //------------------City------------------------
+    for (var i = 0; i < selectObjjj.options.length; i++) {
+        if (selectObjjj.options[i].text == document.getElementById('cty').value) {
+            selectObjjj.options[i].selected = true;
+        }
+    }
+    //------------------AccessLevel------------------------
+    //debugger;
+    var selectedval = SelectedAccesslevel.options;
+    console.log("SelectedAccessLevel " + selectedval);
+    console.log("SelectedAccess length " + selectedval.length);
+    for (var i = 0; i < SelectedAccesslevel.options.length; i++) {
+        console.log("selectedval Access " + [i] + " value " + selectedval[i].value);
+        console.log("AccessLevel Value ViewBag " + document.getElementById('AccessLevel').value);
+        if (selectedval[i].value == document.getElementById('AccessLevel').value) {
+            console.log("IN Access Level Match");
+            SelectedAccesslevel.options[i].selected = true;
+        }
+    }
+    //-----------------------------------
+    //----------------Vendor Code------------
+    for (var i = 0; i < SelectVendorcode.options.length; i++) {
+        if (SelectVendorcode.options[i].text == document.getElementById('vname').value) {
+            SelectVendorcode.options[i].selected = true;
+        }
+    }
+    //---------------------------------------
+    $("#SelectedAccesslevel").prop("disabled", true);
+    //amtlimit();
+    debugger;
+    var selectRoleName = document.getElementById('roleName').value;
+    var selectRoleId = document.getElementById('roleId').value;
+    //console.log("selectRoleName " + selectRoleName);
+
+    var selectedval = SelectRoles1.options;
+    console.log("Selected Role Values " + selectedval);
+    console.log("length " + selectedval.length);
+    for (var i = 0; i < SelectRoles1.options.length; i++) {
+        console.log("selectedval Role " + [i] + " value " + selectedval[i].value);
+        console.log("RoleName Value ViewBag " + selectRoleName);
+        if (selectedval[i].value == selectRoleId) {
+            console.log("IN Role Match");
+            SelectRoles1.options[i].selected = true;
+        }
+    }
+
+</script>

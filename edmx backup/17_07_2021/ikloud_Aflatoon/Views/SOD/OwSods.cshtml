@@ -1,0 +1,379 @@
+﻿@model ikloud_Aflatoon.OwSoD
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "OWSOD";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+<h2>SOD</h2>
+
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+@*<script src="~/Scripts/jquery-2.1.4.min.js"></script>*@
+@*<script src="~/Scripts/UserManagement.js"></script>*@
+@*<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+<link href="~/Content/themes/base/jquery-uiii.css" rel="stylesheet" />
+
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+
+
+@if (ViewBag.done != null)
+{
+    <script type="text/javascript">
+        alert('@ViewBag.done');
+    </script>
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var validflg = false;
+        document.getElementById("chngbtn").disabled = true;
+        $(function () {
+            $("#ProcessingDate").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-100y:c+nn',
+                maxDate: '+10d'
+            });
+        });
+
+        $(function () {
+            $("#PostDated").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-100y:c+nn',
+                //maxDate: '-1d',
+                showOn: "off"
+
+            });
+        });
+        $(function () {
+            $("#StaleDated").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-100y:c+nn',
+                // maxDate: '-1d'
+                showOn: "off"
+            });
+        });
+
+
+        $("#ProcessingDate").change(function () {
+            //  debugger;
+            //---------------Set PostDate--------------
+            var date2 = new Date();
+            date2 = new Date($("#ProcessingDate").datepicker("getDate"));
+            var nextDayDate = new Date();
+            nextDayDate.setDate(date2.getDate() + 1);
+            // alert(nextDayDate);
+            //$("#PostDated").val() = nextDayDate;
+            $("#PostDated").datepicker('setDate', nextDayDate);
+            //--------------------Set Stale Date-----------------
+
+            var staledt = new Date(date2);
+            staledt.setMonth(staledt.getMonth() - 3);
+            staledt.setDate(staledt.getDate() + 1);
+            $("#StaleDated").datepicker('setDate', staledt);
+
+            var dayOfWeek = date2.getUTCDay();
+            if (dayOfWeek == 4) {
+                var reslt = alert('Processing day is friday please select PDC date carefully ');
+            }
+            else if (dayOfWeek == 5) {
+                var reslt = alert('Processing day is Saturday please select PDC date carefully ');
+            }
+
+            document.getElementById("chngbtn").disabled = false;
+        });
+
+        $("#chngbtn").click(function () {
+
+            if ($('#CustomerId option:selected').text() == "Select") {
+                alert('Please select customer!!')
+                document.getElementById('CustomerId').focus();
+                return false;
+            }
+
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('user').value = "";
+            document.getElementById('passd').value = "";
+
+        });
+
+        $("#eodbtn").click(function () {
+
+            if ($('#CustomerId option:selected').text() == "Select") {
+                alert('Please select customer!!')
+                document.getElementById('CustomerId').focus();
+                return false;
+            }
+            if (document.getElementById('ProcessingDate').value == "") {
+                alert('Please Enter Processing Date!!')
+                document.getElementById('ProcessingDate').focus();
+                return false;
+            }
+            if ($("#eodbtn").val() == "Execute EOD") {
+                var condcsn = confirm("Are you really want to do EOD?");
+                if (condcsn == true) {
+                    var finldcsn = confirm("Are you sure to do EOD of all previous date from the selection date?");
+                    if (finldcsn) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: RootUrl + 'SOD/EOD',
+                            dataType: 'html',
+                            data: { procdate: $("#ProcessingDate").val(), custid: $('#CustomerId').val() },
+                            async: false,
+                            success: function (accresult) {
+                                if (accresult == "true" || accresult == true) {
+                                    alert('EOD has been done successfully !!!');
+                                }
+                                //cbsbtn = true;
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                    else {
+                        return false;
+                    }
+
+                }
+                else {
+                    return false;
+                }
+
+            }
+            else {
+                document.getElementById('login').style.display = 'block';
+                document.getElementById('user').value = "";
+                document.getElementById('passd').value = "";
+            }
+
+
+
+        });
+
+
+        $("#slogin").click(function () {
+
+            // debugger;
+            if ($("#user").val() == "" || $("#user").val() == null) {
+                alert('Please enter user name !');
+                $("#user").focus();
+                return false;
+            }
+            if ($("#passd").val() == "" || $("#passd").val() == null) {
+                alert('Please enter password !');
+                $("#passd").focus();
+                return false;
+            }
+            if ($("#user").val().toUpperCase() != $("#lname").val().toUpperCase()) {
+                alert('username not valid!');
+                $("#user").focus();
+                return false;
+            }
+            //
+
+            $.ajax({
+
+                url: RootUrl + 'SOD/login',
+                dataType: "html",
+                data: { uname: $("#user").val(), upass: $("#passd").val(), procdate: $("#ProcessingDate").val(), custid: $('#CustomerId').val() },
+                success: function (data) {
+                    // debugger;
+                    if (data == "true") {
+                        $("#PostDated").datepicker("destroy");
+                        $("#StaleDated").datepicker("destroy");
+                        $(function () {
+                            $("#PostDated").datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                changeMonth: true,
+                                changeYear: true,
+                                yearRange: '-100y:c+nn',
+                                // maxDate: '-1d',
+                                //showOn: "off"
+
+                            });
+                        });
+                        $(function () {
+                            $("#StaleDated").datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                changeMonth: true,
+                                changeYear: true,
+                                yearRange: '-100y:c+nn',
+                                maxDate: '-1d'
+                                //showOn: "off"
+                            });
+                        });
+                        document.getElementById('login').style.display = 'none';
+                        document.getElementById('eodbtn').value = "Execute EOD";
+                    }
+                    else {
+                        alert('Passowrd is wrong!!');
+                        return false;
+                    }
+
+                }
+            });
+        });
+
+        //------------------------EOD-----------------
+
+
+    });
+
+    function check() {
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = dd + '/' + mm + '/' + yyyy;
+
+        var customername = $('#CustomerId option:selected').text();
+        //document.getElementById('customername').value;
+        var ProcessingDate = document.getElementById('ProcessingDate').value;
+        var PostDated = document.getElementById('PostDated').value;
+        var StaleDated = document.getElementById('StaleDated').value;
+        // alert(customername);
+        if (customername == "Select") {
+            alert('Please select customer!!')
+            document.getElementById('CustomerId').focus();
+            return false;
+        }
+        if (ProcessingDate == "") {
+            alert('Please enter Processing Date!!')
+            document.getElementById('ProcessingDate').focus();
+            return false;
+        }
+        if (PostDated == "") {
+            alert('Please enter Post Date!!')
+            document.getElementById('PostDated').focus();
+            return false;
+        }
+        if (StaleDated == "") {
+            alert('Please enter Stale Date!!')
+            document.getElementById('StaleDated').focus();
+            return false;
+        }
+        if (ProcessingDate != today) {
+            
+            //alert("ProcessingDate " + ProcessingDate + " today " + today)
+            var retVal = confirm('Selected SOD Date is not the current todays date !!,Do you want to continue?');
+
+            if (retVal == true) {
+                //document.write("User wants to continue!");
+                return true;
+            }
+            else {
+                //document.write("User does not want to continue!");
+                return false;
+            }
+
+        }
+        return true;
+    }
+</script>
+
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+@using (Html.BeginForm("SOD"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <input type="hidden" id="lname" value="@Session["LoginID"]" />
+    <fieldset style="width:100%; padding-left:10%;padding-right:10%">
+        <legend>SOD</legend>
+        <div class="editor-label">
+            <b>Select Customer</b>
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CustomerId", (SelectList)ViewBag.customer, "Select", new { style = "width: 200px;" })
+
+        </div>
+
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.ProcessingDate)*@
+            <label><b>ProcessingDate</b></label>
+        </div>
+        <div class="editor-field">
+            @*@Html.EditorFor(model => model.ProcessingDate)*@
+            <input style="width: 200px;" class="w3-input w3-border w3-margin-bottom" data-val="true" data-val-required="The processing field is required." id="ProcessingDate" name="ProcessingDate" type="text" value="" placeholder="Enter Processing Date" readonly="readonly" />
+            @*@Html.ValidationMessageFor(model => model.ProcessingDate)*@
+        </div>
+        <div class="editor-label">
+            @* @Html.LabelFor(model => model.PostDated)*@
+            <label><b>PDC Date</b></label>
+        </div>
+        <div class="editor-field">
+            @* @Html.EditorFor(model => model.PostDated)*@
+            <input style="width: 200px;" class="w3-input w3-border w3-margin-bottom" data-val="true" data-val-required="The postdate field is required." id="PostDated" name="PostDated" type="text" value="" placeholder="Enter Post Date" readonly="readonly" />
+            @*@Html.ValidationMessageFor(model => model.PostDated)*@
+        </div>
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.StaleDated)*@
+            <label><b>Stale Date</b></label>
+        </div>
+        <div class="editor-field">
+            @* @Html.EditorFor(model => model.StaleDated)*@
+            <input style="width: 200px;" class="w3-input w3-border w3-margin-bottom" data-val="true" data-val-required="The staledate field is required." id="StaleDated" name="StaleDated" type="text" value="" placeholder="Enter staleDated date" readonly="readonly" />
+            @*@Html.ValidationMessageFor(model => model.StaleDated)*@
+        </div>
+
+        <p>
+            <input class="w3-btn" type="submit" value="Create" onclick="return(check());" />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            <input class="w3-btn" type="button" id="chngbtn" value="Change" />&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            <input class="w3-btn" type="button" id="eodbtn" value="EOD" />
+        </p>
+    </fieldset>
+}
+<div id="login" class="w3-modal w3-animate-zoom ">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('login').style.display = 'none'" class="w3-closebtn">&times;</span>
+            <h2>Login Please....</h2>
+        </header>
+        <div class="w3-row w3-center">
+            <div class="w3-col">
+                <label class="w3-label">Username</label>
+                <input type="text" id="user" name="user" autocomplete="off" placeholder="Enter username" />
+            </div>
+        </div>
+        <div class="w3-row w3-center">
+            <div class="w3-col">
+                <label class="w3-label">Password</label>
+                <input type="password" id="passd" name="passd" autocomplete="off" placeholder="Enter password" />
+            </div>
+        </div>
+        <div class="w3-row w3-center w3-margin-top">
+            <input class="w3-btn" type="button" value="Login" id="slogin" name="slogin" />
+        </div>
+    </div>
+</div>

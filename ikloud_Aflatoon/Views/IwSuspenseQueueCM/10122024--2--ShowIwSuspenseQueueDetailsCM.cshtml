@@ -1,0 +1,328 @@
+﻿@model ikloud_Aflatoon.IwSuspenseQueueViewCM
+@{
+    ViewBag.Title = "Verify";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+
+<script type="text/javascript">
+
+
+</script>
+
+<script src="~/Scripts/ShowSuspenseQueueDetailsCM.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+@*<input type="hidden" id="BankCode" value="@ViewBag.BankCode" />
+<input type="hidden" id="DecisionTaken" value="@ViewBag.DecisionTaken" />
+<input type="hidden" id="RejectCodeTaken" value="@ViewBag.RejectCode" />
+<input type="hidden" id="currentId" value="@Model.Id" />
+<input type="hidden" id="branchCode" value="@Model.BranchCode" />
+<input type="hidden" id="chequeAmount" value="@Model.Amount" />
+<input type="hidden" id="chequeNumber" value="@Model.ChequeNumber" />
+<input type="hidden" id="udk" value="@Model.UDK" />
+<input type="hidden" id="waiveCharge" value="@Model.WaiveCharges" />*@
+
+
+<div class="w3-hide">
+    @Html.DropDownList("rtnlist", new SelectList(ViewBag.rtnlist), "Select")
+    @Html.DropDownList("rtnlistDescrp", new SelectList(ViewBag.rtnlistDescrp), "Select")
+
+    @Html.DropDownList("rtnlistex", new SelectList(ViewBag.rtnlistex), "Select")
+    @Html.DropDownList("rtnlistDescrpex", new SelectList(ViewBag.rtnlistDescrpex), "Select")
+
+</div>
+
+<style>
+    .cheque-image {
+        max-width: 100%;
+        height: 350px;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+
+    .section-title {
+        font-weight: bold;
+    }
+
+    .section-content {
+        margin-bottom: 0px;
+    }
+
+    .btn-row {
+        margin-top: 5px;
+    }
+
+    .info-table td {
+        padding: 5px;
+        vertical-align: middle;
+    }
+</style>
+<div class="w3-hide">
+    <input type="hidden" name="acmin" id="acmin" value="@Session["acfrm"]" />
+    <input type="hidden" name="Id" id="Id" value="@Session["RecordId"]" />
+    <input type="hidden" name="MakerCheckerRole" id="MakerCheckerRole" value="@Session["RoleName"]" />
+    <input type="hidden" name="BranchId" id="BranchId" value="@Session["BranchID"]" />
+    <input type="hidden" name="ExceptionId" id="ExceptionId" value="@Session["ExceptionFilterId"]" />
+
+    <input type="hidden" name="MakerReturnReason" id="MakerReturnReason" value="@Model.MakerReturnReason" />
+    <input type="hidden" name="MakerReturnReasonDiscription" id="MakerReturnReasonDiscription" value="@Model.MakerReturnReasonDiscription" />
+    <input type="hidden" name="CheckerSendBackToMakerDiscription" id="CheckerSendBackToMakerDiscription" value="@Model.CheckerSendBackToMakerDiscription" />
+
+    <input type="hidden" name="MakerDecision" id="MakerDecision" value="@Model.MakerDecision" />
+
+</div>
+<body>
+    <br />
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Left Section -->
+            <div class="col-md-4">
+                <div class="section-content">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="section-title">Account Number</td>
+                            @if (Session["RoleName"].ToString() == "OPS Maker")
+                            {
+                                <td><input type="text" id="AccountNo" value="@Model.AccountNumber" /></td>
+}
+                            else
+                            {
+                                <td>@Model.AccountNumber</td>
+}
+                        </tr>
+                        <tr>
+                            <td class="section-title">Initial Available Balance</td>
+                            <td id="apiinitialamt">API Value</td>
+                        </tr>
+                        <tr>
+                            <td class="section-title">Cheque Number</td>
+                            <td>@Model.ChequeNumber</td>
+                        </tr>
+                        <tr>
+                            <td class="section-title">Current Available Balance</td>
+                            <td id="currentavlableamt">API Value</td>
+                        </tr>
+                        <tr>
+                            <td class="section-title">RBI Sequence Number</td>
+                            <td>@Model.RBISequenceNo</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Middle Section -->
+            <div class="col-md-4">
+                <div class="section-content">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="section-title">Account Name</td>
+                            <td id="AccNameid">API Value</td>
+                        </tr>
+                        <tr>
+                            <td class="section-title">Amount</td>
+                            <td>@Model.Amount</td>
+                        </tr>
+                        <tr>
+                            <td class="section-title">Exception Reason</td>
+                            <td id="ExceptuinReasonId">FINACLE/Manual Exception</td>
+                        </tr>
+                        <tr>
+                            <td class="section-title">Exception ID</td>
+                            <td id="ExceptionId">SYSTEM/Staff 1 bank ID</td>
+                        </tr>
+                        @if (Session["RoleName"].ToString() == "OPS Maker")
+                        {
+                            <tr id="chekarreturnid">
+                                <td class="section-title">Checker Return Remark</td>
+                                <td id="checkerreturnremark" style="color:orange;"></td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--img section-->
+        <div class="row mt-4">
+            <img src="@Model.FrontGrayImg" alt="Cheque Image" class="cheque-image">
+        </div>
+
+        <!-- Decision Row -->
+        <div class="row mt-4">
+            <div class="col-md-10 text-center">
+                <div class="col-md-2 w3-margin-left w3-margin-top">
+                    <label class="" style="float: left;">Decision: </label>
+                    <input class="w3-margin-left" id="IWDecision" name="IWDecision" type="text" style="width: 35px; float: left;font-weight:700;text-align:center" maxlength="1" onkeyup="IWVef();" />
+                </div>
+                <div class="col-md-8  w3-margin-left w3-margin-top" id="rtncd" style="display:none">
+                    <label class="w3-margin-left" style="float: initial">Reason Code: </label>
+                    <input class="w3-margin-left" type="text" style="width: 35px; float: initial;font-weight:700;text-align:center" maxlength="2" id="IWRemark" name="IWRemark" />
+                    <span class="" id="rejectreasonmodal" style="cursor:pointer" onclick="document.getElementById('RejectReason').style.display = 'block';">&#9776;</span>&nbsp;
+                    <input class="" type="text" id="rejectreasondescrpsn" style="float: initial;font-weight:700; width:50%;" />
+
+
+                </div>
+
+                <div class="col-md-8  w3-margin-left w3-margin-top" id="rtncdex" style="display:none">
+                    <label class="w3-margin-left" style="float: initial">Reason Code: </label>
+                    <input class="w3-margin-left" type="text" style="width: 35px; float: initial;font-weight:700;text-align:center" maxlength="2" id="IWRemarkex" name="IWRemarkex" />
+                    <span class="" id="" style="cursor:pointer" onclick="document.getElementById('RejectReasonforExtension').style.display = 'block';">&#9776;</span>&nbsp;
+                    <input class="" type="text" id="rejectreasondescrpsnex" style="float: initial;font-weight:700; width:50%;" />
+
+
+                </div>
+
+            </div>
+
+        </div>
+        @if (Session["RoleName"].ToString() == "OPS Checker")
+        {
+            <div class="row mt-4 w3-margin-top">
+                <div class="col-md-12">
+
+                    <input class="" type="text" id="SendBckToMakerRemark" style="float: initial;font-weight:700; width:25%;" placeholder="Enter Remark"  oninput="checkInput()" />
+                    <button class="btn btn-secondary" id="btnSendBackToMaker">Send Back To Maker</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row mt-4 w3-margin-top" hidden>
+                <div class="col-md-12">
+
+                    <input class="" type="text" id="SendBckToMakerRemark" style="float: initial;font-weight:700; width:25%;" placeholder="Enter Remark"  oninput="checkInput()" disabled/>
+                    <button class="btn btn-secondary" id="btnSendBackToMaker" style="display:none;">Send Back To Maker</button>
+                </div>
+            </div>
+        }
+
+        <!-- Cheque Details Table -->
+        <div class="row mt-4 w3-margin-top">
+            <div class="col-md-8">
+                <table class="table table-bordered table table-responsive">
+                    <thead style="background-color: lightblue;">
+                        <tr>
+                            <th>ChequeNo</th>
+                            <th>SortCode</th>
+                            <th>SAN</th>
+                            <th>Transcode</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @if (Session["RoleName"].ToString() == "OPS Maker")
+                                {
+                                    <input type="text" id="ChqNo" value="@Model.ChequeNumber" />
+                                }
+                                else
+                                {
+                                    @Model.ChequeNumber
+                                }
+                            </td>
+                            <td>
+                                @if (Session["RoleName"].ToString() == "OPS Maker")
+                                {
+                                    <input type="text" id="XmlSortCode" value="@Model.XmlSortCode" />
+                                }
+                                else
+                                {
+                                    @Model.XmlSortCode
+                                }
+
+                            </td>
+                            <td>
+                                @if (Session["RoleName"].ToString() == "OPS Maker")
+                                {
+                                    <input type="text" id="XmlSan" value="@Model.XmlSan" />
+                                }
+                                else
+                                {
+                                    @Model.XmlSan
+                                }
+
+                            </td>
+                            <td>
+                                @if (Session["RoleName"].ToString() == "OPS Maker")
+                                {
+                                    <input type="text" id="XmlTc" value="@Model.XmlTc" />
+                                }
+                                else
+                                {
+                                    @Model.XmlTc
+                                }
+
+                            </td>
+
+                            <td>@Model.Amount</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Buttons Row -->
+        <div class="row btn-row">
+            <div class="col-md-8 text-center">
+                <button class="btn btn-primary" id="btnSave">SAVE</button>
+                <button class="btn btn-secondary" id="btnClose">CLOSE</button>
+
+            </div>
+        </div>
+    </div>
+
+    @*<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>*@
+</body>
+
+
+
+
+
+
+
+
+<div id="RejectReason" class="w3-modal w3-animate-zoom ">
+
+    <div class="w3-modal-content">
+        <div class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('RejectReason').style.display = 'none';"
+                  class="w3-closebtn">&times;</span>
+            <h2>Select Reject Reason</h2>
+        </div>
+        <div class="w3-container">
+
+            @Html.Action("RejectReason", "IwSuspenseQueueCM")
+        </div>
+        <div class="w3-container">&nbsp;</div>
+    </div>
+</div>
+
+<div id="RejectReasonforExtension" class="w3-modal w3-animate-zoom ">
+    @*@Html.Action("RejectReason", "IWDataEntry");*@
+    <div class="w3-modal-content">
+        <div class="w3-container w3-theme-dark">
+            <span onclick="document.getElementById('RejectReasonforExtension').style.display = 'none';"
+                  class="w3-closebtn">&times;</span>
+            <h2>Exception Reject Reason</h2>
+        </div>
+        <div class="w3-container">
+
+            @Html.Action("ExtensionRejectReason", "IwSuspenseQueueCM")
+        </div>
+        <div class="w3-container">&nbsp;</div>
+    </div>
+</div>

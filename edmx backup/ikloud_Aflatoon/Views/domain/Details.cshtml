@@ -1,0 +1,60 @@
+﻿@model ikloud_Aflatoon.domainView
+
+@{
+    ViewBag.Title = "Domain Details";
+    ViewBag.header = "Domain Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DomainMaster</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DomainCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DomainCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DomainName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DomainName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CityCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CityCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.custID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.custID)
+    </div>
+
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.)
+    </div>*@
+    @*<div class="display-field">
+        @Html.DisplayFor(model => model.CreationDateTime)
+    </div>*@
+
+    @*<div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy)
+    </div>*@
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

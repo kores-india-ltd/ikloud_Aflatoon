@@ -1,0 +1,108 @@
+﻿@model ikloud_Aflatoon.UserMaster
+@{
+    ViewBag.Title = "Create";
+    ViewBag.header = "User Creation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+<h2>
+    User Management
+</h2>
+@*<script src="~/Scripts/modernizr-2.8.3.js"></script>
+        <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/UserManagement.js"></script>
+<link href="~/Content/themes/base/jquery-uiii.css" rel="stylesheet" />
+<link href="~/Content/CSS/jquery.multiselect.css" rel="stylesheet" />
+
+<style type="text/css">
+    .ui-datepicker {
+        background: #0f7a97;
+        border: 1px solid #555;
+        color: #EEE;
+    }
+</style>
+@{
+
+    if (ViewBag.result == false || ViewBag.value == "1")
+    {
+        <script type="text/javascript">
+       // alert("@ViewBag.temppassword");
+            alert("User created successfully");
+
+        </script>
+    }
+    if (ViewBag.temppassword != null)
+    {
+        <label style="color:red">Password is->&nbsp; @ViewBag.temppassword</label>
+    }
+    <script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+    </script>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false)
+
+        @Html.HiddenFor(m => m.AccessLevel)
+        @Html.HiddenFor(m => m.AllDomain)
+        <div>
+            @Html.Action("_CreateEntryField")
+        </div>
+        <div>
+            @Html.Partial("_CreateRolProcess")
+        </div>
+
+        @*<div id="vern" style="padding-left:10%;padding-right:10%">
+                All Domain
+                <input type="radio" name="vernc" id="vernc" value="All" onchange="getBranches('vernc');" />
+                &nbsp; Selected Domain
+                <input type="radio" name="vernc" checked="checked" id="verncc" value="Select" onchange="getBranches('verncc');" />
+            </div>
+            <div style="padding-left:10%;padding-right:10%">
+                @Html.Action("_SelectDomain")
+            </div>*@
+        //if (Model.AccessLevel == "ORG")
+        //{
+        @*<div class="w3-row">
+                @Html.Action("_SelectOrgnization")
+            </div>*@
+        <div class="w3-row" id="ajaxorg">
+        </div>
+
+
+        <div class="w3-row" id="ajaxCust">
+        </div>
+
+        <div class="w3-row" id="ajaxDom">
+        </div>
+
+
+        // }
+        @*if (Model.AccessLevel == "CUST")
+            {
+                @Html.Action("_SelectCustomer")
+            }
+
+            if (Model.AccessLevel == "DOM")
+            {
+                @Html.Action("_SelectDomains")
+            }*@
+
+
+        <input type="hidden" id="verlvel" name="verlvel" />
+        <div style="padding-left: 10%; padding-right: 10%; padding-top: 5%">
+            <input class="w3-btn" type="submit" id="create_user" name="create_user" value="Create" onclick="return (valid());" />&nbsp;&nbsp;
+            <input type="reset" class="w3-btn" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        <input type="hidden" id="hddomain" name="hddomain" />
+
+
+
+    }
+}

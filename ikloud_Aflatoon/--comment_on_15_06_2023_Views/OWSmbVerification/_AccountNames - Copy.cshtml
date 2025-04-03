@@ -1,0 +1,63 @@
+﻿@model ikloud_Aflatoon.Infrastructure.cbstetails
+@*@Html.DropDownList("Payee", new SelectList(Model.PayeeName), "Select Name", new { onchange = "getselect();", Id = "Payee", Name = "Payee" })*@
+<br /><br /><br />
+            <div id="cbsdetails" style="left:auto">
+
+                <div style="padding-left:10%">
+                    <label class="w3-label w3-theme-dark w3-white" style="font-weight:600;color:white">  Select Account Holder:</label>
+
+
+                    @*@if (Model.cbsdls == null)
+        {
+            if (Model.status == "SUCCESS")
+            {*@
+                    @*@Html.HiddenFor(m => m.payeenameselected)*@
+
+
+                    @*@Html.DropDownList("ABC", new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "A", Value = "0" },
+                        new SelectListItem { Text = "B", Value = "1" },
+                    })*@
+
+                    @Html.DropDownList("vbAcctName", (IEnumerable
+        <SelectListItem>)ViewBag.vbAcctName)
+
+                    <label></label>
+
+                    @*@if (ViewBag.vbAcctName != null)
+        {*@
+                    @*@Html.DropDownList("Payee", new SelectList(ViewBag.vbAcctName), "Select Name", new { onchange = "getselect();", Id = "Payee", Name = "Payee" })*@
+
+                    @*}
+        else
+        {
+            @Html.DropDownList("PayeeName", new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Not Found", Value = "Not Found" },
+                        }, new { onchange = "getselect();" })
+        }*@
+
+                    @*}
+           else
+            {
+                <div class="w3-container w3-highway-red" style="float: right">
+                    <h3 class="w3-container">
+                        <strong>Account Details Not Found!!</strong>
+                    </h3>
+                </div>
+                <script type="text/javascript">
+                    $("#ChqPayeeName").val("");
+
+                    document.getElementById("blockkey").value = "1";
+                    if ($("#NarrationID").val() == "Y") {
+                        document.getElementById('narsndiv').style.display = "none";
+                        document.getElementById('ofc').value = "0";
+                        narrationReqirdflg = false;
+                    }
+                </script>
+            }
+        }*@
+
+                </div>
+</div>

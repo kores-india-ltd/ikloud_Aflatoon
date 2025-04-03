@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Models.IWBatchsummary>
+@{int k = 1;
+}
+<div class="w3-container">
+
+    <table class="w3-table w3-striped w3-bordered">
+        <thead>
+            <tr>
+                <td colspan="5">
+                    <h3 style=" font-weight: bold;background-color:#0f7a97">
+                        Batch Summary
+                    </h3>
+                </td>
+            </tr>
+            <tr>
+                <td>SrNo.</td>
+                <td>Batch No</td>
+                <td>Batch Name</td>
+                @* <th>Process Date</th>*@
+                <td>Batch Count</td>
+                <td>Batch Amount</td>
+            </tr>
+        </thead>
+        @foreach (var itm in Model)
+        {
+            <tr>
+                <td>@k</td>
+                <td>@Html.DisplayFor(a => itm.BatchNo)</td>
+                <td>@Html.DisplayFor(a => itm.BatchDesc)</td>
+                @*<td>@Html.DisplayFor(a => itm.ProcDate)</td>*@
+                <td>@Html.DisplayFor(a => itm.BatchCount)</td>
+                <td>@Html.DisplayFor(a => itm.BatchAmount)</td>
+            </tr>
+            k = k + 1;
+        }
+    </table>
+</div>
+@*<div>@Html.ActionLink("Back", "Index", "IWDashboard")</div>*@

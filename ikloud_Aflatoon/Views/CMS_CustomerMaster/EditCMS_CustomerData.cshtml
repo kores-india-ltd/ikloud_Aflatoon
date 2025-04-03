@@ -1,0 +1,123 @@
+﻿@model ikloud_Aflatoon.CMS_CustomerMaster_DBS_View
+@{
+    ViewBag.Title = "EditCMS_CustomerData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "EditCMS_CustomerData";
+}
+
+
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+
+    function checkForDuplicate() {
+
+        if ($("#CustomerCode").val() == "" || $("#CustomerCode").val() == null) {
+            alert('Please Enter Customer Code!!!');
+            return false;
+        }
+        if ($("#CustomerName").val() == "" || $("#CustomerName").val() == null) {
+            alert('Please Enter Customer Name!!!');
+            return false;
+        }
+        if ($("#CustomerAccountNo").val() == "" || $("#CustomerAccountNo").val() == null) {
+            alert('Please Enter Customer Account No!!!');
+            return false;
+        }
+
+        var customer_code = document.getElementById("CustomerCode").value;
+        var customer_name = document.getElementById("CustomerName").value;
+        var ID = document.getElementById("ID").value;
+        var result = "";
+
+        $.ajax({
+            url: RootUrl + 'CMS_CustomerMaster/CheckForDuplicateRecordUpdate',
+            // type: 'Post',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
+            data: {
+                customer_code: customer_code, customer_name: customer_name, ID: ID
+            },
+            async: false,
+            success: function (data) {
+                debugger;
+                console.log("data - " + data);
+                result = JSON.parse(data);
+                console.log("result - " + result);
+                
+            }
+        });
+
+        if (result == "true" || result == true) {
+            console.log("IN IF result");
+            alert("Duplicate record found , please enter different value.");
+            return false;
+        }
+        else {
+            console.log("IN ELSE result");
+            return true;
+        }
+    }
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="col-md-12 form-horizontal">
+            <h4>Update Customer</h4>
+            <div>
+                @Html.ActionLink("Back to CMS Customer List", "Index")
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerAccountNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerAccountNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerAccountNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Update" class="btn btn-default" onclick="return checkForDuplicate();" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="color:green">
+                    @ViewBag.Message
+
+                </div>
+            </div>*@
+        </div>
+    </div>
+}

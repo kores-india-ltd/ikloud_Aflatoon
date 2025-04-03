@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "L1 Selection";
+    ViewBag.header = "L1 Selection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Selection", "TFL1verification", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="w3-container w3-row w3-center">
+        <div class="w3-colw3-center w3-large w3-light-grey">
+            <div class="m4">
+                <div class="w3-label">Select Clearing Type</div>
+                @Html.DropDownList("ClearingType", null, "Select", new { style = "width: 150px;" })
+            </div>
+        </div>
+    </div>
+    <div class="w3-row w3-center">
+        <input class="w3-btn" style="float: initial" type="submit" value="Go" id="btSelection" name="btSelection" onclick="return(selectValid());">
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("ClearingType").focus();
+        function selectValid() {
+            var clertype = document.getElementById('ClearingType')
+            var clerval = clertype.options[clertype.selectedIndex].text;
+            if (clerval == "Select") {
+                alert('Please select clearing type!!');
+                document.getElementById('ClearingType').focus();
+                return false;
+            }
+        }
+
+
+    </script>
+}

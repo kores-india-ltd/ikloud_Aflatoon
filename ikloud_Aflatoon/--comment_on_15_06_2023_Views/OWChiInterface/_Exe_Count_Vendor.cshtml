@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ikloud_Aflatoon.Infrastructure.Exe_Count_Vendor>
+
+<div class="row" id="tableData">
+    <div class="col-md-12">
+        <h3>@ViewBag.Heading</h3>
+        <table class="table table-responsive table-bordered table-condensed" style="cursor:pointer;overflow:auto;font-size:x-small;overflow-y: scroll;">
+            <thead>
+                <tr style="background-color:lightblue;">
+
+                    <th>LoadedCount</th>
+                    <th>ProcessedCount</th>
+                    <th>AcceptedCount</th>
+                    <th>RejecedCount</th>
+                    <th>PresentToDEM</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.LoadedCount</td>
+                        <td>@item.ProcessedCount</td>
+                        <td>@item.AcceptedCount</td>
+                        <td>@item.RejecedCount</td>
+                        <td>@item.PresentToDEM</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

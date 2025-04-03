@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ikloud_Aflatoon.CMS_CustomerMaster_DBS_View>
+@{
+    ViewBag.Title = "CMS CustomerMaster Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "CMS CustomerMaster Index";
+}
+
+
+
+
+<style type="text/css">
+
+    tr:nth-of-type(2n) {
+        background-color: azure;
+    }
+
+    tr:nth-of-type(2n-1) {
+        background-color: white;
+    }
+</style>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        alert('@ViewBag.Message');
+    </script>
+}
+
+<div class="container">
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="color:green">
+            @ViewBag.Message
+
+        </div>
+    </div>*@
+    <br />
+    <p>
+        @Html.ActionLink("Add New CMS Customer", "AddCustomer")
+    </p>
+    <br />
+    <div class="row">
+        <table class="table table-responsive table-bordered">
+            @if (Model != null)
+            {
+                <tr style="background-color:lightblue;">
+                    <th>
+                        Sr.No.
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerAccountNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th></th>
+                </tr>
+                int index = 1;
+                foreach (var item in Model)
+                {
+                    @Html.HiddenFor(model => item.ID)
+                    <tr>
+                        <td>
+                            @index
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerAccountNo)
+                        </td>
+                        <td>
+                            @(item.IsActive ? "Active" : "InActive")
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditCMS_CustomerData", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "DeleteCMS_CustomerData", new { id = item.ID }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                        </td>
+                    </tr>
+
+                    index++;
+
+                }
+            }
+
+
+        </table>
+    </div>
+</div>

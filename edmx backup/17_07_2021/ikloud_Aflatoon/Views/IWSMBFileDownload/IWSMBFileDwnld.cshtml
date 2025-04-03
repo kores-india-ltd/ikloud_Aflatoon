@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ikloud_Aflatoon.SMB_GetSMBFileDownloadLinkDetailsResult>
+@{
+    ViewBag.Title = "IW SMB File Dwnld";
+    ViewBag.header = "IW SMB File Dwnld";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+</script>
+
+<div class="w3-container">
+    @using (Html.BeginForm("ZipDownload", "IWSMBFileDownload", FormMethod.Post))
+    {
+        <div class="w3-row w3-light-gray">
+
+            <table class="w3-table">
+                <tr>
+                    <th>File Name</th>
+                    <th>Total Inward Count</th>
+                    <th>Total Inward Amount</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="aa">@Html.DisplayFor(model => item.DownloadLink)</td>
+                        <td id="bb">@Html.DisplayFor(model => item.Total_Inward_Count)</td>
+                        <td id="cc">@Html.DisplayFor(model => item.Total_Inward_Amount)</td>
+                        <td>
+                            @Html.ActionLink("Download", "ZipDownload", "IWSMBFileDownload", new { id = item.ID }, null)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+</div>
+

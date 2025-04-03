@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f77905f28ba4ff2a38f362c87b36ada" Name="Diagram1" DisplayType="true" ZoomLevel="94">
+        <EntityTypeShape EntityType="ikloudProModel.AccOwnershipCodeMaster" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.AccStatusCodeMaster" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.ActivityLog" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.ApplicationSetting" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.AppSecPolicy" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.AppSetting" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.Bank" Width="1.5" PointX="1.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.Branch" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.ClearingHouseInterface" Width="1.5" PointX="1.5" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.Clearinghouse" Width="1.5" PointX="1.5" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.CommonSetting" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.CustomerMaster" Width="1.5" PointX="20.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.Customer" Width="1.5" PointX="3.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.CxfFileStatu" Width="1.5" PointX="20.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.DomainLevelSetting" Width="1.5" PointX="5.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.Domain" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.DownloadedChiFile" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IWActivityLog" Width="1.5" PointX="22.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IWBatchHeader" Width="1.5" PointX="18.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IWImageDtl" Width="1.5" PointX="8" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IWMainTransaction" Width="1.5" PointX="47.125" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.L1Verification" Width="1.5" PointX="22.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.L2Verification" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.L3Verification" Width="1.5" PointX="41.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.LoginLogoutAudit" Width="1.5" PointX="24.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.ModificationLog" Width="1.5" PointX="5.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.MOPCodeMaster" Width="1.5" PointX="12.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.OrganizationMaster" Width="1.5" PointX="30.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.OwCHIFileStatu" Width="1.5" PointX="6" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.PasswordHistory" Width="1.5" PointX="30.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.RoleMapping" Width="1.5" PointX="7.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.UserDomainMapping" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.UserMasterActivity" Width="1.5" PointX="32.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.UserMaster" Width="1.5" PointX="30.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.UserOrganizationMapping" Width="1.5" PointX="32.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.ACDetail" Width="1.5" PointX="2.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IDX_IWDateQC" Width="1.5" PointX="7.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IDX_IWL1" Width="1.5" PointX="34.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IDX_IWL2" Width="1.5" PointX="34.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.IDX_IWL3" Width="1.5" PointX="34.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ikloudProModel.ItemReturnReason" Width="1.5" PointX="11" PointY="33.125" IsExpanded="true" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_AppSettings_dbo_Domains_Domain_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_Banks_dbo_ClearingHouseInterfaces_CHI_CC_ROUTING_NBR" ManuallyRouted="false" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_Customers_dbo_Banks_Bank_BankCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_Branches_dbo_Domains_Domain_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_ClearingHouseInterfaces_dbo_ClearingHouses_ClearingHouse_CH_ROUTING_NBR" ManuallyRouted="false" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_OwCHIFileStatus_dbo_Customers_Cust_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_UserDomainMappings_dbo_Domains_Domain_ID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ikloudProModel.SODs" Width="1.5" PointX="27.375" PointY="35.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IwSoD" Width="1.5" PointX="30.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.TransCodes" Width="1.5" PointX="35.375" PointY="19.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeAccountNoCapture" Width="1.5" PointX="11.375" PointY="36.75" />
+        <EntityTypeShape EntityType="ikloudProModel.SlipAccountNoCapture" Width="1.5" PointX="37.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CHIRejectReasons" Width="1.5" PointX="13.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ClearingType" Width="1.5" PointX="35.375" PointY="22.75" />
+        <EntityTypeShape EntityType="ikloudProModel.OutwardOrganizationDashBoard" Width="1.5" PointX="37.375" PointY="22.75" />
+        <EntityTypeShape EntityType="ikloudProModel.OutwardSingleDomainDashBoard" Width="1.5" PointX="37.375" PointY="33.75" />
+        <EntityTypeShape EntityType="ikloudProModel.NarrationAccount" Width="1.5" PointX="43.5" PointY="33.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWFinalMainTransactions" Width="1.5" PointX="15.375" PointY="35.75" />
+        <EntityTypeShape EntityType="ikloudProModel.NreNroAccountList" Width="1.5" PointX="13.375" PointY="26.75" />
+        <EntityTypeShape EntityType="ikloudProModel.OutwardDomainDashBoard" Width="2.5" PointX="8.375" PointY="36.75" />
+        <EntityTypeShape EntityType="ikloudProModel.BatchMaster" Width="1.5" PointX="17.75" PointY="26.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_SubCustomerMaster" Width="1.5" PointX="27.375" PointY="39.75" />
+        <EntityTypeShape EntityType="ikloudProModel.SlipAmountCapture" Width="1.5" PointX="31.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_BranchAccountMappings" Width="1.5" PointX="8.375" PointY="28.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWTempL1Verification" Width="1.5" PointX="19.375" PointY="37.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWFileHDR" Width="1.5" PointX="5.75" PointY="1" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_IWImageDtls_dbo_IWFileHDRs_File_ID" />
+        <EntityTypeShape EntityType="ikloudProModel.IWTempL2Verification" Width="1.5" PointX="15.375" PointY="38.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWTempL3Verification" Width="1.5" PointX="25.375" PointY="9.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_ProductSuspensionMaster" Width="1.5" PointX="8.375" PointY="23.75" />
+        <EntityTypeShape EntityType="ikloudProModel.OutwardDomainDashBoard_V2" Width="1.5" PointX="39.375" PointY="40.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CaptureFileMaster" Width="1.5" PointX="41.375" PointY="40.75" />
+        <EntityTypeShape EntityType="ikloudProModel.TempSnip1" Width="1.5" PointX="48.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ikloudProModel.BankBlockageMaster" Width="1.5" PointX="49.375" PointY="35.75" />
+        <EntityTypeShape EntityType="ikloudProModel.BranchMaster" Width="1.5" PointX="11.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeAmountCapture" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeMICRCapture" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChiSessionDefinitionMaster" Width="1.5" PointX="8.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CxfAcknowledge" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CxfResponse" Width="1.5" PointX="10.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ikloudProModel.DomainUserMapMaster" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.DownloadedFileSummary" Width="1.5" PointX="17.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ikloudProModel.Employee" Width="1.5" PointX="33.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.GridMaster" Width="1.5" PointX="5.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ikloudProModel.MenuMaster" Width="1.5" PointX="17.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ikloudProModel.OwSoD" Width="1.5" PointX="19.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ScannerMaster" Width="1.5" PointX="17.375" PointY="19.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ScanningNodeMaster" Width="1.5" PointX="21.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ikloudProModel.SettingValueMaster" Width="1.5" PointX="19.375" PointY="19.75" />
+        <EntityTypeShape EntityType="ikloudProModel.UserCustomerMapping" Width="1.5" PointX="21.375" PointY="18.75" />
+        <EntityTypeShape EntityType="ikloudProModel.UserGroupMaster" Width="1.5" PointX="12.375" PointY="23.75" />
+        <EntityTypeShape EntityType="ikloudProModel.UsertTpeMaster" Width="1.5" PointX="10.375" PointY="26.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CityMaster" Width="1.5" PointX="29.375" PointY="25.75" />
+        <EntityTypeShape EntityType="ikloudProModel.DebitAccountDump" Width="1.5" PointX="13.375" PointY="33.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ICRLog" Width="1.5" PointX="45.375" PointY="36.75" />
+        <EntityTypeShape EntityType="ikloudProModel.OCRICR" Width="1.5" PointX="45.375" PointY="41.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeDateCapture" Width="1.5" PointX="41.375" PointY="45.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWDebtAccountTmpProcess" Width="1.5" PointX="5.375" PointY="38.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWAmountTmpProcess" Width="1.5" PointX="25.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWDateTmpProcess" Width="1.5" PointX="29.375" PointY="40.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWMICRTmpProcess" Width="3.125" PointX="25.375" PointY="44.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWPayeeTmpProcess" Width="1.5" PointX="17.375" PointY="45.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_ProductMaster" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_BankBranchMaster" Width="1.5" PointX="9.75" PointY="17.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_CustomerMaster" Width="1.5" PointX="17.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_CustomerProductAdditionaInfo" Width="1.5" PointX="25.75" PointY="19.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_CustomerProductLocationMaster" Width="1.5" PointX="27.75" PointY="28.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_CustomerProductMaster" Width="1.5" PointX="2.75" PointY="36.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMS_OurBranchMaster" Width="1.5" PointX="15.75" PointY="33.75" />
+        <EntityTypeShape EntityType="ikloudProModel.MainTransaction" Width="1.5" PointX="44.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.BankBranches" Width="1.5" PointX="3.75" PointY="47.125" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_BankBranches_dbo_Banks_Bank_BankCode" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_Branches_dbo_BankBranches_SortCode_BankBranchCode" />
+        <EntityTypeShape EntityType="ikloudProModel.Cities" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CMSAdditionalTransactions" Width="1.5" PointX="33.375" PointY="35.75" />
+        <EntityTypeShape EntityType="ikloudProModel.SMB_Master" Width="1.5" PointX="25.375" PointY="24.75" />
+        <EntityTypeShape EntityType="ikloudProModel.DomainMaster" Width="1.5" PointX="15.375" PointY="22.75" />
+        <EntityTypeShape EntityType="ikloudProModel.AddList_FILE_UPLOAD_Format_BranchDataEntry" Width="1.5" PointX="39.375" PointY="26.75" />
+        <EntityTypeShape EntityType="ikloudProModel.RoleMaster" Width="1.5" PointX="39.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ikloudProModel.BatchMaster1" Width="1.5" PointX="0.75" PointY="45.75" />
+        <EntityTypeShape EntityType="ikloudProModel.CaptureRawData" Width="1.5" PointX="19.75" PointY="45.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeAccountNoCapture1" Width="1.5" PointX="35.75" PointY="45.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeAmountCapture1" Width="1.5" PointX="31.75" PointY="46.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeDateCapture1" Width="1.5" PointX="13.75" PointY="47.75" />
+        <EntityTypeShape EntityType="ikloudProModel.ChequeMICRCapture1" Width="1.5" PointX="47.75" PointY="39.75" />
+        <EntityTypeShape EntityType="ikloudProModel.IWFileHDRs" Width="1.5" PointX="41.75" PointY="28" />
+        <EntityTypeShape EntityType="ikloudProModel.L1Verification1" Width="1.5" PointX="43.75" PointY="47.75" />
+        <EntityTypeShape EntityType="ikloudProModel.L2Verification1" Width="1.5" PointX="49.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ikloudProModel.L3Verification1" Width="1.5" PointX="37.75" PointY="49.75" />
+        <EntityTypeShape EntityType="ikloudProModel.MainTransaction1" Width="1.5" PointX="49.75" PointY="39.75" />
+        <EntityTypeShape EntityType="ikloudProModel.SlipAccountNoCapture1" Width="1.5" PointX="6.75" PointY="50.75" />
+        <EntityTypeShape EntityType="ikloudProModel.SlipAmountCapture1" Width="1.5" PointX="8.75" PointY="50.75" />
+        <AssociationConnector Association="ikloudProModel.FK_dbo_IWImageDtls_dbo_IWFileHDRs_File_ID1" />
+        <EntityTypeShape EntityType="ikloudProModel.IWMICRTmpProcess1" Width="1.5" PointX="50.375" PointY="26.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

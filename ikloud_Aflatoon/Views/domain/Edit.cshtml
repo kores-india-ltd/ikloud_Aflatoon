@@ -1,0 +1,121 @@
+﻿@model ikloud_Aflatoon.domainView
+
+@{
+    ViewBag.Title = "Edit Domain";
+    ViewBag.header = "Edit Domain";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        //alert('aila!!')
+        $('#DomainCode,#CityCode,#BranchCode').keypress(function (event) {
+
+            if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                event.preventDefault(); //stop character from entering input
+            }
+
+        });
+
+
+        $("#DomainName").keypress(function (event) {
+            if (event.shiftKey) {
+                event.preventDefault();
+            }
+            var vrpay = document.getElementById("DomainName").value;
+
+            if (vrpay.length == 0) {
+                if (event.charCode == 32) {
+                    alert('Blank space are not allowed!');
+                    event.preventDefault();
+                    return false;
+                }
+            }
+
+            if (event.keyCode == 190 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 38 || event.keyCode == 39 ||
+                        event.keyCode == 40 || event.keyCode == 46 || event.charCode == 32 || (event.charCode > 47 && event.charCode < 58) || (event.charCode > 64 &&
+                        event.charCode < 91) || (event.charCode > 95 && event.charCode < 123) || event.charCode == 46 || (event.charCode >= 37 && event.charCode <= 40)) {
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+
+    });
+</script>
+
+
+<div class="w3-container" style="margin-left:30px;">
+
+
+
+    <h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>DomainMaster</legend>
+
+            @Html.HiddenFor(model => model.custID)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DomainName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DomainName, new { autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.DomainName)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DomainCode)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DomainCode, new { autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.DomainCode)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CityCode)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CityCode, new { autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.CityCode)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BranchCode)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.BranchCode, new { autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.BranchCode)
+            </div>
+            <br />
+            @if (Model.lstDomainLevelSettings.Count() > 0)
+            {
+                <div class="row">
+                    @for (var i = 0; i < Model.lstDomainLevelSettings.Count; i++)
+                    {
+                        @Html.DisplayFor(model => model.lstDomainLevelSettings[i].SettingName)
+                        <br />
+                        @*@Html.EditorFor(model => model.lstDomainLevelSettings[i].SettingValue, null, "dom" + @i)*@
+                        <input type="text" name="dom@(i)" id="dom@(i)" value="@Model.lstDomainLevelSettings[i].SettingValue" />
+                        @Html.Hidden("rowid" + i, Model.lstDomainLevelSettings[i].id)
+                        <br />
+
+                    }
+
+
+                </div>
+            }
+            <input type="hidden" id="domCount" name="domCount" value="@Model.lstDomainLevelSettings.Count" />
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div>

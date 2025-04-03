@@ -1,0 +1,872 @@
+﻿@model ikloud_Aflatoon.Infrastructure.cbstetails
+
+<div id="cbsdetails">
+    @Html.HiddenFor(m => m.cbsdls)
+    @Html.HiddenFor(m => m.JoinHldrs)
+    @Html.HiddenFor(m => m.payeenameselected)
+
+    @Html.HiddenFor(m => m.sFreezeStatusCode)
+    @Html.HiddenFor(m => m.sInvalidAcFlag)
+    @Html.HiddenFor(m => m.sSIBFEE)
+
+    @Html.HiddenFor(m => m.sCARA)
+    @Html.HiddenFor(m => m.sOCSA)
+    @Html.HiddenFor(m => m.sRSA)
+    @Html.HiddenFor(m => m.sOCRSA)
+    @Html.HiddenFor(m => m.sRNPA)
+    @Html.HiddenFor(m => m.sRBISPA)
+    @Html.HiddenFor(m => m.sClosedAccount)
+
+    @Html.HiddenFor(m => m.sCAPA)
+    @{
+        var msg = "";
+    }
+    @*<input type="hidden" id="NreOrNro" name="NreOrNro" value="" />*@
+    <input type="hidden" id="partialSrcFnds" name="partialSrcFnds" value="" />
+
+    <input type="hidden" id="NreOrNro" name="NreOrNro" value="@Session["sNR"].ToString()" />
+    @*<input type="hidden" id="partialSrcFnds" name="partialSrcFnds" value="@ViewBag.vbNRE" />*@
+    @*@Html.DropDownList("partialSrcFnds", new SelectList(ViewBag.vbNRE), new { style = "display:none; width: 250px;" }) //*@
+    <input type="hidden" id="APiDataString" name="APiDataString" value="@Model.ApiDataString" /> 
+    <div>
+        @if (Model.cbsdls == null)
+        {
+            if (Model.status == "SUCCESS")
+            {
+                @Html.HiddenFor(m => m.payeenameselected)
+                <div class="w3-container  w3-card-8">
+                    @if (Model.PayeeNameList != null)
+                    {
+                        @Html.DropDownList("Payee", new SelectList(Model.PayeeNameList), new { onchange = "getselect();", Id = "Payee", Name = "Payee", style = "width: 100%; display:none;" })
+
+                        <script type="text/javascript">
+                            document.getElementById("blockkey").value = "0";
+                            @*document.getElementById("currencyVal").value = @Html.Raw(Json.Encode(ViewBag.Currency));
+                            document.getElementById("IsOpenedDateOld").value = @Html.Raw(Json.Encode(Session["IsOpenedDateOld"]));
+                            document.getElementById("productCode").value = @Html.Raw(Json.Encode(Session["productCode"]));
+                            document.getElementById("productType").value = @Html.Raw(Json.Encode(Session["productType"]));
+                            document.getElementById("accountBalances").value = @Html.Raw(Json.Encode(Session["accountBalances"]));*@
+
+                            var selectedpayee = document.getElementById("PayeeName").value;
+                            var el = document.getElementById("Payee");
+                            //alert(selectedpayee);
+                            for (var i = 0; i < el.options.length; i++) {
+                                if (el.options[i].text == selectedpayee) {
+                                    // el.selectedIndex = i;
+                                    //alert(el.options[i].text);
+                                    el.options[i].selected = true;
+                                    break;
+                                }
+                            }
+
+                                //document.getElementById("sCAPA").value = @Model.NREFlag.ToString();
+                        </script>
+                    }
+                    else
+                    {
+                        <script type="text/javascript">
+                        document.getElementById("blockkey").value = "1";
+                        @*document.getElementById("currencyVal").value = @Html.Raw(Json.Encode(ViewBag.Currency));
+                        document.getElementById("IsOpenedDateOld").value = @Html.Raw(Json.Encode(Session["IsOpenedDateOld"]));
+                        document.getElementById("productCode").value = @Html.Raw(Json.Encode(Session["productCode"]));
+                        document.getElementById("productType").value = @Html.Raw(Json.Encode(Session["productType"]));
+                        document.getElementById("accountBalances").value = @Html.Raw(Json.Encode(Session["accountBalances"]));*@
+
+                        @*if (Model.NREFlag != null) {
+                            document.getElementById("sCAPA").value = @Model.NREFlag.ToString();
+                        }*@
+                        </script>
+
+                        if (Model.sClosedAccount == "ACCOUNT IS CLOSED")
+                        {
+                            <script>
+                                    @{
+                                        msg = "Account is closed";
+                                     }
+                                    document.getElementById("sCAPA").value = "Account is closed";
+                            </script>
+                        }
+                        else if (@Model.sFreezeStatusCode == "T")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Total Freeze Account";
+                                     }
+                                            document.getElementById("sCAPA").value = "Total Freeze Account";
+                            </script>
+                        }
+                        else if (@Model.sFreezeStatusCode == "C")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Credit Freeze Account";
+                                     }
+                                            document.getElementById("sCAPA").value = "Credit Freeze Account";
+                            </script>
+                        }
+
+                        else if (@Model.sInvalid == "I")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Invalid Account";
+                                     }
+                                            document.getElementById("sCAPA").value = "Invalid Account";
+                            </script>
+                        }
+
+
+                        else if (@Model.sSchmCode == "CARUP")
+                        {
+                            <script>
+                                            @{
+                                        msg = "NCMC account not allowed in clearing";
+                                     }
+                                            document.getElementById("sCAPA").value = "NCMC account not allowed in clearing";
+                            </script>
+                        }
+                        else if (@Model.sSchmCode == "SBPIN" || @Model.sSchmCode == "SBPIS")
+                        {
+                            <script>
+                                            @{
+                                        msg = "PIS account not allowed in clearing";
+                                     }
+                                            document.getElementById("sCAPA").value = "PIS account not allowed in clearing";
+                            </script>
+                        }
+                        else if (@Model.sSchmCode == "SBSOB")
+                        {
+                            <script>
+                                            @{
+                                        msg = "SBSOB";
+                                     }
+                                            document.getElementById("sCAPA").value = "SBSOB";
+                            </script>
+                        }
+
+                        else if (@Model.sacct_status == "C")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Dormant Account";
+                                     }
+                                            document.getElementById("sCAPA").value = "Dormant Account";
+                            </script>
+                        }
+                        else if (@Model.sacct_status == "T")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Dormant Account";
+                                     }
+                                            document.getElementById("sCAPA").value = "Dormant Account";
+                            </script>
+                        }
+                        else if (@Model.sacct_status == "I")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Inactive Account";
+                                     }
+                                            document.getElementById("sCAPA").value = "Inactive Account";
+                            </script>
+                        }
+
+                        else if (@Model.scustomerisMinor == "D")
+                        {
+                            <script>
+                                            @{
+                                        msg = "Minor";
+                                     }
+                                            document.getElementById("sCAPA").value = "Minor";
+                            </script>
+                        }
+
+                        else if (@Model.sCAPA != "")
+                        {
+                            <script>
+                                     @{
+                                        msg = @Model.sCAPA;
+                                     }
+                                        document.getElementById("sCAPA").value = @Model.sCAPA;
+                            </script>
+                        }
+
+                        else if (@Model.sCARA != "")
+                        {
+                            <script>
+                                             @{
+                                        msg = @Model.sCARA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sCARA;
+                            </script>
+                        }
+
+                        else if (@Model.sOCSA != "")
+                        {
+                            <script>
+                                            @{
+                                        msg = @Model.sOCSA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sOCSA;
+                            </script>
+                        }
+
+                        else if (@Model.sRSA != "")
+                        {
+                            <script>
+                                            @{
+                                        msg = @Model.sRSA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sRSA;
+                            </script>
+                        }
+
+                        else if (@Model.sOCRSA != "")
+                        {
+                            <script>
+                                            @{
+                                        msg = @Model.sOCRSA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sOCRSA;
+                            </script>
+                        }
+
+                        else if (@Model.sRNPA != "")
+                        {
+                            <script>
+                                            @{
+                                        msg = @Model.sRNPA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sRNPA;
+                            </script>
+                        }
+
+                        else if (@Model.sRBISPA != "")
+                        {
+                            <script>
+                                             @{
+                                        msg = @Model.sRBISPA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sRBISPA;
+                            </script>
+                        }
+
+                        else if (@Model.sSIBFEE != "")
+                        {
+                            <script>
+                                            @{
+                                        msg = @Model.sSIBFEE;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sSIBFEE;
+                            </script>
+                        }
+
+                        else if (@Model.sFCRA != "")
+                        {
+                            <script>
+                                            @{
+                                        msg = @Model.sFCRA;
+                                     }
+                                    document.getElementById("sCAPA").value = @Model.sFCRA;
+                            </script>
+                        }
+
+                        else if (@Model.sSCSA == "SCSA")
+                        {
+                            <script>
+                                             @{
+                                        msg = "SIBCOLL CLEARING SUSPENSE ACCOUNT";
+                                     }
+                                            document.getElementById("sCAPA").value = "SIBCOLL CLEARING SUSPENSE ACCOUNT";
+                            </script>
+                        }
+
+                        else if (@Model.sNCA == "NCA")
+                        {
+                            <script>
+                                            @{
+                                        msg = "NPS_COLLECTION_AC";
+                                     }
+                                            document.getElementById("sCAPA").value = "NPS_COLLECTION_AC";
+                            </script>
+                        }
+
+
+                        else if (@Model.sNSCA == "NSCA")
+                        {
+                            <script>
+                                            @{
+                                        msg = "NPSLITE_COLLECTION_AC";
+                                     }
+                                            document.getElementById("sCAPA").value = "NPSLITE_COLLECTION_AC";
+                            </script>
+                        }
+
+                        else if (@Model.sTDPA == "TDPA")
+                        {
+                            <script>
+                                            @{
+                                        msg = "TAX_DUTIES_PAYABLE_AC";
+                                     }
+                                            document.getElementById("sCAPA").value = "TAX_DUTIES_PAYABLE_AC";
+                            </script>
+                        }
+
+                        else if (@Model.sFCRA == "FCRA")
+                        {
+                            <script>
+                                            @{
+                                        msg = "FCRA Accounts";
+                                     }
+                                            document.getElementById("sCAPA").value = "FCRA Accounts";
+                            </script>
+                        }
+
+                        else if (@Model.sTAPC == "TAPC")
+                        {
+                            <script>
+                                            @{
+                                        msg = "TATA AIG PREMIUM COLLECTION";
+                                     }
+                                            document.getElementById("sCAPA").value = "TATA AIG PREMIUM COLLECTION";
+                            </script>
+                        }
+
+                        else if (@Model.sCDP == "CDP")
+                        {
+                            <script>
+                                            @{
+                                        msg = "CUSTOMS DUTY PAYMENT";
+                                     }
+                                            document.getElementById("sCAPA").value = "CUSTOMS DUTY PAYMENT";
+                            </script>
+                        }
+
+                        else if (@Model.sIPC == "IPC")
+                        {
+                            <script>
+                                             @{
+                                        msg = "ICICI PREMIUM COLLECTION";
+                                     }
+                                            document.getElementById("sCAPA").value = "ICICI PREMIUM COLLECTION";
+                            </script>
+                        }
+
+                        else if (@Model.sRPMC == "RPMC")
+                        {
+                            <script>
+                                            @{
+                                        msg = "RPMC";
+                                     }
+                                            document.getElementById("sCAPA").value = "RPMC";
+                            </script>
+                        }
+
+                        else if (@Model.sCDRF == "CDRF")
+                        {
+                            <script>
+                                            @{
+                                        msg = "CM DISTRESS RELIEF FUND";
+                                     }
+                                            document.getElementById("sCAPA").value = "CM DISTRESS RELIEF FUND";
+                            </script>
+                        }
+
+                        else if (@Model.sCDRFC == "CDRFC")
+                        {
+                            <script>
+                                            @{
+                                        msg = "CM DISTRESS RELIEF FUND-COVID19";
+                                     }
+                                            document.getElementById("sCAPA").value = "CM DISTRESS RELIEF FUND-COVID19";
+                            </script>
+                        }
+
+                        else if (@Model.sMC == "MC")
+                        {
+                            <script>
+                                            @{
+                                        msg = "MANAPPURAM CHITS";
+                                     }
+                                            document.getElementById("sCAPA").value = "MANAPPURAM CHITS";
+                            </script>
+                        }
+
+                        else if (@Model.sPC == "PC")
+                        {
+                            <script>
+                                            @{
+                                        msg = "PREPAID CARD";
+                                     }
+                                            document.getElementById("sCAPA").value = "PREPAID CARD";
+                            </script>
+                        }
+
+                        else if (@Model.sKRF == "KRF")
+                        {
+                            <script>
+                                            @{
+                                        msg = "KNRK REG FEE";
+                                     }
+                                            document.getElementById("sCAPA").value = "KNRK REG FEE";
+                            </script>
+                        }
+
+                        else if (@Model.sKMS == "KMS")
+                        {
+                            <script>
+                                            @{
+                                        msg = "KNRK MONTH SUB";
+                                     }
+                                            document.getElementById("sCAPA").value = "KNRK MONTH SUB";
+                            </script>
+                        }
+
+                        else if (@Model.sKP == "KP")
+                        {
+                            <script>
+                                            @{
+                                        msg = "KNRK PENALTY";
+                                     }
+                                            document.getElementById("sCAPA").value = "KNRK PENALTY";
+                            </script>
+                        }
+
+                        else if (@Model.sELPC == "ELPC")
+                        {
+                            <script>
+                                            @{
+                                        msg = "EXIDE LIFE PREMIUM COLLECTION";
+                                     }
+                                            document.getElementById("sCAPA").value = "EXIDE LIFE PREMIUM COLLECTION";
+                            </script>
+                        }
+
+                        else if (@Model.sGDD == "GDD")
+                        {
+                            <script>
+                                            @{
+                                        msg = "GURUVAYUR DEVASWOM DONATION";
+                                     }
+                                            document.getElementById("sCAPA").value = "GURUVAYUR DEVASWOM DONATION";
+                            </script>
+                        }
+
+                        else if (@Model.sNF == "NF")
+                        {
+                            <script>
+                                            @{
+                                        msg = "NETC FASTAG";
+                                     }
+                                            document.getElementById("sCAPA").value = "NETC FASTAG";
+                            </script>
+                        }
+
+                        else if (@Model.sOT == "OT")
+                        {
+                            <script>
+                                            @{
+                                        msg = "OUSHADHI THRISSUR";
+                                     }
+                                            document.getElementById("sCAPA").value = "OUSHADHI THRISSUR";
+                            </script>
+                        }
+
+                        else if (@Model.sOP == "OP")
+                        {
+                            <script>
+                                            @{
+                                        msg = "OUSHADHI PATHANAPURAM";
+                                     }
+                                            document.getElementById("sCAPA").value = "OUSHADHI PATHANAPURAM";
+                            </script>
+                        }
+
+                        else if (@Model.sOPR == "OPR")
+                        {
+                            <script>
+                                            @{
+                                        msg = "OUSHADHI PARIYARAM";
+                                     }
+                                            document.getElementById("sCAPA").value = "OUSHADHI PARIYARAM";
+                            </script>
+                        }
+
+                        <div class="w3-container w3-highway-red" style="float: right">
+                            <h3 class="w3-container">
+                                <label><strong>@msg.ToString().Trim() </strong></label>
+                            </h3>
+                        </div>
+
+                    }
+                </div>
+
+            }
+            <br />
+            if (Model.sInvalidAcFlag.ToString().Trim() == "F")
+            {
+                <div class="w3-container w3-light-grey w3-margin w3-card-4">
+                    <table class="w3-table w3-bordered" style=" width:100%;font-size:medium">
+                        <tr style="width:100%">
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Account Status: </td>
+                            <td width="50px" style="font-weight:bold;color:steelblue;border:1px solid black">
+                                @if (Model.sacct_status != null)
+                                {
+                                    @Model.sacct_status.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Freeze Code: </td>
+                            <td width="50px" style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                T/D/C
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> P2F: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> CPPS: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Payee New A/C Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Staff Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.StaffAcc != null)
+                                {
+                                    @Model.StaffAcc.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Issuer New A/C: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> MOP </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.MOP != null)
+                                {
+                                    @Model.MOP.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+            }
+            else if (Model.sInvalidAcFlag.ToString().Trim() == "T")
+            {
+                <script type="text/javascript">
+                    document.getElementById("blockkey").value = "1";
+                </script>
+
+                <div class="w3-container w3-light-grey w3-margin w3-card-4">
+                    <table class="w3-table w3-bordered" style=" width:100%;font-size:medium">
+                        <tr style="width:100%">
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Account Status: </td>
+                            <td width="50px" style="font-weight:bold;color:steelblue;border:1px solid black">
+                                @if (Model.sacct_status != null)
+                                {
+                                    @Model.sacct_status.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Freeze Code: </td>
+                            <td width="50px" style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                T/D/C
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> P2F: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> CPPS: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Payee New A/C Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Staff Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.StaffAcc != null)
+                                {
+                                    @Model.StaffAcc.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Issuer New A/C: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> MOP </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.MOP != null)
+                                {
+                                    @Model.MOP.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            }
+
+            else if (Model.sInvalidAcFlag.ToString().Trim() == "N")
+            {
+                <div class="w3-container w3-light-grey w3-margin w3-card-4">
+                    <table class="w3-table w3-bordered" style=" width:100%;font-size:medium">
+                        <tr style="width:100%">
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Account Status: </td>
+                            <td width="50px" style="font-weight:bold;color:steelblue;border:1px solid black">
+                                @if (Model.sacct_status != null)
+                                {
+                                    @Model.sacct_status.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Freeze Code: </td>
+                            <td width="50px" style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                T/D/C
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> P2F: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> CPPS: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Payee New A/C Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Staff Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.StaffAcc != null)
+                                {
+                                    @Model.StaffAcc.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Issuer New A/C: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> MOP </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.MOP != null)
+                                {
+                                    @Model.MOP.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            }
+
+            else
+            {
+                <div class="w3-container w3-light-grey w3-margin w3-card-4">
+                    <table class="w3-table w3-bordered" style=" width:100%;font-size:medium">
+                        <tr style="width:100%">
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Account Status: </td>
+                            <td width="50px" style="font-weight:bold;color:steelblue;border:1px solid black">
+                                @if (Model.sacct_status != null)
+                                {
+                                    @Model.sacct_status.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Freeze Code: </td>
+                            <td width="50px" style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                T/D/C
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> P2F: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> CPPS: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.sFreezeStatusCode != null)
+                                {
+                                    @Model.sFreezeStatusCode.ToString().Trim()
+                                }
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Payee New A/C Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Staff Flag: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.StaffAcc != null)
+                                {
+                                    @Model.StaffAcc.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> Issuer New A/C: </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+
+                                @if (Model.NREFlag != null)
+                                {
+                                    @Model.NREFlag.ToString().Trim()
+                                }
+                            </td>
+                            <td style="font-weight:bold;color:maroon;border:1px solid black"> MOP </td>
+                            <td style="font-weight: bold; color: steelblue; border: 1px solid black">
+                                @if (Model.MOP != null)
+                                {
+                                    @Model.MOP.ToString().Trim()
+                                }
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            }
+
+
+        }
+        else
+        {
+            <div class="w3-container w3-highway-red" style="float: right">
+                <h3 class="w3-container">
+                    <script type="text/javascript">
+                        <strong>Account Details Not Found!!</strong>
+                        @*<strong>@msg</strong>*@
+                    </script>
+                </h3>
+            </div>
+            <script type="text/javascript">
+                document.getElementById("blockkey").value = "1";
+
+                //document.getElementById("sCAPA").value = @Model.NREFlag.ToString();
+
+                if ($("#NarrationID").val() == "Y") {
+                    document.getElementById('narsndiv').style.display = "none";
+                    document.getElementById('ofc').value = "0";
+                    narrationReqirdflg = false;
+                }
+            </script>
+        }
+        @*}*@
+    </div>
+    @if (Model.callby != "ClientCode")
+    {
+        <script type="text/javascript">
+            // alert('aila');
+            var selectedpayee = document.getElementById("payeenameselected").value;
+            var el = document.getElementById("Payee");
+            //alert(selectedpayee);
+            for (var i = 0; i < el.options.length; i++) {
+                if (el.options[i].text == selectedpayee) {
+                    // el.selectedIndex = i;
+                    //alert(el.options[i].text);
+                    el.options[i].selected = true;
+                    break;
+                }
+            }
+        </script>
+    }
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "@Url.Content("~/xhtml1-transitional.dtd")>
+    @using (Html.BeginForm("Index", "IWDataEntry"))
+    {
+        <label>Select Field</label>
+        <select id="selctDE">
+            <option value="DebtAcct">DebtAccount</option>
+            <option value="Amount">Amount</option>
+        </select>
+        <input type="submit" id="slct" value="Ok" />
+    }
+
+
+<script language="javascript" type="text/javascript">
+
+    function valid(type) {
+        // alert(type);
+        var slct = document.getElementById('selctDE').value;
+        if (slct == "") {
+            alert('Please Select Feild');
+            document.getElementById('selctDE').focus();
+            return false
+        }
+
+        return true;
+    }
+</script>

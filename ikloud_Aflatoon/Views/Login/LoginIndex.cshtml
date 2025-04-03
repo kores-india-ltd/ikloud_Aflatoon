@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+    var RootUrl = '@Url.Content("~/")';
+
+    function ShowLoginSelectionForm(data) {
+        //console.log("In home page");
+        var accessLevel = document.getElementById("AccessLevel").value;
+        var userLogin = document.getElementById("UserLogin").value;
+        var url = RootUrl + "Login/CustDomDateSelection?Accesslevel=" + accessLevel + "&userlogin=" + userLogin + "&clearingType=" + data;
+        //var url = RootUrl + "Home/IWIndex";
+        console.log("Url : " + url);
+        window.location.href = url;
+    }
+</script>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/CSS/w3.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/CSS/w3-colors-highway.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/CSS/w3-theme.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/CSS/font-awsome-min.css")" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginIndex</title>
+</head>
+<body>
+    <div class="w3-form">
+        <input type="hidden" id="AccessLevel" value="@ViewBag.AccessLevel" />
+        <input type="hidden" id="UserLogin" value="@ViewBag.UserLogin" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="w3-modal-content w3-card-8 w3-animate-zoom" style="max-width: 600px">
+            <div class="w3-container">
+                <br />
+                <br />
+                <br />
+                <div class="w3-center">
+                    <div class="row col-md-12">
+                        <button type="button" id="btnOutward" name="clearing" value="Outward" class="btn-info btn-lg col-md-offset-2 col-md-3" onclick="ShowLoginSelectionForm('Outward')">Outward</button>
+                        <button type="button" id="btnInward" name="clearing" value="Inward" class="btn-info btn-lg col-md-offset-2 col-md-3" onclick="ShowLoginSelectionForm('Inward')">Inward</button>
+
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

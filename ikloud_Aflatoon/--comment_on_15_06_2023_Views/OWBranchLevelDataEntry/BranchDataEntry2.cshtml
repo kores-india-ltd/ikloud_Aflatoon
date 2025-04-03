@@ -1,0 +1,646 @@
+﻿@model IEnumerable<ikloud_Aflatoon.CaptureRawData>
+
+@{
+    ViewBag.Title = "BranchDataEntry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BranchDataEntry</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomainId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScanningNodeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TruncatingRouteNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BOFD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IFSCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScanningType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CycleNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchSeqNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstrumentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClearingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipChequeCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeNoMICR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortCodeMICR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SANMICR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransCodeMICR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeNoNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortCodeNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SANNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransCodeNI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeNoPara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortCodePara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SANPara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransCodePara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeNoFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortCodeFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SANFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransCodeFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountPara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MICRRepairStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MICRRepairRequired)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IQAFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IQAString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IgnoreIQA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontTiffImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BackTiffImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontGreyImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BackGreyImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreditAccountNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsertTimeStamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CaptureTimeStamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DEBySnippet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeAmountSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeAmountStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeDateSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeDateStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNoStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L2Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L3Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CBSSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L3RequiredForRejected)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExternalData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChequeAccountNoSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScanCutOffDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScannedAfterCutOff)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L1Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L1AmountThreshold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L2AmountThreshold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.L3AmountThreshold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessBypassFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessBypassLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessBypassReversed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipAccountNoSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipAccountNoStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNo1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNo2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalAccountNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccounNoCBSResult1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccounNoCBSResult2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccounNoCBSResultFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDateByPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAccountNoByPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsL1ByPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsL2ByPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsL3ByPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MICRSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MICRStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipChequeSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipAmountSettings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlipAmountStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imported_PresentingBankRoutNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imported_ItemSeqNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imported_Udk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imported_CdkFileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontUVImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontIRTransmissiveImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontIRReflectiveImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontWhiteLightImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KioskId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchAmount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomainId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScanningNodeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TruncatingRouteNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BOFD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IFSCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScanningType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CycleNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BatchNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BatchSeqNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstrumentType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClearingType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipChequeCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeNoMICR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SortCodeMICR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANMICR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransCodeMICR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeNoNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SortCodeNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransCodeNI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeNoPara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SortCodePara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANPara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransCodePara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeNoFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SortCodeFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SANFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransCodeFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountPara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatePara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MICRRepairStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MICRRepairRequired)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IQAFlag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IQAString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IgnoreIQA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontTiffImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackTiffImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontGreyImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackGreyImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreditAccountNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsertTimeStamp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CaptureTimeStamp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEBySnippet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeAmountSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeAmountStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeDateSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeDateStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNoStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L2Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L3Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CBSSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L3RequiredForRejected)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExternalData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChequeAccountNoSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScanCutOffDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScannedAfterCutOff)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L1Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L1AmountThreshold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L2AmountThreshold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.L3AmountThreshold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessBypassFlag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessBypassLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessBypassReversed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipAccountNoSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipAccountNoStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNo1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNo2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinalAccountNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccounNoCBSResult1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccounNoCBSResult2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccounNoCBSResultFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDateByPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAccountNoByPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsL1ByPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsL2ByPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsL3ByPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MICRSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MICRStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipChequeSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipAmountSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlipAmountStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imported_PresentingBankRoutNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imported_ItemSeqNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imported_Udk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imported_CdkFileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontUVImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontIRTransmissiveImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontIRReflectiveImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontWhiteLightImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KioskId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchAccount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchAmount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

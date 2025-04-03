@@ -1,0 +1,93 @@
+﻿@model ikloud_Aflatoon.SANMICRMaster
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+
+
+        //$("#datepicker").datepicker();
+        @*$datepicker.datepicker('setDate', '@ViewBag.Holiday_Date');*@
+        document.getElementById('MICR').value = '@ViewBag.MICR_Code';
+
+        document.getElementById('SAN').value = '@ViewBag.SAN';
+
+        //============ Adding validation by amol on 06/06/2023 =================================
+        $("#MICR,#SAN").keypress(function (event) {
+
+            debugger;
+            //console.log("Event code - " + event.keyCode);
+            if (event.shiftKey) {
+                event.preventDefault();
+            }
+
+            if (event.keyCode == 8 || event.keyCode == 9 || (event.keyCode > 47 && event.keyCode < 58)) {
+
+            }
+            else {
+                event.preventDefault();
+            }
+
+        });
+    });
+
+    function Editsanmicr() {
+        debugger;
+        var Rooturl = '@Url.Content("~/")';
+        var ID = 0;
+        var Holiday_Date = "";
+        var Holiday_Descripton = "";
+         ID = '@ViewBag.ID';
+        MICR_Code = document.getElementById('MICR').value;
+        SAN = document.getElementById('SAN').value;
+
+        if (MICR_Code == "" || SAN == "") {
+            alert("MICR or SAN values cannot be null");
+            return;
+        }
+        if (MICR_Code == SAN) {
+            alert("MICR or SAN Values cannot be same");
+            return;
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: Rooturl + "sanmicr/Savesanmicr",
+            data: { ID: ID, MICR_Code: MICR_Code, SAN: SAN },
+            success: function (data) {
+                alert("Data Updated Successfully!!");
+            }
+        });
+    }
+
+</script>
+
+<div>
+
+    <div class="row">
+
+        <div align="center">
+            <h3>SAN MICR Master</h3>
+        </div>
+
+        @*<div class="col-sm-4" align="center"><label><b>MICR:</b></label></div>*@
+        <div class="col-sm-2 padding-0" align="center">
+            <label><b>MICR:</b></label><input class="form-control" type="text" id="MICR" maxlength="9" />
+            <label><b>SAN:</b></label><input class="form-control" type="text" id="SAN" maxlength="6" />
+        </div><br />
+
+        @*<div class="col-sm-4" align="center"><label><b>SAN:</b></label></div>
+            <div class="col-sm-2 padding-0" align="center">
+                <input class="form-control" type="text" id="SAN" maxlength="6" />
+            </div>*@
+
+        <div class="col-sm-2 padding-0" align="center">
+            <button id="EditHoliday" type="button" class="btn btn-danger btn-sm" onclick="Editsanmicr();">Save</button>
+        </div>
+    </div>
+    <p align="center"> @Html.ActionLink("Back To List", "Index") <p>
+</div>
